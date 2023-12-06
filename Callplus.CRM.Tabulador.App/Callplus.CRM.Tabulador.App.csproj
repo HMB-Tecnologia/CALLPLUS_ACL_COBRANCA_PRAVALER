@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4F0EE4D-AC29-4863-9C16-356B2B4BF543}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Callplus.CRM.Tabulador.App</RootNamespace>
+    <AssemblyName>Callplus</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CallPlusSoftPhone.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CallPlusSoftPhone.API.dll</HintPath>
+    </Reference>
+    <Reference Include="ListboxMessage">
+      <HintPath>..\ListboxMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="pjsipDll, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\pjsipDll.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleSockets">
+      <HintPath>..\SimpleSockets.dll</HintPath>
+    </Reference>
+    <Reference Include="SipekSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SipekSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.ClientEngine, Version=0.8.0.12, Culture=neutral, PublicKeyToken=ee9af13f57f00acc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SuperSocket.ClientEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WaveLibMixer, Version=1.0.6900.26047, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WaveLibMixer.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocket4Net.Net45">
+      <HintPath>..\WebSocket4Net.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocketHMB, Version=1.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebSocketHMB.dll</HintPath>
+    </Reference>
+    <Reference Include="xCallIntegrator">
+      <HintPath>..\xCallIntegrator.dll</HintPath>
+    </Reference>
+    <Reference Include="xCallIntegrator.BLL">
+      <HintPath>..\xCallIntegrator.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="xCallIntegrator.DAL">
+      <HintPath>..\xCallIntegrator.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="xCallToolbox.BLL">
+      <HintPath>..\xCallToolbox.BLL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Callplus\CRM\Tabulador\Infra\Dados\Dao\IndicacaoDao.cs" />
+    <Compile Include="Callplus\CRM\Tabulador\Servico\Servicos\IndicacaoService.cs" />
+    <Compile Include="Cep\ConsultaCepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cep\ConsultaCepForm.Designer.cs">
+      <DependentUpon>ConsultaCepForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Checklist\ChecklistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Checklist\ChecklistForm.Designer.cs">
+      <DependentUpon>ChecklistForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WSAgentCommand\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WSAgentEvent\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WSMailingCommand\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WsVoiceSupportIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomComboBox.Designer.cs">
+      <DependentUpon>CustomComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomTextBox.Designer.cs">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScriptAceiteControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ScriptAceiteControl.Designer.cs">
+      <DependentUpon>ScriptAceiteControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScriptDeFinalizacaoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ScriptDeFinalizacaoControl.Designer.cs">
+      <DependentUpon>ScriptDeFinalizacaoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScriptDeOfertaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ScriptDeOfertaControl.Designer.cs">
+      <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScriptDeApresentacaoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ScriptDeApresentacaoControl.Designer.cs">
+      <DependentUpon>ScriptDeApresentacaoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntegracaoDiscador\OlosWebService\OlosWsAgentControl.cs" />
+    <Compile Include="IntegracaoDiscador\OlosWebService\ScreenPopData.cs" />
+    <Compile Include="Login\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ResetarSenhaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\ResetarSenhaForm.Designer.cs">
+      <DependentUpon>ResetarSenhaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\TesteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\TesteForm.Designer.cs">
+      <DependentUpon>TesteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\AtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\AtendimentoForm.Designer.cs">
+      <DependentUpon>AtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamicor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamicor.Designer.cs">
+      <DependentUpon>ContainerDeLayoutDeCampoDinamicor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\CadastroManualDeProspect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\CadastroManualDeProspect.designer.cs">
+      <DependentUpon>CadastroManualDeProspect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\ConsultaDeProspectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\ConsultaDeProspectForm.designer.cs">
+      <DependentUpon>ConsultaDeProspectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\EnderecoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\EnderecoForm.Designer.cs">
+      <DependentUpon>EnderecoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\fPlayerAudioOlos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\fPlayerAudioOlos.designer.cs">
+      <DependentUpon>fPlayerAudioOlos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\NotificacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\NotificacaoForm.Designer.cs">
+      <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\Indicacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\Indicacao.Designer.cs">
+      <DependentUpon>Indicacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\RankingOperadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\RankingOperadorForm.Designer.cs">
+      <DependentUpon>RankingOperadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\SolicitarPermissaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\TipoEtapaAceite.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\ArgumentoDeAtendimento.cs" />
+    <Compile Include="Scripts\EtapaScriptAceite.cs" />
+    <Compile Include="Scripts\EtapaDoScriptDeAtendimento.cs" />
+    <Compile Include="Scripts\RespostaArgumentoAtendimento.cs" />
+    <Compile Include="Scripts\ScriptDeAceite.cs" />
+    <Compile Include="Scripts\ScriptDeAtendimento_.cs" />
+    <Compile Include="Scripts\TipoResultadoFimScriptAtendimento.cs" />
+    <Compile Include="Integracoes\XCallIntegratorAkiva.cs" />
+    <Compile Include="Util\AutoClosingMessageBox.cs" />
+    <Compile Include="Util\ConfiguracaoDeAmbiente.cs" />
+    <Compile Include="Util\CorreiosActionline\CorreiosActionlineClient.cs" />
+    <Compile Include="ws\OlosWsVoiceSupport.cs" />
+    <Compile Include="ws\PlanetFone.cs" />
+    <Compile Include="ws\RetornoServico.cs" />
+    <EmbeddedResource Include="Cep\ConsultaCepForm.resx">
+      <DependentUpon>ConsultaCepForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Checklist\ChecklistForm.resx">
+      <DependentUpon>ChecklistForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\CustomComboBox.resx">
+      <DependentUpon>CustomComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\CustomTextBox.resx">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ScriptAceiteControl.resx">
+      <DependentUpon>ScriptAceiteControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ScriptDeFinalizacaoControl.resx">
+      <DependentUpon>ScriptDeFinalizacaoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ScriptDeOfertaControl.resx">
+      <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ScriptDeApresentacaoControl.resx">
+      <DependentUpon>ScriptDeApresentacaoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ResetarSenhaForm.resx">
+      <DependentUpon>ResetarSenhaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\TesteForm.resx">
+      <DependentUpon>TesteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\AtendimentoForm.resx">
+      <DependentUpon>AtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamicor.resx">
+      <DependentUpon>ContainerDeLayoutDeCampoDinamicor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\CadastroManualDeProspect.resx">
+      <DependentUpon>CadastroManualDeProspect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\ConsultaDeProspectForm.resx">
+      <DependentUpon>ConsultaDeProspectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\EnderecoForm.resx">
+      <DependentUpon>EnderecoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\fPlayerAudioOlos.resx">
+      <DependentUpon>fPlayerAudioOlos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\NotificacaoForm.resx">
+      <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\Indicacao.resx">
+      <DependentUpon>Indicacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\SolicitarPermissaoForm.resx">
+      <DependentUpon>SolicitarPermissaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Operacao\RankingOperadorForm.resx">
+      <DependentUpon>RankingOperadorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjAvailableOnlineAgent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjCampaign.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjCompany.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjDbCampaignCompany.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjDbPrompt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjDisposition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjDispositionEx.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjOnlineAgent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.ObjReason.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\Callplus.CRM.Tabulador.App.WSAgentCommand.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\WSAgentCommand.wsdl" />
+    <None Include="Connected Services\WSAgentEvent\Callplus.CRM.Tabulador.App.WSAgentEvent.ObjEvent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSAgentEvent\WSAgentEvent.wsdl" />
+    <None Include="Connected Services\WSMailingCommand\Callplus.CRM.Tabulador.App.WSMailingCommand.CallDataSummary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSMailingCommand\Callplus.CRM.Tabulador.App.WSMailingCommand.MailingSummary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSMailingCommand\Callplus.CRM.Tabulador.App.WSMailingCommand.MailingSummaryView.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WSMailingCommand\WSMailingCommand.wsdl" />
+    <None Include="Connected Services\WsVoiceSupportIntegration\WsVoiceSupportIntegration.wsdl" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Callplus.CRM.Tabulador.Dominio.Dto.HistoricoAtendimentoDto.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Dominio\Callplus.CRM.Tabulador.Dominio.csproj">
+      <Project>{F29FAB35-E7B6-45C9-97E5-5A4E12087D99}</Project>
+      <Name>Callplus.CRM.Tabulador.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Infra.Dados\Callplus.CRM.Tabulador.Infra.Dados.csproj">
+      <Project>{fad9c32e-fa49-4f31-b3a2-cf16ad5fd9bc}</Project>
+      <Name>Callplus.CRM.Tabulador.Infra.Dados</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Servico\Callplus.CRM.Tabulador.Servico.csproj">
+      <Project>{D78C5997-3EAA-4B44-BB38-D6DB3979E06D}</Project>
+      <Name>Callplus.CRM.Tabulador.Servico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CallplusUtil\CallplusUtil.csproj">
+      <Project>{A39A0285-492A-42D5-B94A-3A35E17D917B}</Project>
+      <Name>CallplusUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\CallPlusSoftPhone.API.dll" />
+    <Content Include="bin\Debug\pjsipDll.dll" />
+    <Content Include="bin\Debug\SipekSdk.dll" />
+    <Content Include="bin\Debug\SuperSocket.ClientEngine.dll" />
+    <Content Include="bin\Debug\WebSocket4Net.dll" />
+    <Content Include="bin\Debug\WebSocketHMB.dll" />
+    <Content Include="bin\Debug\xCallIntegrator.BLL.dll" />
+    <Content Include="bin\Debug\xCallIntegrator.DAL.dll" />
+    <Content Include="bin\Debug\xCallIntegrator.dll" />
+    <None Include="Connected Services\WsVoiceSupportIntegration\configuration91.svcinfo" />
+    <None Include="Connected Services\WsVoiceSupportIntegration\configuration.svcinfo" />
+    <None Include="Connected Services\WsVoiceSupportIntegration\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\WSMailingCommand\WSMailingCommand.disco" />
+    <None Include="Connected Services\WSMailingCommand\configuration91.svcinfo" />
+    <None Include="Connected Services\WSMailingCommand\configuration.svcinfo" />
+    <None Include="Connected Services\WSMailingCommand\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\WSAgentCommand\WSAgentCommand.disco" />
+    <None Include="Connected Services\WSAgentCommand\configuration91.svcinfo" />
+    <None Include="Connected Services\WSAgentCommand\configuration.svcinfo" />
+    <None Include="Connected Services\WSAgentCommand\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\WSAgentEvent\WSAgentEvent.disco" />
+    <None Include="Connected Services\WSAgentEvent\configuration91.svcinfo" />
+    <None Include="Connected Services\WSAgentEvent\configuration.svcinfo" />
+    <None Include="Connected Services\WSAgentEvent\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="logo.ico" />
+    <None Include="Resources\calendar-icon-15.png" />
+    <None Include="Resources\calendar-clock-icon_34472.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\key.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\power.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\Sync.png" />
+    <None Include="Resources\search2.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\import.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\aplicar24x24.png" />
+    <None Include="Resources\aplicarGray24x24.png" />
+    <None Include="Resources\check.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\fundoAzul.png" />
+    <None Include="Resources\desconectarGray24x24.png" />
+    <None Include="Resources\desconectar24x24.png" />
+    <None Include="Resources\conectarGray24x24.png" />
+    <None Include="Resources\conectar24x24.png" />
+    <None Include="Resources\img_discar.jfif" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\WSAgentCommand\" />
+    <WCFMetadataStorage Include="Connected Services\WSAgentEvent\" />
+    <WCFMetadataStorage Include="Connected Services\WSMailingCommand\" />
+    <WCFMetadataStorage Include="Connected Services\WsVoiceSupportIntegration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WebReference\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

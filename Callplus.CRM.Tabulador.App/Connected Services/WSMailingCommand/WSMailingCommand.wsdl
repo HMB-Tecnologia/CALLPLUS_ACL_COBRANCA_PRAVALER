@@ -1,0 +1,2324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ListMailingsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListMailingsJSONResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListMailings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListMailingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListMailingsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangeMailingStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="State" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeMailingStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeMailingStatusResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeMailingStatusByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="State" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeMailingStatusByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeMailingStatusByNameResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertPhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypePhoneId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertPhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertPhoneNumberResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertPhoneNumberJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypePhoneId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertPhoneNumberJSONResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FinalizeClientJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DispositionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientJSONResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FinalizeClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DispositionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinalizeClientResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByDispositionCodeJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DispositionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByDispositionCodeJSONResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FinalizeClientByDispositionCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DispositionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByDispositionCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinalizeClientByDispositionCodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByPhoneNumberJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DDD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByPhoneNumberJSONResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FinalizeClientByPhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DDD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizeClientByPhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinalizeClientByPhoneNumberResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertNewReferral">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerIdOrigin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DDD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferredName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Month" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Day" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hour" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Minutes" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertNewReferralResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertNewReferralResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertNewReferralWithDDI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerIdOrigin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DDI" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DDD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferredName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Month" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Day" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hour" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Minutes" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertNewReferralWithDDIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertNewReferralWithDDIResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerCallback">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Month" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Day" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hour" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Minutes" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerCallbackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerCallbackResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListMailingsByCompanyId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CompanyId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListMailingsByCompanyIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListMailingsByCompanyIdResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMailingView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="useMailingFilter" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMailingViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMailingViewResult" type="tns:ArrayOfMailingSummary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMailingSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MailingSummary" nillable="true" type="tns:MailingSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MailingSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Mailing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCustomers" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableCustomers" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMailingRawView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="useMailingFilter" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMailingRawViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMailingRawViewResult" type="tns:MailingSummaryView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MailingSummaryView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Mailing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCustomers" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableCustomers" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCustomersAppliedOnDialer" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableCustomersAppliedOnDialer" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MailingCountAppliedOnDialer" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListCustomerMailings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CompanyId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListCustomerMailingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListCustomerMailingsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMailingData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="field" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMailingDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateMailingDataResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrmCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DialerOnly" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="DataIni" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DataFim" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCallDataResult" type="tns:ArrayOfCallDataSummary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCallDataSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CallDataSummary" nillable="true" type="tns:CallDataSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CallDataSummary">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DispositionId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallStart" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallEnd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="WrapStart" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="WrapEnd" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtraFields" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetCallDataProcessed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCallDataProcessedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetCallDataProcessedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCallDataProcessedList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CallIdList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCallDataProcessedListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetCallDataProcessedListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportMailing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mailing" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="partialMailing" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportMailingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ImportMailingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BlockClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BlockClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BlockClientResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfMailingSummary" nillable="true" type="tns:ArrayOfMailingSummary" />
+      <s:element name="MailingSummaryView" nillable="true" type="tns:MailingSummaryView" />
+      <s:element name="ArrayOfCallDataSummary" nillable="true" type="tns:ArrayOfCallDataSummary" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListMailingsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:ListMailingsJSON" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:ListMailingsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListMailings" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListMailingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeMailingStatus" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeMailingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeMailingStatusByName" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeMailingStatusByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertPhoneNumberJSON" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertPhoneNumberJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClientJSON" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClient" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByDispositionCodeJSON" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByDispositionCodeJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByDispositionCode" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByDispositionCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByPhoneNumberJSON" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByPhoneNumberJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizeClientByPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertNewReferral" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertNewReferralResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDISoapIn">
+    <wsdl:part name="parameters" element="tns:InsertNewReferralWithDDI" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDISoapOut">
+    <wsdl:part name="parameters" element="tns:InsertNewReferralWithDDIResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerCallback" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerCallbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ListMailingsByCompanyId" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ListMailingsByCompanyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMailingView" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMailingViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMailingRawView" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMailingRawViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListCustomerMailings" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListCustomerMailingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMailingData" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMailingDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCallData" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCallDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedSoapIn">
+    <wsdl:part name="parameters" element="tns:SetCallDataProcessed" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedSoapOut">
+    <wsdl:part name="parameters" element="tns:SetCallDataProcessedResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListSoapIn">
+    <wsdl:part name="parameters" element="tns:SetCallDataProcessedList" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListSoapOut">
+    <wsdl:part name="parameters" element="tns:SetCallDataProcessedListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportMailing" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportMailingResponse" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientSoapIn">
+    <wsdl:part name="parameters" element="tns:BlockClient" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientSoapOut">
+    <wsdl:part name="parameters" element="tns:BlockClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsJSONHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsJSONHttpGetOut" />
+  <wsdl:message name="ListMailingsHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="TypePhoneId" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="TypePhoneId" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONHttpGetOut" />
+  <wsdl:message name="FinalizeClientJSONHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionId" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientJSONHttpGetOut" />
+  <wsdl:message name="FinalizeClientHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionId" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionCode" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONHttpGetOut" />
+  <wsdl:message name="FinalizeClientByDispositionCodeHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionCode" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONHttpGetOut" />
+  <wsdl:message name="FinalizeClientByPhoneNumberHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerIdOrigin" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="ReferredName" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDIHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerIdOrigin" type="s:string" />
+    <wsdl:part name="DDI" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="ReferredName" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDIHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdHttpGetIn">
+    <wsdl:part name="CompanyId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewHttpGetIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="useMailingFilter" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMailingSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="useMailingFilter" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewHttpGetOut">
+    <wsdl:part name="Body" element="tns:MailingSummaryView" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsHttpGetIn">
+    <wsdl:part name="CompanyId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataHttpGetIn">
+    <wsdl:part name="mailingName" type="s:string" />
+    <wsdl:part name="customerId" type="s:string" />
+    <wsdl:part name="field" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataHttpGetIn">
+    <wsdl:part name="CrmCode" type="s:string" />
+    <wsdl:part name="DialerOnly" type="s:string" />
+    <wsdl:part name="DataIni" type="s:string" />
+    <wsdl:part name="DataFim" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCallDataSummary" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedHttpGetIn">
+    <wsdl:part name="CallId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListHttpGetIn">
+    <wsdl:part name="CallIdList" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="Mailing" type="s1:StringArray" />
+    <wsdl:part name="partialMailing" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientHttpGetIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsJSONHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsJSONHttpPostOut" />
+  <wsdl:message name="ListMailingsHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMailingStatusByNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="TypePhoneId" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="TypePhoneId" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertPhoneNumberJSONHttpPostOut" />
+  <wsdl:message name="FinalizeClientJSONHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionId" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientJSONHttpPostOut" />
+  <wsdl:message name="FinalizeClientHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionId" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionCode" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeJSONHttpPostOut" />
+  <wsdl:message name="FinalizeClientByDispositionCodeHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DispositionCode" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByDispositionCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberJSONHttpPostOut" />
+  <wsdl:message name="FinalizeClientByPhoneNumberHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinalizeClientByPhoneNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerIdOrigin" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="ReferredName" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDIHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerIdOrigin" type="s:string" />
+    <wsdl:part name="DDI" type="s:string" />
+    <wsdl:part name="DDD" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="ReferredName" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertNewReferralWithDDIHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Day" type="s:string" />
+    <wsdl:part name="Hour" type="s:string" />
+    <wsdl:part name="Minutes" type="s:string" />
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCallbackHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdHttpPostIn">
+    <wsdl:part name="CompanyId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListMailingsByCompanyIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewHttpPostIn">
+    <wsdl:part name="CampaignId" type="s:string" />
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="useMailingFilter" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingViewHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMailingSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="useMailingFilter" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMailingRawViewHttpPostOut">
+    <wsdl:part name="Body" element="tns:MailingSummaryView" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsHttpPostIn">
+    <wsdl:part name="CompanyId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ListCustomerMailingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataHttpPostIn">
+    <wsdl:part name="mailingName" type="s:string" />
+    <wsdl:part name="customerId" type="s:string" />
+    <wsdl:part name="field" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMailingDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataHttpPostIn">
+    <wsdl:part name="CrmCode" type="s:string" />
+    <wsdl:part name="DialerOnly" type="s:string" />
+    <wsdl:part name="DataIni" type="s:string" />
+    <wsdl:part name="DataFim" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCallDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCallDataSummary" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedHttpPostIn">
+    <wsdl:part name="CallId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListHttpPostIn">
+    <wsdl:part name="CallIdList" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SetCallDataProcessedListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="Mailing" type="s1:StringArray" />
+    <wsdl:part name="partialMailing" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportMailingHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientHttpPostIn">
+    <wsdl:part name="MailingName" type="s:string" />
+    <wsdl:part name="CustomerId" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BlockClientHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="WSMailingCommandSoap">
+    <wsdl:operation name="ListMailingsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsJSON</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsJSONSoapIn" />
+      <wsdl:output message="tns:ListMailingsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsSoapIn" />
+      <wsdl:output message="tns:ListMailingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatus - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusSoapIn" />
+      <wsdl:output message="tns:ChangeMailingStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatusByName - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusByNameSoapIn" />
+      <wsdl:output message="tns:ChangeMailingStatusByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberSoapIn" />
+      <wsdl:output message="tns:InsertPhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberJSONSoapIn" />
+      <wsdl:output message="tns:InsertPhoneNumberJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientJSONSoapIn" />
+      <wsdl:output message="tns:FinalizeClientJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClient</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientSoapIn" />
+      <wsdl:output message="tns:FinalizeClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCodeJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeJSONSoapIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCode</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeSoapIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberJSONSoapIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberSoapIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralSoapIn" />
+      <wsdl:output message="tns:InsertNewReferralSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral with DDI</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralWithDDISoapIn" />
+      <wsdl:output message="tns:InsertNewReferralWithDDISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CustomerCallback</wsdl:documentation>
+      <wsdl:input message="tns:CustomerCallbackSoapIn" />
+      <wsdl:output message="tns:CustomerCallbackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsByCompanyId</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsByCompanyIdSoapIn" />
+      <wsdl:output message="tns:ListMailingsByCompanyIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingViewSoapIn" />
+      <wsdl:output message="tns:GetMailingViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingRawView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingRawViewSoapIn" />
+      <wsdl:output message="tns:GetMailingRawViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListCustomerMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListCustomerMailingsSoapIn" />
+      <wsdl:output message="tns:ListCustomerMailingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateMailingData</wsdl:documentation>
+      <wsdl:input message="tns:UpdateMailingDataSoapIn" />
+      <wsdl:output message="tns:UpdateMailingDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetCallData</wsdl:documentation>
+      <wsdl:input message="tns:GetCallDataSoapIn" />
+      <wsdl:output message="tns:GetCallDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessed</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedSoapIn" />
+      <wsdl:output message="tns:SetCallDataProcessedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessedList --  Metodo responsavel por efetuar o update de uma lista de ids</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedListSoapIn" />
+      <wsdl:output message="tns:SetCallDataProcessedListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ImportMailing</wsdl:documentation>
+      <wsdl:input message="tns:ImportMailingSoapIn" />
+      <wsdl:output message="tns:ImportMailingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BlockClient</wsdl:documentation>
+      <wsdl:input message="tns:BlockClientSoapIn" />
+      <wsdl:output message="tns:BlockClientSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSMailingCommandHttpGet">
+    <wsdl:operation name="ListMailingsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsJSON</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsJSONHttpGetIn" />
+      <wsdl:output message="tns:ListMailingsJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsHttpGetIn" />
+      <wsdl:output message="tns:ListMailingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatus - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusHttpGetIn" />
+      <wsdl:output message="tns:ChangeMailingStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatusByName - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusByNameHttpGetIn" />
+      <wsdl:output message="tns:ChangeMailingStatusByNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberHttpGetIn" />
+      <wsdl:output message="tns:InsertPhoneNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberJSONHttpGetIn" />
+      <wsdl:output message="tns:InsertPhoneNumberJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientJSONHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClient</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCodeJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeJSONHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCode</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberJSONHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberHttpGetIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralHttpGetIn" />
+      <wsdl:output message="tns:InsertNewReferralHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral with DDI</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralWithDDIHttpGetIn" />
+      <wsdl:output message="tns:InsertNewReferralWithDDIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CustomerCallback</wsdl:documentation>
+      <wsdl:input message="tns:CustomerCallbackHttpGetIn" />
+      <wsdl:output message="tns:CustomerCallbackHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsByCompanyId</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsByCompanyIdHttpGetIn" />
+      <wsdl:output message="tns:ListMailingsByCompanyIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingViewHttpGetIn" />
+      <wsdl:output message="tns:GetMailingViewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingRawView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingRawViewHttpGetIn" />
+      <wsdl:output message="tns:GetMailingRawViewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListCustomerMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListCustomerMailingsHttpGetIn" />
+      <wsdl:output message="tns:ListCustomerMailingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateMailingData</wsdl:documentation>
+      <wsdl:input message="tns:UpdateMailingDataHttpGetIn" />
+      <wsdl:output message="tns:UpdateMailingDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetCallData</wsdl:documentation>
+      <wsdl:input message="tns:GetCallDataHttpGetIn" />
+      <wsdl:output message="tns:GetCallDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessed</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedHttpGetIn" />
+      <wsdl:output message="tns:SetCallDataProcessedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessedList --  Metodo responsavel por efetuar o update de uma lista de ids</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedListHttpGetIn" />
+      <wsdl:output message="tns:SetCallDataProcessedListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ImportMailing</wsdl:documentation>
+      <wsdl:input message="tns:ImportMailingHttpGetIn" />
+      <wsdl:output message="tns:ImportMailingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BlockClient</wsdl:documentation>
+      <wsdl:input message="tns:BlockClientHttpGetIn" />
+      <wsdl:output message="tns:BlockClientHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSMailingCommandHttpPost">
+    <wsdl:operation name="ListMailingsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsJSON</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsJSONHttpPostIn" />
+      <wsdl:output message="tns:ListMailingsJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsHttpPostIn" />
+      <wsdl:output message="tns:ListMailingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatus - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusHttpPostIn" />
+      <wsdl:output message="tns:ChangeMailingStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ChangeMailingStatusByName - State = {1 = Working; 2 = Pause; 3 = Inactived; 4 = Finished}</wsdl:documentation>
+      <wsdl:input message="tns:ChangeMailingStatusByNameHttpPostIn" />
+      <wsdl:output message="tns:ChangeMailingStatusByNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberHttpPostIn" />
+      <wsdl:output message="tns:InsertPhoneNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:InsertPhoneNumberJSONHttpPostIn" />
+      <wsdl:output message="tns:InsertPhoneNumberJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientJSONHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClient</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCodeJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeJSONHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByDispositionCode</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByDispositionCodeHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientByDispositionCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumberJSON</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberJSONHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FinalizeClientByPhoneNumber</wsdl:documentation>
+      <wsdl:input message="tns:FinalizeClientByPhoneNumberHttpPostIn" />
+      <wsdl:output message="tns:FinalizeClientByPhoneNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralHttpPostIn" />
+      <wsdl:output message="tns:InsertNewReferralHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">InsertNewReferral with DDI</wsdl:documentation>
+      <wsdl:input message="tns:InsertNewReferralWithDDIHttpPostIn" />
+      <wsdl:output message="tns:InsertNewReferralWithDDIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CustomerCallback</wsdl:documentation>
+      <wsdl:input message="tns:CustomerCallbackHttpPostIn" />
+      <wsdl:output message="tns:CustomerCallbackHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListMailingsByCompanyId</wsdl:documentation>
+      <wsdl:input message="tns:ListMailingsByCompanyIdHttpPostIn" />
+      <wsdl:output message="tns:ListMailingsByCompanyIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingViewHttpPostIn" />
+      <wsdl:output message="tns:GetMailingViewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetMailingRawView</wsdl:documentation>
+      <wsdl:input message="tns:GetMailingRawViewHttpPostIn" />
+      <wsdl:output message="tns:GetMailingRawViewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ListCustomerMailings</wsdl:documentation>
+      <wsdl:input message="tns:ListCustomerMailingsHttpPostIn" />
+      <wsdl:output message="tns:ListCustomerMailingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateMailingData</wsdl:documentation>
+      <wsdl:input message="tns:UpdateMailingDataHttpPostIn" />
+      <wsdl:output message="tns:UpdateMailingDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetCallData</wsdl:documentation>
+      <wsdl:input message="tns:GetCallDataHttpPostIn" />
+      <wsdl:output message="tns:GetCallDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessed</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedHttpPostIn" />
+      <wsdl:output message="tns:SetCallDataProcessedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SetCallDataProcessedList --  Metodo responsavel por efetuar o update de uma lista de ids</wsdl:documentation>
+      <wsdl:input message="tns:SetCallDataProcessedListHttpPostIn" />
+      <wsdl:output message="tns:SetCallDataProcessedListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ImportMailing</wsdl:documentation>
+      <wsdl:input message="tns:ImportMailingHttpPostIn" />
+      <wsdl:output message="tns:ImportMailingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BlockClient</wsdl:documentation>
+      <wsdl:input message="tns:BlockClientHttpPostIn" />
+      <wsdl:output message="tns:BlockClientHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSMailingCommandSoap" type="tns:WSMailingCommandSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListMailingsJSON">
+      <soap:operation soapAction="http://tempuri.org/ListMailingsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <soap:operation soapAction="http://tempuri.org/ListMailings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <soap:operation soapAction="http://tempuri.org/ChangeMailingStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <soap:operation soapAction="http://tempuri.org/ChangeMailingStatusByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/InsertPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <soap:operation soapAction="http://tempuri.org/InsertPhoneNumberJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClientJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClientByDispositionCodeJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClientByDispositionCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClientByPhoneNumberJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/FinalizeClientByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <soap:operation soapAction="http://tempuri.org/InsertNewReferral" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <soap:operation soapAction="http://tempuri.org/InsertNewReferralWithDDI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <soap:operation soapAction="http://tempuri.org/CustomerCallback" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <soap:operation soapAction="http://tempuri.org/ListMailingsByCompanyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <soap:operation soapAction="http://tempuri.org/GetMailingView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <soap:operation soapAction="http://tempuri.org/GetMailingRawView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <soap:operation soapAction="http://tempuri.org/ListCustomerMailings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <soap:operation soapAction="http://tempuri.org/UpdateMailingData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <soap:operation soapAction="http://tempuri.org/GetCallData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <soap:operation soapAction="http://tempuri.org/SetCallDataProcessed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <soap:operation soapAction="http://tempuri.org/SetCallDataProcessedList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <soap:operation soapAction="http://tempuri.org/ImportMailing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <soap:operation soapAction="http://tempuri.org/BlockClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSMailingCommandSoap12" type="tns:WSMailingCommandSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListMailingsJSON">
+      <soap12:operation soapAction="http://tempuri.org/ListMailingsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <soap12:operation soapAction="http://tempuri.org/ListMailings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <soap12:operation soapAction="http://tempuri.org/ChangeMailingStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <soap12:operation soapAction="http://tempuri.org/ChangeMailingStatusByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <soap12:operation soapAction="http://tempuri.org/InsertPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <soap12:operation soapAction="http://tempuri.org/InsertPhoneNumberJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClientJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClientByDispositionCodeJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClientByDispositionCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClientByPhoneNumberJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <soap12:operation soapAction="http://tempuri.org/FinalizeClientByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <soap12:operation soapAction="http://tempuri.org/InsertNewReferral" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <soap12:operation soapAction="http://tempuri.org/InsertNewReferralWithDDI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <soap12:operation soapAction="http://tempuri.org/CustomerCallback" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <soap12:operation soapAction="http://tempuri.org/ListMailingsByCompanyId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <soap12:operation soapAction="http://tempuri.org/GetMailingView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <soap12:operation soapAction="http://tempuri.org/GetMailingRawView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <soap12:operation soapAction="http://tempuri.org/ListCustomerMailings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <soap12:operation soapAction="http://tempuri.org/UpdateMailingData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <soap12:operation soapAction="http://tempuri.org/GetCallData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <soap12:operation soapAction="http://tempuri.org/SetCallDataProcessed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <soap12:operation soapAction="http://tempuri.org/SetCallDataProcessedList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <soap12:operation soapAction="http://tempuri.org/ImportMailing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <soap12:operation soapAction="http://tempuri.org/BlockClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSMailingCommandHttpGet" type="tns:WSMailingCommandHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ListMailingsJSON">
+      <http:operation location="/ListMailingsJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <http:operation location="/ListMailings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <http:operation location="/ChangeMailingStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <http:operation location="/ChangeMailingStatusByName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <http:operation location="/InsertPhoneNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <http:operation location="/InsertPhoneNumberJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <http:operation location="/FinalizeClientJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <http:operation location="/FinalizeClient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <http:operation location="/FinalizeClientByDispositionCodeJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <http:operation location="/FinalizeClientByDispositionCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <http:operation location="/FinalizeClientByPhoneNumberJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <http:operation location="/FinalizeClientByPhoneNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <http:operation location="/InsertNewReferral" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <http:operation location="/InsertNewReferralWithDDI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <http:operation location="/CustomerCallback" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <http:operation location="/ListMailingsByCompanyId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <http:operation location="/GetMailingView" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <http:operation location="/GetMailingRawView" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <http:operation location="/ListCustomerMailings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <http:operation location="/UpdateMailingData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <http:operation location="/GetCallData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <http:operation location="/SetCallDataProcessed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <http:operation location="/SetCallDataProcessedList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <http:operation location="/ImportMailing" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <http:operation location="/BlockClient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSMailingCommandHttpPost" type="tns:WSMailingCommandHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ListMailingsJSON">
+      <http:operation location="/ListMailingsJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ListMailings">
+      <http:operation location="/ListMailings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatus">
+      <http:operation location="/ChangeMailingStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMailingStatusByName">
+      <http:operation location="/ChangeMailingStatusByName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumber">
+      <http:operation location="/InsertPhoneNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoneNumberJSON">
+      <http:operation location="/InsertPhoneNumberJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientJSON">
+      <http:operation location="/FinalizeClientJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClient">
+      <http:operation location="/FinalizeClient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCodeJSON">
+      <http:operation location="/FinalizeClientByDispositionCodeJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByDispositionCode">
+      <http:operation location="/FinalizeClientByDispositionCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumberJSON">
+      <http:operation location="/FinalizeClientByPhoneNumberJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeClientByPhoneNumber">
+      <http:operation location="/FinalizeClientByPhoneNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferral">
+      <http:operation location="/InsertNewReferral" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNewReferralWithDDI">
+      <http:operation location="/InsertNewReferralWithDDI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCallback">
+      <http:operation location="/CustomerCallback" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListMailingsByCompanyId">
+      <http:operation location="/ListMailingsByCompanyId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingView">
+      <http:operation location="/GetMailingView" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingRawView">
+      <http:operation location="/GetMailingRawView" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListCustomerMailings">
+      <http:operation location="/ListCustomerMailings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMailingData">
+      <http:operation location="/UpdateMailingData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallData">
+      <http:operation location="/GetCallData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessed">
+      <http:operation location="/SetCallDataProcessed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCallDataProcessedList">
+      <http:operation location="/SetCallDataProcessedList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportMailing">
+      <http:operation location="/ImportMailing" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockClient">
+      <http:operation location="/BlockClient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSMailingCommand">
+    <wsdl:port name="WSMailingCommandSoap" binding="tns:WSMailingCommandSoap">
+      <soap:address location="http://10.0.1.227/WSMailingControl/WSMailingCommand.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSMailingCommandSoap12" binding="tns:WSMailingCommandSoap12">
+      <soap12:address location="http://10.0.1.227/WSMailingControl/WSMailingCommand.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSMailingCommandHttpGet" binding="tns:WSMailingCommandHttpGet">
+      <http:address location="http://10.0.1.227/WSMailingControl/WSMailingCommand.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSMailingCommandHttpPost" binding="tns:WSMailingCommandHttpPost">
+      <http:address location="http://10.0.1.227/WSMailingControl/WSMailingCommand.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

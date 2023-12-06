@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetNextEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNextEventResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNextEventResult" type="tns:ObjEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ObjEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentEventType" type="tns:EnumAgentEventType" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObject" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectLoginCCM" type="tns:ObjLoginCCM" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventSendMsgToSupervisorFail" type="tns:ObjSendMsgToSupervisorFail" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventNewMsgFromSupervisor" type="tns:ObjNewMsgFromSupervisor" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectLoginCampaign" type="tns:ObjLoginCampaign" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectLogout" type="tns:ObjLogout" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectAgentChangeStatus" type="tns:ObjAgentChangeStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectScreenPop" type="tns:ObjScreenPop" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectThirdPartyScreenPop" type="tns:ObjThirdPartyScreenPop" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectNewChat" type="tns:ObjNewChat" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectNewChatMsg" type="tns:ObjNewChatMsg" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectNewMessage" type="tns:ObjNewMessage" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectManualCallState" type="tns:ObjManualCallState" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectPreviewCallState" type="tns:ObjPreviewCallState" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectPreviewCallResult" type="tns:ObjPreviewCallResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectCustomerClosureConfirmation" type="tns:ObjCustomerClosureConfirmation" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjPreviewDnisLocateResult" type="tns:ObjPreviewDnisLocateResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventObjectActiveCall" type="tns:ArrayOfObjActiveCall" />
+          <s:element minOccurs="1" maxOccurs="1" name="GenericInt" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GenericString" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EnumAgentEventType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Nothing" />
+          <s:enumeration value="LoginCCM" />
+          <s:enumeration value="LogoutCCM" />
+          <s:enumeration value="LoginCampaign" />
+          <s:enumeration value="LogoutCampaign" />
+          <s:enumeration value="ChangeStatus" />
+          <s:enumeration value="ScreenPop" />
+          <s:enumeration value="ChangeStatusFail" />
+          <s:enumeration value="DispositionRequestFail" />
+          <s:enumeration value="LoginCCMFail" />
+          <s:enumeration value="LoginCampaignFail" />
+          <s:enumeration value="LogoutCCMFail" />
+          <s:enumeration value="LogoutCampaignFail" />
+          <s:enumeration value="OnlineCampaignChangeStatusId" />
+          <s:enumeration value="PassCode" />
+          <s:enumeration value="NewChat" />
+          <s:enumeration value="NewChatMsg" />
+          <s:enumeration value="EndChat" />
+          <s:enumeration value="NewMessage" />
+          <s:enumeration value="ConsultingRequestFail" />
+          <s:enumeration value="ActiveCall" />
+          <s:enumeration value="ManualCallRequestFail" />
+          <s:enumeration value="ChangeManualCallState" />
+          <s:enumeration value="RedialRequestFail" />
+          <s:enumeration value="RedialSuccess" />
+          <s:enumeration value="ListActiveCalls" />
+          <s:enumeration value="PrivateCallbackFail" />
+          <s:enumeration value="ThirdPartyScreenPop" />
+          <s:enumeration value="ChangePreviewCallState" />
+          <s:enumeration value="ChangePreviewCallResult" />
+          <s:enumeration value="CustomerClosureConfirmation" />
+          <s:enumeration value="PreviewDnisLocateResult" />
+          <s:enumeration value="BlindTransferRequestFail" />
+          <s:enumeration value="SendMsgToSupervisorFail" />
+          <s:enumeration value="NewMsgFromSupervisor" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ObjLoginCCM">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgentName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjSendMsgToSupervisorFail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reason" type="tns:SendMessageResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendMessageResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="GenericError" />
+          <s:enumeration value="Ok" />
+          <s:enumeration value="AgentIdNotFound" />
+          <s:enumeration value="SupervisorNotFound" />
+          <s:enumeration value="ServiceNotAvail" />
+          <s:enumeration value="SysConfNotFound" />
+          <s:enumeration value="NotSupervisorOfAgent" />
+          <s:enumeration value="EmptyMessage" />
+          <s:enumeration value="MessageTooLong" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ObjNewMsgFromSupervisor">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BroadcastId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupervisorId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjLoginCampaign">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjLogout">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjAgentChangeStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentStatusId" type="tns:EnumAgentStatusId" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReasonId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EnumAgentStatusId">
+        <s:restriction base="s:string">
+          <s:enumeration value="Nothing" />
+          <s:enumeration value="Idle" />
+          <s:enumeration value="Talking" />
+          <s:enumeration value="Wrap" />
+          <s:enumeration value="Pause" />
+          <s:enumeration value="Ending" />
+          <s:enumeration value="TalkingWithPause" />
+          <s:enumeration value="WrapWithPause" />
+          <s:enumeration value="TalkingWithEnding" />
+          <s:enumeration value="WrapWithEnding" />
+          <s:enumeration value="Consulting" />
+          <s:enumeration value="InChat" />
+          <s:enumeration value="InChatWithPause" />
+          <s:enumeration value="InChatWithEnding" />
+          <s:enumeration value="ConsultingWithPause" />
+          <s:enumeration value="ConsultingWithEnding" />
+          <s:enumeration value="Transfer" />
+          <s:enumeration value="Holding" />
+          <s:enumeration value="HoldingWithPause" />
+          <s:enumeration value="HoldingWithEnding" />
+          <s:enumeration value="ManualCall" />
+          <s:enumeration value="TalkingWithManualCall" />
+          <s:enumeration value="WrapWithManualCall" />
+          <s:enumeration value="ConsultingWithManualCall" />
+          <s:enumeration value="HoldingWithManualCall" />
+          <s:enumeration value="Redial" />
+          <s:enumeration value="PrivateCallback" />
+          <s:enumeration value="TalkingWithPrivateCallback" />
+          <s:enumeration value="WrapWithPrivateCallback" />
+          <s:enumeration value="ManualcallWithPrivateCallback" />
+          <s:enumeration value="ConsultingWithPrivateCallback" />
+          <s:enumeration value="HoldingWithPrivateCallback" />
+          <s:enumeration value="ThirdPartyCampaign" />
+          <s:enumeration value="PersonalCall" />
+          <s:enumeration value="TalkingWithPersonalCall" />
+          <s:enumeration value="WrapWithPersonalCall" />
+          <s:enumeration value="ManualcallWithPersonalCall" />
+          <s:enumeration value="ConsultingWithPersonalCall" />
+          <s:enumeration value="HoldingWithPersonalCall" />
+          <s:enumeration value="PersonalCallWithPause" />
+          <s:enumeration value="PersonalCallWithEnding" />
+          <s:enumeration value="Analyzing" />
+          <s:enumeration value="Attempting" />
+          <s:enumeration value="Waiting" />
+          <s:enumeration value="AnalyzingWithPause" />
+          <s:enumeration value="AnalyzingWithEnding" />
+          <s:enumeration value="AnalyzingWithPrivateCallback" />
+          <s:enumeration value="AnalyzingWithPersonalCall" />
+          <s:enumeration value="AttemptingWithPause" />
+          <s:enumeration value="AttemptingWithEnding" />
+          <s:enumeration value="AttemptingWithPersonalCall" />
+          <s:enumeration value="AttemptingWithPrivateCallback" />
+          <s:enumeration value="AfterAttempting" />
+          <s:enumeration value="AfterAttemptWithPersonalCall" />
+          <s:enumeration value="RedialWithPersonalCall" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ObjScreenPop">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentIdOrigin" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignIdOrigin" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadOnly" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriorityCampaign" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumberList" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreviewCall" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AutomaticPreviewCall" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjThirdPartyScreenPop">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ThirdPartyCallId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SkillGroup" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriorityCampaign" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjNewChat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ChatId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjNewChatMsg">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ChatId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MsgDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjNewMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CampaignId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjManualCallState">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallState" type="tns:EnumCallControlStatusId" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EnumCallControlStatusId">
+        <s:restriction base="s:string">
+          <s:enumeration value="Nothing" />
+          <s:enumeration value="Started" />
+          <s:enumeration value="Alerting" />
+          <s:enumeration value="CustomerConnected" />
+          <s:enumeration value="Routing" />
+          <s:enumeration value="AgentConnected" />
+          <s:enumeration value="Finished" />
+          <s:enumeration value="Consulting" />
+          <s:enumeration value="Transfering" />
+          <s:enumeration value="Queue" />
+          <s:enumeration value="Holding" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ObjPreviewCallState">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallState" type="tns:EnumCallControlStatusId" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjPreviewCallResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjCustomerClosureConfirmation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CampaignData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjPreviewDnisLocateResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Disposition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfObjActiveCall">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ObjActiveCall" nillable="true" type="tns:ObjActiveCall" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjActiveCall">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CallId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomerCall" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllNextEvents">
+        <s:complexType />
+      </s:element>
+      <s:complexType name="ArrayOfObjEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ObjEvent" nillable="true" type="tns:ObjEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllNextEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllNextEventsResult" type="tns:ArrayOfObjEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObjEvent" nillable="true" type="tns:ObjEvent" />
+      <s:element name="ArrayOfObjEvent" nillable="true" type="tns:ArrayOfObjEvent" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetNextEventSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNextEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetNextEventSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNextEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNextEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllNextEvents" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNextEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllNextEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNextEventHttpGetIn">
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNextEventHttpGetOut">
+    <wsdl:part name="Body" element="tns:ObjEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNextEventsHttpGetIn" />
+  <wsdl:message name="GetAllNextEventsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfObjEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetNextEventHttpPostIn">
+    <wsdl:part name="AgentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNextEventHttpPostOut">
+    <wsdl:part name="Body" element="tns:ObjEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNextEventsHttpPostIn" />
+  <wsdl:message name="GetAllNextEventsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfObjEvent" />
+  </wsdl:message>
+  <wsdl:portType name="WSAgentEventSoap">
+    <wsdl:operation name="GetNextEvent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetNextEvent</wsdl:documentation>
+      <wsdl:input message="tns:GetNextEventSoapIn" />
+      <wsdl:output message="tns:GetNextEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetAllNextEvents</wsdl:documentation>
+      <wsdl:input message="tns:GetAllNextEventsSoapIn" />
+      <wsdl:output message="tns:GetAllNextEventsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSAgentEventHttpGet">
+    <wsdl:operation name="GetNextEvent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetNextEvent</wsdl:documentation>
+      <wsdl:input message="tns:GetNextEventHttpGetIn" />
+      <wsdl:output message="tns:GetNextEventHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetAllNextEvents</wsdl:documentation>
+      <wsdl:input message="tns:GetAllNextEventsHttpGetIn" />
+      <wsdl:output message="tns:GetAllNextEventsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSAgentEventHttpPost">
+    <wsdl:operation name="GetNextEvent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetNextEvent</wsdl:documentation>
+      <wsdl:input message="tns:GetNextEventHttpPostIn" />
+      <wsdl:output message="tns:GetNextEventHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GetAllNextEvents</wsdl:documentation>
+      <wsdl:input message="tns:GetAllNextEventsHttpPostIn" />
+      <wsdl:output message="tns:GetAllNextEventsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSAgentEventSoap" type="tns:WSAgentEventSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNextEvent">
+      <soap:operation soapAction="http://tempuri.org/GetNextEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <soap:operation soapAction="http://tempuri.org/GetAllNextEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSAgentEventSoap12" type="tns:WSAgentEventSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNextEvent">
+      <soap12:operation soapAction="http://tempuri.org/GetNextEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <soap12:operation soapAction="http://tempuri.org/GetAllNextEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSAgentEventHttpGet" type="tns:WSAgentEventHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetNextEvent">
+      <http:operation location="/GetNextEvent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <http:operation location="/GetAllNextEvents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSAgentEventHttpPost" type="tns:WSAgentEventHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetNextEvent">
+      <http:operation location="/GetNextEvent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNextEvents">
+      <http:operation location="/GetAllNextEvents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSAgentEvent">
+    <wsdl:port name="WSAgentEventSoap" binding="tns:WSAgentEventSoap">
+      <soap:address location="http://10.0.1.227/WSAgentControl/WSAgentEvent.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSAgentEventSoap12" binding="tns:WSAgentEventSoap12">
+      <soap12:address location="http://10.0.1.227/WSAgentControl/WSAgentEvent.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSAgentEventHttpGet" binding="tns:WSAgentEventHttpGet">
+      <http:address location="http://10.0.1.227/WSAgentControl/WSAgentEvent.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSAgentEventHttpPost" binding="tns:WSAgentEventHttpPost">
+      <http:address location="http://10.0.1.227/WSAgentControl/WSAgentEvent.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

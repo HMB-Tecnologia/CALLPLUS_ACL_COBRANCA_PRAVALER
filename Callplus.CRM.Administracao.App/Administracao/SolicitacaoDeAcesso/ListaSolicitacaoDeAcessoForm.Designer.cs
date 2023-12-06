@@ -1,0 +1,321 @@
+﻿namespace Callplus.CRM.Administracao.App.Administracao.SolicitacaoDeAcesso
+{
+    partial class ListaSolicitacaoDeAcessoForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaSolicitacaoDeAcessoForm));
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblTotalRegistros = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chkListarAtivos = new System.Windows.Forms.CheckBox();
+            this.txtBuscaRapida = new System.Windows.Forms.TextBox();
+            this.btnBuscaRapida = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbOperador = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbSupervisor = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnPesquisar = new System.Windows.Forms.Button();
+            this.btnFechar = new System.Windows.Forms.Button();
+            this.dgResultado = new System.Windows.Forms.DataGridView();
+            this.statusStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTotalRegistros,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 454);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1028, 24);
+            this.statusStrip1.TabIndex = 16;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblTotalRegistros
+            // 
+            this.lblTotalRegistros.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalRegistros.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lblTotalRegistros.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblTotalRegistros.Name = "lblTotalRegistros";
+            this.lblTotalRegistros.Size = new System.Drawing.Size(81, 19);
+            this.lblTotalRegistros.Text = "0 Registro(s)";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.Adjust;
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.Blue;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(378, 19);
+            this.toolStripStatusLabel2.Text = "Para ver os detalhes do registro, dê um clique duplo na linha desejada";
+            // 
+            // chkListarAtivos
+            // 
+            this.chkListarAtivos.AutoSize = true;
+            this.chkListarAtivos.Checked = true;
+            this.chkListarAtivos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkListarAtivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkListarAtivos.Location = new System.Drawing.Point(12, 103);
+            this.chkListarAtivos.Name = "chkListarAtivos";
+            this.chkListarAtivos.Size = new System.Drawing.Size(203, 17);
+            this.chkListarAtivos.TabIndex = 22;
+            this.chkListarAtivos.Text = "Exibir somente os registros pendentes";
+            this.chkListarAtivos.UseVisualStyleBackColor = true;
+            this.chkListarAtivos.CheckedChanged += new System.EventHandler(this.chkListarAtivos_CheckedChanged);
+            // 
+            // txtBuscaRapida
+            // 
+            this.txtBuscaRapida.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscaRapida.Location = new System.Drawing.Point(930, 6);
+            this.txtBuscaRapida.MaxLength = 10;
+            this.txtBuscaRapida.Name = "txtBuscaRapida";
+            this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
+            this.txtBuscaRapida.TabIndex = 19;
+            this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
+            // 
+            // btnBuscaRapida
+            // 
+            this.btnBuscaRapida.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscaRapida.BackColor = System.Drawing.SystemColors.Control;
+            this.btnBuscaRapida.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBuscaRapida.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
+            this.btnBuscaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscaRapida.Location = new System.Drawing.Point(991, 5);
+            this.btnBuscaRapida.Name = "btnBuscaRapida";
+            this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
+            this.btnBuscaRapida.TabIndex = 20;
+            this.btnBuscaRapida.UseVisualStyleBackColor = true;
+            this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(854, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Busca Rápida:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(7, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(293, 25);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "SOLICITAÇÕES DE ACESSO";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cmbOperador);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbSupervisor);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.btnPesquisar);
+            this.groupBox1.Controls.Add(this.btnFechar);
+            this.groupBox1.Location = new System.Drawing.Point(12, 33);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1004, 64);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ações";
+            // 
+            // cmbOperador
+            // 
+            this.cmbOperador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbOperador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbOperador.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbOperador.FormattingEnabled = true;
+            this.cmbOperador.Location = new System.Drawing.Point(294, 32);
+            this.cmbOperador.Name = "cmbOperador";
+            this.cmbOperador.Size = new System.Drawing.Size(275, 21);
+            this.cmbOperador.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(291, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Operador";
+            // 
+            // cmbSupervisor
+            // 
+            this.cmbSupervisor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbSupervisor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbSupervisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSupervisor.FormattingEnabled = true;
+            this.cmbSupervisor.Location = new System.Drawing.Point(13, 32);
+            this.cmbSupervisor.Name = "cmbSupervisor";
+            this.cmbSupervisor.Size = new System.Drawing.Size(275, 21);
+            this.cmbSupervisor.TabIndex = 5;
+            this.cmbSupervisor.SelectedIndexChanged += new System.EventHandler(this.cmbSupervisor_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(10, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Supervisor";
+            // 
+            // btnPesquisar
+            // 
+            this.btnPesquisar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPesquisar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPesquisar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
+            this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPesquisar.Location = new System.Drawing.Point(575, 31);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
+            this.btnPesquisar.TabIndex = 10;
+            this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFechar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFechar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFechar.FlatAppearance.BorderSize = 0;
+            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnFechar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFechar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnFechar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.close;
+            this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFechar.Location = new System.Drawing.Point(918, 29);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(80, 25);
+            this.btnFechar.TabIndex = 12;
+            this.btnFechar.Text = "Fechar   ";
+            this.btnFechar.UseVisualStyleBackColor = true;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+            // 
+            // dgResultado
+            // 
+            this.dgResultado.AllowUserToAddRows = false;
+            this.dgResultado.AllowUserToDeleteRows = false;
+            this.dgResultado.AllowUserToResizeRows = false;
+            this.dgResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgResultado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.EnableHeadersVisualStyles = false;
+            this.dgResultado.Location = new System.Drawing.Point(12, 126);
+            this.dgResultado.MultiSelect = false;
+            this.dgResultado.Name = "dgResultado";
+            this.dgResultado.ReadOnly = true;
+            this.dgResultado.RowHeadersVisible = false;
+            this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgResultado.Size = new System.Drawing.Size(1004, 317);
+            this.dgResultado.TabIndex = 23;
+            this.dgResultado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellDoubleClick);
+            // 
+            // ListaSolicitacaoDeAcessoForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1028, 478);
+            this.Controls.Add(this.chkListarAtivos);
+            this.Controls.Add(this.txtBuscaRapida);
+            this.Controls.Add(this.btnBuscaRapida);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dgResultado);
+            this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "ListaSolicitacaoDeAcessoForm";
+            this.Text = "Solicitações de Acesso";
+            this.Load += new System.EventHandler(this.ListaSolicitacaoDeAcessoForm_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblTotalRegistros;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.CheckBox chkListarAtivos;
+        private System.Windows.Forms.TextBox txtBuscaRapida;
+        private System.Windows.Forms.Button btnBuscaRapida;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cmbSupervisor;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Button btnFechar;
+        private System.Windows.Forms.DataGridView dgResultado;
+        private System.Windows.Forms.ComboBox cmbOperador;
+        private System.Windows.Forms.Label label1;
+    }
+}

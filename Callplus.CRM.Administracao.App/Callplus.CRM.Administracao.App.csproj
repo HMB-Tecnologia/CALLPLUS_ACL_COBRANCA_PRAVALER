@@ -1,0 +1,774 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B36F488-F90A-4E97-BDEA-2870904BB25F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Callplus.CRM.Administracao.App</RootNamespace>
+    <AssemblyName>Callplus.CRM.Administracao.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ListboxMessage">
+      <HintPath>..\ListboxMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="MSDN.HtmlEditorControl">
+      <HintPath>..\MSDN.HtmlEditorControl.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdministracaoMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdministracaoMDI.Designer.cs">
+      <DependentUpon>AdministracaoMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\SolicitacaoDeAcesso\ListaSolicitacaoDeAcessoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\SolicitacaoDeAcesso\ListaSolicitacaoDeAcessoForm.Designer.cs">
+      <DependentUpon>ListaSolicitacaoDeAcessoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\SolicitacaoDeAcesso\SolicitacaoDeAcessoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\SolicitacaoDeAcesso\SolicitacaoDeAcessoForm.Designer.cs">
+      <DependentUpon>SolicitacaoDeAcessoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.Designer.cs">
+      <DependentUpon>AuditoriaOferta_PtvNetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.Designer.cs">
+      <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.Designer.cs">
+      <DependentUpon>AuditoriaOferta_PortabilidadeClaroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.Designer.cs">
+      <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.Designer.cs">
+      <DependentUpon>ListaAuditoriaDeVendaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\Notificacao\ListaNotificacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\Notificacao\ListaNotificacaoForm.designer.cs">
+      <DependentUpon>ListaNotificacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\Notificacao\NotificacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\Notificacao\NotificacaoForm.designer.cs">
+      <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\StatusDeAuditoria\ListaStatusDeAuditoriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\StatusDeAuditoria\ListaStatusDeAuditoriaForm.designer.cs">
+      <DependentUpon>ListaStatusDeAuditoriaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\StatusDeAuditoria\StatusDeAuditoriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\StatusDeAuditoria\StatusDeAuditoriaForm.designer.cs">
+      <DependentUpon>StatusDeAuditoriaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamico.Designer.cs">
+      <DependentUpon>ContainerDeLayoutDeCampoDinamico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomComboBox.Designer.cs">
+      <DependentUpon>CustomComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\CamposDinamicos\CustomTextBox.Designer.cs">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScriptDeOfertaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ScriptDeOfertaControl.designer.cs">
+      <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Aparelho\AparelhoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Aparelho\AparelhoForm.Designer.cs">
+      <DependentUpon>AparelhoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Aparelho\ListaAparelhoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Aparelho\ListaAparelhoForm.Designer.cs">
+      <DependentUpon>ListaAparelhoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\CampanhaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\CampanhaForm.Designer.cs">
+      <DependentUpon>CampanhaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\ListaCampanhaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\ListaCampanhaForm.Designer.cs">
+      <DependentUpon>ListaCampanhaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\FaixaDeRecarga\FaixaDeRecargaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\FaixaDeRecarga\FaixaDeRecargaForm.designer.cs">
+      <DependentUpon>FaixaDeRecargaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\FaixaDeRecarga\ListaFaixaDeRecargaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\FaixaDeRecarga\ListaFaixaDeRecargaForm.designer.cs">
+      <DependentUpon>ListaFaixaDeRecargaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\LayoutDinamico\ListaLayoutDinamico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\LayoutDinamico\ListaLayoutDinamico.Designer.cs">
+      <DependentUpon>ListaLayoutDinamico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\LayoutDinamico\LayoutDinamicoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\LayoutDinamico\LayoutDinamicoForm.Designer.cs">
+      <DependentUpon>LayoutDinamicoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Mailing\ListaMailingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Mailing\ListaMailingForm.Designer.cs">
+      <DependentUpon>ListaMailingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Mailing\MailingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Mailing\MailingForm.Designer.cs">
+      <DependentUpon>MailingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\Usuario\ListaUsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\Usuario\ListaUsuarioForm.Designer.cs">
+      <DependentUpon>ListaUsuarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\Usuario\UsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\Usuario\UsuarioForm.Designer.cs">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ResetSenhaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\ResetSenhaForm.Designer.cs">
+      <DependentUpon>ResetSenhaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Pausas\ListaPausaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Pausas\ListaPausaForm.Designer.cs">
+      <DependentUpon>ListaPausaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Pausas\PausaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Pausas\PausaForm.Designer.cs">
+      <DependentUpon>PausaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Produto\ListaProdutoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Produto\ListaProdutoForm.Designer.cs">
+      <DependentUpon>ListaProdutoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Produto\ProdutoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Produto\ProdutoForm.Designer.cs">
+      <DependentUpon>ProdutoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeAtendimento\ListaStatusDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeAtendimento\ListaStatusDeAtendimentoForm.Designer.cs">
+      <DependentUpon>ListaStatusDeAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeAtendimento\StatusDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeAtendimento\StatusDeAtendimentoForm.Designer.cs">
+      <DependentUpon>StatusDeAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.designer.cs">
+      <DependentUpon>ListaStatusDeOfertaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.Designer.cs">
+      <DependentUpon>StatusDeOfertaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrincipalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrincipalForm.Designer.cs">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\AvaliacaoDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\AvaliacaoDeAtendimentoForm.Designer.cs">
+      <DependentUpon>AvaliacaoDeAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\ListaAvaliacaoDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\ListaAvaliacaoDeAtendimentoForm.Designer.cs">
+      <DependentUpon>ListaAvaliacaoDeAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\ListaFeedbackDeAvaliacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\ListaFeedbackDeAvaliacaoForm.Designer.cs">
+      <DependentUpon>ListaFeedbackDeAvaliacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\Checklist\ChecklistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\Checklist\ChecklistForm.Designer.cs">
+      <DependentUpon>ChecklistForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\Checklist\ListaChecklistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\Checklist\ListaChecklistForm.Designer.cs">
+      <DependentUpon>ListaChecklistForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\FaqDeAtendimento\FaqDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\FaqDeAtendimento\FaqDeAtendimentoForm.Designer.cs">
+      <DependentUpon>FaqDeAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\FaqDeAtendimento\ListarFaqDeAtendimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\FaqDeAtendimento\ListarFaqDeAtendimento.Designer.cs">
+      <DependentUpon>ListarFaqDeAtendimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\FormularioDeQualidade\FormularioDeQualidadeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\FormularioDeQualidade\FormularioDeQualidadeForm.Designer.cs">
+      <DependentUpon>FormularioDeQualidadeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\FormularioDeQualidade\ListaFormularioDeQualidadeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\FormularioDeQualidade\ListaFormularioDeQualidadeForm.Designer.cs">
+      <DependentUpon>ListaFormularioDeQualidadeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\PlanoParaComparacao\ListaPlanoParaComparacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\PlanoParaComparacao\ListaPlanoParaComparacaoForm.Designer.cs">
+      <DependentUpon>ListaPlanoParaComparacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\PlanoParaComparacao\PlanoParaComparacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\PlanoParaComparacao\PlanoParaComparacaoForm.Designer.cs">
+      <DependentUpon>PlanoParaComparacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\ListaScriptAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\ListaScriptAtendimentoForm.Designer.cs">
+      <DependentUpon>ListaScriptAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\ScriptAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\ScriptAtendimentoForm.Designer.cs">
+      <DependentUpon>ScriptAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\SimuladorScriptAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\ScriptDeAtendimento\SimuladorScriptAtendimentoForm.Designer.cs">
+      <DependentUpon>SimuladorScriptAtendimentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\ContatosTrabalhadosDetalhado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\ContatosTrabalhadosDetalhado.designer.cs">
+      <DependentUpon>ContatosTrabalhadosDetalhado.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AdministracaoMDI.resx">
+      <DependentUpon>AdministracaoMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\SolicitacaoDeAcesso\ListaSolicitacaoDeAcessoForm.resx">
+      <DependentUpon>ListaSolicitacaoDeAcessoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\SolicitacaoDeAcesso\SolicitacaoDeAcessoForm.resx">
+      <DependentUpon>SolicitacaoDeAcessoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.resx">
+      <DependentUpon>AuditoriaOferta_PtvNetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.resx">
+      <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.resx">
+      <DependentUpon>AuditoriaOferta_PortabilidadeClaroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.resx">
+      <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.resx">
+      <DependentUpon>ListaAuditoriaDeVendaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\Notificacao\ListaNotificacaoForm.resx">
+      <DependentUpon>ListaNotificacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\Notificacao\NotificacaoForm.resx">
+      <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\StatusDeAuditoria\ListaStatusDeAuditoriaForm.resx">
+      <DependentUpon>ListaStatusDeAuditoriaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\StatusDeAuditoria\StatusDeAuditoriaForm.resx">
+      <DependentUpon>StatusDeAuditoriaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\ContainerDeLayoutDeCampoDinamico.resx">
+      <DependentUpon>ContainerDeLayoutDeCampoDinamico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\CustomComboBox.resx">
+      <DependentUpon>CustomComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\CamposDinamicos\CustomTextBox.resx">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ScriptDeOfertaControl.resx">
+      <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Aparelho\AparelhoForm.resx">
+      <DependentUpon>AparelhoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Aparelho\ListaAparelhoForm.resx">
+      <DependentUpon>ListaAparelhoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Campanha\CampanhaForm.resx">
+      <DependentUpon>CampanhaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Campanha\ListaCampanhaForm.resx">
+      <DependentUpon>ListaCampanhaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\FaixaDeRecarga\FaixaDeRecargaForm.resx">
+      <DependentUpon>FaixaDeRecargaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\FaixaDeRecarga\ListaFaixaDeRecargaForm.resx">
+      <DependentUpon>ListaFaixaDeRecargaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\LayoutDinamico\ListaLayoutDinamico.resx">
+      <DependentUpon>ListaLayoutDinamico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\LayoutDinamico\LayoutDinamicoForm.resx">
+      <DependentUpon>LayoutDinamicoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Mailing\ListaMailingForm.resx">
+      <DependentUpon>ListaMailingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Mailing\MailingForm.resx">
+      <DependentUpon>MailingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\Usuario\ListaUsuarioForm.resx">
+      <DependentUpon>ListaUsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\Usuario\UsuarioForm.resx">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ResetSenhaForm.resx">
+      <DependentUpon>ResetSenhaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Pausas\ListaPausaForm.resx">
+      <DependentUpon>ListaPausaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Pausas\PausaForm.resx">
+      <DependentUpon>PausaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Produto\ListaProdutoForm.resx">
+      <DependentUpon>ListaProdutoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Produto\ProdutoForm.resx">
+      <DependentUpon>ProdutoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\StatusDeAtendimento\ListaStatusDeAtendimentoForm.resx">
+      <DependentUpon>ListaStatusDeAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\StatusDeAtendimento\StatusDeAtendimentoForm.resx">
+      <DependentUpon>StatusDeAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.resx">
+      <DependentUpon>ListaStatusDeOfertaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.resx">
+      <DependentUpon>StatusDeOfertaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrincipalForm.resx">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\AvaliacaoDeAtendimento\AvaliacaoDeAtendimentoForm.resx">
+      <DependentUpon>AvaliacaoDeAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\AvaliacaoDeAtendimento\ListaAvaliacaoDeAtendimentoForm.resx">
+      <DependentUpon>ListaAvaliacaoDeAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\AvaliacaoDeAtendimento\ListaFeedbackDeAvaliacaoForm.resx">
+      <DependentUpon>ListaFeedbackDeAvaliacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\Checklist\ChecklistForm.resx">
+      <DependentUpon>ChecklistForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\Checklist\ListaChecklistForm.resx">
+      <DependentUpon>ListaChecklistForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\FaqDeAtendimento\FaqDeAtendimentoForm.resx">
+      <DependentUpon>FaqDeAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\FaqDeAtendimento\ListarFaqDeAtendimento.resx">
+      <DependentUpon>ListarFaqDeAtendimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\FormularioDeQualidade\FormularioDeQualidadeForm.resx">
+      <DependentUpon>FormularioDeQualidadeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\FormularioDeQualidade\ListaFormularioDeQualidadeForm.resx">
+      <DependentUpon>ListaFormularioDeQualidadeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\PlanoParaComparacao\ListaPlanoParaComparacaoForm.resx">
+      <DependentUpon>ListaPlanoParaComparacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\PlanoParaComparacao\PlanoParaComparacaoForm.resx">
+      <DependentUpon>PlanoParaComparacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\ScriptDeAtendimento\ListaScriptAtendimentoForm.resx">
+      <DependentUpon>ListaScriptAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\ScriptDeAtendimento\ScriptAtendimentoForm.resx">
+      <DependentUpon>ScriptAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\ScriptDeAtendimento\SimuladorScriptAtendimentoForm.resx">
+      <DependentUpon>SimuladorScriptAtendimentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\ContatosTrabalhadosDetalhado.resx">
+      <DependentUpon>ContatosTrabalhadosDetalhado.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.App\Callplus.CRM.Tabulador.App.csproj">
+      <Project>{d4f0ee4d-ac29-4863-9c16-356b2b4bf543}</Project>
+      <Name>Callplus.CRM.Tabulador.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Dominio\Callplus.CRM.Tabulador.Dominio.csproj">
+      <Project>{f29fab35-e7b6-45c9-97e5-5a4e12087d99}</Project>
+      <Name>Callplus.CRM.Tabulador.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Infra.Dados\Callplus.CRM.Tabulador.Infra.Dados.csproj">
+      <Project>{fad9c32e-fa49-4f31-b3a2-cf16ad5fd9bc}</Project>
+      <Name>Callplus.CRM.Tabulador.Infra.Dados</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Servico\Callplus.CRM.Tabulador.Servico.csproj">
+      <Project>{d78c5997-3eaa-4b44-bb38-d6db3979e06d}</Project>
+      <Name>Callplus.CRM.Tabulador.Servico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CallplusUtil\CallplusUtil.csproj">
+      <Project>{a39a0285-492a-42d5-b94a-3a35e17d917b}</Project>
+      <Name>CallplusUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Qualidade\Checklist\images\psd\bold.psd" />
+    <None Include="Qualidade\Checklist\images\psd\Button2.psd" />
+    <None Include="Qualidade\Checklist\images\psd\Button2SMALL.psd" />
+    <None Include="Qualidade\Checklist\images\psd\center.psd" />
+    <None Include="Qualidade\Checklist\images\psd\colors2.psd" />
+    <None Include="Qualidade\Checklist\images\psd\copy.psd" />
+    <None Include="Qualidade\Checklist\images\psd\cut.psd" />
+    <None Include="Qualidade\Checklist\images\psd\font.psd" />
+    <None Include="Qualidade\Checklist\images\psd\fontSize.psd" />
+    <None Include="Qualidade\Checklist\images\psd\icon.psd" />
+    <None Include="Qualidade\Checklist\images\psd\Image.psd" />
+    <None Include="Qualidade\Checklist\images\psd\italic.psd" />
+    <None Include="Qualidade\Checklist\images\psd\left.psd" />
+    <None Include="Qualidade\Checklist\images\psd\open.psd" />
+    <None Include="Qualidade\Checklist\images\psd\paste.psd" />
+    <None Include="Qualidade\Checklist\images\psd\print.psd" />
+    <None Include="Qualidade\Checklist\images\psd\pspbrwse.jbf" />
+    <None Include="Qualidade\Checklist\images\psd\Redo.psd" />
+    <None Include="Qualidade\Checklist\images\psd\right.psd" />
+    <None Include="Qualidade\Checklist\images\psd\save.psd" />
+    <None Include="Qualidade\Checklist\images\psd\stamp.psd" />
+    <None Include="Qualidade\Checklist\images\psd\stamp2.psd" />
+    <None Include="Qualidade\Checklist\images\psd\strikeout.psd" />
+    <None Include="Qualidade\Checklist\images\psd\underline.psd" />
+    <None Include="Qualidade\Checklist\images\psd\Undo.psd" />
+    <None Include="Resources\power.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fundoAzul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\param.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quality.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checklist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VGX_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quality_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\notaAzul.png" />
+    <Content Include="bin\Debug\notaPreta.png" />
+    <Content Include="bin\Debug\notaVerde.png" />
+    <Content Include="bin\Debug\notaVermelha.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="Qualidade\Checklist\images\bold.gif" />
+    <Content Include="Qualidade\Checklist\images\center.gif" />
+    <Content Include="Qualidade\Checklist\images\Colors.gif" />
+    <Content Include="Qualidade\Checklist\images\colors2.gif" />
+    <Content Include="Qualidade\Checklist\images\copy.gif" />
+    <Content Include="Qualidade\Checklist\images\cut.gif" />
+    <Content Include="Qualidade\Checklist\images\font.gif" />
+    <Content Include="Qualidade\Checklist\images\fontSize.gif" />
+    <Content Include="Qualidade\Checklist\images\Image.gif" />
+    <Content Include="Qualidade\Checklist\images\italic.gif" />
+    <Content Include="Qualidade\Checklist\images\left.gif" />
+    <Content Include="Qualidade\Checklist\images\open.gif" />
+    <Content Include="Qualidade\Checklist\images\paste.gif" />
+    <Content Include="Qualidade\Checklist\images\print.gif" />
+    <Content Include="Qualidade\Checklist\images\Redo.gif" />
+    <Content Include="Qualidade\Checklist\images\RichTextBoxExtended.bmp" />
+    <Content Include="Qualidade\Checklist\images\RichTextBoxExtended.ico" />
+    <Content Include="Qualidade\Checklist\images\right.gif" />
+    <Content Include="Qualidade\Checklist\images\save.gif" />
+    <Content Include="Qualidade\Checklist\images\stamp.gif" />
+    <Content Include="Qualidade\Checklist\images\stamp2.gif" />
+    <Content Include="Qualidade\Checklist\images\strikeout.gif" />
+    <Content Include="Qualidade\Checklist\images\underline.gif" />
+    <Content Include="Qualidade\Checklist\images\Undo.gif" />
+    <Content Include="Resources\logoQuintoAndar.png" />
+    <None Include="Resources\address-book-blue.png" />
+    <None Include="Resources\STodos.png" />
+    <None Include="Resources\DTodos.png" />
+    <None Include="Resources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

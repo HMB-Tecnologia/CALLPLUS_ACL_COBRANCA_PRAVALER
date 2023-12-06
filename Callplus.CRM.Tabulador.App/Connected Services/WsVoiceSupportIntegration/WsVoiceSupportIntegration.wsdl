@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="VoiceSupportStart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="paramAgentLogin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoiceSupportStartResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="VoiceSupportPause">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="paramAgentLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoiceSupportPauseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="VoiceSupportResume">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="paramAgentLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoiceSupportResumeResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="VoiceSupportStop">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="paramAgentLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoiceSupportStopResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VoiceSupportStartSoapIn">
+    <wsdl:part name="parameters" element="tns:VoiceSupportStart" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStartSoapOut">
+    <wsdl:part name="parameters" element="tns:VoiceSupportStartResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportPauseSoapIn">
+    <wsdl:part name="parameters" element="tns:VoiceSupportPause" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportPauseSoapOut">
+    <wsdl:part name="parameters" element="tns:VoiceSupportPauseResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportResumeSoapIn">
+    <wsdl:part name="parameters" element="tns:VoiceSupportResume" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportResumeSoapOut">
+    <wsdl:part name="parameters" element="tns:VoiceSupportResumeResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStopSoapIn">
+    <wsdl:part name="parameters" element="tns:VoiceSupportStop" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStopSoapOut">
+    <wsdl:part name="parameters" element="tns:VoiceSupportStopResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStartHttpGetIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+    <wsdl:part name="paramFileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStartHttpGetOut" />
+  <wsdl:message name="VoiceSupportPauseHttpGetIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportPauseHttpGetOut" />
+  <wsdl:message name="VoiceSupportResumeHttpGetIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportResumeHttpGetOut" />
+  <wsdl:message name="VoiceSupportStopHttpGetIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStopHttpGetOut" />
+  <wsdl:message name="VoiceSupportStartHttpPostIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+    <wsdl:part name="paramFileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStartHttpPostOut" />
+  <wsdl:message name="VoiceSupportPauseHttpPostIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportPauseHttpPostOut" />
+  <wsdl:message name="VoiceSupportResumeHttpPostIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportResumeHttpPostOut" />
+  <wsdl:message name="VoiceSupportStopHttpPostIn">
+    <wsdl:part name="paramAgentLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VoiceSupportStopHttpPostOut" />
+  <wsdl:portType name="WsVoiceSupportIntegrationSoap">
+    <wsdl:operation name="VoiceSupportStart">
+      <wsdl:input message="tns:VoiceSupportStartSoapIn" />
+      <wsdl:output message="tns:VoiceSupportStartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <wsdl:input message="tns:VoiceSupportPauseSoapIn" />
+      <wsdl:output message="tns:VoiceSupportPauseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <wsdl:input message="tns:VoiceSupportResumeSoapIn" />
+      <wsdl:output message="tns:VoiceSupportResumeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <wsdl:input message="tns:VoiceSupportStopSoapIn" />
+      <wsdl:output message="tns:VoiceSupportStopSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WsVoiceSupportIntegrationHttpGet">
+    <wsdl:operation name="VoiceSupportStart">
+      <wsdl:input message="tns:VoiceSupportStartHttpGetIn" />
+      <wsdl:output message="tns:VoiceSupportStartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <wsdl:input message="tns:VoiceSupportPauseHttpGetIn" />
+      <wsdl:output message="tns:VoiceSupportPauseHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <wsdl:input message="tns:VoiceSupportResumeHttpGetIn" />
+      <wsdl:output message="tns:VoiceSupportResumeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <wsdl:input message="tns:VoiceSupportStopHttpGetIn" />
+      <wsdl:output message="tns:VoiceSupportStopHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WsVoiceSupportIntegrationHttpPost">
+    <wsdl:operation name="VoiceSupportStart">
+      <wsdl:input message="tns:VoiceSupportStartHttpPostIn" />
+      <wsdl:output message="tns:VoiceSupportStartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <wsdl:input message="tns:VoiceSupportPauseHttpPostIn" />
+      <wsdl:output message="tns:VoiceSupportPauseHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <wsdl:input message="tns:VoiceSupportResumeHttpPostIn" />
+      <wsdl:output message="tns:VoiceSupportResumeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <wsdl:input message="tns:VoiceSupportStopHttpPostIn" />
+      <wsdl:output message="tns:VoiceSupportStopHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsVoiceSupportIntegrationSoap" type="tns:WsVoiceSupportIntegrationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoiceSupportStart">
+      <soap:operation soapAction="http://tempuri.org/VoiceSupportStart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <soap:operation soapAction="http://tempuri.org/VoiceSupportPause" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <soap:operation soapAction="http://tempuri.org/VoiceSupportResume" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <soap:operation soapAction="http://tempuri.org/VoiceSupportStop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsVoiceSupportIntegrationSoap12" type="tns:WsVoiceSupportIntegrationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoiceSupportStart">
+      <soap12:operation soapAction="http://tempuri.org/VoiceSupportStart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <soap12:operation soapAction="http://tempuri.org/VoiceSupportPause" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <soap12:operation soapAction="http://tempuri.org/VoiceSupportResume" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <soap12:operation soapAction="http://tempuri.org/VoiceSupportStop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsVoiceSupportIntegrationHttpGet" type="tns:WsVoiceSupportIntegrationHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="VoiceSupportStart">
+      <http:operation location="/VoiceSupportStart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <http:operation location="/VoiceSupportPause" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <http:operation location="/VoiceSupportResume" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <http:operation location="/VoiceSupportStop" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsVoiceSupportIntegrationHttpPost" type="tns:WsVoiceSupportIntegrationHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="VoiceSupportStart">
+      <http:operation location="/VoiceSupportStart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportPause">
+      <http:operation location="/VoiceSupportPause" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportResume">
+      <http:operation location="/VoiceSupportResume" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="VoiceSupportStop">
+      <http:operation location="/VoiceSupportStop" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsVoiceSupportIntegration">
+    <wsdl:port name="WsVoiceSupportIntegrationSoap" binding="tns:WsVoiceSupportIntegrationSoap">
+      <soap:address location="http://10.0.1.227/WsVoiceSupportIntegration/WsVoiceSupportIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsVoiceSupportIntegrationSoap12" binding="tns:WsVoiceSupportIntegrationSoap12">
+      <soap12:address location="http://10.0.1.227/WsVoiceSupportIntegration/WsVoiceSupportIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsVoiceSupportIntegrationHttpGet" binding="tns:WsVoiceSupportIntegrationHttpGet">
+      <http:address location="http://10.0.1.227/WsVoiceSupportIntegration/WsVoiceSupportIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsVoiceSupportIntegrationHttpPost" binding="tns:WsVoiceSupportIntegrationHttpPost">
+      <http:address location="http://10.0.1.227/WsVoiceSupportIntegration/WsVoiceSupportIntegration.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

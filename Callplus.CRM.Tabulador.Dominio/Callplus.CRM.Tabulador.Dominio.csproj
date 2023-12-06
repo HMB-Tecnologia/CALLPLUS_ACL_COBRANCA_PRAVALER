@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F29FAB35-E7B6-45C9-97E5-5A4E12087D99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Callplus.CRM.Tabulador.Dominio</RootNamespace>
+    <AssemblyName>Callplus.CRM.Tabulador.Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entidades\AparelhoDaCampanha.cs" />
+    <Compile Include="Dto\PesquisaDoAtendimentoDto.cs" />
+    <Compile Include="Dto\ProdutoDoChecklistDto.cs" />
+    <Compile Include="Dto\ProdutoDoScriptDeAtendimentoDto.cs" />
+    <Compile Include="Entidades\Aparelho.cs" />
+    <Compile Include="Entidades\CampanhaDoStatusDeAtendimento.cs" />
+    <Compile Include="Entidades\ConfiguracaoDoStatusDeOferta.cs" />
+    <Compile Include="Entidades\ConsultarCep.cs" />
+    <Compile Include="Entidades\EscalaDeTrabalho.cs" />
+    <Compile Include="Entidades\FaixaDeRecarga.cs" />
+    <Compile Include="Entidades\FormaDePagamentoDeAparelho.cs" />
+    <Compile Include="Dto\PermissaoDeAcessoMenuDTO.cs" />
+    <Compile Include="Entidades\AvaliacaoDeAtendimento.cs" />
+    <Compile Include="Entidades\CanalAdicional.cs" />
+    <Compile Include="Dto\ConfiguracaoVencimentoFaturaDto.cs" />
+    <Compile Include="Dto\HistoricoAtendimentoDto.cs" />
+    <Compile Include="Dto\HistoricoDaOfertaDoAtendimentoBkoDTO.cs" />
+    <Compile Include="Dto\PermissoesDoUsuarioDTO.cs" />
+    <Compile Include="Dto\ProdutoDaOfertaDto.cs" />
+    <Compile Include="Dto\ResumoDaOfertaDoAtendimentoBkoDTO.cs" />
+    <Compile Include="Dto\ScriptDeAtendimentoDto.cs" />
+    <Compile Include="Entidades\ArquivoDePausa.cs" />
+    <Compile Include="Entidades\Atendimento.cs" />
+    <Compile Include="Entidades\Banco.cs" />
+    <Compile Include="Entidades\Campanha.cs" />
+    <Compile Include="Entidades\Checklist.cs" />
+    <Compile Include="Entidades\DadosDoRanking.cs" />
+    <Compile Include="Entidades\Discador.cs" />
+    <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\Endereco.cs" />
+    <Compile Include="Entidades\FaixaDeRenda.cs" />
+    <Compile Include="Entidades\EstadoCivil.cs" />
+    <Compile Include="Entidades\EtapaDoChecklist.cs" />
+    <Compile Include="Entidades\EnderecoDoProspect.cs" />
+    <Compile Include="Entidades\DadosPagamentoDoProspect.cs" />
+    <Compile Include="Entidades\FaqDoProcedimentoDoFormularioDeQualidade.cs" />
+    <Compile Include="Entidades\FeedbackDaAvaliacaoDeAtendimento.cs" />
+    <Compile Include="Entidades\FormularioDeQualidade.cs" />
+    <Compile Include="Entidades\GrauDeParentesco.cs" />
+    <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoMigracaoBKO.cs" />
+    <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoNetPtvBKO.cs" />
+    <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoPortabilidadeBKO.cs" />
+    <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoRentabilizacaoBKO.cs" />
+    <Compile Include="Entidades\HistoricoLeitura.cs" />
+    <Compile Include="Entidades\Indicacao.cs" />
+    <Compile Include="Entidades\IndicacaoDoAtendimento.cs" />
+    <Compile Include="Entidades\ProcedimentoDoItemDoFormularioDeQualidade.cs" />
+    <Compile Include="Entidades\ItemDoModuloDoFormularioDeQualidade.cs" />
+    <Compile Include="Entidades\LayoutDinamico\ConfiguracaoDeCampoDoLayoutDinamico.cs" />
+    <Compile Include="Entidades\Notificacao.cs" />
+    <Compile Include="Entidades\ModuloDoFormularioDeQualidade.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimento.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoNETPTV.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroMigracaoBKO.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroPortabilidade.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroPortabilidadeBKO.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroRentabilizacao.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroRentabilizacaoBKO.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoNETPTVBKO.cs" />
+    <Compile Include="Entidades\OpcaoDaPerguntaDaPesquisa.cs" />
+    <Compile Include="Entidades\Operadora.cs" />
+    <Compile Include="Entidades\PassaporteOferta.cs" />
+    <Compile Include="Entidades\PermissaoDoUsuario.cs" />
+    <Compile Include="Entidades\Permissao.cs" />
+    <Compile Include="Entidades\Pesquisa.cs" />
+    <Compile Include="Entidades\PlanoPorOperadoraParaComparacao.cs" />
+    <Compile Include="Entidades\ProdutoPermitidoParaFaixaDeRecarga.cs" />
+    <Compile Include="Entidades\RegionalClaro.cs" />
+    <Compile Include="Entidades\RespostaDaPesquisaDoAtendimento.cs" />
+    <Compile Include="Entidades\ScriptAtendimento\EtapaDoScriptDeAtendimento.cs" />
+    <Compile Include="Entidades\FaqDeAtendimento.cs" />
+    <Compile Include="Entidades\FormaDePagamento.cs" />
+    <Compile Include="Entidades\LayoutDinamico\CampoDinamico.cs" />
+    <Compile Include="Entidades\LayoutDinamico\LayoutDeCampoDinamico.cs" />
+    <Compile Include="Entidades\LayoutDinamico\LinhaDeCampoDinamico.cs" />
+    <Compile Include="Entidades\LayoutDinamico\ValorDeCampoDinamico.cs" />
+    <Compile Include="Entidades\Contato.cs" />
+    <Compile Include="Entidades\Mailing.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoClaroMigracao.cs" />
+    <Compile Include="Entidades\Perfil.cs" />
+    <Compile Include="Entidades\Produto.cs" />
+    <Compile Include="Entidades\Profissao.cs" />
+    <Compile Include="Entidades\Prospect.cs" />
+    <Compile Include="Entidades\ResultadoDoAtendimento.cs" />
+    <Compile Include="Entidades\ScriptAtendimento\RespostaDaEtapaDoScriptDeAtendimento.cs" />
+    <Compile Include="Entidades\ScriptAtendimento\ScriptDeAtendimento.cs" />
+    <Compile Include="Entidades\SolicitacaoDeAcessoAoSistema.cs" />
+    <Compile Include="Entidades\StatusDeAtendimento.cs" />
+    <Compile Include="Entidades\StatusDeAuditoria.cs" />
+    <Compile Include="Entidades\StatusDeOferta.cs" />
+    <Compile Include="Entidades\TelefoneDoProspect.cs" />
+    <Compile Include="Entidades\TipoDeAvaliacaoDeAtendimento.cs" />
+    <Compile Include="Entidades\TipoDeDiscagem.cs" />
+    <Compile Include="Entidades\TipoDePlanoPorOperadora.cs" />
+    <Compile Include="Entidades\TipoDeProduto.cs" />
+    <Compile Include="Entidades\TipoDeStatusDeOferta.cs" />
+    <Compile Include="Entidades\TipoDeStatusDeAtendimento.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Entidades\VariavelDoChecklist.cs" />
+    <Compile Include="Entidades\VariavelDoScriptDeAtendimento.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tipos\Perfil.cs" />
+    <Compile Include="Tipos\TipoPermissao.cs" />
+    <Compile Include="Tipos\TipoFormaDePagamento.cs" />
+    <Compile Include="Tipos\OrigemDeAtendimento.cs" />
+    <Compile Include="Tipos\TipoDeProduto.cs" />
+    <Compile Include="Tipos\TipoDiscador.cs" />
+    <Compile Include="Tipos\TipoDeDiscagem.cs" />
+    <Compile Include="Tipos\TipoStatusDeAtendimento.cs" />
+    <Compile Include="Tipos\TipoStatusDeOferta.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

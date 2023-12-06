@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FAD9C32E-FA49-4F31-B3A2-CF16AD5FD9BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Callplus.CRM.Tabulador.Infra.Dados</RootNamespace>
+    <AssemblyName>Callplus.CRM.Tabulador.Infra.Dados</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dao\AtendimentoDao.cs" />
+    <Compile Include="Dao\AvaliacaoDeAtendimentoDao.cs" />
+    <Compile Include="Dao\ChecklistDao.cs" />
+    <Compile Include="Dao\ConfiguracaoDeCampoDoLayoutDinamicoDao.cs" />
+    <Compile Include="Dao\ConsultadDeProspectDao.cs" />
+    <Compile Include="Dao\DaoBase.cs" />
+    <Compile Include="Dao\DiscadorDao.cs" />
+    <Compile Include="Dao\EnderecoDao.cs" />
+    <Compile Include="Dao\FaixasDeRecargaDao.cs" />
+    <Compile Include="Dao\FaqDeAtendimentoDao.cs" />
+    <Compile Include="Dao\FeedbackDaAvaliacaoDeAtendimentoDao.cs" />
+    <Compile Include="Dao\FormularioDeQualidadeDao.cs" />
+    <Compile Include="Dao\GrauDeParentescoDao.cs" />
+    <Compile Include="Dao\LayoutDinamicoDao.cs" />
+    <Compile Include="Dao\LoginDao.cs" />
+    <Compile Include="Dao\AuditoriaDeOfertaDao.cs" />
+    <Compile Include="Dao\MailingDao.cs" />
+    <Compile Include="Dao\NotificacaoDao.cs" />
+    <Compile Include="Dao\PausaDao.cs" />
+    <Compile Include="Dao\PermissaoDao.cs" />
+    <Compile Include="Dao\AparelhoDao.cs" />
+    <Compile Include="Dao\PesquisaDao.cs" />
+    <Compile Include="Dao\PlanoPorOperadoraParaComparacaoDao.cs" />
+    <Compile Include="Dao\RelatorioDao.cs" />
+    <Compile Include="Dao\ScriptDeAtendimentoDao.cs" />
+    <Compile Include="Dao\PerfilDao.cs" />
+    <Compile Include="Dao\ProdutoDao.cs" />
+    <Compile Include="Dao\OfertaDoAtendimentoDao.cs" />
+    <Compile Include="Dao\StatusDeAuditoriaDao.cs" />
+    <Compile Include="Dao\StatusDeOfertaDao.cs" />
+    <Compile Include="Dao\UsuarioDao.cs" />
+    <Compile Include="Util\ConnectionFactory.cs" />
+    <Compile Include="Util\DaoUtil.cs" />
+    <Compile Include="Dao\CampanhaDao.cs" />
+    <Compile Include="Dao\ContatoDao.cs" />
+    <Compile Include="Dao\ProspectDao.cs" />
+    <Compile Include="Dao\StatusDeAtendimentoDao.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Callplus.CRM.Tabulador.Dominio\Callplus.CRM.Tabulador.Dominio.csproj">
+      <Project>{F29FAB35-E7B6-45C9-97E5-5A4E12087D99}</Project>
+      <Name>Callplus.CRM.Tabulador.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
