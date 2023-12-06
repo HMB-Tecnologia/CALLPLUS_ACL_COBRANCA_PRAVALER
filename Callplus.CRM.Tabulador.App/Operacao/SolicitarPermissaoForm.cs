@@ -29,6 +29,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         private string _login = "";
         private string _senha = "";
         private bool _verificarPerfilSupervisor = false;
+        private bool _contatoManual;
         private bool _permitePerfilAdministrador = false;
         private Usuario _usuarioLogado;
         private RetornoSolicitacaoPermissaoUsuario _retornoPermissao;
@@ -55,6 +56,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
             string login = _login.Trim();
             string senha = _senha.Trim();
+
             int idUsuarioPermissao = _loginService.VerificarUsuarioPorLoginSenha(_login, _senha);
 
             if (idUsuarioPermissao > 0)
@@ -80,8 +82,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.Close();
         }
 
-        public RetornoSolicitacaoPermissaoUsuario SolicitarPermissaoDeUsuario(bool verificarPerfilSupervisor, bool permitePerfilAdministrador)
+        public RetornoSolicitacaoPermissaoUsuario SolicitarPermissaoDeUsuario(bool verificarPerfilSupervisor, bool permitePerfilAdministrador, bool contatoManual = false)
         {
+            _contatoManual = contatoManual;
             _permitePerfilAdministrador = permitePerfilAdministrador;
             _verificarPerfilSupervisor = verificarPerfilSupervisor;
             _retornoPermissao = new RetornoSolicitacaoPermissaoUsuario();
@@ -103,7 +106,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             }
             else
             {
-                var msgsValidacao = _permissaoservice.VerificarPermissaoPorLoginESenha(idUsuario, _login, _senha, _verificarPerfilSupervisor, _permitePerfilAdministrador);
+                var msgsValidacao = _permissaoservice.VerificarPermissaoPorLoginESenha(idUsuario, _login, _senha, _verificarPerfilSupervisor, _permitePerfilAdministrador, _contatoManual);
                 mensagens.AddRange(msgsValidacao);
             }
 
@@ -147,10 +150,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(66, 110);
+            this.btnCancelar.Location = new System.Drawing.Point(123, 115);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(69, 23);
-            this.btnCancelar.TabIndex = 21;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -158,10 +161,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(162, 110);
+            this.btnConfirmar.Location = new System.Drawing.Point(12, 115);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(68, 23);
-            this.btnConfirmar.TabIndex = 20;
+            this.btnConfirmar.TabIndex = 3;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnConfirmar.UseVisualStyleBackColor = true;
@@ -171,7 +174,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 70);
+            this.label3.Location = new System.Drawing.Point(12, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 15);
             this.label3.TabIndex = 19;
@@ -181,7 +184,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 47);
+            this.label2.Location = new System.Drawing.Point(12, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 15);
             this.label2.TabIndex = 18;
@@ -192,10 +195,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.txtSenha.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.txtSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenha.Location = new System.Drawing.Point(66, 68);
+            this.txtSenha.Location = new System.Drawing.Point(15, 87);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(164, 17);
-            this.txtSenha.TabIndex = 17;
+            this.txtSenha.Size = new System.Drawing.Size(177, 17);
+            this.txtSenha.TabIndex = 2;
             this.txtSenha.UseSystemPasswordChar = true;
             // 
             // txtLogin
@@ -203,16 +206,16 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.txtLogin.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.txtLogin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLogin.Location = new System.Drawing.Point(66, 45);
+            this.txtLogin.Location = new System.Drawing.Point(15, 49);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(164, 17);
-            this.txtLogin.TabIndex = 16;
+            this.txtLogin.Size = new System.Drawing.Size(177, 17);
+            this.txtLogin.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(47, 9);
+            this.label1.Location = new System.Drawing.Point(8, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 21);
             this.label1.TabIndex = 15;
@@ -224,7 +227,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(256, 159);
+            this.ClientSize = new System.Drawing.Size(203, 149);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.label3);
@@ -234,6 +237,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(9, 9);
             this.Name = "SolicitarPermissaoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Solicitar Permissão";

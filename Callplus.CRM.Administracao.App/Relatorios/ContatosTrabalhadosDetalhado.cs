@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
@@ -57,16 +58,22 @@ namespace Callplus.CRM.Administracao.App.Relatorios
 
 
             PreencherCamposIniciais();
-            CarregarCampanhas(listarCampanhasInativas);
+            CarregarCampanhas(listarCampanhasInativas, -2);
+            CarregarTipoDaCampanha(listarCampanhasInativas);
 
             CarregarSupervisores();
-            CarregarRegrasDoPerfil();
-            CarregarStatusDeAtendimento();
-
             CarregarOperadores(idSupervisor: -1);
+            CarregarRegrasDoPerfil();
+            CarregarStatusDeAtendimento(null, null);
+            CarregarStatusDeOferta(null, null);
+
+            cmbOperador.ResetarComSelecione(habilitar: true);
             cmbSupervisor.ResetarComSelecione(habilitar: true);
             cmbMailing.ResetarComSelecione(habilitar: true);
             cmbCampanhas.ResetarComSelecione(habilitar: true);
+            cmbTipoDeCampanha.ResetarComSelecione(habilitar: true);
+            cmbHoraInicial.Text = "08:00";
+            cmbHoraFinal.Text = "22:00";
         }
 
         private void PreencherCamposIniciais()
@@ -77,17 +84,33 @@ namespace Callplus.CRM.Administracao.App.Relatorios
             cmbMailing.PreencherComSelecione(listaVazia);
         }
 
-        private void CarregarCampanhas(bool listarInativos)
+        private void CarregarCampanhas(bool listarInativos, int idTipoDaCampanha)
         {
             bool? ativo = true;
             if (listarInativos)
                 ativo = null;
 
-            IEnumerable<Campanha> campanhas = _campanhaService.Listar(ativo: ativo);
-            cmbCampanhas.PreencherComSelecione(campanhas, x => x.Id, x => x.Nome);
+            IEnumerable<Campanha> _campanhas;
 
+            if (idTipoDaCampanha != -2)
+            {
+                 _campanhas = _campanhaService.Listar(ativo: true).Where(x => x.idTipoDaCampanha == idTipoDaCampanha);
+            }
+            else
+                 _campanhas = _campanhaService.Listar(ativo: true);
+
+            cmbCampanhas.PreencherComTodosESelecione(_campanhas, x => x.Id, x => x.Nome);
         }
 
+        private void CarregarTipoDaCampanha(bool listarInativos)
+        {
+            bool? ativo = true;
+            if (listarInativos)
+                ativo = null;
+
+            IEnumerable<Campanha> tiposCampanhas = _campanhaService.ListarTipoDaCampanha(ativo: ativo);
+            cmbTipoDeCampanha.PreencherComTodosESelecione(tiposCampanhas, x => x.Id, x => x.Nome);
+        }
         private void CarregarMailings(int idCampanha, bool listarInativos)
         {
             bool? ativo = true;
@@ -95,20 +118,20 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 ativo = null;
 
             IEnumerable<Mailing> mailings = _mailingService.Listar(id: null, idCampanha: idCampanha, ativo: ativo);
-            cmbMailing.PreencherComTodosESelecione(mailings, x => x.id, x => x.nome);
+            cmbMailing.PreencherComTodos(mailings, x => x.id, x => x.nome);
             cmbMailing.ResetarComSelecione(habilitar: cmbMailing.Enabled);
         }
 
-        private void CarregarStatusDeOferta(int idCampanha)
+        private void CarregarStatusDeOferta(int? idCampanha, int? idTipoDeCampanha)
         {
-            IEnumerable<StatusDeOferta> statusDeOferta = _statusDeOfertaService.ListarStatusDeOferta(idCampanha: idCampanha, idTipoStatus: null, ativo: null);
+            IEnumerable<StatusDeOferta> statusDeOferta = _statusDeOfertaService.ListarStatusDeOfertaPorTipoCampanha(idCampanha: idCampanha, idTipoStatus: null, idTipoDeCampanha: idTipoDeCampanha);
             chkStatusOferta.Preencher(statusDeOferta, x => x.Id, x => x.Nome);
         }
 
-        private void CarregarStatusDeAtendimento()
+        private void CarregarStatusDeAtendimento(int ?idCampanha, int? idTipoDeCampanha)
         {
             IEnumerable<StatusDeAtendimento> statusDeAtendiemento =
-                _statusDeAtendimentoService.Listar(id: null, ativo: null, idCampanha: null, idTipoStatus: null);
+                _statusDeAtendimentoService.ListarPorTipoCampanha(id: null, idCampanha: idCampanha, idTipoStatus: null, idTipoDeCampanha: idTipoDeCampanha);
             chkStatusDeAtendimento.Preencher(statusDeAtendiemento, x => x.Id, x => x.Nome);
         }
 
@@ -137,11 +160,12 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 CarregarOperadores(-1, AdministracaoMDI._usuario.Id);
 
                 DateTime data = DateTime.Today;
-                DateTime primeiroDiaDoMes = new DateTime(data.Year, data.Month, 1);
-                dtpDataInicial.MinDate = primeiroDiaDoMes;
-
+                //parâmetro abaixo alterado para permitir que o supervisor visualize no mínimo o mês anterior.
+                //DateTime(data.Year, data.Month, 1); chamado 14400.
+                DateTime primeiroDiaDoMes = new DateTime(data.Year, data.Month, 1).AddMonths(-1);
                 DateTime ultimoDiaDoMes = new DateTime(data.Year, data.Month, DateTime.DaysInMonth(data.Year, data.Month));
 
+                dtpDataInicial.MinDate = primeiroDiaDoMes;
                 dtpDataFinal.MaxDate = ultimoDiaDoMes;
             }
         }
@@ -152,6 +176,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
             int? idSupervisor = 0;
             int? idOperador = 0;
             int idCampanha = 0;
+            int idTipoDeCampanha = 0;
             int idMailing = 0;
             bool filtrarStatusDeAtendimentoNulo = false;
             bool filtrarStatusDeOfertaNulo = false;
@@ -171,14 +196,24 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 else
                 {
 
-                    if (cmbCampanhas.TextoEhSelecione() || cmbCampanhas.TextoEhTodos())
+                    if (cmbTipoDeCampanha.TextoEhTodos())
                     {
-                        idCampanha = -1;
+                        idTipoDeCampanha = -2;
+                    }
+                    else
+                    {
+                        idTipoDeCampanha = int.Parse(cmbTipoDeCampanha.SelectedValue?.ToString());
+                    }
+
+                    if (cmbCampanhas.TextoEhTodos())
+                    {
+                        idCampanha = -2;
                     }
                     else
                     {
                         idCampanha = int.Parse(cmbCampanhas.SelectedValue?.ToString());
                     }
+
                     idsStatusOferta = RetornarFiltroDeIdsSelecionadosCheckdListBox(chkStatusOferta, separador: ",");
                     idsStatusAtendimento = RetornarFiltroDeIdsSelecionadosCheckdListBox(chkStatusDeAtendimento, separador: ",");
 
@@ -189,19 +224,17 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                     if (int.TryParse(cmbOperador.SelectedValue?.ToString(), out idParser))
                         idOperador = idParser;
 
-                    if (cmbSupervisor.TextoEhSelecione() || cmbOperador.TextoEhTodos())
+                    if (cmbSupervisor.TextoEhSelecione() && cmbOperador.TextoEhTodos())
                         idSupervisor = -1;
 
-                    if (cmbOperador.TextoEhSelecione() || cmbOperador.TextoEhTodos())
+                    if (cmbOperador.TextoEhSelecione() && cmbOperador.TextoEhTodos())
                         idOperador = -1;
-
 
                     if (int.TryParse(cmbMailing.SelectedValue?.ToString(), out idParser))
                         idMailing = idParser;
 
                     if (cmbMailing.TextoEhSelecione())
                         idMailing = -1;
-
 
                     filtrarStatusDeAtendimentoNulo = chkListarStatusAtendimentoNaoInformado.Checked;
                     filtrarStatusDeOfertaNulo = chkListarStatusOfertaNaoInformado.Checked;
@@ -211,13 +244,14 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                     {
                         dataInicio = data;
                     }
+
                     if (DateTime.TryParse($"{dtpDataFinal.Text} {cmbHoraFinal.Text}", out data))
                     {
                         dataTermino = data;
                     }
                 }
 
-                dgResultado.DataSource = _relatorioService.RetornarContatosTrabalhados(dataInicio, dataTermino, idCampanha, idOperador, idSupervisor, idMailing, idsStatusAtendimento, idsStatusOferta, filtrarStatusDeAtendimentoNulo, filtrarStatusDeOfertaNulo);
+                dgResultado.DataSource = _relatorioService.RetornarContatosTrabalhados(dataInicio, dataTermino, idCampanha, idTipoDeCampanha, idOperador, idSupervisor, idMailing, idsStatusAtendimento, idsStatusOferta, filtrarStatusDeAtendimentoNulo, filtrarStatusDeOfertaNulo);
                 lblTotalRegistros.Text = dgResultado.RowCount + " Registro(s)";
 
                 RealizarAjustesGrid();
@@ -226,8 +260,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
 
         private void RealizarAjustesGrid()
         {
-            dgResultado.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
-            dgResultado.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
+
         }
 
         private bool ParametrosPesquisaValidos(bool buscaRapida)
@@ -259,6 +292,9 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 if (dataInicial > dataFinal)
                     mensagens.Add("[Data Final] deve ser maior que [Data Inicial]");
 
+                if (cmbTipoDeCampanha.TextoEhSelecione())
+                    mensagens.Add("[Tipo da Campanha] deve ser Selecionado");
+
                 if (cmbCampanhas.TextoEhSelecione())
                     mensagens.Add("[Campanha] deve ser Selecionado");
 
@@ -278,8 +314,6 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                     mensagens.Add("[Status de Oferta] deve ser selecionado");
 
             }
-
-
 
             CallplusFormsUtil.ExibirMensagens(mensagens);
 
@@ -309,7 +343,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                         {
                             System.IO.StreamWriter sw = new System.IO.StreamWriter(myStream, UTF8Encoding.UTF8);
 
-                            if (dgResultado.Rows.Count > 1)
+                            if (dgResultado.Rows.Count >= 1)
                             {
                                 for (int i = 0; i < dgResultado.Columns.Count; i++)
                                 {
@@ -325,6 +359,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                                         sw.Write(dgResultado.Rows[i].Cells[j].Value.ToString().Replace(";", "").Replace("\r", "").Replace("\n", "").Replace("\t", "").Trim() + ";");
                                     }
                                 }
+
                                 sw.Close();
                                 retry = DialogResult.Cancel;
                             }
@@ -482,22 +517,6 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 MessageBox.Show($"Não foi possível gerar o arquivo. Erro: {exception.Message}", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _logger.Fatal(exception);
             }
-
-
-
-
-        }
-
-        #endregion EVENTOS
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbOperador_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void chkListarAtivos_CheckedChanged(object sender, EventArgs e)
@@ -521,10 +540,15 @@ namespace Callplus.CRM.Administracao.App.Relatorios
             try
             {
                 bool listarInativos = chkListarAtivos.Checked;
-                int idCampanha = 0;
+                int idCampanha = -2;
+                int idTipoDaCampanha = -2;
+
                 int.TryParse(cmbCampanhas.SelectedValue?.ToString(), out idCampanha);
+                int.TryParse(cmbTipoDeCampanha.SelectedValue?.ToString(), out idTipoDaCampanha);
+
                 CarregarMailings(idCampanha, listarInativos);
-                CarregarStatusDeOferta(idCampanha);
+                CarregarStatusDeOferta(idCampanha, idTipoDaCampanha);
+                CarregarStatusDeAtendimento(idCampanha, idTipoDaCampanha);
             }
             catch (Exception exception)
             {
@@ -533,5 +557,36 @@ namespace Callplus.CRM.Administracao.App.Relatorios
             }
         }
 
+        private void cmbTipoDeCampanha_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                bool listarCampanhasInativas = false;
+
+                if (cmbTipoDeCampanha.TextoEhSelecione() == false)
+                {
+                    int tipoCampanha = int.Parse(cmbTipoDeCampanha.SelectedValue.ToString());
+                    CarregarCampanhas(listarCampanhasInativas, tipoCampanha);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                _logger.Error(ex);
+                MessageBox.Show($"Não foi possível carregar os tipos da campanha\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmbTipoDeCampanha_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int idTipoDaCampanha = -2;
+            int idCampanha = -2;
+
+            int.TryParse(cmbTipoDeCampanha.SelectedValue?.ToString(), out idTipoDaCampanha);
+
+            CarregarStatusDeAtendimento(idCampanha, idTipoDaCampanha);
+        }
+
+        #endregion EVENTOS
     }
 }

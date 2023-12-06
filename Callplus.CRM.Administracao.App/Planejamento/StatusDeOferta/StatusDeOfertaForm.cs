@@ -17,10 +17,11 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             _logger = LogManager.GetCurrentClassLogger();
 
             _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeAtendimentoService = new StatusDeAtendimentoService();
             _campanhaService = new CampanhaService();
 
             if (idStatus > 0)
-                _statusDeOferta = _statusDeOfertaService.RetornarStatusDeOferta(idStatus, -1);
+                _statusDeOferta = _statusDeOfertaService.RetornarStatusDaOferta(idStatus);
 
             InitializeComponent();
 
@@ -31,10 +32,14 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private readonly ILogger _logger;
         private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
         private Tabulador.Dominio.Entidades.StatusDeOferta _statusDeOferta;
         private IEnumerable<TipoDeStatusDeOferta> _tipoDeStatusDeOferta;
         private readonly CampanhaService _campanhaService;
         private Tabulador.Dominio.Entidades.Campanha _campanha;
+        private Tabulador.Dominio.Entidades.StatusDeAtendimento _statusDeAtendimento;
+        private IEnumerable<Tabulador.Dominio.Entidades.StatusDeAtendimento> _statusDeAtendimentos;
+        private IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas;
 
         public bool Atualizar { get; set; }
 
@@ -50,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void CarregarStatusDeOferta()
         {
-            _tipoDeStatusDeOferta = _statusDeOfertaService.ListarTipoDeStatusDeOferta(-1, true);
+            _tipoDeStatusDeOferta = _statusDeOfertaService.ListarTipoDeStatus(true);
             cmbTipoDeStatusDeOferta.PreencherComSelecione(_tipoDeStatusDeOferta, tipoDeStatus => tipoDeStatus.Id, tipoDeStatus => tipoDeStatus.Nome);
         }
 
@@ -69,7 +74,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
                     _statusDeOferta.IdCriador = AdministracaoMDI._usuario.Id;
                 }
 
-
                 _statusDeOferta.IdTipoDeStatusDeOferta = int.Parse(cmbTipoDeStatusDeOferta.SelectedValue.ToString());
                 _statusDeOferta.Nome = txtNome.Text;
                 _statusDeOferta.Ativo = chkAtivo.Checked;
@@ -80,7 +84,18 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
                 _statusDeOferta.Id = _statusDeOfertaService.GravarStatusDeOferta(_statusDeOferta, idsCampanhas);
 
-                MessageBox.Show($"Status de atendimento {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int idProduto = 0;
+
+                int idStatusDeAtendimento = 0;
+
+                if (int.TryParse(cmbStatusDeAtendimento.SelectedValue.ToString(), out idStatusDeAtendimento));
+
+                if (idStatusDeAtendimento > 0)
+                    _statusDeOfertaService.GravarConfiguracaoDoStatusDeOferta(_statusDeOferta.Id, idStatusDeAtendimento);
+
+                MessageBox.Show($"Status de Oferta {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Close();
 
                 Atualizar = true;
             }
@@ -91,7 +106,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             var mensagens = new List<string>();
 
             if (Convert.ToInt32(cmbTipoDeStatusDeOferta.SelectedValue) == -1)
-                mensagens.Add("[Nome] deve ser informado!");
+                mensagens.Add("[Tipo da Oferta] deve ser informado!");
 
             if (string.IsNullOrEmpty(txtNome.Text.Trim()))
                 mensagens.Add("[Nome] deve ser informado.");
@@ -114,11 +129,38 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void CarregarConfiguracaoInicial()
         {
+            ShowIcon = true;
+            MaximizeBox = false;
+            MinimizeBox = false;
+
             CarregarDados();
 
-            cmbTipoDeStatusDeOferta.DropDown += CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
+            if (_statusDeOferta != null)
+            {
+                CarregarCampanhas();
+            }
 
+            CarregarStatusDeAtendimento();
+            ConfigurarStatusDeAtendimento();
             RealizarAjustes();
+        }
+
+        private void ConfigurarStatusDeAtendimento()
+        {
+            if (_statusDeOferta != null)
+            {
+                var configuracaoDoStatusDeOferta = _statusDeOfertaService.RetornarStatusDeAtendimento(_statusDeOferta);
+
+                if (configuracaoDoStatusDeOferta == null)
+                {
+                    MessageBox.Show($"Não existe Status de Atendimento configurado para este Status de Oferta!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    cmbStatusDeAtendimento.SelectedValue = configuracaoDoStatusDeOferta.IdStatusDeAtendimentoPadrao.ToString();
+                    _statusDeAtendimento = _statusDeAtendimentoService.RetornarStatusDoAtendimento(configuracaoDoStatusDeOferta.IdStatusDeAtendimentoPadrao ?? 0);
+                }
+            }
         }
 
         private void CarregarDados()
@@ -126,18 +168,29 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             if (_statusDeOferta != null)
             {
                 CarregarStatusDeOferta();
-
-                cmbTipoDeStatusDeOferta.SelectedValue = _statusDeOferta.IdTipoDeStatusDeOferta.ToString();
-                chkAtivo.Checked = _statusDeOferta.Ativo;
-                txtNome.Text = _statusDeOferta.Nome;
-                txtObservacao.Text = _statusDeOferta.Observacao;
-          
-                RetornarCampanhasSelecionadas();
-
+                CarregarCampos();
             }
             else
                 CarregarStatusDeOferta();
+        }
 
+        private void CarregarStatusDeAtendimento()
+        {
+
+            _statusDeAtendimentos = _statusDeAtendimentoService.Listar(id: null, ativo: true);
+
+            if (Convert.ToInt32(cmbTipoDeStatusDeOferta.SelectedValue.ToString()) >= 0)
+                _statusDeAtendimentos = _statusDeAtendimentos.Where(status => status.IdTipoDeStatusDeAtendimento == Convert.ToInt32(cmbTipoDeStatusDeOferta.SelectedValue.ToString()));
+
+            cmbStatusDeAtendimento.PreencherComSelecione(_statusDeAtendimentos, status => status.Id, status => status.Nome);
+        }
+
+        private void CarregarCampos()
+        {
+            cmbTipoDeStatusDeOferta.SelectedValue = _statusDeOferta.IdTipoDeStatusDeOferta.ToString();
+            chkAtivo.Checked = _statusDeOferta.Ativo;
+            txtNome.Text = _statusDeOferta.Nome;
+            txtObservacao.Text = _statusDeOferta.Observacao;
         }
 
         private void CarregarDadosDoStatusDeAtendimento()
@@ -151,35 +204,21 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         }
 
-        private void RetornarCampanhasSelecionadas()
-        {
-            int idStatusDeOferta = (int)_statusDeOferta.Id;
-
-            IEnumerable<Tabulador.Dominio.Entidades.StatusDeOferta> retorno = _statusDeOfertaService.RetornarCampanhasSelecionadas(idStatusDeOferta);
-
-            clbCampanhas.Items.Clear();
-
-            foreach (var item in retorno)
-            {
-                if (item.Selecionado)
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, true);
-                else
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, false);
-            }
-        }
-
         private void CarregarCampanhas()
         {
-            IEnumerable<Tabulador.Dominio.Entidades.Campanha> campanhas = _campanhaService.Listar(ativo: true);
+            int statusDeOferta = (_statusDeOferta == null) ? -1 : (int)_statusDeOferta.Id;
+
+            IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas = _campanhaService.Listar(ativo: true);
+            IEnumerable<Tabulador.Dominio.Entidades.StatusDeOferta> _campanhasSelecionadas = _statusDeOfertaService.RetornarCampanhasSelecionadas(statusDeOferta);
 
             clbCampanhas.Items.Clear();
 
-            foreach (var item in campanhas)
+            if (_campanhas != null)
             {
-                if (item.Selecionado)
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, true);
-                else
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, false);
+                foreach (var item in _campanhas)
+                {
+                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, _campanhasSelecionadas.Where(x => x.Id == item.Id).Any());
+                }
             }
         }
 
@@ -199,7 +238,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void RealizarAjustes()
         {
-            this.ShowIcon = false;
+            cmbTipoDeStatusDeOferta.DropDown += CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
@@ -253,20 +292,58 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             clbCampanhas.SetarTodosRegistros(check: false);
         }
 
-        private void cmbTipoDeStatusDeAtendimento_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                CarregarCampanhas();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
+        #endregion EVENTOS
 
-                MessageBox.Show($"Não foi possível carregar as Campanahs!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        private void CmbTipoDeStatusDeOferta_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            CarregarStatusDeAtendimento();
+            CarregarCampanhas();
+        }
+
+        private void LklNovoStatusDeAtendimento_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Deseja criar um Status de Atendimento com mesmo nome?", "Confirmar criação de Status de Atendimento", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                GravarStatusDeAtendimento();
+                CarregarStatusDeAtendimento();
+                ConfigurarNovoStatusDeAtendimento();
             }
         }
 
-        #endregion EVENTOS
+        private void ConfigurarNovoStatusDeAtendimento()
+        {
+            cmbStatusDeAtendimento.SelectedValue = _statusDeAtendimento.Id.ToString();
+        }
+
+        private void GravarStatusDeAtendimento()
+        {
+            if (AtendeRegraDeGravacao())
+            {
+                _statusDeAtendimento = new Tabulador.Dominio.Entidades.StatusDeAtendimento();
+
+                bool edicao = true;
+
+                if (_statusDeAtendimento != null)
+                {
+                    edicao = false;
+                    _statusDeAtendimento.IdModificador = AdministracaoMDI._usuario.Id;
+                }
+
+                _statusDeAtendimento.IdTipoDeStatusDeAtendimento = int.Parse(cmbTipoDeStatusDeOferta.SelectedValue.ToString());
+                _statusDeAtendimento.Nome = txtNome.Text.ToUpper();
+                _statusDeAtendimento.Ativo = chkAtivo.Checked;
+                _statusDeAtendimento.Observacao = txtObservacao.Text;
+                _statusDeAtendimento.IdCriador = AdministracaoMDI._usuario.Id;
+
+                string idsCampanhas = RetornarCampanhas();
+
+                _statusDeAtendimento.Id = _statusDeAtendimentoService.GravarStatusDeAtendimento(_statusDeAtendimento, idsCampanhas);
+
+                MessageBox.Show($"Status de atendimento {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Atualizar = true;
+            }
+        }
     }
 }

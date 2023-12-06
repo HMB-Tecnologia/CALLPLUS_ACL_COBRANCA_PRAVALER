@@ -13,8 +13,5 @@ namespace Callplus.CRM.Tabulador.Dominio.Dto
         public DateTime? DataAgendamento { get; set; }
         public long? TelefoneAgendamento { get; set; }
         public string Observacao { get; set; }
-        public string CampanhaAtivo { get; set; }
-        public string CampanhaNome { get; set; }
-        public int IndicacoesDoAtendimento { get; set; }
     }
 }

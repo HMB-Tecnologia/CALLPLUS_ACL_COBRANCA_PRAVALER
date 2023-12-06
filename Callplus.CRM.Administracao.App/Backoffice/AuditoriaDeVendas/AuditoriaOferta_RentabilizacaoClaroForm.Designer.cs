@@ -362,7 +362,7 @@
             this.tcAuditoria.Name = "tcAuditoria";
             this.tcAuditoria.SelectedIndex = 0;
             this.tcAuditoria.Size = new System.Drawing.Size(784, 380);
-            this.tcAuditoria.TabIndex = 1;
+            this.tcAuditoria.TabIndex = 0;
             // 
             // tcAuditoria_tpadosVenda
             // 
@@ -710,6 +710,7 @@
             this.txtRg.ReadOnly = true;
             this.txtRg.Size = new System.Drawing.Size(111, 20);
             this.txtRg.TabIndex = 5;
+            this.txtRg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRg_KeyPress);
             // 
             // txtNome
             // 
@@ -938,6 +939,7 @@
             this.txtNumero.ReadOnly = true;
             this.txtNumero.Size = new System.Drawing.Size(92, 20);
             this.txtNumero.TabIndex = 6;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // label23
             // 
@@ -1182,6 +1184,7 @@
             this.txtConta.Name = "txtConta";
             this.txtConta.Size = new System.Drawing.Size(98, 20);
             this.txtConta.TabIndex = 17;
+            this.txtConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConta_KeyPress);
             // 
             // cmbFormaPagamento
             // 
@@ -1240,6 +1243,7 @@
             this.txtAgencia.Name = "txtAgencia";
             this.txtAgencia.Size = new System.Drawing.Size(92, 20);
             this.txtAgencia.TabIndex = 15;
+            this.txtAgencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAgencia_KeyPress);
             // 
             // lblFaturaDigital
             // 

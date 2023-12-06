@@ -1,7 +1,7 @@
 ﻿using Callplus.CRM.Tabulador.App.WsVoiceSupportIntegration;
 using System;
 
-namespace v1Tabulare_z13.ws
+namespace Callplus.ws
 {
     public static class OlosWsVoiceSupport
     {

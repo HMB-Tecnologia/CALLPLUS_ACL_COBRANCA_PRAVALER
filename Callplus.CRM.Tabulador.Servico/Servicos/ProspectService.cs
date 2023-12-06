@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Infra.Dados.Dao;
 
@@ -57,6 +58,57 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public long GravarProspect(Prospect prospect)
         {
             return _prospectDao.GravarProspect(prospect);
+        }
+
+
+        public void AtualizarProspectDoProspect(Prospect prospect)
+        {
+              _prospectDao.AtualizarProspectDoProspect(prospect);
+        }
+
+        public void InserirLogSistema(string ip, string texto)
+        {
+            _prospectDao.InserirLogSistema(ip, texto);
+        }
+
+        public void InserirLogHuawei(string ip, string url)
+        {
+            _prospectDao.InserirLogHuawei(ip, url);
+        }
+
+        public List<string> RetornarUrlHuawei()
+        {
+            var listaUrl = new List<string>();
+
+            var sql = _prospectDao.RetornarUrlHuawei();
+
+            var dt = _prospectDao.RetornarDataTableHuawei(sql);
+
+            foreach (DataRow linha in dt.Rows)
+            {
+                var urlHuawei = linha["url"].ToString();
+                listaUrl.Add(urlHuawei.ToUpper());
+            }
+
+            return listaUrl;
+        }
+        public DateTime? RetornarHorarioServidor()
+        {
+            var sql = _prospectDao.RetornarHorarioServidor();
+
+            var datatable = _prospectDao.RetornarDataTableHorarioServidor(sql);
+
+            if (datatable.Rows.Count > 0)
+            {
+                var data = datatable.Rows[0]["Horario"].ToString();
+                DateTime dataServidor = DateTime.Now;
+
+                if (DateTime.TryParse(data, out dataServidor))
+                {
+                    return dataServidor;
+                }
+            }
+            return null;
         }
     }
 }

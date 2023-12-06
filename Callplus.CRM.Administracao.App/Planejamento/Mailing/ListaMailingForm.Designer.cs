@@ -47,6 +47,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.dgResultado = new System.Windows.Forms.DataGridView();
+            this.Desabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnBuscaRapida = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -160,9 +161,9 @@
             this.btnAtualizar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAtualizar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.Sync;
             this.btnAtualizar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAtualizar.Location = new System.Drawing.Point(802, 31);
+            this.btnAtualizar.Location = new System.Drawing.Point(802, 29);
             this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(25, 22);
+            this.btnAtualizar.Size = new System.Drawing.Size(25, 25);
             this.btnAtualizar.TabIndex = 13;
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
@@ -274,6 +275,8 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgResultado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Desabilitar});
             this.dgResultado.EnableHeadersVisualStyles = false;
             this.dgResultado.Location = new System.Drawing.Point(12, 126);
             this.dgResultado.MultiSelect = false;
@@ -283,7 +286,17 @@
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultado.Size = new System.Drawing.Size(1004, 317);
             this.dgResultado.TabIndex = 14;
+            this.dgResultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellContentClick);
             this.dgResultado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellDoubleClick);
+            // 
+            // Desabilitar
+            // 
+            this.Desabilitar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Desabilitar.HeaderText = "Desabilitar";
+            this.Desabilitar.Name = "Desabilitar";
+            this.Desabilitar.ReadOnly = true;
+            this.Desabilitar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Desabilitar.Visible = false;
             // 
             // btnBuscaRapida
             // 
@@ -347,5 +360,6 @@
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.DataGridView dgResultado;
         private System.Windows.Forms.Button btnAtualizar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Desabilitar;
     }
 }

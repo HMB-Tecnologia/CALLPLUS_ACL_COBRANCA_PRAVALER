@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CallplusUtil</RootNamespace>
     <AssemblyName>CallplusUtil</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Environment\ConfiguracaoDeAmbiente.cs" />
     <Compile Include="Extensions\CheckedListBoxExtension.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Extensions\TextBoxExtension.cs" />
     <Compile Include="Extensions\ComboBoxExtension.cs" />
     <Compile Include="Forms\CallplusFormsUtil.cs" />

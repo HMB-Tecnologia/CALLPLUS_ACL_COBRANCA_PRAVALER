@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbTipoDeCampanha = new System.Windows.Forms.ComboBox();
+            this.lblTipoDeCampanha = new System.Windows.Forms.Label();
             this.chkListarStatusOfertaNaoInformado = new System.Windows.Forms.CheckBox();
             this.chkListarStatusAtendimentoNaoInformado = new System.Windows.Forms.CheckBox();
             this.linkTodos_StatusNenhum = new System.Windows.Forms.LinkLabel();
@@ -140,14 +142,16 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(290, 25);
+            this.label2.Size = new System.Drawing.Size(284, 25);
             this.label2.TabIndex = 0;
-            this.label2.Text = "CONTATOS TRABALHADOS";
+            this.label2.Text = "TRABALHO DA OPERAÇÃO";
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cmbTipoDeCampanha);
+            this.groupBox1.Controls.Add(this.lblTipoDeCampanha);
             this.groupBox1.Controls.Add(this.chkListarStatusOfertaNaoInformado);
             this.groupBox1.Controls.Add(this.chkListarStatusAtendimentoNaoInformado);
             this.groupBox1.Controls.Add(this.linkTodos_StatusNenhum);
@@ -185,6 +189,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
             // 
+            // cmbTipoDeCampanha
+            // 
+            this.cmbTipoDeCampanha.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbTipoDeCampanha.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTipoDeCampanha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoDeCampanha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTipoDeCampanha.FormattingEnabled = true;
+            this.cmbTipoDeCampanha.Location = new System.Drawing.Point(6, 112);
+            this.cmbTipoDeCampanha.Name = "cmbTipoDeCampanha";
+            this.cmbTipoDeCampanha.Size = new System.Drawing.Size(212, 21);
+            this.cmbTipoDeCampanha.TabIndex = 4;
+            this.cmbTipoDeCampanha.SelectionChangeCommitted += new System.EventHandler(this.cmbTipoDeCampanha_SelectionChangeCommitted);
+            this.cmbTipoDeCampanha.SelectedValueChanged += new System.EventHandler(this.cmbTipoDeCampanha_SelectedValueChanged);
+            // 
+            // lblTipoDeCampanha
+            // 
+            this.lblTipoDeCampanha.AutoSize = true;
+            this.lblTipoDeCampanha.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipoDeCampanha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoDeCampanha.ForeColor = System.Drawing.Color.Black;
+            this.lblTipoDeCampanha.Location = new System.Drawing.Point(6, 96);
+            this.lblTipoDeCampanha.Name = "lblTipoDeCampanha";
+            this.lblTipoDeCampanha.Size = new System.Drawing.Size(97, 13);
+            this.lblTipoDeCampanha.TabIndex = 163;
+            this.lblTipoDeCampanha.Text = "Tipo de Campanha";
+            // 
             // chkListarStatusOfertaNaoInformado
             // 
             this.chkListarStatusOfertaNaoInformado.AutoSize = true;
@@ -192,7 +222,7 @@
             this.chkListarStatusOfertaNaoInformado.Location = new System.Drawing.Point(863, 12);
             this.chkListarStatusOfertaNaoInformado.Name = "chkListarStatusOfertaNaoInformado";
             this.chkListarStatusOfertaNaoInformado.Size = new System.Drawing.Size(100, 17);
-            this.chkListarStatusOfertaNaoInformado.TabIndex = 162;
+            this.chkListarStatusOfertaNaoInformado.TabIndex = 13;
             this.chkListarStatusOfertaNaoInformado.Text = "Não informados";
             this.chkListarStatusOfertaNaoInformado.UseVisualStyleBackColor = true;
             // 
@@ -203,7 +233,7 @@
             this.chkListarStatusAtendimentoNaoInformado.Location = new System.Drawing.Point(559, 12);
             this.chkListarStatusAtendimentoNaoInformado.Name = "chkListarStatusAtendimentoNaoInformado";
             this.chkListarStatusAtendimentoNaoInformado.Size = new System.Drawing.Size(100, 17);
-            this.chkListarStatusAtendimentoNaoInformado.TabIndex = 161;
+            this.chkListarStatusAtendimentoNaoInformado.TabIndex = 9;
             this.chkListarStatusAtendimentoNaoInformado.Text = "Não informados";
             this.chkListarStatusAtendimentoNaoInformado.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +243,7 @@
             this.linkTodos_StatusNenhum.Location = new System.Drawing.Point(720, 14);
             this.linkTodos_StatusNenhum.Name = "linkTodos_StatusNenhum";
             this.linkTodos_StatusNenhum.Size = new System.Drawing.Size(47, 13);
-            this.linkTodos_StatusNenhum.TabIndex = 160;
+            this.linkTodos_StatusNenhum.TabIndex = 11;
             this.linkTodos_StatusNenhum.TabStop = true;
             this.linkTodos_StatusNenhum.Text = "Nenhum";
             this.linkTodos_StatusNenhum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkTodos_StatusNenhum_LinkClicked);
@@ -225,10 +255,10 @@
             this.cmbCampanhas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCampanhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCampanhas.FormattingEnabled = true;
-            this.cmbCampanhas.Location = new System.Drawing.Point(6, 112);
+            this.cmbCampanhas.Location = new System.Drawing.Point(224, 112);
             this.cmbCampanhas.Name = "cmbCampanhas";
             this.cmbCampanhas.Size = new System.Drawing.Size(212, 21);
-            this.cmbCampanhas.TabIndex = 159;
+            this.cmbCampanhas.TabIndex = 7;
             this.cmbCampanhas.SelectedValueChanged += new System.EventHandler(this.cmbCampanhas_SelectedValueChanged);
             // 
             // label13
@@ -237,7 +267,7 @@
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(6, 96);
+            this.label13.Location = new System.Drawing.Point(221, 96);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 13);
             this.label13.TabIndex = 158;
@@ -262,7 +292,7 @@
             this.cmbMailing.Location = new System.Drawing.Point(6, 156);
             this.cmbMailing.Name = "cmbMailing";
             this.cmbMailing.Size = new System.Drawing.Size(212, 21);
-            this.cmbMailing.TabIndex = 156;
+            this.cmbMailing.TabIndex = 8;
             // 
             // label12
             // 
@@ -320,7 +350,7 @@
             this.cmbHoraFinal.Location = new System.Drawing.Point(113, 72);
             this.cmbHoraFinal.Name = "cmbHoraFinal";
             this.cmbHoraFinal.Size = new System.Drawing.Size(105, 21);
-            this.cmbHoraFinal.TabIndex = 153;
+            this.cmbHoraFinal.TabIndex = 3;
             // 
             // label11
             // 
@@ -336,7 +366,6 @@
             this.cmbHoraInicial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHoraInicial.FormattingEnabled = true;
             this.cmbHoraInicial.Items.AddRange(new object[] {
-            "",
             "08:00",
             "08:30",
             "09:00",
@@ -369,7 +398,7 @@
             this.cmbHoraInicial.Location = new System.Drawing.Point(113, 32);
             this.cmbHoraInicial.Name = "cmbHoraInicial";
             this.cmbHoraInicial.Size = new System.Drawing.Size(105, 21);
-            this.cmbHoraInicial.TabIndex = 151;
+            this.cmbHoraInicial.TabIndex = 2;
             // 
             // linkTodos_StatusAtendimento
             // 
@@ -377,7 +406,7 @@
             this.linkTodos_StatusAtendimento.Location = new System.Drawing.Point(677, 14);
             this.linkTodos_StatusAtendimento.Name = "linkTodos_StatusAtendimento";
             this.linkTodos_StatusAtendimento.Size = new System.Drawing.Size(37, 13);
-            this.linkTodos_StatusAtendimento.TabIndex = 24;
+            this.linkTodos_StatusAtendimento.TabIndex = 10;
             this.linkTodos_StatusAtendimento.TabStop = true;
             this.linkTodos_StatusAtendimento.Text = "Todos";
             this.linkTodos_StatusAtendimento.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkTodos_StatusAtendimento_LinkClicked);
@@ -485,8 +514,7 @@
             this.cmbOperador.Location = new System.Drawing.Point(224, 72);
             this.cmbOperador.Name = "cmbOperador";
             this.cmbOperador.Size = new System.Drawing.Size(212, 21);
-            this.cmbOperador.TabIndex = 11;
-            this.cmbOperador.SelectedIndexChanged += new System.EventHandler(this.cmbOperador_SelectedIndexChanged);
+            this.cmbOperador.TabIndex = 6;
             // 
             // label9
             // 
@@ -499,7 +527,6 @@
             this.label9.Size = new System.Drawing.Size(51, 13);
             this.label9.TabIndex = 10;
             this.label9.Text = "Operador";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // cmbSupervisor
             // 
@@ -511,7 +538,7 @@
             this.cmbSupervisor.Location = new System.Drawing.Point(224, 32);
             this.cmbSupervisor.Name = "cmbSupervisor";
             this.cmbSupervisor.Size = new System.Drawing.Size(212, 21);
-            this.cmbSupervisor.TabIndex = 9;
+            this.cmbSupervisor.TabIndex = 5;
             this.cmbSupervisor.SelectionChangeCommitted += new System.EventHandler(this.cmbSupervisor_SelectionChangeCommitted);
             // 
             // label8
@@ -533,7 +560,7 @@
             this.dtpDataFinal.Location = new System.Drawing.Point(6, 73);
             this.dtpDataFinal.Name = "dtpDataFinal";
             this.dtpDataFinal.Size = new System.Drawing.Size(101, 20);
-            this.dtpDataFinal.TabIndex = 3;
+            this.dtpDataFinal.TabIndex = 1;
             // 
             // dtpDataInicial
             // 
@@ -542,7 +569,7 @@
             this.dtpDataInicial.Location = new System.Drawing.Point(6, 32);
             this.dtpDataInicial.Name = "dtpDataInicial";
             this.dtpDataInicial.Size = new System.Drawing.Size(101, 20);
-            this.dtpDataInicial.TabIndex = 1;
+            this.dtpDataInicial.TabIndex = 0;
             // 
             // label5
             // 
@@ -586,7 +613,7 @@
             this.label4.Location = new System.Drawing.Point(773, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 13);
-            this.label4.TabIndex = 16;
+            this.label4.TabIndex = 12;
             this.label4.Text = "Status da Oferta";
             // 
             // dgResultado
@@ -631,7 +658,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ContatosTrabalhadosDetalhado";
-            this.Text = "Contatos Trabalbalhados";
+            this.Text = "Trabalho da Operação";
             this.Load += new System.EventHandler(this.ListaAuditoriaDeVendaForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -683,5 +710,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkListarStatusOfertaNaoInformado;
         private System.Windows.Forms.CheckBox chkListarStatusAtendimentoNaoInformado;
+        private System.Windows.Forms.ComboBox cmbTipoDeCampanha;
+        private System.Windows.Forms.Label lblTipoDeCampanha;
     }
 }

@@ -3,6 +3,7 @@ using Callplus.CRM.Tabulador.Infra.Dados.Dao;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Callplus.CRM.Tabulador.Servico.Servicos
 {
@@ -18,6 +19,12 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public List<string> VerificarSeUsuarioPodeAcessarSistema(string login, string senha, string maquinaUsuario, string enderecoIP, string modulo,string versaoSistema)
         {
             return _loginDao.VerificarSeUsuarioPodeAcessarSistema(login, senha, maquinaUsuario, enderecoIP, modulo, versaoSistema);
+        }
+
+        
+        public List<string> VerificarSeSupervidorPodeAcessarSistema(string login, string senha, string maquinaUsuario, string enderecoIP, string modulo, string versaoSistema)
+        {
+            return _loginDao.VerificarSeSupervidorPodeAcessarSistema(login, senha, maquinaUsuario, enderecoIP, modulo, versaoSistema);
         }
 
         public int VerificarUsuarioPorLoginSenha(string login, string senha)
@@ -46,14 +53,19 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _loginDao.VerificarSenhaExpirada(login, senha);
         }
 
-        public DataTable ListarSolicitacaoDeAcesso(int id, int idSupervisor, int idOperador, bool ativo)
+        public async Task<DataTable> ListarSolicitacaoDeAcesso(int id, int idSupervisor, int idOperador, bool ativo)
         {
-            return _loginDao.ListarSolicitacaoDeAcesso(id, idSupervisor, idOperador, ativo);
+            return await _loginDao.ListarSolicitacaoDeAcesso(id, idSupervisor, idOperador, ativo);
         }
 
         public int GravarSolicitacaoDeAcesso(SolicitacaoDeAcessoAoSistema solicitacao)
         {
             return _loginDao.GravarSolicitacaoDeAcesso(solicitacao);
+        }
+
+        public int RealizarLogoff(int idUsuario)
+        {
+            return _loginDao.RealizarLogoff(idUsuario);
         }
     }
 }

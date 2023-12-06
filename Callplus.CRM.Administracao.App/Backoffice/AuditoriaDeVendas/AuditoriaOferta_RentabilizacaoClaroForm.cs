@@ -186,7 +186,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             if (idStatusAuditoria != null)
             {
                 var status = _statusDeAuditoriaService
-                    .Listar(ativo: true, idStatus: idStatusAuditoria.Value)
+                    .Listar(-1, ativo: true, idStatus: idStatusAuditoria.Value)
                     .FirstOrDefault(x => x.Id == idStatusAuditoria);
 
                 _statusDeAuditoriaAtual = status;
@@ -329,7 +329,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void CarregarStatusDeAuditoria()
         {
-            IEnumerable<Callplus.CRM.Tabulador.Dominio.Entidades.StatusDeAuditoria> retorno = _statusDeAuditoriaService.Listar(ativo: true);
+            IEnumerable<Callplus.CRM.Tabulador.Dominio.Entidades.StatusDeAuditoria> retorno = _statusDeAuditoriaService.Listar(_oferta.idCampanha, ativo: true);
             cmbStatusAuditoria.PreencherComSelecione(retorno, x => x.Id, x => x.Nome);
         }
 
@@ -341,7 +341,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void CarregarDiaDeVencimentoDaFatura()
         {
-            IEnumerable<ConfiguracaoVencimentoFaturaDto> configuracaoDatas = _ofertaDoAtendimentoService.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO();
+            IEnumerable<ConfiguracaoVencimentoFaturaDto> configuracaoDatas = _ofertaDoAtendimentoService.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(false);
             cmbDiaDeVencimentoDaFatura.PreencherComSelecione(configuracaoDatas, x => x.Fechamento, x => x.Vencimento);
         }
 
@@ -1097,5 +1097,45 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
 
         #endregion EVENTOS        
+
+        private void txtRg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtAgencia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //lblConta.ForeColor = SystemColors.WindowText;
+                //e.Handled = char.IsWhiteSpace(e.KeyChar);
+            }
+        }
+
+        private void txtConta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //lblConta.ForeColor = SystemColors.WindowText;
+                //e.Handled = char.IsWhiteSpace(e.KeyChar);
+            }
+        }
     }
 }

@@ -97,7 +97,7 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 47;
+            this.txtBuscaRapida.TabIndex = 0;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
             // 
             // btnBuscaRapida
@@ -110,7 +110,7 @@
             this.btnBuscaRapida.Location = new System.Drawing.Point(991, 5);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
             this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
-            this.btnBuscaRapida.TabIndex = 48;
+            this.btnBuscaRapida.TabIndex = 1;
             this.btnBuscaRapida.UseVisualStyleBackColor = true;
             this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             // 
@@ -156,7 +156,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 64);
-            this.groupBox1.TabIndex = 49;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
             // 
@@ -171,7 +171,7 @@
             this.cmbStatus.Location = new System.Drawing.Point(415, 32);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(146, 21);
-            this.cmbStatus.TabIndex = 15;
+            this.cmbStatus.TabIndex = 3;
             // 
             // btnPesquisar
             // 
@@ -182,7 +182,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(797, 31);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 4;
+            this.btnPesquisar.TabIndex = 5;
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
@@ -202,7 +202,7 @@
             this.cmbAuditor.Location = new System.Drawing.Point(567, 32);
             this.cmbAuditor.Name = "cmbAuditor";
             this.cmbAuditor.Size = new System.Drawing.Size(226, 21);
-            this.cmbAuditor.TabIndex = 17;
+            this.cmbAuditor.TabIndex = 4;
             // 
             // label4
             // 
@@ -235,7 +235,7 @@
             this.txtDataFinal.Location = new System.Drawing.Point(310, 33);
             this.txtDataFinal.Name = "txtDataFinal";
             this.txtDataFinal.Size = new System.Drawing.Size(99, 20);
-            this.txtDataFinal.TabIndex = 13;
+            this.txtDataFinal.TabIndex = 2;
             // 
             // txtDataInicial
             // 
@@ -243,7 +243,7 @@
             this.txtDataInicial.Location = new System.Drawing.Point(205, 33);
             this.txtDataInicial.Name = "txtDataInicial";
             this.txtDataInicial.Size = new System.Drawing.Size(99, 20);
-            this.txtDataInicial.TabIndex = 11;
+            this.txtDataInicial.TabIndex = 1;
             // 
             // label5
             // 
@@ -261,7 +261,7 @@
             this.cmbCampanha.Location = new System.Drawing.Point(14, 32);
             this.cmbCampanha.Name = "cmbCampanha";
             this.cmbCampanha.Size = new System.Drawing.Size(185, 21);
-            this.cmbCampanha.TabIndex = 1;
+            this.cmbCampanha.TabIndex = 0;
             // 
             // btnFechar
             // 

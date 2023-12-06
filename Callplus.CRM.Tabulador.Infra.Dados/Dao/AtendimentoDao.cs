@@ -23,14 +23,27 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 Telefone = resultado.Telefone,
                 TelefoneAgendamento = resultado.TelefoneAgendamento,
                 DataAgendamento = resultado.DataAgendamento,
-                Observacao = resultado.Observacao
+                Observacao = resultado.Observacao,
+                IdUsuarioPermissao = resultado.IdUsuarioPermissao
+            };
+
+            return ExecutarProcedureSingleOrDefault<long>(sql, args);
+        }
+
+        public long AtualizarTicketDiscador(long idAtendimento, string ticket)
+        {
+            var sql = "APP_CRM_ATENDIMENTO_ATUALIZAR_TICKET_DISCADOR";
+            var args = new
+            {
+                IdAtendimento = idAtendimento,
+                NumeroChamadorDiscador = ticket
             };
 
             return ExecutarProcedureSingleOrDefault<long>(sql, args);
         }
 
         public Atendimento IniciarAtendimento(int idOperador, long idProspect, int idSupervisor, int? idDiscador, string numeroChamadorDiscador,
-            string ip, string host, OrigemDeAtendimento origem)
+            string ip, string host, OrigemDeAtendimento origem, int? idUsuarioPermissao, string loginHuawei)
         {
             var sql = "APP_CRM_ATENDIMENTO_INICIAR_ATENDIMENTO";
 
@@ -43,7 +56,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 Ip = ip,
                 Host = host,
                 IdOrigemAtendimento = (int)origem,
-                NumeroChamadorDiscador = numeroChamadorDiscador
+                NumeroChamadorDiscador = numeroChamadorDiscador,
+                IdUsuarioPermissao = idUsuarioPermissao,
+                LoginHuawei = loginHuawei
             };
 
             return ExecutarProcedureSingleOrDefault<Atendimento>(sql, args);
@@ -83,6 +98,18 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             return ExecutarProcedureSingleOrDefault<DadosDoRanking>(sql, args);
 
+        }
+
+        public long VerificarSeExisteVendaPendente(int idCampanha, long idProspect)
+        {
+            var sql = "APP_CRM_ATENDIMENTO_VERIFICAR_SE_EXISTE_VENDA_PENDENTE";
+            var args = new
+            {
+                IdCampanha = idCampanha,
+                IdProspect = idProspect,
+            };
+
+            return ExecutarProcedureSingleOrDefault<long>(sql, args);
         }
 
         public IEnumerable<ValorDeCampoDinamico> RetornarValoresDosCamposDoAtendimento(long idAtendimento)
@@ -132,7 +159,6 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return ExecutarProcedure<string>(sql, args);
         }
 
-
         public IEnumerable<Usuario> ValidarSupervisor(int idSupervisor, string login, string senha)
         {
             var sql = "APP_CRM_ATENDIMENTO_VALIDAR_VENDA_CASADA";
@@ -149,24 +175,86 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveis()
+        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveis(int idCampanha)
         {
-            var sql = "APP_CRM_ATENDIMENTO_LISTAR_CONFIGURACAO_DE_VENCIMENTO_FATURA";
-            var args = new { };
+            //var sql = "APP_CRM_ATENDIMENTO_LISTAR_CONFIGURACAO_DE_VENCIMENTO_FATURA";
+            var sql = "APP_CRM_ATENDIMENTO_LISTAR_VENCIMENTO_FATURA_POR_CAMPANHA";
+            var args = new {idCampanha = idCampanha };
+
             return ExecutarProcedure<ConfiguracaoVencimentoFaturaDto>(sql, args);
         }
 
-        public IEnumerable<string> VerificarSePodeRealizarVenda(int idCampanha, long telefone, string codigoMailing)
+        public IEnumerable<ConfiguracaoDaEscalaDePausa> ListarConfiguracaoDeEscalaDePausa(int id, int idUsuario, int idcampanha)
         {
-            var sql = "APP_CRM_ATENDIMENTO_VERIFICAR_SE_PODE_REALIZAR_VENDA";
+            var sql = "APP_CRM_ATENDIMENTO_CONFIGURACAO_ESCALA_PAUSA_LISTAR";
+            var args = new
+            {
+                Id = id,
+                IdUsuario = idUsuario,
+                Idcampanha = idcampanha
+            };
+            return ExecutarProcedure<ConfiguracaoDaEscalaDePausa>(sql, args);
+        }
+
+        public IEnumerable<string> VerificarSePodeRealizarVenda(int idCampanha, long telefone, long idProspect)
+        {
+            var sql = "APP_CRM_ATENDIMENTO_VERIFICAR_SE_PODE_REALIZAR_VENDA_2";
             var args = new
             {
                 IdCampanha = idCampanha,
                 Telefone = telefone,
-                CodigoMailing = codigoMailing
+                IdProspect = idProspect
             };
 
             return ExecutarProcedure<string>(sql, args);
+        }
+
+        public IEnumerable<string> VerificarSePodeAtivarPausa(int idCampanha, int idConfiguracaoDeEscalaDePausa)
+        {
+            var sql = "APP_CRM_ATENDIMENTO_VERIFICAR_SE_PODE_ATIVAR_PAUSA";
+            var args = new
+            {
+                IdCampanha = idCampanha,
+                IdConfiguracaoDeEscalaDePausa = idConfiguracaoDeEscalaDePausa
+            };
+
+            return ExecutarProcedure<string>(sql, args);
+        }
+
+        public long GravarPausa(long? id, int idUsuario, int idPausa)
+        {
+            var sql = "APP_CRM_HISTORICO_PAUSA_GRAVAR";
+            var args = new
+            {
+                Id = id,
+                IdUsuario = idUsuario,
+                IdConfiguracaoDaEscalaDePausa = idPausa
+            };
+
+            return ExecutarProcedureSingleOrDefault<long>(sql, args);
+        }
+
+        public long RetornarProximoIdProspectParaAtendimento(int idOperador)
+        {
+            var sql = "APP_CRM_ATENDIMENTO_RETORNAR_PROXIMO_ID_PROSPECT";
+            var args = new
+            {
+                IdOperador = idOperador
+            };
+
+            var result = ExecuteProcedureScalar(sql, args);
+
+            return (result != null) ? Convert.ToInt64(result) : 0;
+        }
+
+        public IEnumerable<HistoricoDePausa> ListarHistoricoDePausa(int idUsuario)
+        {
+            var sql = "APP_CRM_HISTORICO_PAUSA_LISTAR";
+            var args = new
+            {
+                IdUsuario = idUsuario
+            };
+            return ExecutarProcedure<HistoricoDePausa>(sql, args);
         }
 
         #region INDICACAO

@@ -14,32 +14,38 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 {
     public partial class EnderecoForm : Form
     {
-        public EnderecoForm(Usuario usuario, Prospect prospect)
+        public EnderecoForm(Usuario usuario, Prospect prospect, Campanha campanha, string telefone)
         {
             _logger = LogManager.GetCurrentClassLogger();
 
             _prospectService = new ProspectService();
             _enderecoService = new EnderecoService();
             _permissaoService = new PermissaoService();
+            _correioService = new RetornoDeCepService();
 
             _prospect = prospect;
             _usuario = usuario;
+            _campanha = campanha;
+            _telefone = telefone;
 
             InitializeComponent();
         }
 
         #region PROPRIEDADES
 
-        private readonly EnderecoService _enderecoService;
         private readonly ILogger _logger;
-
+        private readonly EnderecoService _enderecoService;
         private readonly PermissaoService _permissaoService;
         private readonly ProspectService _prospectService;
         private EnderecoDoProspect _enderecoDoProspectSelecionado;
+        public EnderecoDoProspect EnderecoSelecionado { get; set; }
         private Prospect _prospect;
         private Usuario _usuario;
+        private Campanha _campanha;
+        private readonly RetornoDeCepService _correioService;
+        private string _telefone;
+        private string _ufPesquisa = string.Empty;
 
-        public EnderecoDoProspect EnderecoSelecionado { get; set; }
 
         #endregion PROPRIEDADES
 
@@ -87,34 +93,19 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             if (string.IsNullOrEmpty(cmbUf.Text) || cmbUf.TextoEhSelecione())
                 mensagens.Add("[UF] deve ser informada!");
 
+            if (!string.IsNullOrEmpty(_ufPesquisa))
+                if (cmbUf.Text != _ufPesquisa)
+                    mensagens.Add("[UF] selecionado é diferente do endereço original!");
+
             CallplusFormsUtil.ExibirMensagens(mensagens);
 
             return mensagens.Any() == false;
         }
 
-        private void BuscaRapidaCep()
-        {
-            string cep = txtBuscaRapida.Text.Trim();
-
-            if (!string.IsNullOrEmpty(cep))
-            {
-                if (cep.Length == 8)
-                {
-                    var endereco = _enderecoService.RetornarEndereco(cep, "", "", "", "", "").FirstOrDefault();
-
-                    if (endereco != null)
-                        endereco.Cep = endereco?.Cep?.PadLeft(8, '0');
-
-                    ConfigurarCamposDeDetalhe(habilitarCampos: true, limparTexto: true);
-                    CarregarRetornoDaBusca(endereco);
-                }
-            }
-        }
-
         private void CancelarEdicao()
         {
             ResetarCamposDetalhe(habilitarCampos: false, limparTexto: true);
-            BloquearCamposEdicao();
+            //BloquearCamposEdicao();
 
             _enderecoDoProspectSelecionado = null;
 
@@ -130,6 +121,29 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         private void CarregarConfiguracaoInicial()
         {
             CarregarGrid();
+            CarregarSiglaUfBrasil();
+        }
+
+        private void CarregarSiglaUfBrasil()
+        {
+            if (_campanha.idTipoDaCampanha == 2)
+            {
+                string DDD = string.Empty;
+                if (!string.IsNullOrEmpty(_telefone))
+                    DDD = (_telefone).Substring(0, 2);
+
+                int ddd = 0;
+                int.TryParse(DDD, out ddd);
+                string uf = _enderecoService.RetornarUf(ddd, _campanha.Id);
+
+                IEnumerable<SiglaUfBrasil> retorno = _correioService.ListarUfBrasil(true, uf);
+                cmbUf.PreencherComSelecione(retorno, x => x.Id, x => x.nome);
+            }
+            else
+            {
+                IEnumerable<SiglaUfBrasil> retorno = _correioService.ListarUfBrasil(true, null);
+                cmbUf.PreencherComSelecione(retorno, x => x.Id, x => x.nome);
+            }
         }
 
         private void CarregarGrid()
@@ -248,21 +262,44 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void HabitarCamposDeNovoEndereco()
         {
+            txtCep.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            txtLogradouro.Resetar(habilitar: true, limparTexto: true, readOnly: false);
             txtNumero.Resetar(habilitar: true, limparTexto: true, readOnly: false);
             txtComplemento.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            txtBairro.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            txtCidade.Resetar(habilitar: true, limparTexto: true, readOnly: false);
             txtPontoReferencia.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+
+            //if (_campanha.idTipoDaCampanha == 2)
+            //    cmbUf.ResetarComSelecione(habilitar: false);
+            //else
+            cmbUf.ResetarComSelecione(habilitar: true);
         }
 
         private void IniciarEdicao()
         {
-            ResetarCamposDetalhe(habilitarCampos: false, limparTexto: false);
-            LiberarCamposEdicao();
+            ResetarCamposDetalhe(habilitarCampos: true, limparTexto: false);
+            //LiberarCamposEdicao();
 
             txtLoginLiberar.Resetar(habilitar: true, limparTexto: true);
             txtSenhaLiberar.Resetar(habilitar: true, limparTexto: true);
             txtLoginLiberar.ReadOnly = false;
             txtSenhaLiberar.ReadOnly = false;
             btnLiberarEdicaoManual.Enabled = true;
+
+            txtCep.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtLogradouro.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtNumero.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtComplemento.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtBairro.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtCidade.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+            txtPontoReferencia.Resetar(habilitar: true, limparTexto: false, readOnly: false);
+
+            //if (_campanha.idTipoDaCampanha == 2)
+            //    cmbUf.ResetarComSelecione(habilitar: false);
+            //else
+            cmbUf.ResetarComSelecione(habilitar: true);
+
 
             tsEndereco_btnNovo.Enabled = false;
             tsEndereco_btnEditar.Enabled = false;
@@ -295,13 +332,45 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void PesquisarEndereco()
         {
-            Cep.ConsultaDeCepForm f = new Cep.ConsultaDeCepForm();
+            Cep.ConsultaDeCepForm f = new Cep.ConsultaDeCepForm(_campanha, _telefone);
 
             f.StartPosition = FormStartPosition.CenterScreen;
             f.ShowDialog();
 
             ConfigurarCamposDeDetalhe(habilitarCampos: true, limparTexto: true);
             CarregarRetornoDaBusca(f._endereco);
+        }
+
+        private void PesquisarCep()
+        {
+            string cep = txtBuscaRapida.Text;
+
+            if (VerificarCepValido(cep))
+                BuscarEndereco(cep);
+        }
+
+        private void BuscarEndereco(string cep)
+        {
+            int tipodepesquisa = 1;
+            IEnumerable<CepCorreios> enderecos = _correioService.RetornarEndereco(cep, null, null, null, null, tipodepesquisa);
+
+            var endereco = enderecos.FirstOrDefault();
+
+            _ufPesquisa = endereco != null ? endereco.UF : string.Empty;
+
+            if (endereco != null)
+            {
+                txtCep.Text = endereco.Cep;
+                txtLogradouro.Text = endereco.Logradouro;
+                txtBairro.Text = endereco.Bairro;
+                txtCidade.Text = endereco.Cidade;
+                cmbUf.Text = endereco.UF;
+            }
+            else
+            {
+                MessageBox.Show(
+                $"Não foi possível carregar o CEP do cliente.\nUtilize a pesquisa ou cadatro manual.\n", "Mensagem do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void ResetarCamposDetalhe(bool habilitarCampos, bool limparTexto)
@@ -343,9 +412,39 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             this.Hide();
             this.Close();
         }
-        #endregion METODOS
 
-        #region EVENTOS
+        private bool VerificarCepValido(string cep)
+        {
+            if (cep.Length != 8)
+            {
+                MessageBox.Show("Cep inválido!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else
+                return true;
+        }
+
+        private void LiberarCamposEdicaoManual()
+        {
+            txtLoginLiberar.ReadOnly = false;
+            txtSenhaLiberar.ReadOnly = false;
+
+            txtCep.ReadOnly = false;
+            txtLogradouro.ReadOnly = false;
+            txtNumero.ReadOnly = false;
+            txtComplemento.ReadOnly = false;
+            txtBairro.ReadOnly = false;
+            txtCidade.ReadOnly = false;
+            cmbUf.ResetarComSelecione(habilitar: true);
+            txtPontoReferencia.ReadOnly = false;
+
+            txtBuscaRapida.ReadOnly = false;
+            btnBuscaRapida.Enabled = true;
+            btnPesquisarEndereco.Enabled = true;
+
+            txtLoginLiberar.Text = string.Empty;
+            txtSenhaLiberar.Text = string.Empty;
+        }
 
         private void BloquearCamposEdicao()
         {
@@ -359,24 +458,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             txtComplemento.ReadOnly = true;
             txtBairro.ReadOnly = true;
             txtCidade.ReadOnly = true;
-            //cmbUf.ResetarComSelecione(habilitar: false);
+            cmbUf.ResetarComSelecione(habilitar: true);
             txtPontoReferencia.ReadOnly = true;
-        }
-
-        private void btnBuscaRapida_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //BuscaRapidaCep();
-                BuscaCepClient(txtBuscaRapida.Text);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-
-                MessageBox.Show(
-                    $"Não foi possível realizar a busca rápida por CEP!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void BuscaCepClient(string cepPesquisa)
@@ -424,15 +507,42 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             }
         }
 
-        private bool VerificarCepValido(string cep)
+        private void BuscaRapidaCep()
         {
-            if (cep.Length != 8)
+            string cep = txtBuscaRapida.Text.Trim();
+
+            if (!string.IsNullOrEmpty(cep))
             {
-                MessageBox.Show("Cep inválido!", "Aviso do Sistema");
-                return false;
+                if (cep.Length == 8)
+                {
+                    var endereco = _enderecoService.RetornarEndereco(cep, "", "", "", "", "").FirstOrDefault();
+
+                    if (endereco != null)
+                        endereco.Cep = endereco?.Cep?.PadLeft(8, '0');
+
+                    ConfigurarCamposDeDetalhe(habilitarCampos: true, limparTexto: true);
+                    CarregarRetornoDaBusca(endereco);
+                }
             }
-            else
-                return true;
+        }
+
+        #endregion METODOS
+
+        #region EVENTOS
+
+        private void btnBuscaRapida_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PesquisarCep();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                MessageBox.Show(
+                    $"Não foi possível realizar a busca rápida por CEP!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnLiberarEdicaoManual_Click(object sender, EventArgs e)
@@ -454,7 +564,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         {
             try
             {
-                PesquisarEndereco();
+                Invoke((MethodInvoker)delegate { PesquisarEndereco(); });
             }
             catch (Exception ex)
             {
@@ -507,50 +617,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 MessageBox.Show(
                     $"Não foi possível carregar as configurações iniciais!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void LiberarCamposEdicao()
-        {
-            txtLoginLiberar.ReadOnly = false;
-            txtSenhaLiberar.ReadOnly = false;
-
-            txtCep.ReadOnly = true;
-            txtLogradouro.ReadOnly = true;
-            txtNumero.ReadOnly = false;
-            txtComplemento.ReadOnly = false;
-            txtBairro.ReadOnly = true;
-            txtCidade.ReadOnly = true;
-            cmbUf.Desabilitar();
-            txtPontoReferencia.ReadOnly = false;
-
-            txtBuscaRapida.ReadOnly = false;
-            btnBuscaRapida.Enabled = true;
-            btnPesquisarEndereco.Enabled = true;
-
-            txtLoginLiberar.Text = string.Empty;
-            txtSenhaLiberar.Text = string.Empty;
-        }
-
-        private void LiberarCamposEdicaoManual()
-        {
-            txtLoginLiberar.ReadOnly = false;
-            txtSenhaLiberar.ReadOnly = false;
-
-            txtCep.ReadOnly = false;
-            txtLogradouro.ReadOnly = false;
-            txtNumero.ReadOnly = false;
-            txtComplemento.ReadOnly = false;
-            txtBairro.ReadOnly = false;
-            txtCidade.ReadOnly = false;
-            cmbUf.ResetarComSelecione(habilitar: true);
-            txtPontoReferencia.ReadOnly = false;
-
-            txtBuscaRapida.ReadOnly = false;
-            btnBuscaRapida.Enabled = true;
-            btnPesquisarEndereco.Enabled = true;
-
-            txtLoginLiberar.Text = string.Empty;
-            txtSenhaLiberar.Text = string.Empty;
         }
 
         private void tsEndereco_btnCancelar_Click(object sender, EventArgs e)
@@ -629,6 +695,11 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         }
 
         private void txtBuscaRapida_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Texto.CaractereNumerico(e.KeyChar);
+        }
+
+        private void txtCep_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Texto.CaractereNumerico(e.KeyChar);
         }

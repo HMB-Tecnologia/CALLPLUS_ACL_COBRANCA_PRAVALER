@@ -31,33 +31,44 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministracaoMDI));
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.administracaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEscalaDeTrabalho = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSolicitacaoDeAcesso = new System.Windows.Forms.ToolStripMenuItem();
+            this.integraçãoBaseBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUsuarioLogado = new System.Windows.Forms.ToolStripMenuItem();
             this.nomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarSenhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planejamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mailingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.layoutsDinâmicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pausasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.faixaDeRecargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusDeAtendimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMailing = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCampanha = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLayoutDeCampanha = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuProduto = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuStatusDeAtendimento = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuStatusDeOferta = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVencimentoDeFatura = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFaixaDeRecarga = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCadastroCeps = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAparelho = new System.Windows.Forms.ToolStripMenuItem();
             this.qualidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptsDeAtendimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checklistDeVendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formulariosDeQualidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.avaliaçõesDeAtendimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.feedbacksDeAvaliaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planosParaComparaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.faqDeAtendimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuScriptDeAtendimento = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuChecklistDeVenda = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFormularioDeQualidade = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAvaliacaoDeAtendimento = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFeedbackDeAvaliacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFaqDeAtendimento = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPlanoParaComparacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNivelDeConfianca = new System.Windows.Forms.ToolStripMenuItem();
             this.backofficeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.auditoriaDeVendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusDeAuditoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAuditoriaDeVenda = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuStatusDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNotificacaoParaOperacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMonitoramentoDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAlertaDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGamificacao = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trabalhoDaOperaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRelTrabalhoDaOperacao = new System.Windows.Forms.ToolStripMenuItem();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTopo = new System.Windows.Forms.Panel();
             this.lblModulo = new System.Windows.Forms.Label();
@@ -73,7 +84,7 @@
             this.mnuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administracaoToolStripMenuItem,
             this.btnSair,
-            this.mnuUsuario,
+            this.mnuUsuarioLogado,
             this.planejamentoToolStripMenuItem,
             this.qualidadeToolStripMenuItem,
             this.backofficeToolStripMenuItem,
@@ -82,14 +93,17 @@
             this.mnuPrincipal.Location = new System.Drawing.Point(0, 50);
             this.mnuPrincipal.Name = "mnuPrincipal";
             this.mnuPrincipal.Size = new System.Drawing.Size(1174, 24);
-            this.mnuPrincipal.TabIndex = 30;
+            this.mnuPrincipal.TabIndex = 0;
             this.mnuPrincipal.Text = "menuStrip1";
             // 
             // administracaoToolStripMenuItem
             // 
             this.administracaoToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.administracaoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuariosToolStripMenuItem});
+            this.mnuUsuario,
+            this.mnuEscalaDeTrabalho,
+            this.mnuSolicitacaoDeAcesso,
+            this.integraçãoBaseBToolStripMenuItem});
             this.administracaoToolStripMenuItem.Enabled = false;
             this.administracaoToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.administracaoToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
@@ -97,13 +111,37 @@
             this.administracaoToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
             this.administracaoToolStripMenuItem.Text = "Administração";
             // 
-            // usuariosToolStripMenuItem
+            // mnuUsuario
             // 
-            this.usuariosToolStripMenuItem.Enabled = false;
-            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.usuariosToolStripMenuItem.Text = "Usuários";
-            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuáriosToolStripMenuItem_Click);
+            this.mnuUsuario.Enabled = false;
+            this.mnuUsuario.Name = "mnuUsuario";
+            this.mnuUsuario.Size = new System.Drawing.Size(222, 22);
+            this.mnuUsuario.Text = "Usuários";
+            this.mnuUsuario.Click += new System.EventHandler(this.usuáriosToolStripMenuItem_Click);
+            // 
+            // mnuEscalaDeTrabalho
+            // 
+            this.mnuEscalaDeTrabalho.Enabled = false;
+            this.mnuEscalaDeTrabalho.Name = "mnuEscalaDeTrabalho";
+            this.mnuEscalaDeTrabalho.Size = new System.Drawing.Size(222, 22);
+            this.mnuEscalaDeTrabalho.Text = "Escalas de Trabalho";
+            // 
+            // mnuSolicitacaoDeAcesso
+            // 
+            this.mnuSolicitacaoDeAcesso.Enabled = false;
+            this.mnuSolicitacaoDeAcesso.Name = "mnuSolicitacaoDeAcesso";
+            this.mnuSolicitacaoDeAcesso.Size = new System.Drawing.Size(222, 22);
+            this.mnuSolicitacaoDeAcesso.Text = "Solicitações de Acesso";
+            this.mnuSolicitacaoDeAcesso.Click += new System.EventHandler(this.mnuSolicitacaoDeAcesso_Click);
+            // 
+            // integraçãoBaseBToolStripMenuItem
+            // 
+            this.integraçãoBaseBToolStripMenuItem.Enabled = false;
+            this.integraçãoBaseBToolStripMenuItem.Name = "integraçãoBaseBToolStripMenuItem";
+            this.integraçãoBaseBToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.integraçãoBaseBToolStripMenuItem.Text = "Integração Base B";
+            this.integraçãoBaseBToolStripMenuItem.Visible = false;
+            this.integraçãoBaseBToolStripMenuItem.Click += new System.EventHandler(this.integraçãoBaseBToolStripMenuItem_Click);
             // 
             // btnSair
             // 
@@ -115,19 +153,19 @@
             this.btnSair.Text = "Sair";
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
-            // mnuUsuario
+            // mnuUsuarioLogado
             // 
-            this.mnuUsuario.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.mnuUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuUsuarioLogado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.mnuUsuarioLogado.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nomeToolStripMenuItem,
             this.perfilToolStripMenuItem,
             this.alterarSenhaToolStripMenuItem});
-            this.mnuUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.mnuUsuario.ForeColor = System.Drawing.Color.Black;
-            this.mnuUsuario.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.user;
-            this.mnuUsuario.Name = "mnuUsuario";
-            this.mnuUsuario.Size = new System.Drawing.Size(62, 20);
-            this.mnuUsuario.Text = "login";
+            this.mnuUsuarioLogado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.mnuUsuarioLogado.ForeColor = System.Drawing.Color.Black;
+            this.mnuUsuarioLogado.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.user;
+            this.mnuUsuarioLogado.Name = "mnuUsuarioLogado";
+            this.mnuUsuarioLogado.Size = new System.Drawing.Size(62, 20);
+            this.mnuUsuarioLogado.Text = "login";
             // 
             // nomeToolStripMenuItem
             // 
@@ -154,178 +192,249 @@
             // planejamentoToolStripMenuItem
             // 
             this.planejamentoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mailingsToolStripMenuItem,
-            this.produtosToolStripMenuItem,
-            this.layoutsDinâmicosToolStripMenuItem,
-            this.pausasToolStripMenuItem,
-            this.faixaDeRecargaToolStripMenuItem,
-            this.statusDeAtendimentoToolStripMenuItem});
+            this.mnuMailing,
+            this.mnuCampanha,
+            this.mnuLayoutDeCampanha,
+            this.mnuProduto,
+            this.mnuStatusDeAtendimento,
+            this.mnuStatusDeOferta,
+            this.mnuVencimentoDeFatura,
+            this.mnuFaixaDeRecarga,
+            this.mnuCadastroCeps,
+            this.mnuAparelho});
             this.planejamentoToolStripMenuItem.Enabled = false;
             this.planejamentoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.planejamentoToolStripMenuItem.Name = "planejamentoToolStripMenuItem";
             this.planejamentoToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.planejamentoToolStripMenuItem.Text = "Planejamento";
             // 
-            // mailingsToolStripMenuItem
+            // mnuMailing
             // 
-            this.mailingsToolStripMenuItem.Enabled = false;
-            this.mailingsToolStripMenuItem.Name = "mailingsToolStripMenuItem";
-            this.mailingsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.mailingsToolStripMenuItem.Text = "Mailings";
-            this.mailingsToolStripMenuItem.Click += new System.EventHandler(this.mailingsToolStripMenuItem_Click_1);
+            this.mnuMailing.Enabled = false;
+            this.mnuMailing.Name = "mnuMailing";
+            this.mnuMailing.Size = new System.Drawing.Size(203, 22);
+            this.mnuMailing.Text = "Mailings";
+            this.mnuMailing.Click += new System.EventHandler(this.mailingsToolStripMenuItem_Click_1);
             // 
-            // produtosToolStripMenuItem
+            // mnuCampanha
             // 
-            this.produtosToolStripMenuItem.Enabled = false;
-            this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
-            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.produtosToolStripMenuItem.Text = "Produtos";
-            this.produtosToolStripMenuItem.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
+            this.mnuCampanha.Enabled = false;
+            this.mnuCampanha.Name = "mnuCampanha";
+            this.mnuCampanha.Size = new System.Drawing.Size(203, 22);
+            this.mnuCampanha.Text = "Campanhas";
+            this.mnuCampanha.Click += new System.EventHandler(this.mnuCampanha_Click);
             // 
-            // layoutsDinâmicosToolStripMenuItem
+            // mnuLayoutDeCampanha
             // 
-            this.layoutsDinâmicosToolStripMenuItem.Enabled = false;
-            this.layoutsDinâmicosToolStripMenuItem.Name = "layoutsDinâmicosToolStripMenuItem";
-            this.layoutsDinâmicosToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.layoutsDinâmicosToolStripMenuItem.Text = "Layouts Dinâmicos";
-            this.layoutsDinâmicosToolStripMenuItem.Click += new System.EventHandler(this.layoutsDinâmicosToolStripMenuItem_Click);
+            this.mnuLayoutDeCampanha.Enabled = false;
+            this.mnuLayoutDeCampanha.Name = "mnuLayoutDeCampanha";
+            this.mnuLayoutDeCampanha.Size = new System.Drawing.Size(203, 22);
+            this.mnuLayoutDeCampanha.Text = "Layouts de Campanha";
+            this.mnuLayoutDeCampanha.Click += new System.EventHandler(this.layoutsDinâmicosToolStripMenuItem_Click);
             // 
-            // pausasToolStripMenuItem
+            // mnuProduto
             // 
-            this.pausasToolStripMenuItem.Enabled = false;
-            this.pausasToolStripMenuItem.Name = "pausasToolStripMenuItem";
-            this.pausasToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.pausasToolStripMenuItem.Text = "Pausas";
-            this.pausasToolStripMenuItem.Click += new System.EventHandler(this.pausasToolStripMenuItem_Click);
+            this.mnuProduto.Enabled = false;
+            this.mnuProduto.Name = "mnuProduto";
+            this.mnuProduto.Size = new System.Drawing.Size(203, 22);
+            this.mnuProduto.Text = "Produtos";
+            this.mnuProduto.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
             // 
-            // faixaDeRecargaToolStripMenuItem
+            // mnuStatusDeAtendimento
             // 
-            this.faixaDeRecargaToolStripMenuItem.Enabled = false;
-            this.faixaDeRecargaToolStripMenuItem.Name = "faixaDeRecargaToolStripMenuItem";
-            this.faixaDeRecargaToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.faixaDeRecargaToolStripMenuItem.Text = "Faixa de Recarga";
-            this.faixaDeRecargaToolStripMenuItem.Click += new System.EventHandler(this.faixaDeRecargaToolStripMenuItem_Click);
+            this.mnuStatusDeAtendimento.Enabled = false;
+            this.mnuStatusDeAtendimento.Name = "mnuStatusDeAtendimento";
+            this.mnuStatusDeAtendimento.Size = new System.Drawing.Size(203, 22);
+            this.mnuStatusDeAtendimento.Text = "Status de Atendimento";
+            this.mnuStatusDeAtendimento.Click += new System.EventHandler(this.statusDeAtendimentoToolStripMenuItem_Click);
             // 
-            // statusDeAtendimentoToolStripMenuItem
+            // mnuStatusDeOferta
             // 
-            this.statusDeAtendimentoToolStripMenuItem.Enabled = false;
-            this.statusDeAtendimentoToolStripMenuItem.Name = "statusDeAtendimentoToolStripMenuItem";
-            this.statusDeAtendimentoToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.statusDeAtendimentoToolStripMenuItem.Text = "Status de Atendimento";
-            this.statusDeAtendimentoToolStripMenuItem.Click += new System.EventHandler(this.statusDeAtendimentoToolStripMenuItem_Click);
+            this.mnuStatusDeOferta.Enabled = false;
+            this.mnuStatusDeOferta.Name = "mnuStatusDeOferta";
+            this.mnuStatusDeOferta.Size = new System.Drawing.Size(203, 22);
+            this.mnuStatusDeOferta.Text = "Status de Oferta";
+            this.mnuStatusDeOferta.Click += new System.EventHandler(this.mnuStatusDeOferta_Click);
+            // 
+            // mnuVencimentoDeFatura
+            // 
+            this.mnuVencimentoDeFatura.Enabled = false;
+            this.mnuVencimentoDeFatura.Name = "mnuVencimentoDeFatura";
+            this.mnuVencimentoDeFatura.Size = new System.Drawing.Size(203, 22);
+            this.mnuVencimentoDeFatura.Text = "Vencimentos de Fatura";
+            this.mnuVencimentoDeFatura.Click += new System.EventHandler(this.mnuVencimentoDeFatura_Click);
+            // 
+            // mnuFaixaDeRecarga
+            // 
+            this.mnuFaixaDeRecarga.Enabled = false;
+            this.mnuFaixaDeRecarga.Name = "mnuFaixaDeRecarga";
+            this.mnuFaixaDeRecarga.Size = new System.Drawing.Size(203, 22);
+            this.mnuFaixaDeRecarga.Text = "Faixas de Recarga";
+            this.mnuFaixaDeRecarga.Click += new System.EventHandler(this.faixaDeRecargaToolStripMenuItem_Click);
+            // 
+            // mnuCadastroCeps
+            // 
+            this.mnuCadastroCeps.Enabled = false;
+            this.mnuCadastroCeps.Name = "mnuCadastroCeps";
+            this.mnuCadastroCeps.Size = new System.Drawing.Size(203, 22);
+            this.mnuCadastroCeps.Text = "Cadastro Ceps";
+            this.mnuCadastroCeps.Click += new System.EventHandler(this.mnuCadastroCeps_Click);
+            // 
+            // mnuAparelho
+            // 
+            this.mnuAparelho.Enabled = false;
+            this.mnuAparelho.Name = "mnuAparelho";
+            this.mnuAparelho.Size = new System.Drawing.Size(203, 22);
+            this.mnuAparelho.Text = "Aparelhos";
+            this.mnuAparelho.Click += new System.EventHandler(this.mnuAparelho_Click);
             // 
             // qualidadeToolStripMenuItem
             // 
             this.qualidadeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scriptsDeAtendimentoToolStripMenuItem,
-            this.checklistDeVendasToolStripMenuItem,
-            this.formulariosDeQualidadeToolStripMenuItem,
-            this.avaliaçõesDeAtendimentoToolStripMenuItem,
-            this.feedbacksDeAvaliaçãoToolStripMenuItem,
-            this.planosParaComparaçãoToolStripMenuItem,
-            this.faqDeAtendimentoToolStripMenuItem});
+            this.mnuScriptDeAtendimento,
+            this.mnuChecklistDeVenda,
+            this.mnuFormularioDeQualidade,
+            this.mnuAvaliacaoDeAtendimento,
+            this.mnuFeedbackDeAvaliacao,
+            this.mnuFaqDeAtendimento,
+            this.mnuPlanoParaComparacao,
+            this.mnuNivelDeConfianca});
             this.qualidadeToolStripMenuItem.Enabled = false;
             this.qualidadeToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.qualidadeToolStripMenuItem.Name = "qualidadeToolStripMenuItem";
             this.qualidadeToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.qualidadeToolStripMenuItem.Text = "Qualidade";
             // 
-            // scriptsDeAtendimentoToolStripMenuItem
+            // mnuScriptDeAtendimento
             // 
-            this.scriptsDeAtendimentoToolStripMenuItem.Enabled = false;
-            this.scriptsDeAtendimentoToolStripMenuItem.Name = "scriptsDeAtendimentoToolStripMenuItem";
-            this.scriptsDeAtendimentoToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.scriptsDeAtendimentoToolStripMenuItem.Text = "Scripts de Atendimento";
-            this.scriptsDeAtendimentoToolStripMenuItem.Click += new System.EventHandler(this.scriptsDeAtendimentoToolStripMenuItem_Click);
+            this.mnuScriptDeAtendimento.Enabled = false;
+            this.mnuScriptDeAtendimento.Name = "mnuScriptDeAtendimento";
+            this.mnuScriptDeAtendimento.Size = new System.Drawing.Size(226, 22);
+            this.mnuScriptDeAtendimento.Text = "Scripts de Atendimento";
+            this.mnuScriptDeAtendimento.Click += new System.EventHandler(this.scriptsDeAtendimentoToolStripMenuItem_Click);
             // 
-            // checklistDeVendasToolStripMenuItem
+            // mnuChecklistDeVenda
             // 
-            this.checklistDeVendasToolStripMenuItem.Enabled = false;
-            this.checklistDeVendasToolStripMenuItem.Name = "checklistDeVendasToolStripMenuItem";
-            this.checklistDeVendasToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.checklistDeVendasToolStripMenuItem.Text = "Checklist de Vendas";
-            this.checklistDeVendasToolStripMenuItem.Click += new System.EventHandler(this.checklistDeVendasToolStripMenuItem_Click);
+            this.mnuChecklistDeVenda.Enabled = false;
+            this.mnuChecklistDeVenda.Name = "mnuChecklistDeVenda";
+            this.mnuChecklistDeVenda.Size = new System.Drawing.Size(226, 22);
+            this.mnuChecklistDeVenda.Text = "Checklists de Vendas";
+            this.mnuChecklistDeVenda.Click += new System.EventHandler(this.checklistDeVendasToolStripMenuItem_Click);
             // 
-            // formulariosDeQualidadeToolStripMenuItem
+            // mnuFormularioDeQualidade
             // 
-            this.formulariosDeQualidadeToolStripMenuItem.Enabled = false;
-            this.formulariosDeQualidadeToolStripMenuItem.Name = "formulariosDeQualidadeToolStripMenuItem";
-            this.formulariosDeQualidadeToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.formulariosDeQualidadeToolStripMenuItem.Text = "Formularios de Qualidade";
-            this.formulariosDeQualidadeToolStripMenuItem.Click += new System.EventHandler(this.formulariosDeQualidadeToolStripMenuItem_Click);
+            this.mnuFormularioDeQualidade.Enabled = false;
+            this.mnuFormularioDeQualidade.Name = "mnuFormularioDeQualidade";
+            this.mnuFormularioDeQualidade.Size = new System.Drawing.Size(226, 22);
+            this.mnuFormularioDeQualidade.Text = "Formulários de Qualidade";
+            this.mnuFormularioDeQualidade.Click += new System.EventHandler(this.formulariosDeQualidadeToolStripMenuItem_Click);
             // 
-            // avaliaçõesDeAtendimentoToolStripMenuItem
+            // mnuAvaliacaoDeAtendimento
             // 
-            this.avaliaçõesDeAtendimentoToolStripMenuItem.Enabled = false;
-            this.avaliaçõesDeAtendimentoToolStripMenuItem.Name = "avaliaçõesDeAtendimentoToolStripMenuItem";
-            this.avaliaçõesDeAtendimentoToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.avaliaçõesDeAtendimentoToolStripMenuItem.Text = "Avaliações de Atendimento";
-            this.avaliaçõesDeAtendimentoToolStripMenuItem.Click += new System.EventHandler(this.avaliaçõesDeAtendimentoToolStripMenuItem_Click);
+            this.mnuAvaliacaoDeAtendimento.Enabled = false;
+            this.mnuAvaliacaoDeAtendimento.Name = "mnuAvaliacaoDeAtendimento";
+            this.mnuAvaliacaoDeAtendimento.Size = new System.Drawing.Size(226, 22);
+            this.mnuAvaliacaoDeAtendimento.Text = "Avaliações de Atendimento";
+            this.mnuAvaliacaoDeAtendimento.Click += new System.EventHandler(this.avaliaçõesDeAtendimentoToolStripMenuItem_Click);
             // 
-            // feedbacksDeAvaliaçãoToolStripMenuItem
+            // mnuFeedbackDeAvaliacao
             // 
-            this.feedbacksDeAvaliaçãoToolStripMenuItem.Enabled = false;
-            this.feedbacksDeAvaliaçãoToolStripMenuItem.Name = "feedbacksDeAvaliaçãoToolStripMenuItem";
-            this.feedbacksDeAvaliaçãoToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.feedbacksDeAvaliaçãoToolStripMenuItem.Text = "Feedbacks de Avaliação";
-            this.feedbacksDeAvaliaçãoToolStripMenuItem.Click += new System.EventHandler(this.feedbacksDeAvaliaçãoToolStripMenuItem_Click);
+            this.mnuFeedbackDeAvaliacao.Enabled = false;
+            this.mnuFeedbackDeAvaliacao.Name = "mnuFeedbackDeAvaliacao";
+            this.mnuFeedbackDeAvaliacao.Size = new System.Drawing.Size(226, 22);
+            this.mnuFeedbackDeAvaliacao.Text = "Feedbacks de Avaliação";
+            this.mnuFeedbackDeAvaliacao.Click += new System.EventHandler(this.feedbacksDeAvaliaçãoToolStripMenuItem_Click);
             // 
-            // planosParaComparaçãoToolStripMenuItem
+            // mnuFaqDeAtendimento
             // 
-            this.planosParaComparaçãoToolStripMenuItem.Enabled = false;
-            this.planosParaComparaçãoToolStripMenuItem.Name = "planosParaComparaçãoToolStripMenuItem";
-            this.planosParaComparaçãoToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.planosParaComparaçãoToolStripMenuItem.Text = "Planos para Comparação";
-            this.planosParaComparaçãoToolStripMenuItem.Click += new System.EventHandler(this.planosParaComparaçãoToolStripMenuItem_Click);
+            this.mnuFaqDeAtendimento.Enabled = false;
+            this.mnuFaqDeAtendimento.Name = "mnuFaqDeAtendimento";
+            this.mnuFaqDeAtendimento.Size = new System.Drawing.Size(226, 22);
+            this.mnuFaqDeAtendimento.Text = "FAQ de atendimento";
+            this.mnuFaqDeAtendimento.Click += new System.EventHandler(this.faqDeAtendimentoToolStripMenuItem_Click);
             // 
-            // faqDeAtendimentoToolStripMenuItem
+            // mnuPlanoParaComparacao
             // 
-            this.faqDeAtendimentoToolStripMenuItem.Enabled = false;
-            this.faqDeAtendimentoToolStripMenuItem.Name = "faqDeAtendimentoToolStripMenuItem";
-            this.faqDeAtendimentoToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.faqDeAtendimentoToolStripMenuItem.Text = "Faq de atendimento";
-            this.faqDeAtendimentoToolStripMenuItem.Click += new System.EventHandler(this.faqDeAtendimentoToolStripMenuItem_Click);
+            this.mnuPlanoParaComparacao.Enabled = false;
+            this.mnuPlanoParaComparacao.Name = "mnuPlanoParaComparacao";
+            this.mnuPlanoParaComparacao.Size = new System.Drawing.Size(226, 22);
+            this.mnuPlanoParaComparacao.Text = "Planos para Comparação";
+            this.mnuPlanoParaComparacao.Click += new System.EventHandler(this.planosParaComparaçãoToolStripMenuItem_Click);
+            // 
+            // mnuNivelDeConfianca
+            // 
+            this.mnuNivelDeConfianca.Enabled = false;
+            this.mnuNivelDeConfianca.Name = "mnuNivelDeConfianca";
+            this.mnuNivelDeConfianca.Size = new System.Drawing.Size(226, 22);
+            this.mnuNivelDeConfianca.Text = "Nivel de Confiança";
+            this.mnuNivelDeConfianca.Click += new System.EventHandler(this.mnuNivelDeConfianca_Click);
             // 
             // backofficeToolStripMenuItem
             // 
             this.backofficeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.auditoriaDeVendasToolStripMenuItem,
-            this.notificaçõesToolStripMenuItem,
-            this.statusDeAuditoriaToolStripMenuItem});
+            this.mnuAuditoriaDeVenda,
+            this.mnuStatusDeAuditoria,
+            this.mnuNotificacaoParaOperacao,
+            this.mnuMonitoramentoDeAuditoria,
+            this.mnuAlertaDeAuditoria,
+            this.mnuGamificacao});
             this.backofficeToolStripMenuItem.Enabled = false;
             this.backofficeToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backofficeToolStripMenuItem.Name = "backofficeToolStripMenuItem";
             this.backofficeToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.backofficeToolStripMenuItem.Text = "Backoffice";
             // 
-            // auditoriaDeVendasToolStripMenuItem
+            // mnuAuditoriaDeVenda
             // 
-            this.auditoriaDeVendasToolStripMenuItem.Enabled = false;
-            this.auditoriaDeVendasToolStripMenuItem.Name = "auditoriaDeVendasToolStripMenuItem";
-            this.auditoriaDeVendasToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.auditoriaDeVendasToolStripMenuItem.Text = "Auditoria de Vendas";
-            this.auditoriaDeVendasToolStripMenuItem.Click += new System.EventHandler(this.auditoriaDeVendasToolStripMenuItem_Click);
+            this.mnuAuditoriaDeVenda.Enabled = false;
+            this.mnuAuditoriaDeVenda.Name = "mnuAuditoriaDeVenda";
+            this.mnuAuditoriaDeVenda.Size = new System.Drawing.Size(233, 22);
+            this.mnuAuditoriaDeVenda.Text = "Auditorias de Venda";
+            this.mnuAuditoriaDeVenda.Click += new System.EventHandler(this.auditoriaDeVendasToolStripMenuItem_Click);
             // 
-            // notificaçõesToolStripMenuItem
+            // mnuStatusDeAuditoria
             // 
-            this.notificaçõesToolStripMenuItem.Enabled = false;
-            this.notificaçõesToolStripMenuItem.Name = "notificaçõesToolStripMenuItem";
-            this.notificaçõesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.notificaçõesToolStripMenuItem.Text = "Notificações";
-            this.notificaçõesToolStripMenuItem.Click += new System.EventHandler(this.notificaçõesToolStripMenuItem_Click);
+            this.mnuStatusDeAuditoria.Enabled = false;
+            this.mnuStatusDeAuditoria.Name = "mnuStatusDeAuditoria";
+            this.mnuStatusDeAuditoria.Size = new System.Drawing.Size(233, 22);
+            this.mnuStatusDeAuditoria.Text = "Status de Auditoria";
+            this.mnuStatusDeAuditoria.Click += new System.EventHandler(this.statusDeAuditoriaToolStripMenuItem_Click);
             // 
-            // statusDeAuditoriaToolStripMenuItem
+            // mnuNotificacaoParaOperacao
             // 
-            this.statusDeAuditoriaToolStripMenuItem.Enabled = false;
-            this.statusDeAuditoriaToolStripMenuItem.Name = "statusDeAuditoriaToolStripMenuItem";
-            this.statusDeAuditoriaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.statusDeAuditoriaToolStripMenuItem.Text = "Status de Auditoria";
-            this.statusDeAuditoriaToolStripMenuItem.Click += new System.EventHandler(this.statusDeAuditoriaToolStripMenuItem_Click);
+            this.mnuNotificacaoParaOperacao.Enabled = false;
+            this.mnuNotificacaoParaOperacao.Name = "mnuNotificacaoParaOperacao";
+            this.mnuNotificacaoParaOperacao.Size = new System.Drawing.Size(233, 22);
+            this.mnuNotificacaoParaOperacao.Text = "Notificações para Operação";
+            this.mnuNotificacaoParaOperacao.Click += new System.EventHandler(this.notificaçõesToolStripMenuItem_Click);
+            // 
+            // mnuMonitoramentoDeAuditoria
+            // 
+            this.mnuMonitoramentoDeAuditoria.Enabled = false;
+            this.mnuMonitoramentoDeAuditoria.Name = "mnuMonitoramentoDeAuditoria";
+            this.mnuMonitoramentoDeAuditoria.Size = new System.Drawing.Size(233, 22);
+            this.mnuMonitoramentoDeAuditoria.Text = "Monitoramento de Auditoria";
+            this.mnuMonitoramentoDeAuditoria.Click += new System.EventHandler(this.mnuMonitoramentoDeAuditoria_Click);
+            // 
+            // mnuAlertaDeAuditoria
+            // 
+            this.mnuAlertaDeAuditoria.Enabled = false;
+            this.mnuAlertaDeAuditoria.Name = "mnuAlertaDeAuditoria";
+            this.mnuAlertaDeAuditoria.Size = new System.Drawing.Size(233, 22);
+            this.mnuAlertaDeAuditoria.Text = "Alertas de Auditoria";
+            // 
+            // mnuGamificacao
+            // 
+            this.mnuGamificacao.Enabled = false;
+            this.mnuGamificacao.Name = "mnuGamificacao";
+            this.mnuGamificacao.Size = new System.Drawing.Size(233, 22);
+            this.mnuGamificacao.Text = "Gamificação";
+            this.mnuGamificacao.Click += new System.EventHandler(this.mnuGamificacao_Click);
             // 
             // relatóriosToolStripMenuItem
             // 
             this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.trabalhoDaOperaçãoToolStripMenuItem});
+            this.mnuRelTrabalhoDaOperacao});
             this.relatóriosToolStripMenuItem.Enabled = false;
             this.relatóriosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatóriosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -333,13 +442,13 @@
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatório";
             // 
-            // trabalhoDaOperaçãoToolStripMenuItem
+            // mnuRelTrabalhoDaOperacao
             // 
-            this.trabalhoDaOperaçãoToolStripMenuItem.Enabled = false;
-            this.trabalhoDaOperaçãoToolStripMenuItem.Name = "trabalhoDaOperaçãoToolStripMenuItem";
-            this.trabalhoDaOperaçãoToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.trabalhoDaOperaçãoToolStripMenuItem.Text = "Trabalho da Operação";
-            this.trabalhoDaOperaçãoToolStripMenuItem.Click += new System.EventHandler(this.trabalhoDaOperaçãoToolStripMenuItem_Click);
+            this.mnuRelTrabalhoDaOperacao.Enabled = false;
+            this.mnuRelTrabalhoDaOperacao.Name = "mnuRelTrabalhoDaOperacao";
+            this.mnuRelTrabalhoDaOperacao.Size = new System.Drawing.Size(201, 22);
+            this.mnuRelTrabalhoDaOperacao.Text = "Trabalho da Operação";
+            this.mnuRelTrabalhoDaOperacao.Click += new System.EventHandler(this.trabalhoDaOperaçãoToolStripMenuItem_Click);
             // 
             // dashboardToolStripMenuItem
             // 
@@ -417,9 +526,9 @@
 
         public System.Windows.Forms.MenuStrip mnuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem administracaoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem btnSair;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuario;
+        public System.Windows.Forms.ToolStripMenuItem btnSair;
+        private System.Windows.Forms.ToolStripMenuItem mnuUsuarioLogado;
         protected System.Windows.Forms.Panel pnlTopo;
         protected System.Windows.Forms.Label lblModulo;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -427,26 +536,37 @@
         private System.Windows.Forms.ToolStripMenuItem perfilToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarSenhaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planejamentoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mailingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuMailing;
         private System.Windows.Forms.ToolStripMenuItem backofficeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qualidadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scriptsDeAtendimentoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem produtosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem layoutsDinâmicosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pausasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem auditoriaDeVendasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checklistDeVendasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formulariosDeQualidadeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem avaliaçõesDeAtendimentoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem feedbacksDeAvaliaçãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planosParaComparaçãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem faqDeAtendimentoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trabalhoDaOperaçãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statusDeAuditoriaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem faixaDeRecargaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem notificaçõesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statusDeAtendimentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuScriptDeAtendimento;
+        private System.Windows.Forms.ToolStripMenuItem mnuProduto;
+        private System.Windows.Forms.ToolStripMenuItem mnuLayoutDeCampanha;
+        private System.Windows.Forms.ToolStripMenuItem mnuAuditoriaDeVenda;
+        private System.Windows.Forms.ToolStripMenuItem mnuChecklistDeVenda;
+        private System.Windows.Forms.ToolStripMenuItem mnuFormularioDeQualidade;
+        private System.Windows.Forms.ToolStripMenuItem mnuAvaliacaoDeAtendimento;
+        private System.Windows.Forms.ToolStripMenuItem mnuFeedbackDeAvaliacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuPlanoParaComparacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuFaqDeAtendimento;
+        private System.Windows.Forms.ToolStripMenuItem mnuRelTrabalhoDaOperacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuStatusDeAuditoria;
+        private System.Windows.Forms.ToolStripMenuItem mnuFaixaDeRecarga;
+        private System.Windows.Forms.ToolStripMenuItem mnuNotificacaoParaOperacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuStatusDeAtendimento;
+        private System.Windows.Forms.ToolStripMenuItem integraçãoBaseBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuCampanha;
+        private System.Windows.Forms.ToolStripMenuItem mnuVencimentoDeFatura;
+        private System.Windows.Forms.ToolStripMenuItem mnuStatusDeOferta;
+        private System.Windows.Forms.ToolStripMenuItem mnuAparelho;
+        private System.Windows.Forms.ToolStripMenuItem mnuAlertaDeAuditoria;
+        private System.Windows.Forms.ToolStripMenuItem mnuEscalaDeTrabalho;
+        private System.Windows.Forms.ToolStripMenuItem mnuSolicitacaoDeAcesso;
+        private System.Windows.Forms.ToolStripMenuItem mnuMonitoramentoDeAuditoria;
+        private System.Windows.Forms.ToolStripMenuItem mnuCadastroCeps;
+        private System.Windows.Forms.ToolStripMenuItem mnuNivelDeConfianca;
+        private System.Windows.Forms.ToolStripMenuItem mnuGamificacao;
     }
 }

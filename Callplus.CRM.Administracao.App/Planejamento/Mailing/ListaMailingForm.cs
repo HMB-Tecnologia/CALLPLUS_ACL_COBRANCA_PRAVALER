@@ -23,12 +23,12 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
         }
 
         #region PROPRIEDADES
-                
+
         private readonly CampanhaService _campanhaService;
         private readonly MailingService _mailingService;
         private readonly ILogger _logger;
         private IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas;
-        
+
         #endregion PROPRIEDADES
 
         #region METODOS
@@ -74,7 +74,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
                     idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
                     nome = txtNome.Text.Trim();
                 }
-                
+
                 dgResultado.DataSource = _mailingService.Listar(idRegistro, idCampanha, nome, ativo);
 
                 lblTotalRegistros.Text = dgResultado.RowCount.ToString() + " Registro(s)";
@@ -85,9 +85,11 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
         private void RealizarAjustesGrid()
         {
+            dgResultado.Columns["Id"].Width = 35;
+
             dgResultado.Columns["Data"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
-            for (int i = dgResultado.Columns["Indicação"].Index + 1; i < dgResultado.Columns.Count; i++)
+            for (int i = dgResultado.Columns["Ativos"].Index + 1; i < dgResultado.Columns.Count; i++)
             {
                 dgResultado.Columns[i].Visible = false;
             }
@@ -133,7 +135,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
                 {
                     mailing.indicacao = false;
                 }
-                
+
                 mailing.observacao = dgResultado.Rows[linha].Cells["observacao"].Value.ToString();
 
                 MailingForm f = new MailingForm("DETALHES DO MAILING", mailing, _campanhas);
@@ -173,7 +175,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             try
             {
                 CarregarConfiguracaoInicial();
-                
+
                 btnPesquisar_Click(sender, e);
             }
             catch (Exception ex)
@@ -237,8 +239,11 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
         private void btnFechar_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
-            this.Close();
+            if (btnFechar.Text.Trim() == "Fechar")
+            {
+                this.Hide();
+                this.Close();
+            }
         }
 
         private void txtBuscaRapida_KeyPress(object sender, KeyPressEventArgs e)
@@ -261,11 +266,16 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             }
         }
 
-        #endregion EVENTOS
-
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             btnPesquisar_Click(sender, e);
+        }
+
+        #endregion EVENTOS
+
+        private void dgResultado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

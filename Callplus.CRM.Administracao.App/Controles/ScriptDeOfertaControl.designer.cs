@@ -100,7 +100,7 @@
             // tsComboRespostas
             // 
             this.tsComboRespostas.Name = "tsComboRespostas";
-            this.tsComboRespostas.Size = new System.Drawing.Size(121, 25);
+            this.tsComboRespostas.Size = new System.Drawing.Size(400, 25);
             // 
             // toolSeparatorResposta
             // 

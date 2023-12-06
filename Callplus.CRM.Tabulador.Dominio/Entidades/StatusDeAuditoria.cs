@@ -13,5 +13,7 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public bool HabilitaTrocaDeStatus { get; set; }
         public bool PermitidoHumano { get; set; }
         public bool Selecionado { get; set; }
+        public int IdModificador { get; set; }
+        public bool AuditoriaOperador { get; set; }
     }
 }

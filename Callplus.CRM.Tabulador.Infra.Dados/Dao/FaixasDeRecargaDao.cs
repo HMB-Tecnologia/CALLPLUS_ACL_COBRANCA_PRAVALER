@@ -23,7 +23,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
         public IEnumerable<ProdutoPermitidoParaFaixaDeRecarga> ListarFaixasDeRecargaDoProduto(long idProduto)
         {
-            var sql = "APP_CRM_PRODUTO_LISTAR_FAIXAS_DE_RECARGA_DO_PRODUTO";
+            var sql = "APP_CRM_PRODUTO_LISTAR_FAIXAS_DE_RECARGA_DO_PRODUTO ";
             var args = new { IdProduto = idProduto };
             var resultado = ExecutarProcedure<ProdutoPermitidoParaFaixaDeRecarga>(sql, args);
             return resultado;
@@ -38,17 +38,17 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public int Salvar(ProdutoPermitidoParaFaixaDeRecarga produtoPermitidoParaFaixaDeRecarga)
+        public int GravarProdutoPermitidoParaFaixaDeRecarga(ProdutoPermitidoParaFaixaDeRecarga produtoPermitidoParaFaixaDeRecarga, string idsFaixaDeRecarga)
         {
             var sql = "APP_CRM_PRODUTO_PERMITIDO_PARA_FAIXA_DE_RECARGA_GRAVAR";
 
             var args = new
             {
-                id = produtoPermitidoParaFaixaDeRecarga.Id,
-                idFaixaDeRecarga = produtoPermitidoParaFaixaDeRecarga.IdFaixaDeRecarga,
+                //id = produtoPermitidoParaFaixaDeRecarga.Id,
+                //idFaixaDeRecarga = produtoPermitidoParaFaixaDeRecarga.IdFaixaDeRecarga,
                 idProduto = produtoPermitidoParaFaixaDeRecarga.IdProduto,
-                ativo = produtoPermitidoParaFaixaDeRecarga.Ativo,
-
+                //ativo = produtoPermitidoParaFaixaDeRecarga.Ativo,
+                idsFaixaDeRecarga
             };
 
 
@@ -65,6 +65,8 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 Id = faixa.Id,
                 Nome = faixa.Nome,
                 Ativo = faixa.Ativo,
+                IdCriador = faixa.idCriador,
+                idModificador = faixa.idModificador
             };
 
             var resultado = ExecuteProcedureScalar(sql, args);

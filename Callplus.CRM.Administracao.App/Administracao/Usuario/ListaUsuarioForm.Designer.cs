@@ -53,6 +53,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblTotalRegistros = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnEditarUsuarios = new System.Windows.Forms.Button();
+            this.lnkMarcarTodos = new System.Windows.Forms.LinkLabel();
+            this.lnkDesmarcarTodos = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -301,11 +304,11 @@
             this.dgResultado.Location = new System.Drawing.Point(12, 126);
             this.dgResultado.MultiSelect = false;
             this.dgResultado.Name = "dgResultado";
-            this.dgResultado.ReadOnly = true;
             this.dgResultado.RowHeadersVisible = false;
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultado.Size = new System.Drawing.Size(1004, 317);
             this.dgResultado.TabIndex = 14;
+            this.dgResultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellContentClick);
             this.dgResultado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellDoubleClick);
             // 
             // btnBuscaRapida
@@ -356,12 +359,63 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(378, 19);
             this.toolStripStatusLabel2.Text = "Para ver os detalhes do registro, dê um clique duplo na linha desejada";
             // 
+            // btnEditarUsuarios
+            // 
+            this.btnEditarUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditarUsuarios.BackColor = System.Drawing.SystemColors.Control;
+            this.btnEditarUsuarios.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarUsuarios.Enabled = false;
+            this.btnEditarUsuarios.FlatAppearance.BorderSize = 0;
+            this.btnEditarUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnEditarUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarUsuarios.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEditarUsuarios.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.save;
+            this.btnEditarUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditarUsuarios.Location = new System.Drawing.Point(912, 99);
+            this.btnEditarUsuarios.Name = "btnEditarUsuarios";
+            this.btnEditarUsuarios.Size = new System.Drawing.Size(104, 25);
+            this.btnEditarUsuarios.TabIndex = 13;
+            this.btnEditarUsuarios.Text = "Editar Usuários";
+            this.btnEditarUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditarUsuarios.UseVisualStyleBackColor = true;
+            this.btnEditarUsuarios.Click += new System.EventHandler(this.btnEditarUsuarios_Click);
+            // 
+            // lnkMarcarTodos
+            // 
+            this.lnkMarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkMarcarTodos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkMarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkMarcarTodos.Location = new System.Drawing.Point(745, 105);
+            this.lnkMarcarTodos.Name = "lnkMarcarTodos";
+            this.lnkMarcarTodos.Size = new System.Drawing.Size(69, 13);
+            this.lnkMarcarTodos.TabIndex = 16;
+            this.lnkMarcarTodos.TabStop = true;
+            this.lnkMarcarTodos.Text = "Marcar todos";
+            this.lnkMarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkMarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMarcarTodos_LinkClicked);
+            // 
+            // lnkDesmarcarTodos
+            // 
+            this.lnkDesmarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkDesmarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkDesmarcarTodos.Location = new System.Drawing.Point(819, 105);
+            this.lnkDesmarcarTodos.Name = "lnkDesmarcarTodos";
+            this.lnkDesmarcarTodos.Size = new System.Drawing.Size(87, 13);
+            this.lnkDesmarcarTodos.TabIndex = 17;
+            this.lnkDesmarcarTodos.TabStop = true;
+            this.lnkDesmarcarTodos.Text = "Desmarcar todos";
+            this.lnkDesmarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkDesmarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDesmarcarTodos_LinkClicked);
+            // 
             // ListaUsuarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1028, 478);
+            this.Controls.Add(this.lnkDesmarcarTodos);
+            this.Controls.Add(this.lnkMarcarTodos);
+            this.Controls.Add(this.btnEditarUsuarios);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.chkListarAtivos);
             this.Controls.Add(this.txtBuscaRapida);
@@ -409,5 +463,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalRegistros;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.Button btnEditarUsuarios;
+        private System.Windows.Forms.LinkLabel lnkMarcarTodos;
+        private System.Windows.Forms.LinkLabel lnkDesmarcarTodos;
     }
 }

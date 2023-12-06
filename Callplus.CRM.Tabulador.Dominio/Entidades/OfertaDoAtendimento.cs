@@ -9,5 +9,7 @@
         public int? IdTipoDeProduto { get; set; }
         public int? IdScriptOferta { get; set; }
         public string NomeDaOferta { get; set; }
+        public bool PreVenda { get; set; }
+
     }
 }

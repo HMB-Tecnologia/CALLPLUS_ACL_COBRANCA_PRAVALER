@@ -46,7 +46,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
             dgDados.Columns["Data Criacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgDados.Columns["Data Modificacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-            dgDados.Columns["Nome Status de Atendimento"].Width = 250;
+            dgDados.Columns["Nome"].Width = 250;
 
             dgDados.Columns["Ativo"].Width = 50;
             dgDados.Columns["Ativo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -84,8 +84,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
 
         private void CarregarGrid(bool buscaRapida)
         {
-            int idStatus = -1;
-            string nome = txtNome.Text;
+            int? idStatus = -1;
+            string nome = "";
             int idTipoTipoStatus = -1;
             bool ativo = chkAtivos.Checked;
             int idcampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
@@ -101,11 +101,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
                 }
                 else
                 {
-                    idStatus = int.Parse(cmbCampanha.SelectedValue.ToString());
                     nome = txtNome.Text.Trim();
                 }
 
-                dgDados.DataSource = _statusDeAtendimentoService.ListaStatusDeAtendimento(idcampanha, ativo, nome);
+                dgDados.DataSource = _statusDeAtendimentoService.ListaStatusDeAtendimento(idcampanha, ativo, nome, idStatus);
 
                 lblTotalRegistros.Text = dgDados.RowCount.ToString() + " Registro(s)";
 
@@ -198,11 +197,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
                 MessageBox.Show(
                     $"Não foi possível realizar a pesquisa!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            btnPesquisar_Click(sender, e);
         }
 
         private void chkListarAtivos_CheckedChanged(object sender, EventArgs e)

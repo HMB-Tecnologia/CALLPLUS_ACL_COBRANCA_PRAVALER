@@ -203,11 +203,11 @@
             // 
             this.lblDiscador.AutoSize = true;
             this.lblDiscador.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiscador.Location = new System.Drawing.Point(9, 522);
+            this.lblDiscador.Location = new System.Drawing.Point(9, 507);
             this.lblDiscador.Name = "lblDiscador";
-            this.lblDiscador.Size = new System.Drawing.Size(198, 17);
+            this.lblDiscador.Size = new System.Drawing.Size(164, 17);
             this.lblDiscador.TabIndex = 13;
-            this.lblDiscador.Text = "Discador da Campanha: Akiva";
+            this.lblDiscador.Text = "Discador da Campanha: ";
             // 
             // cmdEnviarParaDiscador
             // 
@@ -220,7 +220,7 @@
             this.cmdEnviarParaDiscador.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmdEnviarParaDiscador.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.Sync;
             this.cmdEnviarParaDiscador.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cmdEnviarParaDiscador.Location = new System.Drawing.Point(226, 549);
+            this.cmdEnviarParaDiscador.Location = new System.Drawing.Point(226, 534);
             this.cmdEnviarParaDiscador.Name = "cmdEnviarParaDiscador";
             this.cmdEnviarParaDiscador.Size = new System.Drawing.Size(238, 25);
             this.cmdEnviarParaDiscador.TabIndex = 15;
@@ -232,14 +232,13 @@
             // 
             this.cmdExportarArquivo.BackColor = System.Drawing.SystemColors.Control;
             this.cmdExportarArquivo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmdExportarArquivo.Enabled = false;
             this.cmdExportarArquivo.FlatAppearance.BorderSize = 0;
             this.cmdExportarArquivo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
             this.cmdExportarArquivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdExportarArquivo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmdExportarArquivo.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.import;
             this.cmdExportarArquivo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cmdExportarArquivo.Location = new System.Drawing.Point(12, 549);
+            this.cmdExportarArquivo.Location = new System.Drawing.Point(12, 534);
             this.cmdExportarArquivo.Name = "cmdExportarArquivo";
             this.cmdExportarArquivo.Size = new System.Drawing.Size(208, 25);
             this.cmdExportarArquivo.TabIndex = 14;

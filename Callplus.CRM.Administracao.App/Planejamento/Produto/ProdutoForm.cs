@@ -2,6 +2,7 @@
 using Callplus.CRM.Tabulador.Dominio.Entidades.ScriptAtendimento;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
+using CallplusUtil.Forms;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,40 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
 
         #region METODOS
 
+        private void CarregarConfiguracaoInicial()
+        {
+            ShowIcon = true;
+            MaximizeBox = false;
+            MinimizeBox = false;
+
+            cmbCampanha.DropDown += CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
+            cmbTipoDeProduto.DropDown += CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
+
+            CarregarTipos();
+            CarregarCampanhas();
+            CarregarDados();
+        }
+
+        private void CarregarDados()
+        {
+            if (_produto != null)
+            {
+                cmbTipoDeProduto.SelectedValue = _produto.IdTipoDeProduto.ToString();
+                cmbCampanha.SelectedValue = _produto.IdCampanha.ToString();
+                txtNome.Text = _produto.Nome;
+                txtOrdem.Text = _produto.Ordem.ToString();
+                txtValor.Text = _produto.Valor.ToString();
+                chkAtivo.Checked = _produto.Ativo;
+                chkAtivoBko.Checked = (_produto.AtivoBko ?? false);
+                txtObservacao.Text = _produto.Observacao;
+
+                CarregarFaixas();
+                DesabilitarCampos();
+            }
+            else
+                CarregarFaixasDeRecarga();
+        }
+
         private void ApenasValorNumerico(object sender, KeyPressEventArgs e)
         {
             TextBox txt = (TextBox)sender;
@@ -67,118 +102,40 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
             }
         }
 
-        private bool AtendeRegrasDeGravacao()
-        {
-            var mensagens = new List<string>();
-
-            if (cmbTipoDeProduto.TextoEhSelecione() || string.IsNullOrEmpty(cmbTipoDeProduto.Text))
-                mensagens.Add("Favor selecionar o tipo de produto!");
-
-            if (cmbCampanha.TextoEhSelecione() || string.IsNullOrEmpty(cmbCampanha.Text))
-                mensagens.Add("Favor selecionar a campanha!");
-
-            if (string.IsNullOrEmpty(txtNome.Text.Trim()))
-                mensagens.Add("[Nome] deve ser informado.");
-
-            int ordem = 0;
-            if (int.TryParse(txtOrdem.Text, out ordem))
-            {
-                if (ordem < 0)
-                    mensagens.Add("Informe uma ordem válida!");
-            }
-            else
-                mensagens.Add("[Ordem] deve ser informado.");
-
-            if (string.IsNullOrEmpty(txtValor.Text) == false)
-            {
-                decimal valor = 0;
-                if (decimal.TryParse(txtValor.Text, out valor) == false)
-                {
-                    if (valor <= 0)
-                        mensagens.Add("[Valor] deve ser válido!");
-                }
-            }
-
-            ExibirMensagens(mensagens);
-            return mensagens.Any() == false;
-        }
-
         private void CarregarCampanhas()
         {
             _campanhas = _campanhaService.Listar(true);
             cmbCampanha.PreencherComSelecione(_campanhas, x => x.Id, x => x.Nome);
         }
 
-        private void CarregarConfiguracaoInicial()
+        private void CarregarFaixas()
         {
-            CarregarTipos();
-            CarregarCampanhas();
-            CarregarFaixasDeRecarga(null, true);
-            CarregarScriptDeOferta(-1, true);
-            ConfigurarCamposFaixaDeRecargaDoProduto(habilitarId: false, habilitarComboFaixa: false, habilitarAtivo: false);
-            ConfigurarTabsDeDetalhes();
+            long idProduto = (_produto == null) ? -1 : (long)_produto.Id;
 
-            if (_produto != null)
+            IEnumerable<FaixaDeRecarga> _faixasDeRecarga = _faixasDeRecargaService.ListarFaixasDeRecarga(-1, true);
+            IEnumerable<ProdutoPermitidoParaFaixaDeRecarga> _faixasDeRecargaDoProduto = _faixasDeRecargaService.ListarFaixasDeRecargaDoProduto(idProduto);
+
+            if (_faixasDeRecarga != null)
             {
-                CarregarDadosDoProduto();
-                CarregarFaixasDeRecargaDoProduto(_produto.Id);
-                DesabilitarCampos();
+                foreach (var item in _faixasDeRecarga)
+                {
+                    clbFaixaDeRecarga.Items.Add(item.Id + " - " + item.Nome, _faixasDeRecargaDoProduto.Where(x => x.IdFaixaDeRecarga == item.Id).Any());
+                }
             }
         }
 
-        private void ConfigurarTabsDeDetalhes()
+        private void CarregarFaixasDeRecarga()
         {
-            bool edicao = _produto != null;
+            IEnumerable<FaixaDeRecarga> _faixasDeRecarga = _faixasDeRecargaService.ListarFaixasDeRecarga(-1, true);
 
-            tabDetalhesProduto.Enabled = (edicao == true);
+            clbFaixaDeRecarga.Items.Clear();
 
-        }
+            foreach (var item in _faixasDeRecarga)
+            {
+                clbFaixaDeRecarga.Items.Add(item.Id + " - " + item.Nome);
+            }
 
-        private void CarregarDadosDoProduto()
-        {
-            txtIdProduto.Text = _produto.Id.ToString();
-            cmbTipoDeProduto.SelectedValue = _produto.IdTipoDeProduto.ToString();
-            cmbCampanha.SelectedValue = _produto.IdCampanha.ToString();
-            txtNome.Text = _produto.Nome;
-            txtOrdem.Text = _produto.Ordem.ToString();
-            txtValor.Text = _produto.Valor.ToString();
-            if (_produto.IdScriptOferta != null)
-                cmbScriptOferta.SelectedValue = _produto.IdScriptOferta.ToString();
-            chkAtivo.Checked = _produto.Ativo;
-            chkAtivoBko.Checked = (_produto.AtivoBko ?? false);
-            txtObservacao.Text = _produto.Observacao;
-        }
-
-        private void CarregarFaixasDeRecarga(int? id, bool? ativo)
-        {
-            _faixasDeRecarga = _faixasDeRecargaService.ListarFaixasDeRecarga(id, ativo);
-            cmbFaixaDeRecarga.PreencherComSelecione(_faixasDeRecarga, x => x.Id, x => x.Nome);
-        }
-
-        private void CarregarFaixasDeRecargaDoProduto(long idProduto)
-        {
-            _faixasDeRecargaDoProduto = _faixasDeRecargaService.ListarFaixasDeRecargaDoProduto(idProduto);
-            dgFaixaDeRecarga.DataSource = _faixasDeRecargaDoProduto;
-        }
-
-        private void CarregarScriptDeOferta(int? id, bool ativo)
-        {
-            _scriptsdeAtendimento = _scriptDeAtendimentoService.Listar(id, ativo);
-            cmbScriptOferta.PreencherComSelecione(_scriptsdeAtendimento, x => x.Id, x => $"{x.Id} - {x.Nome}");
-        }
-
-        private void ConfigurarBotoesFaixaDeRecarga(bool habilitarNovo, bool habilitarCancelar, bool habilitarSalvar)
-        {
-            tsFaixadeRecarga_btnNovo.Enabled = habilitarNovo;
-            tsFaixaDeRecarga_btnCancelar.Enabled = habilitarCancelar;
-            tsFaixaDeRecarga_btnSalvar.Enabled = habilitarSalvar;
-        }
-
-        private void ConfigurarCamposFaixaDeRecargaDoProduto(bool habilitarId, bool habilitarComboFaixa, bool habilitarAtivo)
-        {
-            txtIdProdutoPermitido.Resetar(habilitar: habilitarId, limparTexto: true);
-            chkAtivoFaixaDeRecarga.Enabled = habilitarAtivo;
-            cmbFaixaDeRecarga.ResetarComSelecione(habilitar: habilitarComboFaixa);
+            lblTotalRegistros.Text = "0 Registro(s)";
         }
 
         private void CarregarTipos()
@@ -222,9 +179,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
                 _produto.AtivoBko = chkAtivoBko.Checked;
                 _produto.IdCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
                 _produto.IdTipoDeProduto = int.Parse(cmbTipoDeProduto.SelectedValue.ToString());
-                if (cmbScriptOferta.TextoEhSelecione() == false && string.IsNullOrEmpty(cmbScriptOferta.Text) == false)
-                    _produto.IdScriptOferta = int.Parse(cmbScriptOferta.SelectedValue.ToString());
-                _produto.Nome = txtNome.Text.Trim();
+                _produto.Nome = txtNome.Text.Trim().ToUpper();
                 _produto.Observacao = txtObservacao.Text.Trim();
                 _produto.Ordem = int.Parse(txtOrdem.Text.Trim());
                 _produto.IdModificador = _usuarioLogado.Id;
@@ -238,100 +193,53 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
                     }
                 }
 
-                _produtoService.Gravar(_produto);
+                _produto.Id = _produtoService.Gravar(_produto);
 
-                MessageBox.Show($"Produto {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Atualizar = true;
-
-            }
-
-        }
-
-        private void NovaFaixaDeRecarga()
-        {
-            ConfigurarBotoesFaixaDeRecarga(habilitarNovo: false, habilitarCancelar: true, habilitarSalvar: true);
-            ConfigurarCamposFaixaDeRecargaDoProduto(habilitarId: false, habilitarComboFaixa: true, habilitarAtivo: true);
-        }
-
-        private void IniciarEdicaoFaixaDeRecargaDoProduto(int linha)
-        {
-            if (linha >= 0)
-            {
-                ConfigurarBotoesFaixaDeRecarga(habilitarNovo: false, habilitarCancelar: true, habilitarSalvar: true);
-                ConfigurarCamposFaixaDeRecargaDoProduto(habilitarId: false, habilitarComboFaixa: false, habilitarAtivo: true);
-
-                int id = (int)dgFaixaDeRecarga.Rows[linha].Cells[nameof(colDgFaixaDeRecarga_Id)].Value;
-
-                var faixaDoProduto = _faixasDeRecargaDoProduto.FirstOrDefault(x => x.Id == id);
-
-                txtIdProdutoPermitido.Text = faixaDoProduto.Id.ToString();
-                cmbFaixaDeRecarga.SelectedValue = faixaDoProduto.IdFaixaDeRecarga.ToString();
-                chkAtivoFaixaDeRecarga.Checked = faixaDoProduto.Ativo;
-            }
-
-        }
-
-        private void RetornarMascaraMonetaria(object sender, EventArgs e)
-        {
-            TextBox txt = (TextBox)sender;
-            if (string.IsNullOrEmpty(txt.Text) == false)
-                txt.Text = double.Parse(txt.Text).ToString("N2");
-        }
-
-        private void SalvarFaixaDeRecargaDoProduto()
-        {
-            if (VerificarSePodeSalvarFaixaDeRecargaDoProduto())
-            {
                 var produtoPermitido = new ProdutoPermitidoParaFaixaDeRecarga();
 
-                int idProdutoPermitido = 0;
-                bool edicao = false;
-
-                if (int.TryParse(txtIdProdutoPermitido.Text, out idProdutoPermitido))
-                {
-                    produtoPermitido.Id = idProdutoPermitido; //edição
-                    edicao = true;
-                }
-
                 produtoPermitido.IdProduto = _produto.Id;
-                produtoPermitido.IdFaixaDeRecarga = int.Parse(cmbFaixaDeRecarga.SelectedValue.ToString());
-                produtoPermitido.Ativo = chkAtivoFaixaDeRecarga.Checked;
-                produtoPermitido.FaixaDeRecarga = cmbFaixaDeRecarga.Text;
+                string idsFaixasDeRecarga = RetornarFaixaDeRecarga();
 
-                _faixasDeRecargaService.Salvar(produtoPermitido);
+                produtoPermitido.Id = _faixasDeRecargaService.GravarProdutoPermitidoParaFaixaDeRecarga(produtoPermitido, idsFaixasDeRecarga);
 
-                CarregarFaixasDeRecargaDoProduto(_produto.Id);
+                MessageBox.Show($"Produto {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show($"Faixa de recarga {(edicao ? "editada" : "associada")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Atualizar = true;
 
-                ConfigurarBotoesFaixaDeRecarga(habilitarNovo: true, habilitarCancelar: false, habilitarSalvar: false);
-                ConfigurarCamposFaixaDeRecargaDoProduto(habilitarId: false, habilitarComboFaixa: false, habilitarAtivo: false);
+                this.Close();
             }
+
         }
 
-        private void TirarMascaraMonetaria(object sender, EventArgs e)
+        private bool AtendeRegrasDeGravacao()
         {
-            TextBox txt = (TextBox)sender;
-            txt.Text = txt.Text.Replace("R$", "").Trim();
-        }
-
-        private bool VerificarSePodeSalvarFaixaDeRecargaDoProduto()
-        {
-
             var mensagens = new List<string>();
 
-            if (cmbFaixaDeRecarga.TextoEhSelecione() || string.IsNullOrEmpty(cmbFaixaDeRecarga.Text))
-                mensagens.Add("Favor selecionar a faixa de recarga.");
-            else
+            if (cmbTipoDeProduto.TextoEhSelecione() || string.IsNullOrEmpty(cmbTipoDeProduto.Text))
+                mensagens.Add("Favor selecionar o tipo de produto!");
+
+            if (cmbCampanha.TextoEhSelecione() || string.IsNullOrEmpty(cmbCampanha.Text))
+                mensagens.Add("Favor selecionar a campanha!");
+
+            if (string.IsNullOrEmpty(txtNome.Text.Trim()))
+                mensagens.Add("[Nome] deve ser informado.");
+
+            int ordem = 0;
+            if (int.TryParse(txtOrdem.Text, out ordem))
             {
-                int idFaixaSelecionada = 0;
-                int.TryParse(cmbFaixaDeRecarga.SelectedValue.ToString(), out idFaixaSelecionada);
+                if (ordem < 0)
+                    mensagens.Add("Informe uma ordem válida!");
+            }
+            else
+                mensagens.Add("[Ordem] deve ser informado.");
 
-                if (idFaixaSelecionada == 0)//inclusão
+            if (string.IsNullOrEmpty(txtValor.Text) == false)
+            {
+                decimal valor = 0;
+                if (decimal.TryParse(txtValor.Text, out valor) == false)
                 {
-
-                    if (_faixasDeRecargaDoProduto.Any(x => x.IdFaixaDeRecarga == idFaixaSelecionada))
-                        mensagens.Add("A Faixa de Recarga Selecionada já está vinculada a este produto");
+                    if (valor <= 0)
+                        mensagens.Add("[Valor] deve ser válido!");
                 }
             }
 
@@ -339,9 +247,37 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
             return mensagens.Any() == false;
         }
 
+        string RetornarFaixaDeRecarga()
+        {
+            string ids = "";
+            foreach (var item in clbFaixaDeRecarga.CheckedItems)
+            {
+                string[] itemSplit = item.ToString().Split('-');
+
+                if (itemSplit.Count() > 0)
+                    ids += itemSplit[0].Trim() + ",";
+            }
+
+            return ids;
+        }
+
+        private void RetornarMascaraMonetaria(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            if (string.IsNullOrEmpty(txt.Text) == false)
+                txt.Text = double.Parse(txt.Text).ToString("N2");
+        } 
+
+        private void TirarMascaraMonetaria(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            txt.Text = txt.Text.Replace("R$", "").Trim();
+        }
+
         #endregion METODOS
 
         #region EVENTOS
+
         private void ProdutoForm_Load(object sender, EventArgs e)
         {
             try
@@ -373,56 +309,42 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Produto
 
         }
 
-        private void tsFaixadeRecarga_btnNovo_Click(object sender, EventArgs e)
+        private void lnkTodos_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            clbFaixaDeRecarga.SetarTodosRegistros(check: true);
+        }
+
+        private void lnkNenhum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            clbFaixaDeRecarga.SetarTodosRegistros(check: false);
+        }
+
+        private void cmbTipoDeProduto_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {
-                NovaFaixaDeRecarga();
+                CarregarFaixasDeRecarga();
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
 
-                MessageBox.Show($"Não foi possível incluir uma nova faixa de recarga!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Não foi possível carregar os Operadores do Supervisor!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void tsFaixaDeRecarga_btnSalvar_Click_1(object sender, EventArgs e)
+        private void clbFaixaDeRecarga_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            try
-            {
-                SalvarFaixaDeRecargaDoProduto();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
+            CheckedListBox clb = (CheckedListBox)sender;
 
-                MessageBox.Show($"Não foi possível salvar faixa de recarga!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            clb.ItemCheck -= clbFaixaDeRecarga_ItemCheck;
+            clb.SetItemCheckState(e.Index, e.NewValue);
+            clb.ItemCheck += clbFaixaDeRecarga_ItemCheck;
+
+            lblTotalRegistros.Text = clbFaixaDeRecarga.CheckedItems.Count.ToString() + " Registro(s)";
         }
 
-        private void tsFaixaDeRecarga_btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            ConfigurarBotoesFaixaDeRecarga(habilitarNovo: true, habilitarCancelar: false, habilitarSalvar: false);
-            ConfigurarCamposFaixaDeRecargaDoProduto(habilitarId: false, habilitarComboFaixa: false, habilitarAtivo: false);
-
-        }
-
-        private void dgFaixaDeRecarga_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                IniciarEdicaoFaixaDeRecargaDoProduto(e.RowIndex);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-
-                MessageBox.Show(
-                    $"Não foi possível iniciar a edição da faixa de recarga!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        
         #endregion EVENTOS
+
     }
 }

@@ -48,7 +48,7 @@
             this.cmbCampanha.Location = new System.Drawing.Point(9, 41);
             this.cmbCampanha.Name = "cmbCampanha";
             this.cmbCampanha.Size = new System.Drawing.Size(356, 21);
-            this.cmbCampanha.TabIndex = 1;
+            this.cmbCampanha.TabIndex = 0;
             // 
             // lblCampanha
             // 
@@ -81,7 +81,7 @@
             this.gpDadosCadastrais.Location = new System.Drawing.Point(12, 48);
             this.gpDadosCadastrais.Name = "gpDadosCadastrais";
             this.gpDadosCadastrais.Size = new System.Drawing.Size(376, 285);
-            this.gpDadosCadastrais.TabIndex = 40;
+            this.gpDadosCadastrais.TabIndex = 0;
             this.gpDadosCadastrais.TabStop = false;
             this.gpDadosCadastrais.Text = "Dados Cadastrais";
             // 
@@ -91,7 +91,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(9, 266);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 8;
+            this.chkAtivo.TabIndex = 3;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -101,7 +101,7 @@
             this.txtPergunta.Multiline = true;
             this.txtPergunta.Name = "txtPergunta";
             this.txtPergunta.Size = new System.Drawing.Size(356, 79);
-            this.txtPergunta.TabIndex = 7;
+            this.txtPergunta.TabIndex = 1;
             // 
             // lblResposta
             // 
@@ -118,7 +118,7 @@
             this.txtResposta.Multiline = true;
             this.txtResposta.Name = "txtResposta";
             this.txtResposta.Size = new System.Drawing.Size(356, 79);
-            this.txtResposta.TabIndex = 5;
+            this.txtResposta.TabIndex = 2;
             // 
             // lblPergunta
             // 
@@ -142,7 +142,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 341);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 21;
+            this.btnSalvar.TabIndex = 1;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);

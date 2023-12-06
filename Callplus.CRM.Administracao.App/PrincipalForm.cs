@@ -8,6 +8,8 @@ using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using Callplus.CRM.Administracao.App.Relatorios;
+using Callplus.CRM.Administracao.App.Dashboard;
+using Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas;
 
 namespace Callplus.CRM.Administracao.App
 {
@@ -193,6 +195,17 @@ namespace Callplus.CRM.Administracao.App
             }
         }
 
+        private void lklStatusOferta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.StatusDeOferta.ListaStatusDeOfertaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
 
         private void lklScriptAtendimento_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -365,11 +378,122 @@ namespace Callplus.CRM.Administracao.App
             }
         }
 
-        private void LklStatusDeOferta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lklIntegracaoBaseB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
-                AdministracaoMDI.ExibirForm(new Planejamento.StatusDeOferta.ListaStatusDeOfertaForm());
+                //AdministracaoMDI.ExibirForm(new Planejamento.CriarFaixaDeRecarga.ListaFaixaDeRecargaForm(_usuarioLogado));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklVencimentoDeFatura_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.VencimentoDeFatura.ListaVencimentoDeFatura());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklAuditoriaRelatorio_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Backoffice.RelatorioDeAuditoria.MonitoramentoDeAuditoriaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklCadastroCep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.CadastroCep.ListaCepForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklAlertaDeVenda_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void lklNivelDeConfianca_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Qualidade.NivelDeConfianca.ListarNivelDeConfiancaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklNivelDeConfianca_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void lklGamificacao_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void lklGamificacao_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Backoffice.Gamificacao.ListarGamificacaoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklRelRankingDaOperacao_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new RankingDaOperacao());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklDashOperacoes2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new DashOperacaoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void lklDashAuditoria_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new ListaAuditoriaDeVendaAgrupadaForm());
             }
             catch (Exception ex)
             {

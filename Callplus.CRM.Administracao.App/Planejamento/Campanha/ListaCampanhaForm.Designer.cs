@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaCampanhaForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblTotalRegistros = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.chkListarAtivos = new System.Windows.Forms.CheckBox();
             this.txtBuscaRapida = new System.Windows.Forms.TextBox();
-            this.btnBuscaRapida = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDuplicar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.btnNovo = new System.Windows.Forms.Button();
@@ -47,6 +47,7 @@
             this.btnFechar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.dgResultado = new System.Windows.Forms.DataGridView();
+            this.btnBuscaRapida = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -107,22 +108,8 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 26;
+            this.txtBuscaRapida.TabIndex = 0;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
-            // 
-            // btnBuscaRapida
-            // 
-            this.btnBuscaRapida.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscaRapida.BackColor = System.Drawing.SystemColors.Control;
-            this.btnBuscaRapida.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBuscaRapida.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
-            this.btnBuscaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscaRapida.Location = new System.Drawing.Point(991, 5);
-            this.btnBuscaRapida.Name = "btnBuscaRapida";
-            this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
-            this.btnBuscaRapida.TabIndex = 27;
-            this.btnBuscaRapida.UseVisualStyleBackColor = true;
-            this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             // 
             // label3
             // 
@@ -151,6 +138,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDuplicar);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.btnNovo);
@@ -161,9 +149,29 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 64);
-            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
+            // 
+            // btnDuplicar
+            // 
+            this.btnDuplicar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDuplicar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDuplicar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDuplicar.FlatAppearance.BorderSize = 0;
+            this.btnDuplicar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnDuplicar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDuplicar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDuplicar.Image = ((System.Drawing.Image)(resources.GetObject("btnDuplicar.Image")));
+            this.btnDuplicar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDuplicar.Location = new System.Drawing.Point(687, 29);
+            this.btnDuplicar.Name = "btnDuplicar";
+            this.btnDuplicar.Size = new System.Drawing.Size(140, 25);
+            this.btnDuplicar.TabIndex = 3;
+            this.btnDuplicar.Text = "Espelhar Campanha";
+            this.btnDuplicar.UseVisualStyleBackColor = true;
+            this.btnDuplicar.Visible = false;
+            this.btnDuplicar.Click += new System.EventHandler(this.btnDuplicar_Click);
             // 
             // label7
             // 
@@ -180,7 +188,7 @@
             this.txtNome.MaxLength = 100;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(146, 20);
-            this.txtNome.TabIndex = 9;
+            this.txtNome.TabIndex = 1;
             // 
             // btnNovo
             // 
@@ -196,7 +204,7 @@
             this.btnNovo.Location = new System.Drawing.Point(833, 29);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(80, 25);
-            this.btnNovo.TabIndex = 5;
+            this.btnNovo.TabIndex = 4;
             this.btnNovo.Text = "Novo ";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -210,7 +218,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(399, 30);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 4;
+            this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
@@ -221,7 +229,7 @@
             this.cmbDiscador.Location = new System.Drawing.Point(14, 32);
             this.cmbDiscador.Name = "cmbDiscador";
             this.cmbDiscador.Size = new System.Drawing.Size(227, 21);
-            this.cmbDiscador.TabIndex = 1;
+            this.cmbDiscador.TabIndex = 0;
             // 
             // btnFechar
             // 
@@ -237,7 +245,7 @@
             this.btnFechar.Location = new System.Drawing.Point(918, 29);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(80, 25);
-            this.btnFechar.TabIndex = 6;
+            this.btnFechar.TabIndex = 5;
             this.btnFechar.Text = "Fechar   ";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
@@ -281,7 +289,22 @@
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultado.Size = new System.Drawing.Size(1004, 317);
             this.dgResultado.TabIndex = 30;
+            this.dgResultado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellClick);
             this.dgResultado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellDoubleClick);
+            // 
+            // btnBuscaRapida
+            // 
+            this.btnBuscaRapida.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscaRapida.BackColor = System.Drawing.SystemColors.Control;
+            this.btnBuscaRapida.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBuscaRapida.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
+            this.btnBuscaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscaRapida.Location = new System.Drawing.Point(991, 5);
+            this.btnBuscaRapida.Name = "btnBuscaRapida";
+            this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
+            this.btnBuscaRapida.TabIndex = 27;
+            this.btnBuscaRapida.UseVisualStyleBackColor = true;
+            this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             // 
             // ListaCampanhaForm
             // 
@@ -330,5 +353,6 @@
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgResultado;
+        private System.Windows.Forms.Button btnDuplicar;
     }
 }

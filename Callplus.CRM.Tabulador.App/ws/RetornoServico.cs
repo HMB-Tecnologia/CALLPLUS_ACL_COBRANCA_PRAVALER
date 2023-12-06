@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace v1Tabulare_z13.ws
+namespace Callplus.ws
 {
     public class RetornoServico
     {

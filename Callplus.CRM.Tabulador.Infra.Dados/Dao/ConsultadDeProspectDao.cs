@@ -8,14 +8,14 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
     {
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
-        public DataTable PesquisarProspects(int idUsuario, long telefone = -1, long idProspect = -1)
+        public DataTable PesquisarProspects(int idUsuario, string cpf, long telefone = -1, long idProspect = -1)
         {
-            string query = "EXEC APP_CRM_PROSPECT_PESQUISAR";
+            string query = "EXEC APP_CRM_PROSPECT_PESQUISAR_3";
 
             query += $" @idUsuario = {idUsuario}";
             query += $" ,@telefone = {telefone}";
             query += $" ,@idProspect = {idProspect}";
-
+            query += $" ,@cpf = '{cpf}' ";
 
             var datatable = CarregarDataTable(query, new { });
             return datatable;
@@ -32,6 +32,21 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             var datatable = CarregarDataTable(query, new { });
             return datatable;
+        }
+
+        public long PesquisarProspectPorTelefone(long telefone)
+        {
+            var sql = "APP_CRM_PESQUISAR_PROSPECT_POR_TELEFONE ";
+
+            var args = new
+            {
+                Telefone = telefone
+
+            };
+
+            var resultado = ExecutarProcedureSingleOrDefault<long>(sql, args);
+            return resultado;
+
         }
     }
 }

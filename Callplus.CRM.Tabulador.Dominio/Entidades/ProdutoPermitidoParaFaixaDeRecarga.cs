@@ -13,7 +13,8 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public int IdFaixaDeRecarga { get; set; }
         public long IdProduto { get; set; }
         public string FaixaDeRecarga { get; set; }
-        public bool Ativo { get; set; } 
+        public bool Ativo { get; set; }
+        public bool Selecionado { get; set; }
 
     }
 }

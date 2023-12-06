@@ -1,4 +1,5 @@
 ﻿using Callplus.CRM.Tabulador.App.Controles.CamposDinamicos;
+using Callplus.CRM.Tabulador.App.Operacao;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using NLog;
@@ -11,16 +12,17 @@ namespace Callplus.CRM.Tabulador.App.Checklist
 {
     public partial class ChecklistForm : Form
     {
-        public ChecklistForm(Dominio.Entidades.Checklist checklist, Form form, int idTipoDeProduto, ContainerDeLayoutDeCamposDinamicos camposDinamicos)
+        public ChecklistForm(Dominio.Entidades.Checklist checklist, Form form, int idTipoDeProduto, ContainerDeLayoutDeCamposDinamicos camposDinamicos, Usuario usuario)
         {
             _logger = LogManager.GetCurrentClassLogger();
 
             _checklistService = new ChecklistService();
-
+            _campanhaService = new CampanhaService();
             _checklist = checklist;
             _form = form;
             _idTipoDeProduto = idTipoDeProduto;
             _camposDinamicos = camposDinamicos;
+            _usuario = usuario;
 
             InitializeComponent();
         }
@@ -34,11 +36,16 @@ namespace Callplus.CRM.Tabulador.App.Checklist
         private Dominio.Entidades.Checklist _checklist;
         private IEnumerable<EtapaDoChecklist> _etapasDoChecklist;
         private IEnumerable<VariavelDoChecklist> _variavelDoChecklist;
+        private Campanha campanhaPrincipal;
 
         private int _etapaAtual;
         private int _idTipoDeProduto;
         private Form _form;
+        private Usuario _usuario;
         private ContainerDeLayoutDeCamposDinamicos _camposDinamicos;
+        private readonly CampanhaService _campanhaService;
+
+        public int _idAuditor { get; set; }
 
         public bool _checklistRealizado { get; set; }
 
@@ -144,9 +151,31 @@ namespace Callplus.CRM.Tabulador.App.Checklist
 
         private void FinalizarChecklist()
         {
-            _checklistRealizado = true;
+            campanhaPrincipal = _campanhaService.RetornarCampanhaPrincipalDoUsuario(_usuario.Id);
+            //_campanha.TipoAuditoria
+            if (campanhaPrincipal.TipoAuditoria == Dominio.Tipos.TipoDeAuditoria.OFFLINE)
+            {
+                _checklistRealizado = true;
 
-            this.Close();
+                this.Close();
+                return;
+            }
+
+            SolicitarPermissaoForm solicitarPemissaoForm = new SolicitarPermissaoForm(_usuario);
+            var retorno = solicitarPemissaoForm.SolicitarPermissaoDeUsuario(true, true);
+
+            if (retorno?.PermissaoConfirmada ?? false)
+            {
+                _checklistRealizado = true;
+                _idAuditor = (int)retorno.IdUsuarioPermissao;
+
+                this.Close();
+            }
+
+
+            //_checklistRealizado = true;
+
+            //this.Close();
         }
 
         #endregion METODOS

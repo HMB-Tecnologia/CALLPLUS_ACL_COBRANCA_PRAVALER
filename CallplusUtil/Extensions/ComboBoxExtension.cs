@@ -17,26 +17,75 @@ namespace CallplusUtil.Extensions
         public static void Preencher<TEntity, TProperty>(this ComboBox comboBox, IEnumerable<TEntity> itens,
             Expression<Func<TEntity, TProperty>> valueMember, Expression<Func<TEntity, string>> displayMember)
         {
+            BindingList<ListItem> bindingList = new BindingList<ListItem>();
+
+            foreach (var item in itens)
+            {
+                bindingList.Add(new ListItem
+                {
+                    Value = valueMember.Compile().Invoke(item).ToString(),
+                    Text = displayMember.Compile().Invoke(item)
+                });
+
+            }
+
             if (comboBox.InvokeRequired)
             {
                 comboBox.Invoke(new MethodInvoker(() =>
                 {
-                    comboBox.DataSource = itens;
-                    comboBox.DisplayMember = GetMemberInfo(displayMember).Name;
-                    comboBox.ValueMember = GetMemberInfo(valueMember).Name;
+                    comboBox.DataSource = null;
+                    comboBox.DataSource = bindingList;
+                    comboBox.DisplayMember = "Text";
+                    comboBox.ValueMember = "Value";
+
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                 }));
             }
             else
             {
-                comboBox.DataSource = itens;
-                comboBox.DisplayMember = GetMemberInfo(displayMember).Name;
-                comboBox.ValueMember = GetMemberInfo(valueMember).Name;
+                comboBox.DataSource = null;
+                comboBox.DataSource = bindingList;
+                comboBox.DisplayMember = "Text";
+                comboBox.ValueMember = "Value";
+                comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+        }
+
+        public static void Preencher<TTipoKey, TTipoValue>(this ComboBox comboBox, IEnumerable<KeyValuePair<TTipoKey, TTipoValue>> itens)
+        {
+            BindingList<ListItem> bindingList = new BindingList<ListItem>();
+
+            foreach (var item in itens)
+            {
+                bindingList.Add(new ListItem
+                {
+                    Value = item.Key.ToString(),
+                    Text = item.Value.ToString()
+                });
+
             }
 
+            if (comboBox.InvokeRequired)
+            {
+                comboBox.Invoke(new MethodInvoker(() =>
+                {
+                    comboBox.DataSource = null;
+                    comboBox.DataSource = bindingList;
+                    comboBox.DisplayMember = "Text";
+                    comboBox.ValueMember = "Value";
 
-            comboBox.DataSource = itens;
-            comboBox.DisplayMember = GetMemberInfo(displayMember).Name;
-            comboBox.ValueMember = GetMemberInfo(valueMember).Name;
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                }));
+            }
+            else
+            {
+                comboBox.DataSource = null;
+                comboBox.DataSource = bindingList;
+                comboBox.DisplayMember = "Text";
+                comboBox.ValueMember = "Value";
+
+                comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
         }
 
         public static void PreencherComSelecione<TTipoKey, TTipoValue>(this ComboBox comboBox, IEnumerable<KeyValuePair<TTipoKey, TTipoValue>> itens)
@@ -116,9 +165,6 @@ namespace CallplusUtil.Extensions
                 comboBox.ValueMember = "Value";
                 comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             }
-
-
-
         }
 
         public static void PreencherComTodos<TEntity, TProperty>(this ComboBox comboBox, IEnumerable<TEntity> itens,
@@ -156,9 +202,6 @@ namespace CallplusUtil.Extensions
                 comboBox.ValueMember = "Value";
                 comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             }
-
-
-
 
         }
 
@@ -308,7 +351,67 @@ namespace CallplusUtil.Extensions
             }
         }
 
+        public static void PreencherComTodos<TTipoKey, TTipoValue>(this ComboBox comboBox, IEnumerable<KeyValuePair<TTipoKey, TTipoValue>> itens)
+        {
+            BindingList<ListItem> bindingList = new BindingList<ListItem>();
+
+            bindingList.Add(new ListItem { Value = "-1", Text = Todos });
+            foreach (var item in itens)
+            {
+                bindingList.Add(new ListItem
+                {
+                    Value = item.Key.ToString(),
+                    Text = item.Value.ToString()
+                });
+
+            }
+
+            if (comboBox.InvokeRequired)
+            {
+                comboBox.Invoke(new MethodInvoker(() =>
+                {
+                    comboBox.DataSource = null;
+                    comboBox.DataSource = bindingList;
+                    comboBox.DisplayMember = "Text";
+                    comboBox.ValueMember = "Value";
+
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                }));
+            }
+            else
+            {
+                comboBox.DataSource = null;
+                comboBox.DataSource = bindingList;
+                comboBox.DisplayMember = "Text";
+                comboBox.ValueMember = "Value";
+
+                comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+
+
+        }
+
+        public static void DefinirComoTodos(this ComboBox comboBox)
+        {
+            comboBox.DataSource = null;
+            BindingList<KeyValuePair<int, string>> bindingList = new BindingList<KeyValuePair<int, string>>();
+            bindingList.Add(new KeyValuePair<int, string>(-1, Todos));
+
+            if (comboBox.InvokeRequired)
+            {
+                comboBox.Invoke(new MethodInvoker(() =>
+                {
+                    comboBox.DataSource = bindingList;
+                    comboBox.DisplayMember = "Value";
+                    comboBox.ValueMember = "Key";
+                }));
+            }
+            else
+            {
+                comboBox.DataSource = bindingList;
+                comboBox.DisplayMember = "Value";
+                comboBox.ValueMember = "Key";
+            }
+        }
     }
-
-
 }

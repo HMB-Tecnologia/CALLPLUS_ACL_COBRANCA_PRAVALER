@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Callplus.CRM.Tabulador.App.Operacao;
 using static CallplusUtil.Forms.CallplusFormsUtil;
 
 namespace Callplus.CRM.Tabulador.App.Operacao
@@ -24,32 +25,35 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             _idCampanha = idCampanha;
 
             _usuarioLogado = usuario;
+
             InitializeComponent();
 
         }
+
 
         #region PROPRIEDADES
 
         private readonly ILogger _logger;
 
         private readonly Usuario _usuarioLogado;
+        private readonly ConsultaDeProspectForm _consultaDeProspectForm;
         private readonly int _idCampanha;
         private readonly CampanhaService _campanhaService;
         private readonly ProspectService _prospectService;
-        long? idNovoCliente;
+        long idNovoCliente;
 
         private IEnumerable<Campanha> _campanhasDoUsuario;
 
         public bool Atualizar;
-
+        
         #endregion PROPRIEDADES
 
         #region METODOS
 
-        public long? CadastrarNovoCliente(int idCampanha)
+        public long CadastrarNovoCliente(int idCampanha)
         {
             ShowDialog();
-
+            
             return idNovoCliente;
         }
 
@@ -57,56 +61,98 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         {
             _campanhasDoUsuario = _campanhaService.ListarCampanhasDoUsuario(_usuarioLogado.Id);
             cmbCampanha.PreencherComSelecione(_campanhasDoUsuario, x => x.Id, x => x.Nome);
-            cmbCampanha.SelectedIndex = _idCampanha;
+            cmbCampanha.SelectedValue = _idCampanha.ToString();
+        }
+
+        private void CarregarDdds()
+        {
+            cmbDdd.Sorted = true;
+            cmbDdd.ResetarComSelecione(habilitar: true);
         }
 
         private void CarregarConfiguracoesIniciais()
         {
             CarregarCmbCampanha();
+            HabilitarCamposTalk();
+            CarregarDdds();
+        }
+
+        private void HabilitarCamposTalk()
+        {
+            if (_idCampanha == 13)
+            {
+                txtCampaing_CD.Enabled = true;
+                txtResptracking_CD.Enabled = true;
+                txtCoringa1.Enabled = true;
+                txtCoringa2.Enabled = true;
+                txtCoringa3.Enabled = true;
+                txtCoringa4.Enabled = true;
+            }
         }
 
         private void SalvarProspect()
         {
             if (!PodeSalvarNovoProspect()) return;
 
-            var prospect = new Prospect();
-
+           var prospect = new Prospect();
             Campanha campanha = _campanhaService.RetornarCampanha(_idCampanha);
 
+            long telefone01 = 0;
+            long telefone02 = 0;
+            long telefone03 = 0;
+
             prospect.IdCampanha = _idCampanha;
-
-            if (campanha.IdMailingCadastroManual is null)
-            {
-                MessageBox.Show("A campanha " + cmbCampanha.Text + " não possui mailing indicação",
-                    "Aviso do sistema",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
-
             prospect.IdMailing = campanha.IdMailingCadastroManual ?? 0;
 
-            prospect.Campo001 = txtNome.Text.ToUpper();
+            prospect.Campo021 = "MALING_INDICACAO";
 
-            if (long.TryParse(txtTelefone01.Text, out long telefone01))
+            //if (campanha.idTipoDaCampanha == 2)
+            //{
+                //prospect.Campo005 = txtNome.Text.ToUpper();
+            //}
+            //else
+            //{
+                prospect.Campo003 = txtNome.Text.ToUpper(); // Alterado para campo003 - Chamado 15979
+            //}
+
+            // TODO: Flávio - Chamado 15979 Inserido CPF no Cadastro Manual
+            if (!string.IsNullOrEmpty(txtCPF.Text))
+                prospect.Campo002 = txtCPF.Text.Replace(".","").Replace("-","") ;
+
+            if (long.TryParse(txtTelefone01.Text, out telefone01))
             {
                 prospect.Telefone01 = telefone01;
             }
 
-            if (long.TryParse(txtTelefone02.Text, out long telefone02))
+            if (long.TryParse(txtTelefone02.Text, out telefone02))
             {
                 prospect.Telefone02 = telefone02;
             }
 
-            if (long.TryParse(txtTelefone03.Text, out long telefone03))
+            if (long.TryParse(txtTelefone03.Text, out telefone03))
             {
                 prospect.Telefone03 = telefone03;
             }
 
+            if (_idCampanha == 0)
+            {
+                prospect.Campo004 = txtCampaing_CD.Text;
+                prospect.Campo039 = txtCoringa1.Text;
+                prospect.Campo040 = txtCoringa2.Text;
+                prospect.Campo041 = txtCoringa3.Text;
+                prospect.Campo042 = txtCoringa4.Text;
+                prospect.Campo043 = txtResptracking_CD.Text;
+            }
+
+            prospect.Campo080 = cmbDdd.Text;
+            
+
             idNovoCliente = _prospectService.GravarProspect(prospect);
 
-            MessageBox.Show("Registro Salvo com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //_consultaDeProspectForm.CarregarDetalhesDoProspect(idNovoCliente);
+
+            MessageBox.Show("Registro Salvo com sucesso!","Aviso do sistema",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            
             Close();
 
         }
@@ -128,6 +174,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             if (string.IsNullOrEmpty(txtTelefone01.Text.Trim()))
                 mensagens.Add("[Telefone01] deve ser informado.");
 
+            if (cmbDdd.Text == "SELECIONE...")
+                mensagens.Add("[DDD] válido deve ser selecionado");
+
             if (!Texto.TelefonePossuiFormatoValido(txtTelefone01.Text))
             {
                 mensagens.Add("[Telefone01] inválido!");
@@ -142,44 +191,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             {
                 mensagens.Add("[Telefone03] inválido!");
             }
-
-            // CHAMADO 10222 
-            #region Validacao cpf e data de nascimento
-            //if (string.IsNullOrEmpty(txtCPF.Text.Trim()))
-            //    mensagens.Add("O [CPF] deve ser informado");
-            //else
-            //{
-            //    if (!Texto.CpfPossuiFormatoValido(txtCPF.Text))
-            //        mensagens.Add("O [CPF] não é válido");
-            //}
-
-            //if (string.IsNullOrEmpty(txtDataNascimento.Text))
-            //{
-            //    mensagens.Add("[Data de Nascimento] deve ser informado");
-            //}
-            //else
-            //{
-            //    if (Texto.DataEhValida(txtDataNascimento.Text))
-            //    {
-            //        DateTime dataNascimento = DateTime.Parse(txtDataNascimento.Text);
-
-            //        int idade = RetornarIdade(dataNascimento);
-
-            //        if (idade < 18)
-            //        {
-            //            mensagens.Add("A [Idade] deve ser maior que 18 anos!");
-            //        }
-            //        if (RetornarIdade(dataNascimento) > 120)
-            //        {
-            //            mensagens.Add("A [Idade] deve ser menor que 120 anos!");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        mensagens.Add("A [Data de Nascimento] não é válida");
-            //    }
-            //} 
-            #endregion
 
             var msgsValidacao = _prospectService.VerificarSePodeGravar(idUsuario, idCampanha);
             mensagens.AddRange(msgsValidacao);

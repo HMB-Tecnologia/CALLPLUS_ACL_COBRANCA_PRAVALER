@@ -56,7 +56,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
 
         private void CarregarConfiguracaoInicial()
         {
-            ShowIcon = false;
+            //ShowIcon = false;
             MaximizeBox = false;
             MinimizeBox = false;
 
@@ -85,7 +85,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
         private void CarregarSupervisores()
         {
             IEnumerable<Usuario> supervisores = _usuarioService.ListarSupervisores(ativo: true);
-            cmbSupervisor.PreencherComTodosESelecione(supervisores, x => x.Id, x => x.Nome);
+            cmbSupervisor.PreencherComSelecione(supervisores, x => x.Id, x => x.Nome);
         }
 
         private void CarregarOperadores()
@@ -170,7 +170,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
                 }
 
                 _notificacao.Titulo = txtTitulo.Text;
-                _notificacao.Mensagem = txtMensagem.Text.ToString();//"yyyy-MM-dd 23:59:59"
+                _notificacao.Mensagem = txtMensagem.Text.ToString();
                 _notificacao.DataInicio = dtpDataInicial.Value;
                 _notificacao.DataTermino = dtpDataFinal.Value;
                 _notificacao.IdSupervisor = Convert.ToInt32(cmbSupervisor.SelectedValue);
@@ -186,6 +186,8 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
                 CarregarHistoricoDeLeitura();
 
                 atualizar = true;
+
+                this.Close();
             }
         }
 

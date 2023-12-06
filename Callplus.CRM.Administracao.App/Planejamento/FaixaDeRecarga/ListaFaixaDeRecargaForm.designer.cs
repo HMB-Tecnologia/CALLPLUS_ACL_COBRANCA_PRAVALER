@@ -129,7 +129,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 66);
-            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
             // 
@@ -141,7 +141,7 @@
             this.btnFechar.Location = new System.Drawing.Point(914, 29);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 6;
+            this.btnFechar.TabIndex = 3;
             this.btnFechar.Text = "Fechar    ";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
@@ -154,8 +154,8 @@
             this.btnNovo.Location = new System.Drawing.Point(833, 29);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 23);
-            this.btnNovo.TabIndex = 5;
-            this.btnNovo.Text = "Novo    ";
+            this.btnNovo.TabIndex = 2;
+            this.btnNovo.Text = "Novo ";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.BtnNovo_Click);
             // 
@@ -166,7 +166,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(351, 29);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 4;
+            this.btnPesquisar.TabIndex = 1;
             this.btnPesquisar.UseVisualStyleBackColor = false;
             this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
             // 
@@ -184,8 +184,7 @@
             this.txtFaixa.Location = new System.Drawing.Point(7, 31);
             this.txtFaixa.Name = "txtFaixa";
             this.txtFaixa.Size = new System.Drawing.Size(338, 20);
-            this.txtFaixa.TabIndex = 3;
-            this.txtFaixa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFaixa_KeyPress);
+            this.txtFaixa.TabIndex = 0;
             // 
             // label2
             // 
@@ -204,7 +203,7 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 29;
+            this.txtBuscaRapida.TabIndex = 0;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
             // 
             // btnBuscaRapida

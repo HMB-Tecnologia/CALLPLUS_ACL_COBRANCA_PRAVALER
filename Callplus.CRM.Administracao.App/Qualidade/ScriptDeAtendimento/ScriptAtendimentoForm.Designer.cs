@@ -90,9 +90,13 @@
             this.tcScript = new System.Windows.Forms.TabControl();
             this.tcScript_tpEtapa = new System.Windows.Forms.TabPage();
             this.tcScript_tpDDD = new System.Windows.Forms.TabPage();
+            this.lnkMarcarTodos = new System.Windows.Forms.LinkLabel();
+            this.lnkDesmarcarTodos = new System.Windows.Forms.LinkLabel();
             this.clbDDD = new System.Windows.Forms.CheckedListBox();
             this.tcScript_tpProduto = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lnkMarcarTodosProdutos = new System.Windows.Forms.LinkLabel();
+            this.lnkDesmarcarTodosProdutos = new System.Windows.Forms.LinkLabel();
             this.chkFinalizacao = new System.Windows.Forms.CheckBox();
             this.chkApresentacao = new System.Windows.Forms.CheckBox();
             this.tsProdutoDoScript = new System.Windows.Forms.ToolStrip();
@@ -110,10 +114,6 @@
             this.finalizacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCampanha = new System.Windows.Forms.TextBox();
-            this.lnkMarcarTodos = new System.Windows.Forms.LinkLabel();
-            this.lnkDesmarcarTodos = new System.Windows.Forms.LinkLabel();
-            this.lnkMarcarTodosProdutos = new System.Windows.Forms.LinkLabel();
-            this.lnkDesmarcarTodosProdutos = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgEtapa)).BeginInit();
             this.pnlEtapa.SuspendLayout();
             this.tcEtapa.SuspendLayout();
@@ -147,7 +147,7 @@
             this.cmbEtapa.Location = new System.Drawing.Point(404, 54);
             this.cmbEtapa.Name = "cmbEtapa";
             this.cmbEtapa.Size = new System.Drawing.Size(353, 21);
-            this.cmbEtapa.TabIndex = 4;
+            this.cmbEtapa.TabIndex = 1;
             // 
             // label7
             // 
@@ -189,7 +189,7 @@
             this.dgEtapa.RowHeadersVisible = false;
             this.dgEtapa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgEtapa.Size = new System.Drawing.Size(799, 134);
-            this.dgEtapa.TabIndex = 1;
+            this.dgEtapa.TabIndex = 0;
             this.dgEtapa.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEtapa_CellDoubleClick);
             // 
             // idEtapa
@@ -242,7 +242,7 @@
             this.tcEtapa.Name = "tcEtapa";
             this.tcEtapa.SelectedIndex = 0;
             this.tcEtapa.Size = new System.Drawing.Size(799, 289);
-            this.tcEtapa.TabIndex = 3;
+            this.tcEtapa.TabIndex = 2;
             // 
             // tpDadosEtapa
             // 
@@ -266,7 +266,7 @@
             this.hecDescricao.Name = "hecDescricao";
             this.hecDescricao.ReadOnly = true;
             this.hecDescricao.Size = new System.Drawing.Size(778, 199);
-            this.hecDescricao.TabIndex = 5;
+            this.hecDescricao.TabIndex = 0;
             this.hecDescricao.ToolbarDock = System.Windows.Forms.DockStyle.Top;
             // 
             // chkAtivoEtapa
@@ -427,7 +427,7 @@
             this.tsResposta_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsResposta_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsResposta_btnExcluir.Name = "tsResposta_btnExcluir";
-            this.tsResposta_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsResposta_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsResposta_btnExcluir.Text = "Excluir";
             this.tsResposta_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsResposta_btnExcluir.Click += new System.EventHandler(this.tsResposta_btnExcluir_Click);
@@ -565,7 +565,7 @@
             this.tsEtapa.Name = "tsEtapa";
             this.tsEtapa.Padding = new System.Windows.Forms.Padding(0);
             this.tsEtapa.Size = new System.Drawing.Size(799, 25);
-            this.tsEtapa.TabIndex = 0;
+            this.tsEtapa.TabIndex = 1;
             this.tsEtapa.Text = "toolStrip2";
             // 
             // tsEtapa_btnNovo
@@ -589,7 +589,7 @@
             this.tsEtapa_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsEtapa_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEtapa_btnExcluir.Name = "tsEtapa_btnExcluir";
-            this.tsEtapa_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsEtapa_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsEtapa_btnExcluir.Text = "Excluir";
             this.tsEtapa_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEtapa_btnExcluir.Click += new System.EventHandler(this.tsEtapa_btnExcluir_Click);
@@ -638,7 +638,7 @@
             this.txtNome.MaxLength = 50;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(386, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtNome.TabIndex = 0;
             // 
             // label2
             // 
@@ -655,7 +655,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(763, 56);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 5;
+            this.chkAtivo.TabIndex = 2;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -677,7 +677,7 @@
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObservacao.Size = new System.Drawing.Size(820, 49);
-            this.txtObservacao.TabIndex = 10;
+            this.txtObservacao.TabIndex = 4;
             // 
             // btnSalvar
             // 
@@ -692,7 +692,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 654);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 10;
+            this.btnSalvar.TabIndex = 5;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -711,7 +711,7 @@
             this.btnSimular.Location = new System.Drawing.Point(740, 654);
             this.btnSimular.Name = "btnSimular";
             this.btnSimular.Size = new System.Drawing.Size(93, 25);
-            this.btnSimular.TabIndex = 11;
+            this.btnSimular.TabIndex = 6;
             this.btnSimular.Text = "Simular";
             this.btnSimular.UseVisualStyleBackColor = true;
             this.btnSimular.Click += new System.EventHandler(this.btnSimular_Click);
@@ -725,7 +725,7 @@
             this.tcScript.Name = "tcScript";
             this.tcScript.SelectedIndex = 0;
             this.tcScript.Size = new System.Drawing.Size(821, 498);
-            this.tcScript.TabIndex = 12;
+            this.tcScript.TabIndex = 3;
             // 
             // tcScript_tpEtapa
             // 
@@ -750,6 +750,32 @@
             this.tcScript_tpDDD.TabIndex = 2;
             this.tcScript_tpDDD.Text = "DDD";
             this.tcScript_tpDDD.UseVisualStyleBackColor = true;
+            // 
+            // lnkMarcarTodos
+            // 
+            this.lnkMarcarTodos.AutoSize = true;
+            this.lnkMarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkMarcarTodos.Location = new System.Drawing.Point(14, 7);
+            this.lnkMarcarTodos.Name = "lnkMarcarTodos";
+            this.lnkMarcarTodos.Size = new System.Drawing.Size(69, 13);
+            this.lnkMarcarTodos.TabIndex = 7;
+            this.lnkMarcarTodos.TabStop = true;
+            this.lnkMarcarTodos.Text = "Marcar todos";
+            this.lnkMarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkMarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMarcarTodos_LinkClicked);
+            // 
+            // lnkDesmarcarTodos
+            // 
+            this.lnkDesmarcarTodos.AutoSize = true;
+            this.lnkDesmarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkDesmarcarTodos.Location = new System.Drawing.Point(105, 7);
+            this.lnkDesmarcarTodos.Name = "lnkDesmarcarTodos";
+            this.lnkDesmarcarTodos.Size = new System.Drawing.Size(87, 13);
+            this.lnkDesmarcarTodos.TabIndex = 8;
+            this.lnkDesmarcarTodos.TabStop = true;
+            this.lnkDesmarcarTodos.Text = "Desmarcar todos";
+            this.lnkDesmarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkDesmarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDesmarcarTodos_LinkClicked);
             // 
             // clbDDD
             // 
@@ -790,6 +816,32 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(801, 460);
             this.panel1.TabIndex = 8;
+            // 
+            // lnkMarcarTodosProdutos
+            // 
+            this.lnkMarcarTodosProdutos.AutoSize = true;
+            this.lnkMarcarTodosProdutos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkMarcarTodosProdutos.Location = new System.Drawing.Point(70, 327);
+            this.lnkMarcarTodosProdutos.Name = "lnkMarcarTodosProdutos";
+            this.lnkMarcarTodosProdutos.Size = new System.Drawing.Size(69, 13);
+            this.lnkMarcarTodosProdutos.TabIndex = 11;
+            this.lnkMarcarTodosProdutos.TabStop = true;
+            this.lnkMarcarTodosProdutos.Text = "Marcar todos";
+            this.lnkMarcarTodosProdutos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkMarcarTodosProdutos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMarcarTodosProdutos_LinkClicked);
+            // 
+            // lnkDesmarcarTodosProdutos
+            // 
+            this.lnkDesmarcarTodosProdutos.AutoSize = true;
+            this.lnkDesmarcarTodosProdutos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkDesmarcarTodosProdutos.Location = new System.Drawing.Point(161, 327);
+            this.lnkDesmarcarTodosProdutos.Name = "lnkDesmarcarTodosProdutos";
+            this.lnkDesmarcarTodosProdutos.Size = new System.Drawing.Size(87, 13);
+            this.lnkDesmarcarTodosProdutos.TabIndex = 12;
+            this.lnkDesmarcarTodosProdutos.TabStop = true;
+            this.lnkDesmarcarTodosProdutos.Text = "Desmarcar todos";
+            this.lnkDesmarcarTodosProdutos.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lnkDesmarcarTodosProdutos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDesmarcarTodosProdutos_LinkClicked);
             // 
             // chkFinalizacao
             // 
@@ -968,58 +1020,6 @@
             this.txtCampanha.ReadOnly = true;
             this.txtCampanha.Size = new System.Drawing.Size(601, 20);
             this.txtCampanha.TabIndex = 4;
-            // 
-            // lnkMarcarTodos
-            // 
-            this.lnkMarcarTodos.AutoSize = true;
-            this.lnkMarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lnkMarcarTodos.Location = new System.Drawing.Point(14, 7);
-            this.lnkMarcarTodos.Name = "lnkMarcarTodos";
-            this.lnkMarcarTodos.Size = new System.Drawing.Size(69, 13);
-            this.lnkMarcarTodos.TabIndex = 7;
-            this.lnkMarcarTodos.TabStop = true;
-            this.lnkMarcarTodos.Text = "Marcar todos";
-            this.lnkMarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.lnkMarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMarcarTodos_LinkClicked);
-            // 
-            // lnkDesmarcarTodos
-            // 
-            this.lnkDesmarcarTodos.AutoSize = true;
-            this.lnkDesmarcarTodos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lnkDesmarcarTodos.Location = new System.Drawing.Point(105, 7);
-            this.lnkDesmarcarTodos.Name = "lnkDesmarcarTodos";
-            this.lnkDesmarcarTodos.Size = new System.Drawing.Size(87, 13);
-            this.lnkDesmarcarTodos.TabIndex = 8;
-            this.lnkDesmarcarTodos.TabStop = true;
-            this.lnkDesmarcarTodos.Text = "Desmarcar todos";
-            this.lnkDesmarcarTodos.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.lnkDesmarcarTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDesmarcarTodos_LinkClicked);
-            // 
-            // lnkMarcarTodosProdutos
-            // 
-            this.lnkMarcarTodosProdutos.AutoSize = true;
-            this.lnkMarcarTodosProdutos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lnkMarcarTodosProdutos.Location = new System.Drawing.Point(70, 327);
-            this.lnkMarcarTodosProdutos.Name = "lnkMarcarTodosProdutos";
-            this.lnkMarcarTodosProdutos.Size = new System.Drawing.Size(69, 13);
-            this.lnkMarcarTodosProdutos.TabIndex = 11;
-            this.lnkMarcarTodosProdutos.TabStop = true;
-            this.lnkMarcarTodosProdutos.Text = "Marcar todos";
-            this.lnkMarcarTodosProdutos.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.lnkMarcarTodosProdutos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMarcarTodosProdutos_LinkClicked);
-            // 
-            // lnkDesmarcarTodosProdutos
-            // 
-            this.lnkDesmarcarTodosProdutos.AutoSize = true;
-            this.lnkDesmarcarTodosProdutos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lnkDesmarcarTodosProdutos.Location = new System.Drawing.Point(161, 327);
-            this.lnkDesmarcarTodosProdutos.Name = "lnkDesmarcarTodosProdutos";
-            this.lnkDesmarcarTodosProdutos.Size = new System.Drawing.Size(87, 13);
-            this.lnkDesmarcarTodosProdutos.TabIndex = 12;
-            this.lnkDesmarcarTodosProdutos.TabStop = true;
-            this.lnkDesmarcarTodosProdutos.Text = "Desmarcar todos";
-            this.lnkDesmarcarTodosProdutos.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.lnkDesmarcarTodosProdutos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDesmarcarTodosProdutos_LinkClicked);
             // 
             // ScriptAtendimentoForm
             // 

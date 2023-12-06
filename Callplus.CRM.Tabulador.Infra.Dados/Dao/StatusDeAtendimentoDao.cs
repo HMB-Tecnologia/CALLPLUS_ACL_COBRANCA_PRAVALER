@@ -57,6 +57,22 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
+        public IEnumerable<StatusDeAtendimento> ListarPorTipoCampanha(int? id, int? idTipoStatus, int? idCampanha, int? idTipoDeCampanha)
+        {
+            var sql = "APP_CRM_STATUS_DE_ATENDIMENTO_POR_TIPO_CAMPANHA_LISTAR";
+            var args = new
+            {
+                IdStatus = id,
+                IdTipoTipoStatus = idTipoStatus,
+                IdCampanha = idCampanha,
+                IdTipoDeCampanha = idTipoDeCampanha
+            };
+
+            var resultado = ExecutarProcedure<StatusDeAtendimento>(sql, args);
+
+            return resultado;
+        }
+
         public int Gravar(StatusDeAtendimento statusDeAtendimento, string idsCampanhas)
         {
             var sql = "APP_CRM_STATUS_DE_ATENDIMENTO_GRAVAR";
@@ -73,6 +89,19 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             };
 
             return ExecutarProcedureSingleOrDefault<int>(sql, args);
+        }
+
+        public IEnumerable<StatusDeAtendimento> ListarTabulacaoAutomatica(bool? tabulacaoAutomatica)
+        {
+            var sql = "APP_CRM_STATUS_DE_ATENDIMENTO_LISTAR";
+            var args = new
+            {
+                TabulacaoAutomatica = tabulacaoAutomatica
+            };
+
+            var resultado = ExecutarProcedure<StatusDeAtendimento>(sql, args);
+
+            return resultado;
         }
 
         public IEnumerable<CampanhaDoStatusDeAtendimento> ListarCampanhaDoStatus(int idCampanha, bool ativo)
@@ -106,11 +135,11 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public DataTable ListaStatusDeAtendimento(int? idcampanha, bool? ativo, string nome)
+        public DataTable ListaStatusDeAtendimento(int? idcampanha, bool? ativo, string nome, int? idStatus)
         {
             var sql = "APP_CRM_STATUS_DE_ATENDIMENTO_LISTAR_EXIBICAO";
 
-            sql += string.Format(" @idcampanha = {0}, @ativo= {1}, @nome = '{2}'", idcampanha, ativo, nome);
+            sql += string.Format(" @idcampanha = {0}, @ativo= {1}, @nome = '{2}', @idStatus = {3}", idcampanha, ativo, nome, idStatus);
 
             var args = new
             {
@@ -129,7 +158,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado.FirstOrDefault();
         }
 
-        public IEnumerable<StatusDeAtendimento> Listar(int? id, bool ativo)
+        public IEnumerable<StatusDeAtendimento> Listar(int? id, bool? ativo)
         {
             var sql = "APP_CRM_STATUS_DE_ATENDIMENTO_LISTAR";
 

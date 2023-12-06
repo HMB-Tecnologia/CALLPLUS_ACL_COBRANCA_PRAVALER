@@ -21,6 +21,9 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
 
             if (idStatus > 0)
                 _statusDeAtendimento = _statusDeAtendimentoService.RetornarStatusDoAtendimento(idStatus);
+            else
+                _statusDeAtendimento = new Tabulador.Dominio.Entidades.StatusDeAtendimento();
+
 
             InitializeComponent();
 
@@ -69,7 +72,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
                     _statusDeAtendimento.IdCriador = AdministracaoMDI._usuario.Id;
                 }
 
-
                 _statusDeAtendimento.IdTipoDeStatusDeAtendimento = int.Parse(cmbTipoDeStatusDeAtendimento.SelectedValue.ToString());
                 _statusDeAtendimento.Nome = txtNome.Text;
                 _statusDeAtendimento.Ativo = chkAtivo.Checked;
@@ -81,6 +83,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
                 _statusDeAtendimento.Id = _statusDeAtendimentoService.GravarStatusDeAtendimento(_statusDeAtendimento, idsCampanhas);
 
                 MessageBox.Show($"Status de atendimento {(edicao == true ? "atualizado" : "criado")} com sucesso!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
 
                 Atualizar = true;
             }
@@ -123,7 +127,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
 
         private void CarregarDados()
         {
-            if (_statusDeAtendimento != null)
+            if (_statusDeAtendimento != null && _statusDeAtendimento.Id > 0)
             {
                 CarregarStatusDeAtendimento();
 
@@ -131,9 +135,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
                 chkAtivo.Checked = _statusDeAtendimento.Ativo;
                 txtNome.Text = _statusDeAtendimento.Nome;
                 txtObservacao.Text = _statusDeAtendimento.Observacao;
-          
-                RetornarCampanhasSelecionadas();
 
+                CarregarCampanhas();
             }
             else
                 CarregarStatusDeAtendimento();
@@ -149,24 +152,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
             txtNome.Text = _statusDeAtendimento.Nome;
             txtObservacao.Text = _statusDeAtendimento.Observacao;
 
-        }
-
-        private void RetornarCampanhasSelecionadas()
-        {
-            int idStatusDeAtendimento = (int)_statusDeAtendimento.Id;
-
-            IEnumerable<Tabulador.Dominio.Entidades.Campanha> campanhas = _campanhaService.Listar(ativo: true);
-            IEnumerable<Tabulador.Dominio.Entidades.StatusDeAtendimento> retorno = _statusDeAtendimentoService.RetornarCampanhasSelecionadas(idStatusDeAtendimento);
-
-            clbCampanhas.Items.Clear();
-
-            if (campanhas != null)
-            {
-                foreach (var item in campanhas)
-                {
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, retorno.Where(x => x.Id == item.Id).Any());
-                }
-            }
         }
 
         private void CarregarCampanhas()
@@ -203,7 +188,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
 
         private void RealizarAjustes()
         {
-            this.ShowIcon = false;
+            //this.ShowIcon = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
@@ -267,7 +252,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeAtendimento
             {
                 _logger.Error(ex);
 
-                MessageBox.Show($"Não foi possível carregar as Campanahs!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Não foi possível carregar as Campanhas!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

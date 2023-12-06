@@ -31,5 +31,15 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _enderecoDao.RetornarBairro(uf, cidade);
         }
+
+        public string RetornarUf(int ddd, int idcampanha)
+        {
+            return _enderecoDao.RetornarUf(ddd, idcampanha);
+        }
+
+        public List<string> VerificarSeCepEhElegivel(string cep, bool ehCepEntrega)
+        {
+            return _enderecoDao.VerificarSeCepEhElegivel(cep, ehCepEntrega);
+        }
     }
 }

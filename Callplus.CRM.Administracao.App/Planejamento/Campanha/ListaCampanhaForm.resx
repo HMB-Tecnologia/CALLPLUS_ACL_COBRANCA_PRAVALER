@@ -121,6 +121,19 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnDuplicar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        bwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADbSURBVDhPY/j/
+        /z8KrtzzWq1q5/OG6p0vNlftfPEsas6DvwmLHr5IWvroQNrqZ27o6pEZjNU7XhQANX0D4v8wHD7rPhxH
+        zL7/P3npo/VAtUwoBoA173yxFVkjNgNgOH7Bg1cwQ8AGQG3G0AzC2AwAYZBLwAZA/IzqbBh+8PLT/1tP
+        P2I1AOQdUJgwgAIMm2YQxmcACCcvebSfARraZBkAih2gC148Q9cEw+8/fvn/5t2n//cePIZjZANAUUy5
+        AVTwAoWBSHE0UpyQoARlSRluCLmZCRmTlp3/MwAAlhn1h4XSUggAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>45</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAEBAAAAAAIABoBAAAZgAAACAgAAAAACAAqBAAAM4EAAAwMAAAAAAgAKglAAB2FQAAQEAAAAAA

@@ -1,4 +1,5 @@
 ﻿using Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento;
+using Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoForm;
 using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Dominio.Entidades.LayoutDinamico;
@@ -30,9 +31,12 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             _layoutDinamicoService = new LayoutDinamicoService();
             _avaliacaoDeAtendimentoService = new AvaliacaoDeAtendimentoService();
             _usuarioLogado = AdministracaoMDI._usuario;
-            
+            _tipos = new TipoDeAvaliacaoDeAtendimento();
+
             _oferta = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroMigracaoBKO(idOferta);
             _resumoDaOferta = _ofertaDoAtendimentoService.RetornarResumoDaOfertaDoAtendimentoBKO(idOferta, (int)_oferta.idTipoDeProduto);
+
+            _campanha = _campanhaService.RetornarCampanha(_oferta.idCampanha);
 
             InitializeComponent();
         }
@@ -58,12 +62,20 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
         //private readonly string _dataDaAvaliacao;
         //private readonly long _idAvaliacao;
         private bool _ofertaFoiAtualizada;
+        private readonly TipoDeAvaliacaoDeAtendimento _tipos;
+        private readonly Campanha _campanha;
+
 
         private OfertaDoAtendimentoClaroMigracaoBKO _oferta;
         private ResumoDaOfertaDoAtendimentoBkoDTO _resumoDaOferta;
         private HistoricoDaOfertaDoAtendimentoMigracaoBKO _historicoOfertaBKO;
 
+        private bool _filtraPorFaixaDeRecarga;
+
+
         public bool Atualizar { get; set; }
+
+        private int _idProdutoInicial = 0;
 
         #endregion PROPRIEDADES
 
@@ -76,7 +88,19 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             Atualizar = false;
             lIdade.Text = "";
             lblLoginValidado.Text = "";
-            cmbFaturaDigital.ResetarComSelecione(habilitar: true);
+            //cmbFaturaDigital.ResetarComSelecione(habilitar: true);
+            //cmbCodigo21.ResetarComSelecione(habilitar: true);
+            cmbReceberContrato.ResetarComSelecione(habilitar: true);
+            cmbOndeReceberContrato.ResetarComSelecione(habilitar: true);
+            cmbSexo.ResetarComSelecione(habilitar: true);
+            //TODO - O código comentado abaixo não se aplica a essa operação Vivo / Filtro de recarga sempre false - Rei Almeida
+            _filtraPorFaixaDeRecarga = false;
+            
+            //if (_campanha.idTipoDaCampanha == 7)
+            //{
+            //    _filtraPorFaixaDeRecarga = false;
+            //    gbLiberarMplay.Enabled = false;
+            //}
 
             CarregarProduto();
             CarregarBanco();
@@ -87,7 +111,8 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             CarregarFormaDePagamento();
             CarregarStatusDeAuditoria();
             CarregarDadosDaAvaliacaoDeQualidade();
-            
+            CarregarHistoricoDeAuditoria();
+
             if (_oferta != null)
             {
                 CarregarResumoDaOferta();
@@ -118,7 +143,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 btnAvaliacao.Text = "Realizar Avaliação";
             }
         }
-         
+
         private void CarregarRegrasDoPerfil()
         {
             if (AdministracaoMDI._usuario.IdPerfil != 1 && AdministracaoMDI._usuario.IdPerfil != 4 && AdministracaoMDI._usuario.IdPerfil != 6)
@@ -161,9 +186,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
         {
             if (idStatusAuditoria != null)
             {
-                var status = _statusDeAuditoriaService
-                    .Listar(ativo: true, idStatus: idStatusAuditoria.Value)
-                    .FirstOrDefault(x => x.Id == idStatusAuditoria);
+                var status = _statusDeAuditoriaService.Listar(-1, ativo: true, idStatus: idStatusAuditoria.Value).FirstOrDefault(x => x.Id == idStatusAuditoria);
 
                 _statusDeAuditoriaAtual = status;
             }
@@ -171,7 +194,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void CarregarLayoutDinamicoBko()
         {
-            Campanha campanhaDaOferta = _campanhaService.RetornarCampanha(_oferta.idCampanha);
+            Campanha campanhaDaOferta = _campanha;
 
             if (campanhaDaOferta != null && campanhaDaOferta.IdLayoutCampoDinamicoBko != null)
             {
@@ -204,9 +227,13 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
         {
             txtNome.Text = _oferta.nome;
 
+            if (!string.IsNullOrEmpty(_oferta.cpf?.ToString()))
             txtCpf.Text = CallplusFormsUtil.FormatarCPF(_oferta.cpf?.ToString());
 
             txtRg.Text = _oferta.rg;
+
+            if (!string.IsNullOrEmpty(_oferta.Sexo))
+                cmbSexo.Text = _oferta.Sexo.ToString();
 
             if (_oferta.nascimento != null)
                 txtDataNascimento.Text = _oferta.nascimento.ToString();
@@ -247,21 +274,38 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             {
                 cmbProduto.SelectedValue = _oferta.idProduto.ToString();
 
+                _idProdutoInicial = (int)_oferta.idProduto;
+
                 if (cmbProduto.SelectedValue == null)
                     cmbProduto.ResetarComSelecione(habilitar: true);
             }
 
             txtNumeroMigrado.Text = _oferta.numeroMigrado.ToString();
 
-            if (_oferta.faturaDigital == true)
-                cmbFaturaDigital.Text = "SIM";
-            else if (_oferta.faturaDigital == false)
-                cmbFaturaDigital.Text = "NÃO";
 
-            txtEmailFaturaDigital.Text = _oferta.emailFaturaDigital ?? "";
+            //if (_oferta.OfertaAparelho == true)
+            //    cmbOfertaAparelho.Text = "SIM";
+            //else if (_oferta.OfertaAparelho == false)
+            //    cmbOfertaAparelho.Text = "NÃO";
+
+            //txtUrl.Text = _oferta.Url ?? "";
+
+            //if (_oferta.faturaDigital == true)
+            //    cmbFaturaDigital.Text = "SIM";
+            //else if (_oferta.faturaDigital == false)
+            //    cmbFaturaDigital.Text = "NÃO";
+
 
             if (_oferta.diaVencimento != null)
+            {
                 cmbDiaDeVencimentoDaFatura.Text = _oferta.diaVencimento?.ToString();
+
+                if (cmbDiaDeVencimentoDaFatura.TextoEhSelecione())
+                {
+                    cmbDiaDeVencimentoDaFatura.Text = _oferta.diaVencimento?.ToString() + " - HOJE";
+                    //lblDiaVencimento.Text = lblDiaVencimento.Text + " (DIA:" + _oferta.diaVencimento?.ToString() + ")";
+                }
+            }
 
             if (_oferta.idFormaDePagamento != null)
                 cmbFormaPagamento.SelectedValue = _oferta.idFormaDePagamento.ToString();
@@ -271,11 +315,33 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
             txtAgencia.Text = _oferta.agencia ?? "";
             txtConta.Text = _oferta.conta ?? "";
+
+            //if (_oferta.codigo21 == true)
+            //    cmbCodigo21.Text = "SIM";
+            //else if (_oferta.codigo21 == false)
+            //    cmbCodigo21.Text = "NÃO";
+            
+            txtEmailFaturaDigital.Text = _oferta.emailFaturaDigital ?? "";
+
+            if (_oferta.receberContrato == true)
+                cmbReceberContrato.Text = "SIM";
+            else if (_oferta.receberContrato == false)
+                cmbReceberContrato.Text = "NÃO";
+
+            if (string.IsNullOrEmpty(_oferta.ondeReceberContrato))
+                cmbOndeReceberContrato.ResetarComSelecione(habilitar: true);
+            else if (_oferta.ondeReceberContrato == "E-MAIL")
+                cmbOndeReceberContrato.Text = "E-MAIL";
+            else if (_oferta.ondeReceberContrato == "CORREIO")
+                cmbOndeReceberContrato.Text = "CORREIO";
+
+            if (_oferta.NumeroFaturaWhatsApp != null)
+                txtNumeroFaturaWhatsApp.Text = _oferta.NumeroFaturaWhatsApp.ToString();
         }
 
         private void CarregarStatusDeAuditoria()
         {
-            IEnumerable<Callplus.CRM.Tabulador.Dominio.Entidades.StatusDeAuditoria> retorno = _statusDeAuditoriaService.Listar(ativo: true);
+            IEnumerable<Callplus.CRM.Tabulador.Dominio.Entidades.StatusDeAuditoria> retorno = _statusDeAuditoriaService.Listar(_oferta.idCampanha, ativo: true);
             cmbStatusAuditoria.PreencherComSelecione(retorno, x => x.Id, x => x.Nome);
         }
 
@@ -287,7 +353,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void CarregarDiaDeVencimentoDaFatura()
         {
-            IEnumerable<ConfiguracaoVencimentoFaturaDto> configuracaoDatas = _ofertaDoAtendimentoService.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(); ;
+            IEnumerable<ConfiguracaoVencimentoFaturaDto> configuracaoDatas = _ofertaDoAtendimentoService.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(false); ;
             cmbDiaDeVencimentoDaFatura.PreencherComSelecione(configuracaoDatas, x => x.Fechamento, x => x.Vencimento);
         }
 
@@ -317,7 +383,18 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void CarregarProduto()
         {
-            IEnumerable<Produto> produtos = _produtoService.Listar(-1, _oferta.idCampanha, (int)_oferta.idTipoDeProduto, true).Distinct();
+            IEnumerable<Produto> produtos;
+
+            if (_filtraPorFaixaDeRecarga && _oferta.idCampanha != 16)
+            {
+                produtos = _produtoService.ListarProdutoDaOfertaPorFaixaDeRecargaBKO(_oferta.idProspect).Distinct();
+            }
+            else
+            {
+                produtos = _produtoService.Listar(-1, _oferta.idCampanha, (int)_oferta.idTipoDeProduto, true).Distinct();
+                //produtos = _produtoService.ListarProdutoDaOfertaPorIdProspect(-1, _oferta.idProspect, );
+            }
+
             cmbProduto.PreencherComSelecione(produtos, x => x.Id, x => x.Nome);
         }
 
@@ -371,30 +448,30 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 return false;
             }
 
-            if (statusDeAuditoria.AprovaOferta)
-            {
-                if (string.IsNullOrEmpty(txtProtocolo.Text))
-                {
-                    mensagens.Add("[Protocolo] deve ser informado!");
-                }
+            //if (statusDeAuditoria.AprovaOferta)
+            //{
+            //    if (string.IsNullOrEmpty(txtProtocolo.Text))
+            //    {
+            //        mensagens.Add("[Protocolo] deve ser informado!");
+            //    }
 
-                if (string.IsNullOrEmpty(txtAutorizacao.Text))
-                {
-                    mensagens.Add("[Autorização] deve ser informada!");
-                }
+            //    if (string.IsNullOrEmpty(txtAutorizacao.Text))
+            //    {
+            //        mensagens.Add("[Autorização] deve ser informada!");
+            //    }
 
-                if (string.IsNullOrEmpty(txtCodigo.Text))
-                {
-                    mensagens.Add("[Código Agente] deve ser informado!");
-                }
-            }
+            //    if (string.IsNullOrEmpty(txtCodigo.Text))
+            //    {
+            //        mensagens.Add("[Código Agente] deve ser informado!");
+            //    }
+            //}
 
             CallplusFormsUtil.ExibirMensagens(mensagens);
             return mensagens.Any() == false;
         }
 
         private bool AtendeRegrasDeGravacaoDaOferta()
-        {
+        {   
             foreach (var item in gbDadosPessoais.Controls.OfType<Label>().Where(x => x.Name.Contains("lbl")))
             {
                 item.ForeColor = SystemColors.WindowText;
@@ -416,6 +493,11 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             }
 
             var mensagens = new List<string>();
+
+            if (_campanha.idTipoDaCampanha == 7)
+            {
+                return true;
+            }
 
             if (string.IsNullOrEmpty(txtNome.Text))
             {
@@ -457,13 +539,19 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 mensagens.Add("[Produto] deve ser informado!");
             }
 
+            //if(Convert.ToInt32(VerificaRGMaiorQueZero(txtRg.Text)) < 1)
+            //{
+            //    txtRg.ForeColor = Color.Red;
+            //    mensagens.Add("[RG] inválido!!");
+            //}
+
             if (_oferta.idTipoDeProduto != 2)
             {
-                if (string.IsNullOrEmpty(txtRg.Text))
-                {
-                    lblRg.ForeColor = Color.Red;
-                    mensagens.Add("[RG] deve ser informado!");
-                }
+                //if (string.IsNullOrEmpty(txtRg.Text))
+                //{
+                //    lblRg.ForeColor = Color.Red;
+                //    mensagens.Add("[RG] deve ser informado!");
+                //}
 
                 if (string.IsNullOrEmpty(txtDataNascimento.Text))
                 {
@@ -499,7 +587,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 }
 
                 string[] nomeMae = txtNomeDaMae.Text.Trim().Split(' ');
-                if (nomeMae.Length <= 1)
+                if (!string.IsNullOrEmpty(txtNomeDaMae.Text) && nomeMae.Length <= 1)
                 {
                     lblNomeMae.ForeColor = Color.Red;
                     mensagens.Add("[Nome da Mãe] inválido!");
@@ -535,22 +623,30 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                     mensagens.Add("[CEP] deve ser informado!");
                 }
 
-                if (string.IsNullOrEmpty(cmbFaturaDigital.Text) || cmbFaturaDigital.TextoEhSelecione())
-                {
-                    lblFaturaDigital.ForeColor = Color.Red;
-                    mensagens.Add("[Deseja Fatura Digital] deve ser informada!");
-                }
+                //if (string.IsNullOrEmpty(cmbOfertaAparelho.Text) || cmbOfertaAparelho.TextoEhSelecione())
+                //{
+                //    lblDesejaAparelho.ForeColor = Color.Red;
+                //    mensagens.Add("[Deseja Receber Oferta de Aparelho?] deve ser informado!");
+                //}
+                //else if (cmbOfertaAparelho.Text == "SIM")
+                //{
+                //    if (string.IsNullOrEmpty(txtUrl.Text))
+                //    {
+                //        lblUrl.ForeColor = Color.Red;
+                //        mensagens.Add("[Url] deve ser preenchido!");
+                //    }
+                //}
 
-                if (cmbFaturaDigital.Text == "SIM" && string.IsNullOrEmpty(txtEmailFaturaDigital.Text))
+                //if (string.IsNullOrEmpty(cmbFaturaDigital.Text) || cmbFaturaDigital.TextoEhSelecione())
+                //{
+                //    lblFaturaDigital.ForeColor = Color.Red;
+                //    mensagens.Add("[Deseja Fatura Digital] deve ser informada!");
+                //}
+
+                if (!string.IsNullOrEmpty(txtEmailFaturaDigital.Text) && !Texto.EmailPosuiFormatoValido(txtEmailFaturaDigital.Text))
                 {
                     lblEmailFaturaDigital.ForeColor = Color.Red;
-                    mensagens.Add("[E-mail Fatura] deve ser informado!");
-                }
-
-                if (cmbFaturaDigital.Text == "SIM" && !string.IsNullOrEmpty(txtEmailFaturaDigital.Text) && !Texto.EmailPosuiFormatoValido(txtEmailFaturaDigital.Text))
-                {
-                    lblEmailFaturaDigital.ForeColor = Color.Red;
-                    mensagens.Add("[E-mail Fatura] inválido!");
+                    mensagens.Add("[E-mail para Fatura] inválido!");
                 }
 
                 if (string.IsNullOrEmpty(cmbDiaDeVencimentoDaFatura.Text) || cmbDiaDeVencimentoDaFatura.TextoEhSelecione())
@@ -564,8 +660,13 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                     lblFormaPagamento.ForeColor = Color.Red;
                     mensagens.Add("[Forma de Pagamento] deve ser informado!");
                 }
+                else if (cmbFormaPagamento.Text.Contains("WHATSAPP") && (string.IsNullOrEmpty(txtNumeroFaturaWhatsApp.Text)))
+                {
+                    lblNumeroFaturaWhatsApp.ForeColor = Color.Red;
+                    mensagens.Add("[Número Fatura WhatsApp] deve ser informado!");
+                }
 
-                if (cmbFormaPagamento.Text == "DÉBITO EM CONTA")
+                if (FormaDePagamentoEhDebito())
                 {
                     if (string.IsNullOrEmpty(cmbBanco.Text) || cmbBanco.TextoEhSelecione())
                     {
@@ -585,6 +686,54 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                         mensagens.Add("[Conta] deve ser informada!");
                     }
                 }
+
+                //if (string.IsNullOrEmpty(cmbCodigo21.Text) || cmbCodigo21.TextoEhSelecione())
+                //{
+                //    lblCodigo21.ForeColor = Color.Red;
+                //    mensagens.Add("[Código 21] deve ser informado!");
+                //}
+
+                //if (string.IsNullOrEmpty(cmbReceberContrato.Text) || cmbReceberContrato.TextoEhSelecione())
+                //{
+                //    lblReceberContrato.ForeColor = Color.Red;
+                //    mensagens.Add("[Deseja Receber Contrato] deve ser informado!");
+                //}
+
+                //if (cmbOndeReceberContrato.TextoEhSelecione() && cmbReceberContrato.Text == "SIM")
+                //{
+                //    lblOndeReceberContrato.ForeColor = Color.Red;
+                //    mensagens.Add("[Onde Receber Contrato] deve ser informado!");
+                //}
+
+                //if (string.IsNullOrEmpty(txtEmailFaturaDigital.Text))
+                //{
+                //    if ((cmbReceberContrato.Text == "SIM" && cmbOndeReceberContrato.Text == "E-MAIL") || cmbFormaPagamento.Text.Contains("E-MAIL"))
+                //    {
+                //        lblEmailFaturaDigital.ForeColor = Color.Red;
+                //        mensagens.Add("[E-mail para Fatura] deve ser informado!");
+                //    }
+                //}
+
+                //if (cmbReceberContrato.Text == "SIM" && cmbOndeReceberContrato.Text == "CORREIO")
+                //{
+                //    if (string.IsNullOrEmpty(txtCep.Text))
+                //    {
+                //        lblCep.ForeColor = Color.Red;
+                //        mensagens.Add("[Cep Residencial] deve ser informado!");
+                //    }
+
+                //    if (string.IsNullOrEmpty(txtNumero.Text))
+                //    {
+                //        label15.ForeColor = Color.Red;
+                //        mensagens.Add("[Número Residencial] deve ser informado!");
+                //    }
+
+                //    if (string.IsNullOrEmpty(txtCidade.Text))
+                //    {
+                //        label22.ForeColor = Color.Red;
+                //        mensagens.Add("[Cidade Residencial] deve ser informado!");
+                //    }
+                //}
             }
 
             CallplusFormsUtil.ExibirMensagens(mensagens);
@@ -623,6 +772,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
                 _ofertaFoiAtualizada = true;
                 Atualizar = true;
+                this.Close();
             }
         }
 
@@ -638,26 +788,42 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 if (!string.IsNullOrEmpty(txtNumeroMigrado.Text))
                     _oferta.numeroMigrado = Convert.ToInt64(txtNumeroMigrado.Text);
 
-                if (!cmbFaturaDigital.TextoEhSelecione())
-                    _oferta.faturaDigital = (cmbFaturaDigital.Text == "SIM") ? true : false;
+                if (!cmbSexo.TextoEhSelecione())
+                    _oferta.Sexo = cmbSexo.Text;
+
+                //if (!cmbFaturaDigital.TextoEhSelecione())
+                //    _oferta.faturaDigital = (cmbFaturaDigital.Text == "SIM") ? true : false;
+
+                //if (!cmbOfertaAparelho.TextoEhSelecione())
+                //    _oferta.OfertaAparelho = (cmbOfertaAparelho.Text == "SIM") ? true : false;
+
+                // _oferta.Url = txtUrl.Text;
 
                 if (!string.IsNullOrEmpty(txtEmailFaturaDigital.Text))
                     _oferta.emailFaturaDigital = txtEmailFaturaDigital.Text;
+                else
+                    _oferta.emailFaturaDigital = null;
 
                 if (!cmbDiaDeVencimentoDaFatura.TextoEhSelecione())
-                    _oferta.diaVencimento = Convert.ToInt32(cmbDiaDeVencimentoDaFatura.Text);
+                    _oferta.diaVencimento = Convert.ToInt32(cmbDiaDeVencimentoDaFatura.Text.Replace(" - HOJE", ""));
 
                 if (!cmbFormaPagamento.TextoEhSelecione())
                     _oferta.idFormaDePagamento = Convert.ToInt32(cmbFormaPagamento.SelectedValue);
 
                 if (!cmbBanco.TextoEhSelecione())
                     _oferta.idBanco = Convert.ToInt32(cmbBanco.SelectedValue);
+                else
+                    _oferta.idBanco = null;
 
                 if (!string.IsNullOrEmpty(txtAgencia.Text))
                     _oferta.agencia = txtAgencia.Text;
+                else
+                    _oferta.agencia = null;
 
                 if (!string.IsNullOrEmpty(txtConta.Text))
                     _oferta.conta = txtConta.Text;
+                else
+                    _oferta.conta = null;
 
                 if (!string.IsNullOrEmpty(txtNome.Text))
                     _oferta.nome = txtNome.Text;
@@ -680,18 +846,28 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
                 if (!string.IsNullOrEmpty(txtTelResidencial.Text))
                     _oferta.telefoneResidencial = Convert.ToInt64(txtTelResidencial.Text);
+                else
+                    _oferta.telefoneResidencial = null;
 
                 if (!string.IsNullOrEmpty(txtTelRecado.Text))
                     _oferta.telefoneRecado = Convert.ToInt64(txtTelRecado.Text);
+                else
+                    _oferta.telefoneRecado = null;
 
                 if (!cmbEstadoCivil.TextoEhSelecione())
                     _oferta.idEstadoCivil = Convert.ToInt32(cmbEstadoCivil.SelectedValue);
+                else
+                    _oferta.idEstadoCivil = null;
 
                 if (!cmbProfissao.TextoEhSelecione())
                     _oferta.idProfissao = Convert.ToInt32(cmbProfissao.SelectedValue);
+                else
+                    _oferta.idProfissao = null;
 
                 if (!cmbFaixaRenda.TextoEhSelecione())
                     _oferta.idFaixaDeRenda = Convert.ToInt32(cmbFaixaRenda.SelectedValue);
+                else
+                    _oferta.idFaixaDeRenda = null;
 
                 if (!string.IsNullOrEmpty(txtCep.Text))
                     _oferta.cep = Convert.ToInt64(txtCep.Text);
@@ -716,11 +892,28 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
                 if (!string.IsNullOrEmpty(txtPontoReferencia.Text))
                     _oferta.pontoDeReferencia = txtPontoReferencia.Text;
+                else
+                    _oferta.pontoDeReferencia = null;
 
                 if (!string.IsNullOrEmpty(txtObservacao.Text))
                     _oferta.observacao = txtObservacao.Text;
 
+                //if (!cmbCodigo21.TextoEhSelecione())
+                //    _oferta.codigo21 = (cmbCodigo21.Text == "SIM") ? true : false;
+
+                if (!cmbReceberContrato.TextoEhSelecione())
+                    _oferta.receberContrato = (cmbReceberContrato.Text == "SIM") ? true : false;
+
+                if (!cmbOndeReceberContrato.TextoEhSelecione())
+                    _oferta.ondeReceberContrato = cmbOndeReceberContrato.Text;
+
+                if (!string.IsNullOrEmpty(txtNumeroFaturaWhatsApp.Text))
+                    _oferta.NumeroFaturaWhatsApp = Convert.ToInt64(txtNumeroFaturaWhatsApp.Text);
+
                 _oferta.id = _ofertaDoAtendimentoService.GravarOfertaDoAtendimentoClaroMigracaoBKO(_oferta);
+
+                if(_idProdutoInicial != 0 && (_idProdutoInicial != _oferta.idProduto))
+                    _oferta.id = _ofertaDoAtendimentoService.GravarAlteracaoDeProdutoMigracaoBKO((long)_oferta.id, _idProdutoInicial, (int)_oferta.idProduto, _usuarioLogado.Id);
             }
             else
             {
@@ -796,19 +989,80 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
         private void IniciarEdicaoAvaliacaoDeAtendimento()
         {
             AvaliacaoDeAtendimentoForm f = new AvaliacaoDeAtendimentoForm("DETALHES DA AVALIAÇÃO", _avaliacaoDeAtendimento.id, null, _avaliacaoDeAtendimento.Nome, (_avaliacaoDeAtendimento.idFeedback != null) ? true : false, (long)_oferta.id);
-
             f.Iniciar();
 
             CarregarDadosDaAvaliacaoDeQualidade();
         }
 
         private void IniciarNovaAvaliacaoDeAtendimento()
-        {   
-            AvaliacaoDeAtendimentoForm f = new AvaliacaoDeAtendimentoForm("NOVA AVALIAÇÃO", 0, null, "", false, (long)_oferta.id, _oferta.idCampanha);
+        {
+            int _tipos = (_oferta.id > 0) ? 1 : 2;
 
+            AvaliacaoDeAtendimentoForm f = new AvaliacaoDeAtendimentoForm("NOVA AVALIAÇÃO", 0, _oferta.idCampanha, _oferta.idOperador.Value, _oferta.idSupervisor.Value, _oferta.dataRegistroOferta.ToString("yyyy-MM-dd"), DateTime.Now.ToString(("yyyy-MM-dd") + " 23:59:59"), _oferta.idStatusDaOferta.Value.ToString(), _tipos, _oferta.id.Value);
             f.Iniciar();
 
             CarregarDadosDaAvaliacaoDeQualidade();
+        }
+
+        private void ConfiguracoesDoCampoFormaPagamento()
+        {
+            if (FormaDePagamentoEhDebito())
+            {
+                cmbBanco.ResetarComSelecione(habilitar: true);
+                txtAgencia.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+                txtConta.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+
+                txtAgencia.BackColor = SystemColors.InactiveBorder;
+                txtConta.BackColor = SystemColors.InactiveBorder;
+            }
+            else
+            {
+                cmbBanco.ResetarComSelecione(habilitar: false);
+                txtAgencia.Resetar(habilitar: false, limparTexto: false, readOnly: true);
+                txtConta.Resetar(habilitar: false, limparTexto: false, readOnly: true);
+            }
+
+            if (cmbFormaPagamento.Text.Contains("WHATSAPP"))
+                txtNumeroFaturaWhatsApp.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            else
+                txtNumeroFaturaWhatsApp.Resetar(habilitar: false, limparTexto: true, readOnly: false);
+
+            txtEmailFaturaDigital.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+        }
+
+        private bool FormaDePagamentoEhDebito()
+        {
+            if (cmbFormaPagamento.Text == "DÉBITO EM CONTA" || cmbFormaPagamento.Text.Contains("DCC") || cmbFormaPagamento.Text.Contains("DEBITO EM CONTA"))
+                return true;
+            else
+                return false;
+        }
+
+        private void LiberarAlteracaoDeProduto()
+        {
+            if (string.IsNullOrEmpty(txtLoginProduto.Text))
+            {
+                MessageBox.Show("Para liberar Alteração de Produto, informe um Login permitido!", "CallPlus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (string.IsNullOrEmpty(txtSenhaProduto.Text))
+            {
+                MessageBox.Show("Para liberar Alteração de Produto, informe uma Senha de login permitido!", "CallPlus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (!string.IsNullOrEmpty(txtLoginProduto.Text) && !string.IsNullOrEmpty(txtSenhaProduto.Text))
+            {
+                Usuario usuario = _ofertaDoAtendimentoService.ValidarUsuarioPermitidoParaAlterarProduto(txtLoginProduto.Text, txtSenhaProduto.Text).FirstOrDefault();
+
+                if (usuario != null)
+                {
+                    txtLoginProduto.Text = string.Empty;
+                    txtSenhaProduto.Text = string.Empty;
+                    cmbProduto.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Você não tem permissão para executar essa ação!", "CallPlus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         #endregion METODOS
@@ -890,30 +1144,33 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void AuditoriaOferta_MigracaoClaroForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsLower(e.KeyChar))
-                e.KeyChar = Char.ToUpper(e.KeyChar);
-
-            if (Control.ModifierKeys.ToString().ToUpper().Contains("ALT"))
+            if (!txtSenhaProduto.Focused)
             {
-                e.Handled = true;
+                if (Char.IsLower(e.KeyChar))
+                    e.KeyChar = Char.ToUpper(e.KeyChar);
+
+                if (Control.ModifierKeys.ToString().ToUpper().Contains("ALT"))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void cmbFaturaDigital_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblFaturaDigital.ForeColor = SystemColors.WindowText;
-            lblEmailFaturaDigital.ForeColor = SystemColors.WindowText;
+            //lblFaturaDigital.ForeColor = SystemColors.WindowText;
+            //lblEmailFaturaDigital.ForeColor = SystemColors.WindowText;
 
-            if (cmbFaturaDigital.Text == "SIM")
-            {
-                txtEmailFaturaDigital.Resetar(habilitar: true, limparTexto: true, readOnly: false);
-                txtEmailFaturaDigital.BackColor = SystemColors.InactiveBorder;
-            }
-            else
-            {
-                txtEmailFaturaDigital.Resetar(habilitar: true, limparTexto: true, readOnly: true);
-                txtEmailFaturaDigital.BackColor = Color.WhiteSmoke;
-            }
+            //if (cmbFaturaDigital.Text == "SIM")
+            //{
+            //    txtEmailFaturaDigital.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            //    txtEmailFaturaDigital.BackColor = SystemColors.InactiveBorder;
+            //}
+            //else
+            //{
+            //    txtEmailFaturaDigital.Resetar(habilitar: true, limparTexto: true, readOnly: true);
+            //    txtEmailFaturaDigital.BackColor = Color.WhiteSmoke;
+            //}
         }
 
         private void cmbDiaDeVencimentoDaFatura_SelectedIndexChanged(object sender, EventArgs e)
@@ -931,7 +1188,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
             try
             {
-                int diaVencimento = int.Parse(cmbDiaDeVencimentoDaFatura.Text);
+                int diaVencimento = int.Parse(cmbDiaDeVencimentoDaFatura.Text.Replace(" - HOJE", ""));
                 int ciclo = int.Parse(cmbDiaDeVencimentoDaFatura.SelectedValue.ToString());
 
                 if (ciclo < mesFatura.Day && diaVencimento <= mesFatura.Day && ciclo >= diaVencimento)
@@ -962,25 +1219,9 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             lblBanco.ForeColor = SystemColors.WindowText;
             lblAgencia.ForeColor = SystemColors.WindowText;
             lblConta.ForeColor = SystemColors.WindowText;
+            lblEmailFaturaDigital.ForeColor = SystemColors.WindowText;
 
-            if (cmbFormaPagamento.Text == "DÉBITO EM CONTA")
-            {
-                cmbBanco.ResetarComSelecione(habilitar: true);
-                txtAgencia.Resetar(habilitar: true, limparTexto: true, readOnly: false);
-                txtConta.Resetar(habilitar: true, limparTexto: true, readOnly: false);
-
-                txtAgencia.BackColor = SystemColors.InactiveBorder;
-                txtConta.BackColor = SystemColors.InactiveBorder;
-            }
-            else
-            {
-                cmbBanco.ResetarComSelecione(habilitar: false);
-                txtAgencia.Resetar(habilitar: true, limparTexto: true, readOnly: true);
-                txtConta.Resetar(habilitar: true, limparTexto: true, readOnly: true);
-
-                txtAgencia.BackColor = Color.WhiteSmoke;
-                txtConta.BackColor = Color.WhiteSmoke;
-            }
+            ConfiguracoesDoCampoFormaPagamento();
         }
 
         private void cmbProduto_SelectedIndexChanged(object sender, EventArgs e)
@@ -1001,7 +1242,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
                 {
                     lblEmailFaturaDigital.ForeColor = Color.Red;
                     txtEmailFaturaDigital.Focus();
-                    MessageBox.Show("[E-mail] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("[E-mail para Fatura] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
@@ -1017,14 +1258,27 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void txtAgencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            lblAgencia.ForeColor = SystemColors.WindowText;
-            e.Handled = char.IsWhiteSpace(e.KeyChar);
+
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //lblConta.ForeColor = SystemColors.WindowText;
+                //e.Handled = char.IsWhiteSpace(e.KeyChar);
+            }
         }
 
         private void txtConta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            lblConta.ForeColor = SystemColors.WindowText;
-            e.Handled = char.IsWhiteSpace(e.KeyChar);
+
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //lblConta.ForeColor = SystemColors.WindowText;
+                //e.Handled = char.IsWhiteSpace(e.KeyChar);
+            }
+           
         }
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
@@ -1080,8 +1334,14 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
         private void txtRg_KeyPress(object sender, KeyPressEventArgs e)
         {
-            lblRg.ForeColor = SystemColors.WindowText;
-            e.Handled = char.IsWhiteSpace(e.KeyChar);
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            //lblRg.ForeColor = SystemColors.WindowText;
+            //e.Handled = char.IsWhiteSpace(e.KeyChar);
         }
 
         private void txtDataNascimento_KeyPress(object sender, KeyPressEventArgs e)
@@ -1242,6 +1502,147 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             }
         }
 
+        private void txtNumeroFaturaWhatsApp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            lblNumeroFaturaWhatsApp.ForeColor = SystemColors.WindowText;
+            e.Handled = Texto.CaractereNumerico(e.KeyChar);
+        }
+
+        private void txtNumeroFaturaWhatsApp_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNumeroFaturaWhatsApp.Text))
+            {
+                if (!Texto.TelefoneCelularPossuiFormatoValido(txtNumeroFaturaWhatsApp.Text))
+                {
+                    lblNumeroFaturaWhatsApp.ForeColor = Color.Red;
+                    txtNumeroFaturaWhatsApp.Focus();
+                    MessageBox.Show("[Número Fatura WhatsApp] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                lblNumeroFaturaWhatsApp.ForeColor = SystemColors.WindowText;
+            }
+        }
+
         #endregion EVENTOS 
+
+        private void txtRg_Leave(object sender, EventArgs e)
+        {                      
+            if (!string.IsNullOrEmpty(txtRg.Text) && Convert.ToInt32(VerificaRGMaiorQueZero(txtRg.Text)) == 0)
+            {
+                MessageBox.Show("[RG] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRg.Focus();
+                return;
+            }
+
+            char[] rg = txtRg.Text.ToCharArray();
+            string rgCorreto = string.Empty;
+            int cont = 0;
+            char last = '_';
+            for (int i = 0; i < rg.Length; i++)
+            {
+                if (char.IsNumber(rg[i]) || char.IsLetter(rg[i]))
+                {
+                    if (rg[i] == last)
+                        cont++;
+                    else
+                        cont = 0;
+
+                    if (cont < 4)
+                        rgCorreto += rg[i];
+
+                    last = rg[i];
+                }
+            }
+            txtRg.Text = rgCorreto.Replace('Á', 'A').Replace('É', 'E').Replace('Í', 'I').Replace('Ó', 'O').Replace('Ú', 'U')
+                .Replace('À', 'A').Replace('È', 'E').Replace('Ì', 'I').Replace('Ò', 'O').Replace('Ù', 'U')
+                .Replace('Â', 'A').Replace('Ê', 'E').Replace('Î', 'I').Replace('Ô', 'O').Replace('Û', 'U')
+                .Replace('Ã', 'A').Replace('Õ', 'O');
+            
+        }
+        private string VerificaRGMaiorQueZero(string numRG)
+        {
+            int soma = 0;
+            for (int i = 0; i < numRG.Length; i++)
+            {               
+                if((numRG).Substring(i, 1) == "1" ||
+                   (numRG).Substring(i, 1) == "2" ||
+                   (numRG).Substring(i, 1) == "3" ||
+                   (numRG).Substring(i, 1) == "4" ||
+                   (numRG).Substring(i, 1) == "5" ||
+                   (numRG).Substring(i, 1) == "6" ||
+                   (numRG).Substring(i, 1) == "7" ||
+                   (numRG).Substring(i, 1) == "8" ||
+                   (numRG).Substring(i, 1) == "9" ||
+                   (numRG).Substring(i, 1) == "0")
+                {
+                    soma += Convert.ToInt32((txtRg.Text).Substring(i, 1));
+                }
+            }
+            numRG = soma.ToString();
+            return numRG ;
+        }
+
+        private void txtNumeroMigrado_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNumeroMigrado.Text))
+            {
+                if (!Texto.TelefoneCelularPossuiFormatoValido(txtNumeroMigrado.Text))
+                {
+                    lblNumeroMigrado.ForeColor = Color.Red;
+                    txtNumeroMigrado.Focus();
+                    MessageBox.Show("[Número Migrado] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                lblNumeroMigrado.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void cmbDesejaAparelho_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbOfertaAparelho.Text == "SIM")
+                txtUrl.Resetar(habilitar: true, limparTexto: true, readOnly: false);
+            else
+                txtUrl.Resetar(habilitar: false, limparTexto: true, readOnly: false);
+        }
+
+        private void btnLiberarProduto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LiberarAlteracaoDeProduto();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                MessageBox.Show(
+                    $"Não foi possível liberar alteração de produto!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmbReceberContrato_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbReceberContrato.Text == "SIM")
+            {
+                cmbOndeReceberContrato.ResetarComSelecione(habilitar: true);
+            }
+            else
+            {
+                cmbOndeReceberContrato.ResetarComSelecione(habilitar: false);
+            }
+        }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public AvaliacaoDeAtendimento RetornarOfertaMigracao(long idOferta)
         {
-            return _dao.RetornarOfertaPortabilidade(idOferta);
+            return _dao.RetornarOfertaMigracao(idOferta);
         }
 
         public AvaliacaoDeAtendimento RetornarOfertaPortabilidade(long idOferta)

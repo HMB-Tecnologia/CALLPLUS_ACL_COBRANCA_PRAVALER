@@ -69,6 +69,7 @@
             this.tsItem_btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsItem_btnCancelar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tsItem_btnSalvar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tbpProcedimento = new System.Windows.Forms.TabPage();
@@ -86,6 +87,7 @@
             this.tsProcedimento_btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsProcedimento_btnCancelar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tsProcedimento_btnSalvar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tbpFaq = new System.Windows.Forms.TabPage();
@@ -103,6 +105,7 @@
             this.tsFaq_btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.tsFaq_btnCancelar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tsFaq_btnSalvar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.chkAtivo = new System.Windows.Forms.CheckBox();
@@ -111,9 +114,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tcDados.SuspendLayout();
             this.tbpCampanha.SuspendLayout();
             this.tsCampanha.SuspendLayout();
@@ -155,7 +155,7 @@
             this.tcDados.Name = "tcDados";
             this.tcDados.SelectedIndex = 0;
             this.tcDados.Size = new System.Drawing.Size(801, 430);
-            this.tcDados.TabIndex = 4;
+            this.tcDados.TabIndex = 2;
             // 
             // tbpCampanha
             // 
@@ -188,6 +188,7 @@
             this.tsCampanha_btnSalvar.Size = new System.Drawing.Size(58, 22);
             this.tsCampanha_btnSalvar.Text = "Salvar";
             this.tsCampanha_btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.tsCampanha_btnSalvar.Click += new System.EventHandler(this.tsCampanha_btnSalvar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -325,7 +326,7 @@
             this.tsModulo_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsModulo_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsModulo_btnExcluir.Name = "tsModulo_btnExcluir";
-            this.tsModulo_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsModulo_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsModulo_btnExcluir.Text = "Excluir";
             this.tsModulo_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsModulo_btnExcluir.Click += new System.EventHandler(this.tsModulo_btnExcluir_Click);
@@ -529,7 +530,7 @@
             this.tsItem_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsItem_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsItem_btnExcluir.Name = "tsItem_btnExcluir";
-            this.tsItem_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsItem_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsItem_btnExcluir.Text = "Excluir";
             this.tsItem_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsItem_btnExcluir.Click += new System.EventHandler(this.tsItem_btnExcluir_Click);
@@ -549,6 +550,11 @@
             this.tsItem_btnCancelar.Text = "Cancelar";
             this.tsItem_btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsItem_btnCancelar.Click += new System.EventHandler(this.tsItem_btnCancelar_Click);
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
             // 
             // tsItem_btnSalvar
             // 
@@ -708,7 +714,7 @@
             this.tsProcedimento_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsProcedimento_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsProcedimento_btnExcluir.Name = "tsProcedimento_btnExcluir";
-            this.tsProcedimento_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsProcedimento_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsProcedimento_btnExcluir.Text = "Excluir";
             this.tsProcedimento_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsProcedimento_btnExcluir.Click += new System.EventHandler(this.tsProcedimento_btnExcluir_Click);
@@ -728,6 +734,11 @@
             this.tsProcedimento_btnCancelar.Text = "Cancelar";
             this.tsProcedimento_btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsProcedimento_btnCancelar.Click += new System.EventHandler(this.tsProcedimento_btnCancelar_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
             // 
             // tsProcedimento_btnSalvar
             // 
@@ -886,7 +897,7 @@
             this.tsFaq_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsFaq_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsFaq_btnExcluir.Name = "tsFaq_btnExcluir";
-            this.tsFaq_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsFaq_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsFaq_btnExcluir.Text = "Excluir";
             this.tsFaq_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsFaq_btnExcluir.Click += new System.EventHandler(this.tsFaq_btnExcluir_Click);
@@ -906,6 +917,11 @@
             this.tsFaq_btnCancelar.Text = "Cancelar";
             this.tsFaq_btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsFaq_btnCancelar.Click += new System.EventHandler(this.tsFaq_btnCancelar_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
             // tsFaq_btnSalvar
             // 
@@ -929,7 +945,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(763, 58);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 3;
+            this.chkAtivo.TabIndex = 1;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -949,7 +965,7 @@
             this.txtNome.MaxLength = 100;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(745, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtNome.TabIndex = 0;
             // 
             // label20
             // 
@@ -969,7 +985,7 @@
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObservacao.Size = new System.Drawing.Size(800, 49);
-            this.txtObservacao.TabIndex = 6;
+            this.txtObservacao.TabIndex = 3;
             // 
             // btnSalvar
             // 
@@ -984,25 +1000,10 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 587);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 7;
+            this.btnSalvar.TabIndex = 4;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
             // FormularioDeQualidadeForm
             // 

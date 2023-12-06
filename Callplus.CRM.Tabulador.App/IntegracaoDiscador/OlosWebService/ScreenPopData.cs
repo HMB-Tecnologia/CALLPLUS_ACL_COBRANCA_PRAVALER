@@ -1,4 +1,4 @@
-﻿namespace v1Tabulare_z13.IntegracaoDiscador.OlosWebService
+﻿namespace Callplus.IntegracaoDiscador.OlosWebService
 {
     public class ScreenPopData
     {

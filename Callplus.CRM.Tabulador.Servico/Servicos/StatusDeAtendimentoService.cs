@@ -20,7 +20,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _statusDeAtendimentoDao.ListarStatusDeAtendimento(idTipoStatus,ativo);
         }
 
-        public IEnumerable<StatusDeAtendimento> Listar(int? id, bool ativo)
+        public IEnumerable<StatusDeAtendimento> Listar(int? id, bool? ativo)
         {
             return _statusDeAtendimentoDao.Listar(id, ativo);
         }
@@ -35,14 +35,18 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _statusDeAtendimentoDao.ListarTipoDeStatusDeAtendimento(idStatus);
         }
 
-        public IEnumerable<StatusDeAtendimento> Listar(int? id, int? idTipoStatus, bool? ativo, int? idCampanha)
+        public IEnumerable<StatusDeAtendimento> Listar(int? id, int? idTipoStatus, int? idCampanha, bool? ativo)
         {
             return _statusDeAtendimentoDao.Listar(id, idTipoStatus, idCampanha, ativo);
         }
 
-        public DataTable ListaStatusDeAtendimento(int? idcampanha, bool? ativo, string nome)
+        public IEnumerable<StatusDeAtendimento> ListarPorTipoCampanha(int? id, int? idTipoStatus, int? idCampanha, int? idTipoDeCampanha)
         {
-            return _statusDeAtendimentoDao.ListaStatusDeAtendimento(idcampanha, ativo, nome);
+            return _statusDeAtendimentoDao.ListarPorTipoCampanha(id, idTipoStatus, idCampanha, idTipoDeCampanha);
+        }
+        public DataTable ListaStatusDeAtendimento(int? idcampanha, bool? ativo, string nome, int? idStatus)
+        {
+            return _statusDeAtendimentoDao.ListaStatusDeAtendimento(idcampanha, ativo, nome, idStatus);
         }
 
         public IEnumerable<TipoDeStatusDeAtendimento> ListarTipoDeStatus(bool ativo)
@@ -63,6 +67,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public IEnumerable<CampanhaDoStatusDeAtendimento> ListarCampanhaDoStatus(int idCampanha, bool ativo)
         {
             return _statusDeAtendimentoDao.ListarCampanhaDoStatus(idCampanha, ativo);
+        }
+
+        public IEnumerable<StatusDeAtendimento> ListarTabulacaoAutomatica(bool? tabulacaoAutomatica)
+        {
+            return _statusDeAtendimentoDao.ListarTabulacaoAutomatica(tabulacaoAutomatica);
         }
     }
 }

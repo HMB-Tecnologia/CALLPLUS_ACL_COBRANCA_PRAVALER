@@ -4,6 +4,8 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
 {
     public class OfertaDoAtendimentoClaroMigracao : OfertaDoAtendimento
     {
+        public string ondeReceberContrato;
+
         //public long Id { get; set; }
         //public long IdAtendimento { get; set; }
         //public long IdProduto { get; set; }
@@ -41,5 +43,12 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public int IdOperador { get; set; }
         public long? NumeroMigrado2 { get; set; }
         public long? IdProduto2 { get; set; }
+        public bool? codigo21 { get; set; }
+        public bool? receberContrato { get; set; }
+        public long? NumeroFaturaWhatsApp { get; set; }
+        public bool? processado { get; set; }
+        public bool? ofertaAparelho { get; set; }
+        public string url { get; set; }
+        public string Sexo { get; set; }
     }
 }

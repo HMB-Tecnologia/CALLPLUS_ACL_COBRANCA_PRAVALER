@@ -33,6 +33,8 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
         private IEnumerable<Perfil> _perfis;
         private IEnumerable<Tabulador.Dominio.Entidades.Usuario> _supervisores;
 
+        private List<int> _idsUsuarios = new List<int>();
+
         #endregion VARIAVEIS
 
         #region METODOS
@@ -107,6 +109,7 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
             }
         }
 
+        bool existeEditar = true;
         private void RealizarAjustesGrid()
         {
             dgResultado.Columns["Data"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
@@ -115,6 +118,24 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
             {
                 dgResultado.Columns[i].Visible = false;
             }
+
+            for (int i = 0; i < dgResultado.Columns["Data"].Index; i++)
+            {
+                dgResultado.Columns[i].ReadOnly = true;
+            }
+
+            DataGridViewCheckBoxColumn dgvCbcEditar = new DataGridViewCheckBoxColumn();
+            if (existeEditar)
+            {
+                dgvCbcEditar.ValueType = typeof(bool);
+                dgvCbcEditar.Name = "dgvCbcEditar";
+                dgvCbcEditar.HeaderText = "Editar";
+                dgvCbcEditar.ReadOnly = false;
+                dgResultado.Columns.Add(dgvCbcEditar);
+                dgResultado.AutoResizeColumn(dgResultado.Columns["dgvCbcEditar"].Index);
+                existeEditar = false;
+            }
+           
         }
 
         private void IniciarNovoRegistro()
@@ -202,7 +223,18 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                     usuario.ReceberAvaliacaoDeQualidade = false;
                 }
 
+                usuario.GerarNota = (bool)dgResultado.Rows[linha].Cells["gerarNota"].Value;
                 usuario.SenhaExpirada = (bool)dgResultado.Rows[linha].Cells["senhaExpirada"].Value;
+                
+                
+                if (dgResultado.Rows[linha].Cells["Alterar Produto Bko"].Value.ToString().ToUpper() == "SIM")
+                {
+                    usuario.alterarProdutoBKO = true;
+                }
+                else
+                {
+                    usuario.alterarProdutoBKO = false;
+                }
 
                 usuario.Observacao = dgResultado.Rows[linha].Cells["observacao"].Value.ToString();
 
@@ -332,6 +364,69 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
             }
         }
 
-        #endregion EVENTOS     
+        private void dgResultado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {            
+            if ((this.dgResultado.RowCount > 0))
+            {
+                if ((string.Compare(dgResultado.CurrentCell.OwningColumn.Name, "dgvCbcEditar") == 0))
+                {
+                    this.dgResultado.EndEdit(); //Feche a edição do seu datagrid
+
+                    bool checkBoxStatus = Convert.ToBoolean(dgResultado.CurrentCell.EditedFormattedValue);
+                    if (checkBoxStatus == true)
+                    {
+                        _idsUsuarios.Add(Convert.ToInt32(dgResultado["ID", e.RowIndex].Value));
+                    }
+                    else if (checkBoxStatus == false)
+                    {
+                        int idUsuarioSelecionado = Convert.ToInt32(dgResultado["ID", e.RowIndex].Value);
+                        if (_idsUsuarios.Contains(idUsuarioSelecionado))
+                        {
+                            _idsUsuarios.Remove(idUsuarioSelecionado);
+                        }
+                    }
+
+                    if (_idsUsuarios.Count <= 0)
+                    {
+                        btnEditarUsuarios.Enabled = false;
+                    }
+                    else
+                    {
+                        btnEditarUsuarios.Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private void btnEditarUsuarios_Click(object sender, EventArgs e)
+        {
+            UsuarioFormEdit f = new UsuarioFormEdit("EDITAR USUÁRIOS", _idsUsuarios, _campanhas, _perfis, _supervisores);
+
+            ExibirForm(f);
+        }
+
+        private void lnkMarcarTodos_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (DataGridViewRow dtr in dgResultado.Rows)
+            {
+                ((DataGridViewCheckBoxCell)dtr.Cells[dgResultado.Columns["dgvCbcEditar"].Index]).Value = true;
+                _idsUsuarios.Add(Convert.ToInt32(dgResultado["ID", dtr.Index].Value));
+            }
+
+            btnEditarUsuarios.Enabled = true;
+        }
+
+        private void lnkDesmarcarTodos_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (DataGridViewRow dtr in dgResultado.Rows)
+            {
+                ((DataGridViewCheckBoxCell)dtr.Cells[dgResultado.Columns["dgvCbcEditar"].Index]).Value = false;
+            }
+
+            _idsUsuarios.Clear();
+            btnEditarUsuarios.Enabled = false;
+        }
+
+        #endregion EVENTOS        
     }
 }

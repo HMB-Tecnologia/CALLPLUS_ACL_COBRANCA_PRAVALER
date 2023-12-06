@@ -86,7 +86,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
 
                 lblTotalRegistros.Text = dgResultado.RowCount.ToString() + " Registro(s)";
 
-                RealizarAjustesGrid();
+                //RealizarAjustesGrid();
             }
         }
 

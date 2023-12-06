@@ -1086,5 +1086,10 @@ namespace Callplus.CRM.Administracao.App.Qualidade.FormularioDeQualidade
         }
 
         #endregion EVENTOS        
+
+        private void tsCampanha_btnSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

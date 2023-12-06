@@ -31,8 +31,6 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
             InitializeComponent();
 
             lblTitulo.Text = titulo;
-
-
         }
 
         #region PROPRIEDADES
@@ -57,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
 
         private void CarregarConfiguracaoInicial()
         {
-            this.ShowIcon = false;
+            this.ShowIcon = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
@@ -73,26 +71,29 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
                 chkAprovaOferta.Checked = _status.AprovaOferta;
                 chkPerminitoHumano.Checked = _status.PermitidoHumano;
                 chkAtivo.Checked = _status.Ativo;
+                chkAuditoriaOperador.Checked = _status.AuditoriaOperador;
 
                 RetornarCampanhasSelecionadas();
             }
-               
+            else
+                CarregarCampanhas();
         }
 
         private void RetornarCampanhasSelecionadas()
         {
             int idStatusAuditoria = (int)_status.Id;
 
+            IEnumerable<Campanha> campanhas = _campanhaService.Listar(ativo: true);
             IEnumerable<Tabulador.Dominio.Entidades.StatusDeAuditoria> retorno = _statusDeAuditoriaService.RetornarCampanhasSelecionadas(idStatusAuditoria);
 
             clbCampanhas.Items.Clear();
 
-            foreach (var item in retorno)
+            if (campanhas != null)
             {
-                if (item.Selecionado)
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, true);
-                else
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, false);
+                foreach (var item in campanhas)
+                {
+                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, retorno.Where(x => x.Id == item.Id).Any());
+                }
             }
         }
 
@@ -104,10 +105,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
 
             foreach (var item in campanhas)
             {
-                if (item.Selecionado)
-                    clbCampanhas.Items.Add(item.Id + " - " + item.Nome, true);
-                else
-                    clbCampanhas.Items.Add(item.Id + " - " +item.Nome, false);
+                clbCampanhas.Items.Add(item.Id + " - " + item.Nome);
             }
         }
 
@@ -136,7 +134,6 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
                     edicao = false;
 
                     _status = new Tabulador.Dominio.Entidades.StatusDeAuditoria();
-
                     _status.IdCriador = AdministracaoMDI._usuario.Id;
                 }
 
@@ -144,14 +141,17 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
                 _status.HabilitaTrocaDeStatus = chkTrocaStatus.Checked;
                 _status.AprovaOferta = chkAprovaOferta.Checked;
                 _status.PermitidoHumano = chkPerminitoHumano.Checked;
-                _status.IdCriador = AdministracaoMDI._usuario.Id;
+                _status.IdModificador = AdministracaoMDI._usuario.Id;
+                _status.AuditoriaOperador = chkAuditoriaOperador.Checked;
                 _status.Ativo = chkAtivo.Checked;
 
                 string idsCampanhas = RetornarCampanhas();
 
-                _status.Id = _statusDeAuditoriaService.GravarNotificacao(_status, idsCampanhas);
+                _status.Id = _statusDeAuditoriaService.Gravar(_status, idsCampanhas);
 
                 MessageBox.Show("Notificação " + ((edicao) ? "atualizada" : "incluída") + " com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
 
                 atualizar = true;
             }
@@ -160,6 +160,9 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
         private bool AtendeRegraDeGravacao()
         {
             var mensagens = new List<string>();
+
+            if (string.IsNullOrEmpty(txtNome.Text))
+                mensagens.Add("[Nome] deve ser informado!");
 
             if (clbCampanhas.CheckedItems.Count == 0)
                 mensagens.Add("[Campanha] deve ser informada!");
@@ -211,20 +214,6 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
             }
         }
 
-        private void txtNome_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                CarregarCampanhas();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-
-                MessageBox.Show($"Não foi possível carregar as Campanhas!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void lnkTodos_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             clbCampanhas.SetarTodosRegistros(check: true);
@@ -233,12 +222,6 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
         private void lnkNenhum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             clbCampanhas.SetarTodosRegistros(check: false);
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            this.Close();
         }
 
         #endregion EVENTOS

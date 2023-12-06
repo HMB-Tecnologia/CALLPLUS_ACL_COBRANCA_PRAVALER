@@ -8,7 +8,8 @@
         Agendamento = 2,
         Recusa = 3,
         Telefonia = 4,
-        Sistema = 5
+        Sistema = 5,
+        Inelegivel = 6
 
     }
 }

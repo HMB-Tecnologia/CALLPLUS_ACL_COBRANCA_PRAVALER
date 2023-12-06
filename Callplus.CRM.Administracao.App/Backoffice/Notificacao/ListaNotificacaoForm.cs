@@ -47,7 +47,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
         #endregion PROPRIEDADES
 
         #region METODOS
-        
+
         private void CarregarConfiguracaoInicial()
         {
             ShowIcon = false;
@@ -84,10 +84,10 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
         private void CarregarGrid(bool buscaRapida)
         {
             int idRegistro = -1;
-            DateTime dataInicio  = dtpDataInicial.Value;
+            DateTime dataInicio = dtpDataInicial.Value;
             DateTime dataTermino = dtpDataFinal.Value;
             bool ativo = chkListarAtivos.Checked;
-            
+
             if (ParametrosPesquisaValidos(buscaRapida))
             {
                 if (buscaRapida)
@@ -103,7 +103,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
                 RealizarAjustesGrid();
             }
         }
-        
+
         private void IniciarEdicaoRegistro(int linha)
         {
             if (linha >= 0)
@@ -150,7 +150,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
             try
             {
                 CarregarConfiguracaoInicial();
-                
+
                 btnPesquisar_Click(sender, e);
             }
             catch (Exception ex)
@@ -217,7 +217,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
             this.Hide();
             this.Close();
         }
-                
+
         private void dgResultado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -235,9 +235,20 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
 
         private void chkListarAtivos_CheckedChanged(object sender, EventArgs e)
         {
-            btnPesquisar_Click(sender, e);
+            //btnPesquisar_Click(sender, e);
+            try
+            {
+                CarregarGrid(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                MessageBox.Show(
+                    $"Não foi possível realizar a pesquisa!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        
+
         #endregion EVENTOS        
     }
 }

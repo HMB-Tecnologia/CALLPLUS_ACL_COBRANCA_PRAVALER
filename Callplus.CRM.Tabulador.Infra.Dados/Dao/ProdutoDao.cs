@@ -59,6 +59,15 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
+        public IEnumerable<Produto> ListarProdutoDaOfertaPorFaixaDeRecargaBKO(long idProspect)
+        {
+            var sql = "APP_CRM_PRODUTO_LISTAR_PRODUTOS_OFERTA_POR_FAIXA_RECARGA_BKO";
+            var args = new { IdProspect = idProspect };
+
+            var resultado = ExecutarProcedure<Produto>(sql, args);
+            return resultado;
+        }
+        
         public IEnumerable<Produto> ListarProdutosDaCampanha(int idCampanha)
         {
             var sql = "APP_CRM_PRODUTOS_DA_CAMPANHA_LISTAR";
@@ -76,6 +85,24 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             {
                 IdCampanha = idCampanha,
                 Nome = nome,
+                Ativo = ativo,
+                AtivoBko = ativoBko
+
+            };
+
+            var resultado = ExecutarProcedure<ProdutoDaOfertaDto>(sql, args);
+            return resultado;
+        }
+
+        public IEnumerable<ProdutoDaOfertaDto> ListarProdutoDaOfertaPorIdProspect(long idCampanha, long idProspect, bool? ativo, bool? ativoBko)
+        {
+            var sql = "APP_CRM_PRODUTO_LISTAR_PRODUTOS_OFERTA_POR_IDPROSPECT";
+            var args =
+            new
+            {
+
+                IdCampanha = idCampanha,
+                IdProspect = idProspect,
                 Ativo = ativo,
                 AtivoBko = ativoBko
 

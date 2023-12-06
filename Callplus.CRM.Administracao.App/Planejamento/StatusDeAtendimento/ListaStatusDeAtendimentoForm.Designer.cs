@@ -58,7 +58,7 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 28;
+            this.txtBuscaRapida.TabIndex = 0;
             // 
             // btnBuscaRapida
             // 
@@ -70,7 +70,7 @@
             this.btnBuscaRapida.Location = new System.Drawing.Point(991, 4);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
             this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
-            this.btnBuscaRapida.TabIndex = 33;
+            this.btnBuscaRapida.TabIndex = 1;
             this.btnBuscaRapida.UseVisualStyleBackColor = true;
             this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             // 
@@ -169,7 +169,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 66);
-            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
             // 
@@ -180,7 +180,7 @@
             this.cmbCampanha.Location = new System.Drawing.Point(6, 29);
             this.cmbCampanha.Name = "cmbCampanha";
             this.cmbCampanha.Size = new System.Drawing.Size(340, 21);
-            this.cmbCampanha.TabIndex = 8;
+            this.cmbCampanha.TabIndex = 0;
             // 
             // label6
             // 
@@ -202,7 +202,7 @@
             this.btnFechar.Location = new System.Drawing.Point(914, 29);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 6;
+            this.btnFechar.TabIndex = 4;
             this.btnFechar.Text = "Fechar    ";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
@@ -215,7 +215,7 @@
             this.btnNovo.Location = new System.Drawing.Point(833, 29);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 23);
-            this.btnNovo.TabIndex = 5;
+            this.btnNovo.TabIndex = 3;
             this.btnNovo.Text = "Novo    ";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -227,7 +227,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(696, 27);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 4;
+            this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.UseVisualStyleBackColor = false;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
@@ -245,8 +245,7 @@
             this.txtNome.Location = new System.Drawing.Point(352, 29);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(338, 20);
-            this.txtNome.TabIndex = 3;
-            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
+            this.txtNome.TabIndex = 1;
             // 
             // label2
             // 

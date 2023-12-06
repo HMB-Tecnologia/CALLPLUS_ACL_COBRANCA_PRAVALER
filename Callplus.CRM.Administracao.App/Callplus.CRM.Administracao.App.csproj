@@ -55,6 +55,9 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.SHDocVw, Version=1.1.0.0, Culture=neutral">
+      <HintPath>..\packages\AxInterop.SHDocVw.1.0.0\lib\AxInterop.SHDocVw.dll</HintPath>
+    </Reference>
     <Reference Include="ListboxMessage">
       <HintPath>..\ListboxMessage.dll</HintPath>
     </Reference>
@@ -67,17 +70,19 @@
       <HintPath>..\MSDN.HtmlEditorControl.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\..\..\CALLPLUS_ALS_FIXO\CALLPLUS_ALS_FIXO\MAIN\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +92,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WaveLibMixer, Version=1.0.6900.26047, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WaveLibMixer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministracaoMDI.cs">
@@ -94,6 +103,12 @@
     </Compile>
     <Compile Include="AdministracaoMDI.Designer.cs">
       <DependentUpon>AdministracaoMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\IntegracaoBaseB\BaseBForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\IntegracaoBaseB\BaseBForm.designer.cs">
+      <DependentUpon>BaseBForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Administracao\SolicitacaoDeAcesso\ListaSolicitacaoDeAcessoForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +122,12 @@
     <Compile Include="Administracao\SolicitacaoDeAcesso\SolicitacaoDeAcessoForm.Designer.cs">
       <DependentUpon>SolicitacaoDeAcessoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Administracao\Usuario\UsuarioFormEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracao\Usuario\UsuarioFormEdit.Designer.cs">
+      <DependentUpon>UsuarioFormEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,11 +140,11 @@
     <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.Designer.cs">
       <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.cs">
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.Designer.cs">
-      <DependentUpon>AuditoriaOferta_PortabilidadeClaroForm.cs</DependentUpon>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.Designer.cs">
+      <DependentUpon>AuditoriaOferta_PortabilidadeMPForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.cs">
       <SubType>Form</SubType>
@@ -131,11 +152,29 @@
     <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.Designer.cs">
       <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaAgrupadaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaAgrupadaForm.designer.cs">
+      <DependentUpon>ListaAuditoriaDeVendaAgrupadaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.Designer.cs">
       <DependentUpon>ListaAuditoriaDeVendaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\Gamificacao\GamificacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\Gamificacao\GamificacaoForm.Designer.cs">
+      <DependentUpon>GamificacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\Gamificacao\ListarGamificacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\Gamificacao\ListarGamificacaoForm.Designer.cs">
+      <DependentUpon>ListarGamificacaoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Backoffice\Notificacao\ListaNotificacaoForm.cs">
       <SubType>Form</SubType>
@@ -148,6 +187,12 @@
     </Compile>
     <Compile Include="Backoffice\Notificacao\NotificacaoForm.designer.cs">
       <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backoffice\RelatorioDeAuditoria\MonitoramentoDeAuditoriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice\RelatorioDeAuditoria\MonitoramentoDeAuditoriaForm.designer.cs">
+      <DependentUpon>MonitoramentoDeAuditoriaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Backoffice\StatusDeAuditoria\ListaStatusDeAuditoriaForm.cs">
       <SubType>Form</SubType>
@@ -185,6 +230,12 @@
     <Compile Include="Controles\ScriptDeOfertaControl.designer.cs">
       <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\DashOperacaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\DashOperacaoForm.Designer.cs">
+      <DependentUpon>DashOperacaoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planejamento\Aparelho\AparelhoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +247,24 @@
     </Compile>
     <Compile Include="Planejamento\Aparelho\ListaAparelhoForm.Designer.cs">
       <DependentUpon>ListaAparelhoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\CadastroCep\CadastroCepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\CadastroCep\CadastroCepForm.designer.cs">
+      <DependentUpon>CadastroCepForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\CadastroCep\ListaCepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\CadastroCep\ListaCepForm.designer.cs">
+      <DependentUpon>ListaCepForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\CampanhaEspelhoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Campanha\CampanhaEspelhoForm.Designer.cs">
+      <DependentUpon>CampanhaEspelhoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Planejamento\Campanha\CampanhaForm.cs">
       <SubType>Form</SubType>
@@ -314,8 +383,20 @@
     <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.Designer.cs">
+    <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.designer.cs">
       <DependentUpon>StatusDeOfertaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\VencimentoDeFatura\ListaVencimentoDeFaturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\VencimentoDeFatura\ListaVencimentoDeFaturaForm.Designer.cs">
+      <DependentUpon>ListaVencimentoDeFaturaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planejamento\VencimentoDeFatura\VencimentoDeFaturaDetalhe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\VencimentoDeFatura\VencimentoDeFaturaDetalhe.Designer.cs">
+      <DependentUpon>VencimentoDeFaturaDetalhe.cs</DependentUpon>
     </Compile>
     <Compile Include="PrincipalForm.cs">
       <SubType>Form</SubType>
@@ -342,6 +423,12 @@
     </Compile>
     <Compile Include="Qualidade\AvaliacaoDeAtendimento\ListaFeedbackDeAvaliacaoForm.Designer.cs">
       <DependentUpon>ListaFeedbackDeAvaliacaoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\NovaAvaliacaoDeAtendimentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\AvaliacaoDeAtendimento\NovaAvaliacaoDeAtendimentoForm.designer.cs">
+      <DependentUpon>NovaAvaliacaoDeAtendimentoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Qualidade\Checklist\ChecklistForm.cs">
       <SubType>Form</SubType>
@@ -379,6 +466,24 @@
     <Compile Include="Qualidade\FormularioDeQualidade\ListaFormularioDeQualidadeForm.Designer.cs">
       <DependentUpon>ListaFormularioDeQualidadeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\EditarNivelDeConfiancaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\EditarNivelDeConfiancaForm.Designer.cs">
+      <DependentUpon>EditarNivelDeConfiancaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\ListarNivelDeConfiancaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\ListarNivelDeConfiancaForm.Designer.cs">
+      <DependentUpon>ListarNivelDeConfiancaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\NovoNivelDeConfiancaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qualidade\NivelDeConfianca\NovoNivelDeConfiancaForm.Designer.cs">
+      <DependentUpon>NovoNivelDeConfiancaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Qualidade\PlanoParaComparacao\ListaPlanoParaComparacaoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,8 +520,17 @@
     <Compile Include="Relatorios\ContatosTrabalhadosDetalhado.designer.cs">
       <DependentUpon>ContatosTrabalhadosDetalhado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RankingDaOperacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RankingDaOperacao.designer.cs">
+      <DependentUpon>RankingDaOperacao.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdministracaoMDI.resx">
       <DependentUpon>AdministracaoMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\IntegracaoBaseB\BaseBForm.resx">
+      <DependentUpon>BaseBForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Administracao\SolicitacaoDeAcesso\ListaSolicitacaoDeAcessoForm.resx">
       <DependentUpon>ListaSolicitacaoDeAcessoForm.cs</DependentUpon>
@@ -424,26 +538,41 @@
     <EmbeddedResource Include="Administracao\SolicitacaoDeAcesso\SolicitacaoDeAcessoForm.resx">
       <DependentUpon>SolicitacaoDeAcessoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Administracao\Usuario\UsuarioFormEdit.resx">
+      <DependentUpon>UsuarioFormEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.resx">
       <DependentUpon>AuditoriaOferta_PtvNetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.resx">
       <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeClaroForm.resx">
-      <DependentUpon>AuditoriaOferta_PortabilidadeClaroForm.cs</DependentUpon>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.resx">
+      <DependentUpon>AuditoriaOferta_PortabilidadeMPForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.resx">
       <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaAgrupadaForm.resx">
+      <DependentUpon>ListaAuditoriaDeVendaAgrupadaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaForm.resx">
       <DependentUpon>ListaAuditoriaDeVendaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\Gamificacao\GamificacaoForm.resx">
+      <DependentUpon>GamificacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\Gamificacao\ListarGamificacaoForm.resx">
+      <DependentUpon>ListarGamificacaoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\Notificacao\ListaNotificacaoForm.resx">
       <DependentUpon>ListaNotificacaoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\Notificacao\NotificacaoForm.resx">
       <DependentUpon>NotificacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backoffice\RelatorioDeAuditoria\MonitoramentoDeAuditoriaForm.resx">
+      <DependentUpon>MonitoramentoDeAuditoriaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\StatusDeAuditoria\ListaStatusDeAuditoriaForm.resx">
       <DependentUpon>ListaStatusDeAuditoriaForm.cs</DependentUpon>
@@ -463,11 +592,23 @@
     <EmbeddedResource Include="Controles\ScriptDeOfertaControl.resx">
       <DependentUpon>ScriptDeOfertaControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\DashOperacaoForm.resx">
+      <DependentUpon>DashOperacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\Aparelho\AparelhoForm.resx">
       <DependentUpon>AparelhoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\Aparelho\ListaAparelhoForm.resx">
       <DependentUpon>ListaAparelhoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\CadastroCep\CadastroCepForm.resx">
+      <DependentUpon>CadastroCepForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\CadastroCep\ListaCepForm.resx">
+      <DependentUpon>ListaCepForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Campanha\CampanhaEspelhoForm.resx">
+      <DependentUpon>CampanhaEspelhoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\Campanha\CampanhaForm.resx">
       <DependentUpon>CampanhaForm.cs</DependentUpon>
@@ -529,6 +670,12 @@
     <EmbeddedResource Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.resx">
       <DependentUpon>StatusDeOfertaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\VencimentoDeFatura\ListaVencimentoDeFaturaForm.resx">
+      <DependentUpon>ListaVencimentoDeFaturaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\VencimentoDeFatura\VencimentoDeFaturaDetalhe.resx">
+      <DependentUpon>VencimentoDeFaturaDetalhe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrincipalForm.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -545,6 +692,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Qualidade\AvaliacaoDeAtendimento\ListaFeedbackDeAvaliacaoForm.resx">
       <DependentUpon>ListaFeedbackDeAvaliacaoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\AvaliacaoDeAtendimento\NovaAvaliacaoDeAtendimentoForm.resx">
+      <DependentUpon>NovaAvaliacaoDeAtendimentoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Qualidade\Checklist\ChecklistForm.resx">
       <DependentUpon>ChecklistForm.cs</DependentUpon>
@@ -564,6 +714,15 @@
     <EmbeddedResource Include="Qualidade\FormularioDeQualidade\ListaFormularioDeQualidadeForm.resx">
       <DependentUpon>ListaFormularioDeQualidadeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\NivelDeConfianca\EditarNivelDeConfiancaForm.resx">
+      <DependentUpon>EditarNivelDeConfiancaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\NivelDeConfianca\ListarNivelDeConfiancaForm.resx">
+      <DependentUpon>ListarNivelDeConfiancaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qualidade\NivelDeConfianca\NovoNivelDeConfiancaForm.resx">
+      <DependentUpon>NovoNivelDeConfiancaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Qualidade\PlanoParaComparacao\ListaPlanoParaComparacaoForm.resx">
       <DependentUpon>ListaPlanoParaComparacaoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -582,9 +741,10 @@
     <EmbeddedResource Include="Relatorios\ContatosTrabalhadosDetalhado.resx">
       <DependentUpon>ContatosTrabalhadosDetalhado.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <EmbeddedResource Include="Relatorios\RankingDaOperacao.resx">
+      <DependentUpon>RankingDaOperacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -745,7 +905,12 @@
     <Content Include="Qualidade\Checklist\images\strikeout.gif" />
     <Content Include="Qualidade\Checklist\images\underline.gif" />
     <Content Include="Qualidade\Checklist\images\Undo.gif" />
-    <Content Include="Resources\logoQuintoAndar.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\reply.png" />
+    <None Include="Resources\duplicate %282%29.png" />
+    <None Include="Resources\replicar.png" />
+    <None Include="Resources\duplicate.png" />
+    <None Include="Resources\convert.png" />
     <None Include="Resources\address-book-blue.png" />
     <None Include="Resources\STodos.png" />
     <None Include="Resources\DTodos.png" />

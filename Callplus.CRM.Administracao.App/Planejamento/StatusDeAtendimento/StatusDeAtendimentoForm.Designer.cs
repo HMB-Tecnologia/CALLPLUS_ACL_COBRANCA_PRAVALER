@@ -39,7 +39,6 @@
             this.cmbTipoDeStatusDeAtendimento = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.clbCampanhas = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lnkNenhum = new System.Windows.Forms.LinkLabel();
@@ -53,7 +52,7 @@
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObservacao.Size = new System.Drawing.Size(535, 66);
-            this.txtObservacao.TabIndex = 11;
+            this.txtObservacao.TabIndex = 3;
             // 
             // lblCampanha
             // 
@@ -82,7 +81,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(500, 62);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 56;
+            this.chkAtivo.TabIndex = 1;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -108,7 +107,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 442);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 27);
-            this.btnSalvar.TabIndex = 62;
+            this.btnSalvar.TabIndex = 7;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -118,7 +117,7 @@
             this.txtNome.Location = new System.Drawing.Point(12, 106);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(535, 20);
-            this.txtNome.TabIndex = 67;
+            this.txtNome.TabIndex = 2;
             // 
             // cmbTipoDeStatusDeAtendimento
             // 
@@ -127,7 +126,7 @@
             this.cmbTipoDeStatusDeAtendimento.Location = new System.Drawing.Point(12, 60);
             this.cmbTipoDeStatusDeAtendimento.Name = "cmbTipoDeStatusDeAtendimento";
             this.cmbTipoDeStatusDeAtendimento.Size = new System.Drawing.Size(482, 21);
-            this.cmbTipoDeStatusDeAtendimento.TabIndex = 69;
+            this.cmbTipoDeStatusDeAtendimento.TabIndex = 0;
             this.cmbTipoDeStatusDeAtendimento.SelectionChangeCommitted += new System.EventHandler(this.cmbTipoDeStatusDeAtendimento_SelectionChangeCommitted);
             // 
             // label6
@@ -154,19 +153,6 @@
             this.label1.TabIndex = 70;
             this.label1.Text = "Nome do Status de Atendimento";
             // 
-            // btnFechar
-            // 
-            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFechar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.close;
-            this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFechar.Location = new System.Drawing.Point(457, 442);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(93, 27);
-            this.btnFechar.TabIndex = 71;
-            this.btnFechar.Text = "Fechar    ";
-            this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
-            // 
             // clbCampanhas
             // 
             this.clbCampanhas.CheckOnClick = true;
@@ -174,7 +160,7 @@
             this.clbCampanhas.Location = new System.Drawing.Point(12, 252);
             this.clbCampanhas.Name = "clbCampanhas";
             this.clbCampanhas.Size = new System.Drawing.Size(535, 184);
-            this.clbCampanhas.TabIndex = 72;
+            this.clbCampanhas.TabIndex = 6;
             // 
             // label2
             // 
@@ -192,7 +178,7 @@
             this.lnkNenhum.Location = new System.Drawing.Point(503, 236);
             this.lnkNenhum.Name = "lnkNenhum";
             this.lnkNenhum.Size = new System.Drawing.Size(47, 13);
-            this.lnkNenhum.TabIndex = 74;
+            this.lnkNenhum.TabIndex = 5;
             this.lnkNenhum.TabStop = true;
             this.lnkNenhum.Text = "Nenhum";
             this.lnkNenhum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkNenhum_LinkClicked);
@@ -203,7 +189,7 @@
             this.lnkTodos.Location = new System.Drawing.Point(460, 236);
             this.lnkTodos.Name = "lnkTodos";
             this.lnkTodos.Size = new System.Drawing.Size(37, 13);
-            this.lnkTodos.TabIndex = 73;
+            this.lnkTodos.TabIndex = 4;
             this.lnkTodos.TabStop = true;
             this.lnkTodos.Text = "Todos";
             this.lnkTodos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkTodos_LinkClicked);
@@ -218,7 +204,6 @@
             this.Controls.Add(this.lnkNenhum);
             this.Controls.Add(this.lnkTodos);
             this.Controls.Add(this.clbCampanhas);
-            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbTipoDeStatusDeAtendimento);
             this.Controls.Add(this.label6);
@@ -250,7 +235,6 @@
         private System.Windows.Forms.ComboBox cmbTipoDeStatusDeAtendimento;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.CheckedListBox clbCampanhas;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel lnkNenhum;

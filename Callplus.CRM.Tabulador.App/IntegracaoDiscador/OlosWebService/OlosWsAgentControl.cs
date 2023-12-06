@@ -1,14 +1,12 @@
 ﻿using System.Timers;
-using v1Tabulare_z13.IntegracaoDiscador.OlosWebService;
+using Callplus.IntegracaoDiscador.OlosWebService;
 using Callplus.CRM.Tabulador.App.WSAgentEvent;
 using Callplus.CRM.Tabulador.App.WSAgentCommand;
 using NLog;
 using System;
 using System.Collections.Generic;
-using Callplus.CRM.Tabulador.App.WSAgentEvent;
-using Callplus.CRM.Tabulador.App.WSAgentCommand;
 
-namespace v1Tabulare_z13.IntegracaoDiscador
+namespace Callplus.IntegracaoDiscador
 {
 
     public class OlosWsAgentControl
@@ -69,6 +67,7 @@ namespace v1Tabulare_z13.IntegracaoDiscador
             _timerOlosEvents = new Timer();
             _logger = LogManager.GetCurrentClassLogger();
         }
+
         public void StartAgentMonitoring(int agentId)
         {
             _agentId = agentId;
@@ -91,7 +90,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
                 agentId = agentWS.AgentAuthentication(login, password, forceLogout);
                 return agentId;
             }
-
         }
 
         public void Logout(int agentId)
@@ -107,9 +105,7 @@ namespace v1Tabulare_z13.IntegracaoDiscador
             using (WSAgentCommandSoapClient agentWS = new WSAgentCommandSoapClient(WSAgentCommandBinding))
             {
                 agentWS.AgentReasonRequest(agentId, reasonId);
-
             }
-
         }
 
         public void AlterarStatusParaLigacaoManual(int agentId)
@@ -117,7 +113,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
             using (WSAgentCommandSoapClient agentWS = new WSAgentCommandSoapClient(WSAgentCommandBinding))
             {
                 agentWS.ManualCallStateRequest(agentId);
-
             }
         }
 
@@ -128,6 +123,7 @@ namespace v1Tabulare_z13.IntegracaoDiscador
                 agentWS.AgentIdleRequest(agentId);
             }
         }
+
         public List<ObjReason> ListarPausas(int agentId)
         {
             List<ObjReason> listaPausa = new List<ObjReason>();
@@ -204,29 +200,24 @@ namespace v1Tabulare_z13.IntegracaoDiscador
             }
         }
 
-
         private void MonitorarEventosOlos(int agentId)
         {
             using (WSAgentEventSoapClient eventWS = new WSAgentEventSoapClient(WSAgentEventBinding))
             {
-
                 ObjEvent objEvent = eventWS.GetNextEvent(agentId);
 
                 if (objEvent.AgentEventType != EnumAgentEventType.Nothing)
                     _logger.Debug($"Evento OLOS: {objEvent.AgentEventType.ToString()}");
 
-
                 //_logger.Debug($"Generic String: {objEvent.GenericString ?? ""}, Generic Int: {objEvent.GenericInt.ToString() ?? ""}");
-
 
                 switch (objEvent.AgentEventType)
                 {
                     case EnumAgentEventType.PassCode:
                         {
-                            var passCode = objEvent.GenericInt;
+                            var passCode = (int)objEvent.EventObject;
                             _logger.Debug($"Passcode Recebido: {passCode}");
                             DispararEventoPassCode(passCode);
-
                         }
                         break;
                     case EnumAgentEventType.ChangeManualCallState:
@@ -234,7 +225,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
                             var statusLigacao = objEvent.EventObjectManualCallState;
                             int callId = statusLigacao.CallId;
                             DispararEventoTrocaDeStatusLigacaoManual(callId, statusLigacao);
-
                         }
                         break;
                     case EnumAgentEventType.ScreenPop:
@@ -313,7 +303,7 @@ namespace v1Tabulare_z13.IntegracaoDiscador
                         {
                             var status = objEvent.EventObjectManualCallState;
                             DispararEventosManualCallRequestFail();
-                            //_logger.Debug($"{objEvent.AgentEventType.ToString()}: GenericString: {objEvent.GenericString ?? ""}");
+                            _logger.Debug($"{objEvent.AgentEventType.ToString()}: GenericString: {objEvent.GenericString ?? ""}");
                             /// DispararEventosDeTrocaDeStatus(objEvent, status);
                         }
                         break;
@@ -338,7 +328,9 @@ namespace v1Tabulare_z13.IntegracaoDiscador
         {
             if (objEvent == null) return;
             if (status == null) return;
-            _logger.Info($"Novo Status Evento HangUp: Tipo: { Enum.GetName(typeof(EnumAgentStatusId), status.AgentStatusId)}");
+
+            _logger.Info($"DispararEventosDeTrocaDeStatusHangUp Novo Status Evento HangUp: Tipo: { Enum.GetName(typeof(EnumAgentStatusId), status.AgentStatusId)}");
+
             var reasonId = status.ReasonId;
             switch (status.AgentStatusId)
             {               
@@ -361,8 +353,8 @@ namespace v1Tabulare_z13.IntegracaoDiscador
             if (objEvent == null) return;
             if (status == null) return;
 
+            _logger.Info($"DispararEventosDeTrocaDeStatus Novo Status: Tipo: { Enum.GetName(typeof(EnumAgentStatusId), status.AgentStatusId)}");
 
-            _logger.Info($"Novo Status: Tipo: { Enum.GetName(typeof(EnumAgentStatusId), status.AgentStatusId)}");
             _ultimoStatusDoCliente = status.AgentStatusId;
             var reasonId = status.ReasonId;
             AgentStatusEvent?.Invoke(reasonId, status);
@@ -404,7 +396,9 @@ namespace v1Tabulare_z13.IntegracaoDiscador
 
         public bool PodeFinalizarContato()
         {
-            if (_ultimoStatusDoCliente == null) return false;
+            //if (_ultimoStatusDoCliente == null) return false;
+            
+            _logger.Debug($"_ultimoStatusDoCliente: {_ultimoStatusDoCliente}");
 
             switch (_ultimoStatusDoCliente)
             {
@@ -421,7 +415,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
                         return false;
                     }                             
             }
-
         }
 
         private void DispararEventosManualCallRequestFail()
@@ -473,7 +466,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
         private void DispararEventoPassCode(int passCode)
         {
             PassCodeEvent?.Invoke(passCode);
-
         }
 
         private void DispararEventoScreenPop(ObjScreenPop screenPop)
@@ -496,7 +488,6 @@ namespace v1Tabulare_z13.IntegracaoDiscador
         {
             _timerOlosEvents.Stop();
             _timerOlosEvents.Enabled = false;
-
         }
     }
 

@@ -20,7 +20,7 @@ namespace Callplus.CRM.Administracao.App.Login
         }
 
         #region VARIAVEIS
-
+        
         private readonly ILogger _logger;
         private Usuario _usuarioLogado;
         private readonly LoginService _loginService;
@@ -29,7 +29,8 @@ namespace Callplus.CRM.Administracao.App.Login
         private string _modulo = "ADM";
         private string _maquinaUsuario = "";
         private string _enderecoIP = "";
-        private string _release = "001.03";
+        private string _release = "01.001" +
+            "";
         public static string Release;
 
         #endregion VARIAVEIS

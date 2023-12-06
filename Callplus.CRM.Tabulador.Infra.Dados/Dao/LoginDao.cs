@@ -14,11 +14,22 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
     {
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
-        public List<string> VerificarSeUsuarioPodeAcessarSistema(string login, string senha, string maquinaUsuario, string enderecoIP, string modulo,string versaoSistema)
+        public List<string> VerificarSeUsuarioPodeAcessarSistema(string login, string senha, string maquinaUsuario, string enderecoIP, string modulo, string versaoSistema)
         {
             string sql = $"APP_CRM_LOGIN_VERIFICAR_LOGIN_SENHA ";
-          
-            var args = new { Login = login , Senha = senha, MaquinaUsuario = maquinaUsuario, EnderecoIP = enderecoIP, Modulo = modulo,VersaoSistema = versaoSistema};            
+
+            var args = new { Login = login, Senha = senha, MaquinaUsuario = maquinaUsuario, EnderecoIP = enderecoIP, Modulo = modulo, VersaoSistema = versaoSistema };
+
+            var resultado = ExecutarProcedure<string>(sql, args);
+
+            return resultado.ToList();
+        }
+
+        public List<string> VerificarSeSupervidorPodeAcessarSistema(string login, string senha, string maquinaUsuario, string enderecoIP, string modulo, string versaoSistema)
+        {
+            string sql = $"APP_CRM_LOGIN_VERIFICAR_SUPERVISOR ";
+
+            var args = new { Login = login, Senha = senha, MaquinaUsuario = maquinaUsuario, EnderecoIP = enderecoIP, Modulo = modulo, VersaoSistema = versaoSistema };
 
             var resultado = ExecutarProcedure<string>(sql, args);
 
@@ -56,7 +67,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             var resultado = ExecutarProcedure<string>(sql, args);
 
-           
+
             return resultado.ToList();
         }
 
@@ -67,10 +78,10 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
         public bool VerificarSenhaExpirada(string login, string senha)
         {
-   
+
             string sql = $"APP_CRM_LOGIN_VERIFICAR_SENHA_EXPIRADA";
 
-            var args = new { Login = login, Senha = senha};
+            var args = new { Login = login, Senha = senha };
 
             var expirada = ExecutarProcedureSingleOrDefault<bool>(sql, args);
 
@@ -81,12 +92,12 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
         {
             string sql = $"APP_CRM_RESETARSENHA_ATUALIZAR_SENHA";
 
-            var args = new { Login  = login, SenhaNova = senhaNova};
+            var args = new { Login = login, SenhaNova = senhaNova };
 
             ExecutarProcedure(sql, args);
         }
 
-        public DataTable ListarSolicitacaoDeAcesso(int id, int idSupervisor, int idOperador, bool ativo)
+        public async Task<DataTable> ListarSolicitacaoDeAcesso(int id, int idSupervisor, int idOperador, bool ativo)
         {
             var sql = "APP_CRM_SOLICITACAO_ACESSO_LISTAR_EXIBICAO ";
             sql += string.Format("@id = {0}, @idSupervisor = {1}, @idOperador = {2}, @liberado = {3}",
@@ -97,9 +108,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             };
 
-            var resultado = CarregarDataTable(sql, args);
+            var resultado = CarregarDataTableAsync(sql, args);
 
-            return resultado;
+            return await resultado;
         }
 
         public int GravarSolicitacaoDeAcesso(SolicitacaoDeAcessoAoSistema solicitacao)
@@ -111,6 +122,18 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 Id = solicitacao.id,
                 IdUsuarioLiberacao = solicitacao.idUsuarioLiberacao,
                 Observacao = solicitacao.observacao
+            };
+
+            return ExecutarProcedureSingleOrDefault<int>(sql, args);
+        }
+
+        public int RealizarLogoff(int idUsuario)
+        {
+            var sql = "APP_CRM_LOGIN_REALIZAR_LOGOFF";
+
+            var args = new
+            {
+                IdUsuario = idUsuario
             };
 
             return ExecutarProcedureSingleOrDefault<int>(sql, args);

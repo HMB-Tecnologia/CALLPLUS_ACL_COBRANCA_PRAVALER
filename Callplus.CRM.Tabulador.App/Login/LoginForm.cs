@@ -1,18 +1,18 @@
 ﻿using Callplus.CRM.Tabulador.App.Operacao;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
+using Callplus.IntegracaoDiscador;
 using CallplusUtil.Environment;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using v1Tabulare_z13.IntegracaoDiscador;
 using Perfil = Callplus.CRM.Tabulador.Dominio.Tipos.Perfil;
 
 namespace Callplus.CRM.Tabulador.App.Login
 {
-    public partial class LoginForm : Form
+	public partial class LoginForm : Form
     {
         public LoginForm()
         {
@@ -34,7 +34,7 @@ namespace Callplus.CRM.Tabulador.App.Login
         private readonly ILogger _logger;
         private Usuario _usuarioLogado;
         private Discador _discadorConectado;
-        private readonly LoginService _loginService;
+        private readonly LoginService _loginService; 
         private readonly CampanhaService _campanhaService;
         private readonly DiscadorService _discadorService;
         private string _senha = "";
@@ -42,7 +42,7 @@ namespace Callplus.CRM.Tabulador.App.Login
         private string _modulo = "OPE";
         private string _maquinaUsuario = "";
         private string _enderecoIP = "";
-        private string _release = "001.03";
+        private string _release = "01.003";
 
         #endregion PROPRIEDADES
 
@@ -97,20 +97,25 @@ namespace Callplus.CRM.Tabulador.App.Login
             if (PodeAcessar())
             {
                 CarregarUsuarioLogado(_login);
+
                 if (_usuarioLogado.perfil != Perfil.OPERADOR)
                 {
-                    MessageBox.Show("Não é possível fazer login pois o usuário não possui perfil de Operador",
-                        "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Não é possível fazer login pois o usuário não possui perfil de Operador", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+
                 Campanha campanhaPrincipal = _campanhaService.RetornarCampanhaPrincipalDoUsuario(_usuarioLogado.Id);
+
                 _logger.Info($"Iniciando sistema no módulo operador. Versão: {_release}");
+                //TODO - DESCOMENTAR DISCADOR
                 CarregarDiscadorConectado(campanhaPrincipal.IdDiscador);
+
                 if (_discadorConectado.TipoDiscador == Dominio.Tipos.TipoDiscador.OlosAPI)
                 {
                     LogarOlosWebService(_login, _login, true);
                     return;
                 }
+
                 this.Hide();
                 AtendimentoForm formulario = new AtendimentoForm(_usuarioLogado, _discadorConectado);
                 formulario.Iniciar();
@@ -203,10 +208,13 @@ namespace Callplus.CRM.Tabulador.App.Login
 
         private void LogarOlosWebService(string login, string password, bool forceLogout)
         {
-            if (login == "testeolos")
+            _logger.Info($"LogarOlosWebService. Versão: {login}");
+
+            if (login == "oohmb")
             {
-                login = "teste_hmb";
-                password = "1234";
+                _login = "plantestes";
+                login = "plantestes";
+                password = "plantestes";
             }
 
             _olosWsAgentControl = new OlosWsAgentControl();
@@ -219,10 +227,39 @@ namespace Callplus.CRM.Tabulador.App.Login
 
         private void Olos_OnLoginCCM()
         {
+            //_logger.Info($"Login CCM");
+
             ///parar de monitorar eventos
             _olosWsAgentControl?.FinishAgentMonitoring();
 
-            Entrar();
+            if (InvokeRequired)
+            {
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    //_logger.Info($"InvokeRequired TRUE: {InvokeRequired}");
+
+                    this.Hide();
+                    AtendimentoForm formulario = new AtendimentoForm(_usuarioLogado, _discadorConectado);
+                    formulario.Iniciar();
+
+                    //MessageBox.Show($"Chamou LOGIN CCM.", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    this.Close();
+                }));
+
+            }
+            else
+            {
+                //_logger.Info($"InvokeRequired FALSO: {InvokeRequired}");
+
+                this.Hide();
+                AtendimentoForm formulario = new AtendimentoForm(_usuarioLogado, _discadorConectado);
+                formulario.Iniciar();
+
+                //MessageBox.Show($"Chamou LOGIN CCM.", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                this.Close();
+            }
         }
 
         private void Olos_OnLoginCCMFail(string reason)
@@ -239,6 +276,8 @@ namespace Callplus.CRM.Tabulador.App.Login
 
         public void RealizarLoginOlos(string login, string password, bool forceLogout)
         {
+            _logger.Info($"RealizarLoginOlos: {login}, {password},{forceLogout}");
+
             int agentId = 0;
             agentId = _olosWsAgentControl.Login(login, password, forceLogout);
 
@@ -246,6 +285,7 @@ namespace Callplus.CRM.Tabulador.App.Login
             {
                 AgenteIdOlos = agentId;
                 _olosWsAgentControl.StartAgentMonitoring(agentId);
+                _logger.Debug($"agente id olos { agentId }");
             }
             else
             {
@@ -253,7 +293,7 @@ namespace Callplus.CRM.Tabulador.App.Login
                 MessageBox.Show("Login e/ou Senha inválido(s).", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        #endregion
 
+        #endregion
     }
 }

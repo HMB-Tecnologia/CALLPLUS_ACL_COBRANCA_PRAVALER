@@ -37,8 +37,56 @@ namespace Callplus.CRM.Tabulador.App.Controles.CamposDinamicos
             ConfigurarLayout(layout);
         }
 
+        public Dominio.Entidades.Prospect AtualizarCamposDoProspect(IEnumerable<ValorDeCampoDinamico> valores, Dominio.Entidades.Prospect prospect)
+        {
+            int idCampo = 0;
+            foreach (var valorDeCampo in valores)
+            {
+                var controlesEncontrados = tableLayout.Controls.Find(valorDeCampo.IdCampo, true);
+
+                foreach (var controleEncontrado in controlesEncontrados)
+                {
+                    if (controleEncontrado is CustomTextBox)
+                    {
+                        var textBox = (controleEncontrado as CustomTextBox);
+                        string texto = valorDeCampo.Valor;
+                        
+                        idCampo = Convert.ToInt32(valorDeCampo.IdCampo);
+
+                        if (idCampo == 81)
+                        {
+                            prospect.Campo060 = textBox.TextBoxText;
+                        }
+                        if (idCampo == 82)
+                        {
+                            prospect.Campo061 = textBox.TextBoxText;
+                        }
+                        if (idCampo == 83)
+                        {
+                            prospect.Campo062 = textBox.TextBoxText;
+                        }
+                        if (idCampo == 84)
+                        {
+                            prospect.Campo063 = textBox.TextBoxText;
+                        }
+
+                        Console.WriteLine(valorDeCampo.IdCampo);
+
+                        if (idCampo <= 82 && idCampo >= 85)
+                        {
+                            Console.WriteLine(textBox.TextBoxText);
+                            Console.WriteLine("texto");
+                        }
+                        continue;
+                    }
+                }
+            }
+            return prospect;
+        }
+
         public void PreencherCampos(IEnumerable<ValorDeCampoDinamico> valores)
         {
+            int idCampo = 0;
             foreach (var valorDeCampo in valores)
             {
                 var controlesEncontrados = tableLayout.Controls.Find(valorDeCampo.IdCampo, true);
@@ -53,8 +101,16 @@ namespace Callplus.CRM.Tabulador.App.Controles.CamposDinamicos
                         {
                             texto = valorDeCampo.Valor.Substring(0, textBox.TextBoxMaxLength);
                         }
-
                         textBox.TextBoxText = texto;
+                        idCampo = Convert.ToInt32(valorDeCampo.IdCampo);
+
+                        Console.WriteLine(valorDeCampo.IdCampo);
+
+                        if (idCampo <= 82 && idCampo >= 85)
+                        {
+                            Console.WriteLine(textBox.TextBoxText);
+                            Console.WriteLine("texto");
+                        }
                         continue;
                     }
 
@@ -65,7 +121,6 @@ namespace Callplus.CRM.Tabulador.App.Controles.CamposDinamicos
                         continue;
                     }
                 }
-
             }
         }
 
@@ -186,9 +241,9 @@ namespace Callplus.CRM.Tabulador.App.Controles.CamposDinamicos
                     control.Invoke(new MethodInvoker(() => (control as CustomComboBox)?.ComboBox.ResetarComSelecione(habilitar: control.Enabled)));
                 }
                 else
-                { 
-                  (control as CustomTextBox)?.Resetar();
-                  (control as CustomComboBox)?.ComboBox.ResetarComSelecione(habilitar: control.Enabled);
+                {
+                    (control as CustomTextBox)?.Resetar();
+                    (control as CustomComboBox)?.ComboBox.ResetarComSelecione(habilitar: control.Enabled);
 
                 }
             }

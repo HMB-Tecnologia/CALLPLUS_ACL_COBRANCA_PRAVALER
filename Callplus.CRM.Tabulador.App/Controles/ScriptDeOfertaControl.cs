@@ -14,7 +14,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
 {
     public partial class ScriptDeOfertaControl : UserControl
     {
-       
+
         public ScriptDeOfertaControl()
         {
             _pilhaDeEtapas = new Stack<EtapaDoScriptDeAtendimento>();
@@ -23,7 +23,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
             InitializeComponent();
 
             //((Control)webBrowserEtapa).Enabled = false;
-           
+
             webBrowserEtapa.DocumentCompleted += (sender, args) =>
             {
                 if (_carregarHtmPendente)
@@ -63,10 +63,11 @@ namespace Callplus.CRM.Tabulador.App.Controles
         {
             var itens = new List<KeyValuePair<int, string>>();
             IEnumerable<KeyValuePair<int, string>> listaFake = new List<KeyValuePair<int, string>>();
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.ACEITE, TipoStatusDeOferta.ACEITE.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.RECUSA, TipoStatusDeOferta.RECUSA.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.TELEFONIA, TipoStatusDeOferta.TELEFONIA.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.AGENDAMENTO, TipoStatusDeOferta.AGENDAMENTO.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Aceite, TipoStatusDeOferta.Aceite.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Recusa, TipoStatusDeOferta.Recusa.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Telefonia, TipoStatusDeOferta.Telefonia.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Agendamento, TipoStatusDeOferta.Agendamento.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Inelegivel, TipoStatusDeOferta.Inelegivel.ToString()));
 
             tsComboTipo.ComboBox.PreencherComSelecione(itens);
             tsComboStatus.ComboBox.PreencherComSelecione(listaFake);
@@ -223,12 +224,13 @@ namespace Callplus.CRM.Tabulador.App.Controles
         private void ConfigurarFimDoScript()
         {
             btnAvancar.Enabled = false;
-            tsComboRespostas.Enabled = false;
+            lblResposta.Visible = false;
+            toolSeparatorResposta.Visible = false;
+            tsComboRespostas.Visible = false;
         }
 
         private void SelecionarResposta(int idResposta)
         {
-
             if (idResposta <= 0)
             {
                 btnAvancar.Enabled = false;
@@ -236,11 +238,11 @@ namespace Callplus.CRM.Tabulador.App.Controles
                 toolSeparatorResposta.Visible = true;
                 tsComboRespostas.Visible = true;
             };
+
             RespostaDaEtapaDoScriptDeAtendimento resposta = _scriptDeAtendimento?.EtapaAtual?.Respostas?.FirstOrDefault(x => x.Id == idResposta);
             _respostaSelecionada = resposta;
 
             if (resposta == null) return;
-
 
             var podeAvancar = true;
             btnAvancar.Enabled = podeAvancar;
@@ -263,23 +265,16 @@ namespace Callplus.CRM.Tabulador.App.Controles
                 toolSeparatorResposta.Visible = true;
                 tsComboRespostas.Visible = true;
             }
-
         }
 
         private void Voltar()
         {
-            //if (_scriptDeAtendimento.EtapaAtual == null)
-            //{
-            //    MessageBox.Show("Não existe etapa anterior");
-            //    return;
-            //}
-
             if (_pilhaDeEtapas.Count > 0)
             {
                 var etapaAtual = _pilhaDeEtapas.Pop();
                 var etapaAnterior = _pilhaDeEtapas.Pop();
 
-                btnAvancar.Enabled = true;
+                //btnAvancar.Enabled = true;
 
                 _scriptDeAtendimento.EtapaAtual = etapaAnterior;
                 ConfigurarEtapa(etapaAnterior);
@@ -332,6 +327,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
             tsComboRespostas.ComboBox.SelectionChangeCommitted += ComboRespostas_OnSelectionChangeCommitted;
             tsComboTipo.ComboBox.SelectionChangeCommitted += ComboTipo_OnSelectionChangeCommitted;
             tsComboStatus.ComboBox.DropDown += CallplusUtil.Forms.CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
+            tsComboRespostas.ComboBox.DropDown += CallplusUtil.Forms.CallplusFormsUtil.AjustarTamanhoDoDropDownNoComboBox;
             tsComboStatus.ComboBox.Width = 250;
 
             tsComboTipo.ComboBox.ResetarComSelecione(habilitar: true);

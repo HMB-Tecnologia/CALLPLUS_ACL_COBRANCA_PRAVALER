@@ -25,6 +25,8 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
 
         public IEnumerable<ValorDeCampoDinamico> CamposDoAtendimento;
 
+        public int? idUsuarioPermissao { get; set; }
+
         //public OrigemDeAtendimento OrigemDeAtendimento
         //{
         //    get => (OrigemDeAtendimento)IdOrigemAtendimento;

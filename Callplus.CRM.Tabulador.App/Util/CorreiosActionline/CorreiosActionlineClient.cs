@@ -23,6 +23,7 @@ namespace Callplus.CRM.Tabulador.App.Util.CorreiosActionline
         public List<RetornoCepActionline> ConsultarCep(string cep, string logradouro = "", string uf = "")
         {
             var retorno = new List<RetornoCepActionline>();
+
             try
             {
                 using (var cliente = new WebClient())

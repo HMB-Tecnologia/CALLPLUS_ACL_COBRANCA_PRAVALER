@@ -68,7 +68,7 @@
             this.cmbOperadora.Location = new System.Drawing.Point(15, 61);
             this.cmbOperadora.Name = "cmbOperadora";
             this.cmbOperadora.Size = new System.Drawing.Size(124, 21);
-            this.cmbOperadora.TabIndex = 2;
+            this.cmbOperadora.TabIndex = 0;
             // 
             // label1
             // 
@@ -85,7 +85,7 @@
             this.cmbTipoDePlano.Location = new System.Drawing.Point(145, 61);
             this.cmbTipoDePlano.Name = "cmbTipoDePlano";
             this.cmbTipoDePlano.Size = new System.Drawing.Size(159, 21);
-            this.cmbTipoDePlano.TabIndex = 4;
+            this.cmbTipoDePlano.TabIndex = 1;
             // 
             // label2
             // 
@@ -102,7 +102,7 @@
             this.txtPlano.MaxLength = 100;
             this.txtPlano.Name = "txtPlano";
             this.txtPlano.Size = new System.Drawing.Size(343, 20);
-            this.txtPlano.TabIndex = 8;
+            this.txtPlano.TabIndex = 3;
             // 
             // label3
             // 
@@ -121,7 +121,7 @@
             this.txtPacoteDadosMensal.Name = "txtPacoteDadosMensal";
             this.txtPacoteDadosMensal.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPacoteDadosMensal.Size = new System.Drawing.Size(399, 58);
-            this.txtPacoteDadosMensal.TabIndex = 11;
+            this.txtPacoteDadosMensal.TabIndex = 5;
             // 
             // label4
             // 
@@ -140,7 +140,7 @@
             this.txtOfertaRedesSociais.Name = "txtOfertaRedesSociais";
             this.txtOfertaRedesSociais.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOfertaRedesSociais.Size = new System.Drawing.Size(200, 58);
-            this.txtOfertaRedesSociais.TabIndex = 15;
+            this.txtOfertaRedesSociais.TabIndex = 7;
             // 
             // label5
             // 
@@ -159,7 +159,7 @@
             this.txtVoz.Name = "txtVoz";
             this.txtVoz.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtVoz.Size = new System.Drawing.Size(399, 58);
-            this.txtVoz.TabIndex = 13;
+            this.txtVoz.TabIndex = 6;
             // 
             // label6
             // 
@@ -178,7 +178,7 @@
             this.txtTorpedos.Name = "txtTorpedos";
             this.txtTorpedos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtTorpedos.Size = new System.Drawing.Size(193, 58);
-            this.txtTorpedos.TabIndex = 17;
+            this.txtTorpedos.TabIndex = 8;
             // 
             // label7
             // 
@@ -195,7 +195,7 @@
             this.txtValor.MaxLength = 100;
             this.txtValor.Name = "txtValor";
             this.txtValor.Size = new System.Drawing.Size(104, 20);
-            this.txtValor.TabIndex = 6;
+            this.txtValor.TabIndex = 2;
             // 
             // label8
             // 
@@ -212,7 +212,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(364, 106);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 9;
+            this.chkAtivo.TabIndex = 4;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -229,7 +229,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(15, 493);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 20;
+            this.btnSalvar.TabIndex = 10;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -240,7 +240,7 @@
             this.clbCampanha.Location = new System.Drawing.Point(15, 386);
             this.clbCampanha.Name = "clbCampanha";
             this.clbCampanha.Size = new System.Drawing.Size(399, 94);
-            this.clbCampanha.TabIndex = 19;
+            this.clbCampanha.TabIndex = 9;
             // 
             // label9
             // 

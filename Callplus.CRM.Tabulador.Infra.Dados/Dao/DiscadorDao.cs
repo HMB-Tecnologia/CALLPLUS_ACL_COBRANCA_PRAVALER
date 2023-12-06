@@ -4,7 +4,6 @@ using System.Linq;
 using Callplus.CRM.Tabulador.Infra.Dados.Util;
 using System.Data;
 using System;
-using Callplus.CRM.Tabulador.Dominio.TipoDiscagem;
 
 namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 {
@@ -16,8 +15,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
         {
             var sql = "APP_CRM_DISCADOR_LISTAR";
 
-            var args = new 
-            {                
+            var args = new {                
                 Ativo = ativo
             };
 
@@ -50,20 +48,6 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             var args = new { idUsuario, idDiscador };
 
             return ExecutarProcedureSingleOrDefault<string>(sql, args);
-        }
-
-        public IEnumerable<Dominio.Entidades.TipoDeDiscagem> TipoDeDiscagemListar(bool ativo)
-        {
-            var sql = "APP_CRM_TIPO_DE_DISCAGEM_LISTAR";
-
-            var args = new
-            {
-                Ativo = ativo
-            };
-
-            var resultado = ExecutarProcedure<Dominio.Entidades.TipoDeDiscagem>(sql, args);
-
-            return resultado;
         }
 
         public Discador RetornarTipoEnvioDadosDiscador(int idCampanha)

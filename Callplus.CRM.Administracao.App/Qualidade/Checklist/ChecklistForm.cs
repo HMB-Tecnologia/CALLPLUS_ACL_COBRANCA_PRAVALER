@@ -939,7 +939,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
 
                 var control = new ListBox()
                 {
-                    
+
                     //TODO: colocar para buscar as variaveis do banco.
 
                     Location = a,
@@ -948,7 +948,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                         "[DescontoAplicado]","[DiaVencimento]","[Email]","[FormaPagamento]","[Logradouro]","[MesPosterior]",
                         "[Nome]", "[NomeMae]","[Numero]","[PeriodoInstalacao]","[PontosAdicionais]","[RG]","[TelefoneRecado]",
                         "[TelefoneResidencial]","[UF]","[ValorComDesconto]","[ValorDaMulta]", "[PlanoInternet]",
-                        "[PlanoTelefoneFixo]", "[ValorTotal]", "[Passaporte]" },
+                        "[PlanoTelefoneFixo]", "[ValorTotal]", "[Passaporte]", "[NumeroPortado]" },
                     Visible = true
                 };
 
@@ -1196,9 +1196,23 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
             }
         }
 
+        private void CarregarCmbEtapas()
+        {
+            cmbEtapa.Items.Clear();
+
+            var selecione = new System.Web.UI.WebControls.ListItem { Value = $"{-1}", Text = $"SELECIONE..." };
+            cmbEtapa.Items.Add(selecione);
+
+            for (int linha = 1; linha <= dgEtapa.Rows.Count + 1; linha++)
+            {
+                var item = new System.Web.UI.WebControls.ListItem { Value = $"{linha}", Text = $"{linha}" };
+                cmbEtapa.Items.Add(item);
+            }
+        }
+
         private void CarregarEtapas(int idChecklist)
         {
-            IEnumerable<EtapaDoChecklist> retorno = _checklistService.ListarEtapas(idChecklist, false);            
+            IEnumerable<EtapaDoChecklist> retorno = _checklistService.ListarEtapas(idChecklist, false);
 
             dgEtapa.AutoGenerateColumns = false;
             dgEtapa.DataSource = retorno;
@@ -1212,7 +1226,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
             txtNome.Text = _checklist.nome;
             txtTitulo.Text = _checklist.titulo;
             chkAtivo.Checked = _checklist.ativo;
-            txtPalavraChave.Text = _checklist.palavraChaveMailing;            
+            txtPalavraChave.Text = _checklist.palavraChaveMailing;
             txtObservacao.Text = _checklist.observacao;
 
             PreencherRegionais();
@@ -1233,7 +1247,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                 ResetarControlesCampanha(true);
 
                 int idCampanha = (int)gvProdutoDoChecklist.Rows[linha].Cells["idCampanha"].Value;
-                string campanha = gvProdutoDoChecklist.Rows[linha].Cells["campanha"].Value.ToString();                
+                string campanha = gvProdutoDoChecklist.Rows[linha].Cells["campanha"].Value.ToString();
 
                 _idCampanha = idCampanha;
 
@@ -1288,6 +1302,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
 
         private void CarregarDadosDaEtapa(int linha)
         {
+            CarregarCmbEtapas();
             if (linha >= 0)
             {
                 ResetarControlesEtapa(true);
@@ -1325,12 +1340,19 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
 
             _etapaDoChecklist = null;
 
-            ResetarControlesEtapa(false);            
+            ResetarControlesEtapa(false);
         }
 
         private void IniciarEdicaoEtapa()
         {
+            CarregarCmbEtapas();
             ResetarControlesEtapa(true);
+            DesativarBtnExcluir();
+        }
+
+        private void DesativarBtnExcluir()
+        {
+            tsEtapa_btnExcluir.Enabled = false;
         }
 
         public void Iniciar()
@@ -1366,6 +1388,21 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
             {
                 mensagens.Add("[Etapa] deve ser informada!");
             }
+            else
+            {
+                List<int> lista = new List<int>();
+                foreach (DataGridViewRow row in dgEtapa.Rows)
+                {
+                    if (_etapaDoChecklist == null || Convert.ToInt32(row.Cells[0].Value) != _etapaDoChecklist.id)
+                        lista.Add(Convert.ToInt32(row.Cells[1].Value));
+                }
+
+                foreach (int numero in lista)
+                {
+                    if (numero == Convert.ToInt32(cmbEtapa.Text))
+                        mensagens.Add("Não é possível salvar duas etapas com a mesma ordem");
+                }
+            }
 
             if (string.IsNullOrEmpty(rtb1.Text.Trim()))
             {
@@ -1394,7 +1431,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                 _checklist.nome = txtNome.Text;
                 _checklist.titulo = txtTitulo.Text;
                 _checklist.ativo = chkAtivo.Checked;
-                
+
                 StringBuilder sbRegionais = new StringBuilder();
                 for (int i = 0; i < clbRegionais.CheckedItems.Count; i++)
                 {
@@ -1435,16 +1472,15 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                 }
 
                 _etapaDoChecklist.idChecklist = _checklist.id;
-                _etapaDoChecklist.etapa = Convert.ToInt32(cmbEtapa.Text);                
+                _etapaDoChecklist.etapa = Convert.ToInt32(cmbEtapa.Text);
                 _etapaDoChecklist.descricaoRtf = rtb1.Rtf.Replace("'", "''");
                 _etapaDoChecklist.ativo = chkAtivoEtapa.Checked;
 
                 _etapaDoChecklist.id = _checklistService.GravarEtapaDoChecklist(_etapaDoChecklist);
 
-                MessageBox.Show("Etapa gravada com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);                               
+                MessageBox.Show("Etapa gravada com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CarregarEtapas(_checklist.id);
-
                 CancelarEdicaoDaEtapa();
             }
         }
@@ -1467,7 +1503,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                     produtos += splitProduto[0].Trim() + ",";
             }
 
-            _produtoDoChecklistDto.Produtos = produtos;            
+            _produtoDoChecklistDto.Produtos = produtos;
 
             _checklistService.GravarProdutosDoChecklist(_produtoDoChecklistDto);
 
@@ -1493,7 +1529,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
             tsProdutoDoScript_btnSalvar.Enabled = habilitar;
 
             txtCampanha.Resetar(habilitar: true, limparTexto: true, readOnly: true);
-            
+
             clbProduto.Enabled = habilitar;
             clbProduto.Items.Clear();
         }
@@ -1501,13 +1537,13 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
         private void ExcluirEtapa()
         {
             _checklistService.ExcluirEtapaDoChecklist(_etapaDoChecklist.id);
-            
-            CarregarEtapas(_etapaDoChecklist.idChecklist);
 
+            CarregarEtapas(_etapaDoChecklist.idChecklist);
             CancelarEdicaoDaEtapa();
 
             MessageBox.Show("Etapa excluída com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         #endregion METODOS
 
@@ -1526,7 +1562,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                 MessageBox.Show(
                     $"Não foi possível carregar as configurações iniciais!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }        
+        }
 
         private void dgEtapa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1542,7 +1578,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.Checklist
                     $"Não foi possível carregar os dados da Etapa!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void tsEtapa_btnCancelar_Click(object sender, EventArgs e)
         {
             try

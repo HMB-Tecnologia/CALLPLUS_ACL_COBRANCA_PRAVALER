@@ -8,6 +8,7 @@
         Agendamento = 3,
         CadastroManual = 4,
         ConsultaDeCliente = 5,
-        Transferencia = 6
+        Transferencia = 6,
+        AgenteVirtual = 7
     }
 }

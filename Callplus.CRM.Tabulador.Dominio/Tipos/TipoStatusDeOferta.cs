@@ -4,9 +4,11 @@
     {
         Default = 0,
         NaoDefinido = -1,
-        ACEITE = 1,
-        AGENDAMENTO = 2,
-        RECUSA = 3,
-        TELEFONIA = 4
+        Aceite = 1,
+        Agendamento = 2,
+        Recusa = 3,
+        Telefonia = 4,
+        Sistema = 5,
+        Inelegivel = 6
     }
 }

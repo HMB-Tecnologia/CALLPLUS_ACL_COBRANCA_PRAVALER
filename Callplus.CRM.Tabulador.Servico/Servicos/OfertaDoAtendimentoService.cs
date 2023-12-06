@@ -23,16 +23,25 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _ofertaDoAtendimentoDao.ListarOfertaDoAtendimento(idAtendimento);
         }
 
-        public OfertaDoAtendimento RetornarOfertaElegivelParaAtendimento(long idAtendimento, int idCampanha)
+        public OfertaDoAtendimento RetornarOfertaElegivelParaAtendimento(long idAtendimento, int idCampanha, int idMailing)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaElegivelParaAtendimento(idAtendimento, idCampanha);
+            return _ofertaDoAtendimentoDao.RetornarOfertaElegivelParaAtendimento(idAtendimento, idCampanha, idMailing);
         }
 
-        public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeOferta status)
+        public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeOferta status, string nome, string cpf, int? idBanco)
         {            
             //TODO: ALTERAR PARA CONSIDERAR O TIPO DA OFERTA NÃO UTILIZANDO O ID
-            if (oferta.IdTipoDeProduto == 1) 
-                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimento(oferta.Id, oferta.IdAtendimento, status.Id);
+            if (oferta.IdTipoDeProduto == 0) 
+                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroMigracao(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf);
+
+            if (oferta.IdTipoDeProduto == 0)
+                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroRentabilizacao(oferta.Id, oferta.IdAtendimento, status.Id);
+
+            if (oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2 || oferta.IdTipoDeProduto == 3 || oferta.IdTipoDeProduto == 4 || oferta.IdTipoDeProduto == 5)
+                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroPortabilidade(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf, idBanco);
+
+            if (oferta.IdTipoDeProduto == 0)
+                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoNETPTV(oferta.Id, oferta.IdAtendimento, status.Id);
 
             throw new InvalidOperationException("O tipo da Oferta do Atendimento não pôde ser reconhecido");
         }
@@ -45,6 +54,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public string ValidarLoginDaOperadora(int idOperadora, string login)
         {
             return _ofertaDoAtendimentoDao.ValidarLoginDaOperadora(idOperadora, login);
+        }
+
+        public OfertaDoAtendimentoClaroMigracao RetornarOfertaDoAtendimentoPreVendaMigracao(long idOferta)
+        {
+            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoPreVendaMigracao(idOferta);
         }
 
         public IEnumerable<OfertaDoAtendimento> RetornarOfertasDoAtendimento(long idAtendimento)
@@ -81,9 +95,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _ofertaDoAtendimentoDao.RetornarResumoDaOfertaDoAtendimentoBKO(id, idTipoDeProduto);
         }
 
-        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveisBKO()
+        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(bool exibirTodasAsDatas)
         {
-            return _ofertaDoAtendimentoDao.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO();
+            return _ofertaDoAtendimentoDao.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(exibirTodasAsDatas);
         }
 
         public IEnumerable<CanalAdicional> ListarCanalAdicional(int idOperadora, int idProduto, bool ativo)
@@ -91,9 +105,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _ofertaDoAtendimentoDao.ListarCanalAdicional(idOperadora, idProduto, ativo);
         }
 
-        public DataTable RetornarOfertaParaAvaliacao(int idCampanha, int idSupervisor, int idOperador, string dataInicial, string dataFinal, string idStatus)
+        public DataTable RetornarOfertaParaAvaliacao(int idCampanha, int idSupervisor, int idOperador, string dataInicial, string dataFinal, string idStatus, long? iDOferta)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus);
+            return _ofertaDoAtendimentoDao.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus, iDOferta);
         }
 
         public DataTable RetornarOfertaParaAvaliacaoBKO(long idOfertaBko)
@@ -147,6 +161,17 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             historico.id = idHistorico;
             return historico;
         }
+
+        public IEnumerable<Usuario> ValidarUsuarioPermitidoParaAlterarProduto(string login, string senha)
+        {
+            return _ofertaDoAtendimentoDao.ValidarUsuarioPermitidoParaAlterarProduto(login, senha);
+        }
+
+        public long GravarAlteracaoDeProdutoMigracaoBKO(long idOfertaBKO, int idProdutoInicial, int idProduto, int idUsuario)
+        {
+            return _ofertaDoAtendimentoDao.GravarAlteracaoDeProdutoMigracaoBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
+        }
+
 
         #endregion CLARO_MIGRACAO
 
@@ -206,19 +231,29 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         #region CLARO_PORTABILIDADE
 
-        public long GravarOfertaDoAtendimentoClaroPortabilidade(OfertaDoAtendimentoClaroPortabilidade oferta)
+        public long GravarOfertaDoAtendimentoMPPortabilidade(OfertaDoAtendimentoMPPortabilidade oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroPortabilidade(oferta);
+            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoMPPortabilidade(oferta);
         }
 
-        public OfertaDoAtendimentoClaroPortabilidade RetornarOfertaDoAtendimentoClaroPortabilidade(long id)
+        public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoPreVendaPortabilidade(long idAtendimento)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroPortabilidade(id);
+            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoPreVendaPortabilidade(idAtendimento);
         }
 
-        public OfertaDoAtendimentoClaroPortabilidadeBKO RetornarOfertaDoAtendimentoClaroPortabilidadeBKO(long id)
+        public long GravarOfertaDoAtendimentoMPPortabilidadeBKO(OfertaDoAtendimentoMPPortabilidadeBKO ofertaBko)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroPortabilidadeBKO(id);
+            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoMPPortabilidadeBKO(ofertaBko);
+        }
+
+        public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoMPPortabilidade(long id)
+        {
+            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoMPPortabilidade(id);
+        }
+
+        public OfertaDoAtendimentoMPPortabilidadeBKO RetornarOfertaDoAtendimentoMPPortabilidadeBKO(long id)
+        {
+            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoMPPortabilidadeBKO(id);
         }
 
         public long GravarHistoricoDoAtendimentoClaroPortabilidadeBKO(HistoricoDaOfertaDoAtendimentoPortabilidadeBKO oferta)
@@ -246,8 +281,13 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return historico;
         }
 
+        public long GravarAlteracaoDeProdutoPortabilidadeBKO(long idOfertaBKO, int idProdutoInicial, int idProduto, int idUsuario)
+        {
+            return _ofertaDoAtendimentoDao.GravarAlteracaoDeProdutoPortabilidadeBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
+        }
+
         #endregion CLARO_PORTABILIDADE
-        
+
         #region NET_PTV
 
         public long GravarOfertaDoAtendimentoNETPTV(OfertaDoAtendimentoNETPTV oferta)

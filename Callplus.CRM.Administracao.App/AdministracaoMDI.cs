@@ -39,7 +39,7 @@ namespace Callplus.CRM.Administracao.App
         {
             this.Text = this.Text + " (Versão: " + LoginForm.Release + ")";
 
-            mnuUsuario.Text = _usuario.Login;
+            mnuUsuarioLogado.Text = _usuario.Login;
             nomeToolStripMenuItem.Text = _usuario.Nome;
             perfilToolStripMenuItem.Text = _usuario.perfil.ToString();
 
@@ -153,7 +153,7 @@ namespace Callplus.CRM.Administracao.App
 
         private void alterarSenhaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Login.ResetSenhaForm(mnuUsuario.Text);
+            Form f = new Login.ResetSenhaForm(mnuUsuarioLogado.Text);
             f.ShowDialog();
         }
 
@@ -337,6 +337,126 @@ namespace Callplus.CRM.Administracao.App
             try
             {
                 AdministracaoMDI.ExibirForm(new Planejamento.StatusDeAtendimento.ListaStatusDeAtendimentoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void integraçãoBaseBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //AdministracaoMDI.ExibirForm(new Planejamento.StatusDeAtendimento.ListaStatusDeAtendimentoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuSolicitacaoDeAcesso_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Administracao.SolicitacaoDeAcesso.ListaSolicitacaoDeAcessoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuCampanha_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.Campanha.ListaCampanhaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuStatusDeOferta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.StatusDeOferta.ListaStatusDeOfertaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuAparelho_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.Aparelho.ListaAparelhoForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuVencimentoDeFatura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.VencimentoDeFatura.ListaVencimentoDeFatura());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuMonitoramentoDeAuditoria_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Backoffice.RelatorioDeAuditoria.MonitoramentoDeAuditoriaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuCadastroCeps_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Planejamento.CadastroCep.ListaCepForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuNivelDeConfianca_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Qualidade.NivelDeConfianca.ListarNivelDeConfiancaForm());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+        }
+
+        private void mnuGamificacao_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AdministracaoMDI.ExibirForm(new Backoffice.Gamificacao.ListarGamificacaoForm());
             }
             catch (Exception ex)
             {

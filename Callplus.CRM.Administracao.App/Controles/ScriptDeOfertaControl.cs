@@ -54,9 +54,9 @@ namespace Callplus.CRM.Administracao.App.Controles
         {
             var itens = new List<KeyValuePair<int, string>>();
             IEnumerable<KeyValuePair<int, string>> listaFake = new List<KeyValuePair<int, string>>();
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.ACEITE, TipoStatusDeOferta.ACEITE.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.RECUSA, TipoStatusDeOferta.RECUSA.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.TELEFONIA, TipoStatusDeOferta.TELEFONIA.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Aceite, TipoStatusDeOferta.Aceite.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Recusa, TipoStatusDeOferta.Recusa.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Telefonia, TipoStatusDeOferta.Telefonia.ToString()));
 
             tsComboRespostas.ComboBox.PreencherComSelecione(listaFake);
             //   tsComboTipo.ComboBox.PreencherComSelecione(listaFake);
@@ -195,12 +195,13 @@ namespace Callplus.CRM.Administracao.App.Controles
         private void ConfigurarFimDoScript()
         {
             btnAvancar.Enabled = false;
-            tsComboRespostas.Enabled = false;
+            lblResposta.Visible = false;
+            toolSeparatorResposta.Visible = false;
+            tsComboRespostas.Visible = false;
         }
 
         private void SelecionarResposta(int idResposta)
         {
-
             if (idResposta <= 0)
             {
                 btnAvancar.Enabled = false;
@@ -212,7 +213,6 @@ namespace Callplus.CRM.Administracao.App.Controles
             _respostaSelecionada = resposta;
 
             if (resposta == null) return;
-
 
             var podeAvancar = true;
             btnAvancar.Enabled = podeAvancar;
@@ -235,7 +235,6 @@ namespace Callplus.CRM.Administracao.App.Controles
                 toolSeparatorResposta.Visible = true;
                 tsComboRespostas.Visible = true;
             }
-
         }
 
         private void Voltar()
@@ -245,7 +244,7 @@ namespace Callplus.CRM.Administracao.App.Controles
                 var etapaAtual = _pilhaDeEtapas.Pop();
                 var etapaAnterior = _pilhaDeEtapas.Pop();
 
-                btnAvancar.Enabled = true;
+                //btnAvancar.Enabled = true;
 
                 _scriptDeAtendimento.EtapaAtual = etapaAnterior;
                 ConfigurarEtapa(etapaAnterior);

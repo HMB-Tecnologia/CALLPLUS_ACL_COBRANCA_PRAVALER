@@ -1,25 +1,20 @@
-﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
+﻿using Callplus.CRM.Tabulador.App.Operacao;
+using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
-using CallplusUtil.Extensions;
-using CallplusUtil.Forms;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Callplus.CRM.Tabulador.App.Operacao;
 
 namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 {
-    public partial class AvaliacaoDeAtendimentoForm : Form
+	public partial class AvaliacaoDeAtendimentoForm : Form
     {
         public AvaliacaoDeAtendimentoForm(string titulo, long idAvaliacao, int? idFormulario, string avaliador, bool feedbackRealizado, long idOfertaBko = 0, int idCampanha = 0)
         {
@@ -74,7 +69,35 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
             InitializeComponent();
         }
-        
+
+        public AvaliacaoDeAtendimentoForm(string titulo, long idOfertaBKO, int iDCampanha, int iDOperador, int iDSupervisor, string dTInicial, string dTFinal, string iDStatus, int iDTipo, long? idOferta)
+        {
+            _logger = LogManager.GetCurrentClassLogger();
+
+            _avaliacaoDeAtendimentoService = new AvaliacaoDeAtendimentoService();
+            _campanhaService = new CampanhaService();
+            _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
+            _formularioDeQualidadeService = new FormularioDeQualidadeService();
+            _loginService = new LoginService();
+            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _prospectService = new ProspectService();
+            _statusDeOfertaService = new StatusDeOfertaService();
+            _usuarioService = new UsuarioService();
+
+            this.titulo = titulo;
+            _idOfertaBKO = idOfertaBKO;
+            this.iDCampanha = iDCampanha;
+            this.iDOperador = iDOperador;
+            this.iDSupervisor = iDSupervisor;
+            this.dTInicial = dTInicial;
+            this.dTFinal = dTFinal;
+            this.iDStatus = iDStatus;
+            this.iDTipo = iDTipo;
+            this.iDOferta = idOferta;
+
+            InitializeComponent();
+        }
+
         #region PROPRIEDADES
 
         private readonly ILogger _logger;
@@ -89,9 +112,11 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         private readonly StatusDeOfertaService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
 
+        private OfertaDoAtendimentoClaroMigracao _oferta;
+
         bool modoFeedback = false;
         bool feedbackRealizado = false;
-        
+
         int? idFormulario = 0;
         int idOperadorDoContato = 0;
         int idsupervisorDoOperador = 0;
@@ -117,19 +142,29 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         List<KeyValuePair<string, string>> ListaDeProcedimentosNOK = new List<KeyValuePair<string, string>>();
         List<KeyValuePair<string, string>> ListaDeProcedimentosNA = new List<KeyValuePair<string, string>>();
         List<KeyValuePair<string, int>> ListaPontuacaoPerdida = new List<KeyValuePair<string, int>>();
-        
+
         private long _idOfertaBKO = 0;
         private int _idCampanhaBKO = 0;
+        private int iDCampanha;
+        private int iDOperador;
+        private int iDSupervisor;
+        private string dTInicial;
+        private string dTFinal;
+        private string iDStatus;
+        private int iDTipo;
+        private long? iDOferta;
+        private List<ModuloDoFormularioDeQualidade> _moduloList;
 
         public bool atualizar { get; set; }
 
         #endregion PROPRIEDADES
 
         #region METODOS
-        
+
         private void CarregarConfiguracaoInicial()
         {
             lblTitulo.Text = titulo;
+            pnlOferta.Visible = false;
 
             gbAvaliacao.Location = new Point(12, 37);
 
@@ -138,12 +173,21 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 this.Width = 845;
                 gbFeedback.Visible = false;
             }
+            else
+            {
+                this.Location = new Point(0, 0);
+                this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+                this.Height = Screen.PrimaryScreen.Bounds.Width - 20;
+                this.Height = Screen.PrimaryScreen.Bounds.Height - 80;
+            }
 
             listbox = new ListBoxMessage.MessageListBox();
             listbox.Size = new Size(367, 409);
             listbox.Location = new Point(18, 34);
             listbox.AutoScroll = true;
             this.gbFeedback.Controls.Add(listbox);
+            tcOferta.Visible = false;
+            pnlOferta.Visible = false;
 
             if (auditor != "")
             {
@@ -163,7 +207,6 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
             if (idAvaliacao > 0)
             {
-                gbFiltro.Visible = false;
                 btnCancelar.Visible = false;
 
                 txtNomeAvaliador.Text = avaliador;
@@ -173,23 +216,19 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             else
             {
                 LimparAvaliacao();
-
-                CarregarTipo();
-                CarregarCampanhas(false);
-                CarregarSupervisores(0);
-                CarregarOperadores(0, 0);
-                CarregarStatusDeOferta(0);
             }
 
             if (_idOfertaBKO > 0)
-            {                
-                //btnCancelar.Visible = false;
-                //btnDetalheContato.Visible = false;
-
-                if(idAvaliacao == 0)
+            {
+                if (idAvaliacao == 0)
                 {
                     CarregarNovaAvaliacao();
                 }
+            }
+
+            if (idAvaliacao == 0)
+            {
+                CarregarNovaAvaliacao();
             }
         }
 
@@ -219,7 +258,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             if (dataTable.Rows.Count > 0)
             {
                 int idCampanha = -1;
-                int idTipo = (int)dataTable.Rows[0]["idTipo"];                
+                int idTipo = (int)dataTable.Rows[0]["idTipo"];
                 int idFormulario = (int)dataTable.Rows[0]["Id Formulário"];
 
                 idProspect = (long)dataTable.Rows[0]["idProspect"];
@@ -227,6 +266,9 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
                 dataTableFormularioQualidade = _formularioDeQualidadeService.RetornarEstrutura(idFormulario, idCampanha);
 
+                PreencherModulosDeQualidade();
+
+                lblPontuacaoDosModulos.Visible = true;
                 dataTableProcedimentoFormularioQualidade = _formularioDeQualidadeService.RetornarProcedimento(idFormulario, idCampanha);
 
                 CarregarRespostasDaAvaliacao();
@@ -250,11 +292,57 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
                 if (modoFeedback)
                     ListarFAQ(int.Parse(idItemFormulario));
+
+                AtualizarListaDePontuaçãoPerdida();
+                CalcularPontosPerdidosPorModulo();
+                AtualizarPontuacao();
             }
             else
             {
                 MessageBox.Show("A Avaliação não foi encontrada.", "AVISO DO SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
+        }
+
+        private void PreencherModulosDeQualidade()
+        {
+            List<ModuloDoFormularioDeQualidade> moduloList = new List<ModuloDoFormularioDeQualidade>();
+            List<ItemDoModuloDoFormularioDeQualidade> itemList = new List<ItemDoModuloDoFormularioDeQualidade>();
+
+            for (int i = 0; i < dataTableFormularioQualidade.Rows.Count; i++)
+            {
+                var modulo = new ModuloDoFormularioDeQualidade()
+                {
+                    Id = Convert.ToInt32(dataTableFormularioQualidade.Rows[i][0].ToString()),
+                    Valor = 100,
+                    Nome = dataTableFormularioQualidade.Rows[i][2].ToString(),
+                    ItemList = new List<ItemDoModuloDoFormularioDeQualidade>(),
+                    Peso = Convert.ToInt32(dataTableFormularioQualidade.Rows[i][7].ToString())
+                };
+
+                var item = new ItemDoModuloDoFormularioDeQualidade()
+                {
+                    Id = Convert.ToInt32(dataTableFormularioQualidade.Rows[i][1].ToString()),
+                    IdModuloDoFormularioDeQualidade = Convert.ToInt32(dataTableFormularioQualidade.Rows[i][0].ToString()),
+                    Peso = Convert.ToInt32(dataTableFormularioQualidade.Rows[i][5].ToString())
+                };
+
+                itemList.Add(item);
+
+                if (moduloList.Exists(x => x.Id == modulo.Id)) continue;
+                moduloList.Add(modulo);
+            }
+
+            foreach (var modulo in moduloList)
+            {
+                foreach (var item in itemList)
+                {
+                    if (modulo.Id == item.IdModuloDoFormularioDeQualidade)
+                        modulo.ItemList.Add(item);
+                }
+            }
+
+            _moduloList = moduloList;
         }
 
         private void CarregarRespostasDaAvaliacao()
@@ -285,121 +373,40 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             }
         }
 
-        private void CarregarTipo()
-        {
-            IEnumerable<TipoDeAvaliacaoDeAtendimento> _tipos = _avaliacaoDeAtendimentoService.ListarTipo(true);
-            
-            cmbTipo.PreencherComSelecione(_tipos, tipo => tipo.Id, tipo => tipo.Nome);
-        }
-
-        private void CarregarCampanhas(bool preencher)
-        {
-            IEnumerable<Campanha> _campanhas = _campanhaService.Listar(true);
-
-            if (!preencher)
-                _campanhas = _campanhas.Where(x => x.Id == 0);
-
-            cmbCampanha.PreencherComSelecione(_campanhas, campanha => campanha.Id, campanha => campanha.Nome);
-        }
-
-        private void CarregarSupervisores(int idCampanha)
-        {
-            IEnumerable<Usuario> _supervisores = _usuarioService.ListarSupervisores(true, idCampanha);
-            
-            cmbSupervisor.PreencherComTodos(_supervisores, supervisor => supervisor.Id, supervisor => supervisor.Nome);
-        }
-
-        private void CarregarOperadores(int idCampanha, int idSupervisor)
-        {
-            IEnumerable<Usuario> _operadores = _usuarioService.ListarOperadores(true, idCampanha, idSupervisor);
-
-            cmbOperador.PreencherComTodos(_operadores, operador => operador.Id, operador => operador.Nome);
-        }
-        
-        private void CarregarStatusDeOferta(int idCampanha)
-        {
-            IEnumerable<StatusDeOferta> _status = _statusDeOfertaService.ListarStatusDeOferta(idCampanha, null, true);
-
-            if (cmbTipo.Text == "VENDA")
-                _status = _status.Where(x => x.IdTipoDeStatusDeOferta == 1);
-            else
-                _status = _status.Where(x => x.IdTipoDeStatusDeOferta != 1);
-
-            clbStatus.Preencher(_status, x => x.Id, x => "(" + x.Id + ") " + x.Nome);
-        }
-
-        private bool ParametrosPesquisaValidos()
-        {
-            var mensagens = new List<string>();
-
-            if (_idOfertaBKO == 0)
-            {
-                if (cmbTipo.TextoEhSelecione())
-                {
-                    mensagens.Add("[Tipo] deve ser informado!");
-                }
-
-                if (cmbCampanha.TextoEhSelecione())
-                {
-                    mensagens.Add("[Campanha] deve ser informada!");
-                }
-
-                if (dtpDataFinal.Value.Date < dtpDataInicial.Value.Date)
-                {
-                    mensagens.Add("[Data Final] não pode ser menor que a Data Inicial!");
-                }
-
-                if (clbStatus.CheckedItems.Count == 0)
-                {
-                    mensagens.Add("[Status] deve ser informado!");
-                }
-            }
-
-            CallplusFormsUtil.ExibirMensagens(mensagens);
-
-            return mensagens.Any() == false;
-        }
-        
         private void CarregarNovaAvaliacao()
         {
-            if(ParametrosPesquisaValidos())
+            int idCampanha = iDCampanha;
+
+            if (idCampanha <= 0)
+                idCampanha = _idCampanhaBKO;
+
+            dataTableFormularioQualidade = _formularioDeQualidadeService.RetornarEstrutura(-1, idCampanha);
+
+            PreencherModulosDeQualidade();
+
+            if (dataTableFormularioQualidade.Rows.Count > 0)
             {
-                int idCampanha = Convert.ToInt32(cmbCampanha.SelectedValue);
+                idFormulario = (int)dataTableFormularioQualidade.Rows[0]["idFormulario"];
 
-                if (idCampanha <= 0)
-                    idCampanha = _idCampanhaBKO;
+                DataTable dataTable = BuscarOferta();
 
-                dataTableFormularioQualidade = _formularioDeQualidadeService.RetornarEstrutura(-1, idCampanha);
-
-                if (dataTableFormularioQualidade.Rows.Count > 0)
+                if (dataTable.Rows.Count > 0)
                 {
-                    idFormulario = (int)dataTableFormularioQualidade.Rows[0]["idFormulario"];                    
+                    idProspect = (long)dataTable.Rows[0]["idProspect"];
+                    idAtendimento = (long)dataTable.Rows[0]["idAtendimento"];
 
-                    DataTable dataTable = BuscarOferta();
+                    dataTableProcedimentoFormularioQualidade = _formularioDeQualidadeService.RetornarProcedimento(-1, idCampanha);
 
-                    if (dataTable.Rows.Count > 0)
-                    {
-                        idProspect = (long)dataTable.Rows[0]["idProspect"];
-                        idAtendimento = (long)dataTable.Rows[0]["idAtendimento"];
+                    CarregarInicioDaAvaliacao(idCampanha, dataTable);
 
-                        dataTableProcedimentoFormularioQualidade = _formularioDeQualidadeService.RetornarProcedimento(-1, idCampanha);
+                    if (_idOfertaBKO == 0)
+                        btnCancelar.Visible = true;
 
-                        CarregarInicioDaAvaliacao(idCampanha, dataTable);
-
-                        if (_idOfertaBKO == 0)
-                            btnCancelar.Visible = true;
-
-                        gbAvaliacao.Visible = true;
-                        gbFiltro.Visible = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nenhum contato encontrado para os filtros informados!", "AVISO DO SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    gbAvaliacao.Visible = true;
                 }
                 else
                 {
-                    MessageBox.Show("Não foi encontrado nenhum Formulário de Qualidade para os parâmetros informados!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Nenhum contato encontrado para os filtros informados!", "AVISO DO SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -458,26 +465,19 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 lblPagina.Text = "1 DE " + dataTableFormularioQualidade.Rows.Count;
             }
 
-            //if (_idOfertaBKO == 0)
             btnDetalheContato.Visible = true;
 
             gbAvaliacao.Enabled = true;
-            gbFiltro.Enabled = false;
         }
 
         private DataTable BuscarOferta()
         {
-            int idCampanha = Convert.ToInt32(cmbCampanha.SelectedValue);
-            int idOperador = Convert.ToInt32(cmbOperador.SelectedValue);
-            int idSupervisor = Convert.ToInt32(cmbSupervisor.SelectedValue);
-            string dataInicial = dtpDataInicial.Value.ToString("yyyy-MM-dd");
-            string dataFinal = dtpDataFinal.Value.ToString("yyyy-MM-dd") + " 23:59:59";
-            
-            string idStatus = "";
-            foreach (object itemChecked in clbStatus.CheckedItems)
-            {
-                idStatus += itemChecked.ToString().Substring(1, itemChecked.ToString().IndexOf(")") - 1) + ",";
-            }
+            int idCampanha = iDCampanha;
+            int idOperador = iDOperador;
+            int idSupervisor = iDSupervisor;
+            string dataInicial = dTInicial;
+            string dataFinal = dTFinal;
+            string idStatus = iDStatus + ",";
 
             if (idStatus == "") idStatus = "0,";
 
@@ -485,7 +485,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
             if (_idOfertaBKO == 0)
             {
-                dataTable = _ofertaDoAtendimentoService.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus);
+                dataTable = _ofertaDoAtendimentoService.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus, iDOferta);
             }
             else
             {
@@ -587,6 +587,8 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     DataGridViewCheckBoxCell chkNOk = (DataGridViewCheckBoxCell)row.Cells[4];
                     DataGridViewCheckBoxCell chkNa = (DataGridViewCheckBoxCell)row.Cells[5];
 
+
+
                     foreach (var item in ListaDeProcedimentosNA.Where(x => x.Key == idItemFormulario))
                     {
                         if (row.Cells[0].Value.ToString() == item.Value.ToString())
@@ -607,6 +609,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                             lblPontuacaoItem.Text = "Pontos Perdidos: " + lblPeso.Text;
                         }
                     }
+
                 }
             }
             else
@@ -619,19 +622,22 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
         private void AtualizarPontuacao()
         {
-            int pontuacaoPerdidaAtual = 0;
+            decimal pontuacaoTotalCorrigida = 0.0m;
 
-            foreach (var item in ListaPontuacaoPerdida)
+            foreach (var modulo in _moduloList)
             {
-                pontuacaoPerdidaAtual = pontuacaoPerdidaAtual + item.Value;
+                pontuacaoTotalCorrigida += modulo.Valor * (modulo.Peso/100.0m);
             }
 
-            int pontuacaoTotalCorrigida = 100 - pontuacaoPerdidaAtual;
 
-            if (pontuacaoTotalCorrigida < 0)
-                pontuacaoTotalCorrigida = 0;
+            var moduloExibido = _moduloList.Single(x => x.Nome == lblModulo.Text);
+
+            lblPontuacaoDosModulos.Text = "Pontuação do Modulo: " + moduloExibido.Valor;
 
             lblPontuacao.Text = "Pontuação Total: " + pontuacaoTotalCorrigida;
+
+
+
         }
 
         private bool VerificarPreenchimento(string idItemCorrente)
@@ -728,67 +734,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
             btnCancelar.Visible = false;
 
-            gbAvaliacao.Visible = false;
-            gbFiltro.Visible = true;
-            gbFiltro.Enabled = true;
-
             btnDetalheContato.Visible = false;
-        }
-
-        public void SelecionarTipo()
-        {
-            cmbCampanha.SelectedIndexChanged -= cmbCampanha_SelectedIndexChanged;
-
-            if (!cmbTipo.TextoEhSelecione())
-            {
-                CarregarCampanhas(true);
-            }
-            else
-            {
-                CarregarCampanhas(false);
-                CarregarSupervisores(0);
-                CarregarStatusDeOferta(0);
-            }
-
-            cmbCampanha.SelectedIndexChanged += cmbCampanha_SelectedIndexChanged;
-        }
-
-        public void SelecionarCampanha()
-        {
-            int idCampanha = 0;
-
-            if (!cmbCampanha.TextoEhSelecione())
-            {
-                idCampanha = Convert.ToInt32(cmbCampanha.SelectedValue);
-            }
-
-            cmbSupervisor.SelectedIndexChanged -= cmbSupervisor_SelectedIndexChanged;
-
-            CarregarSupervisores(idCampanha);
-
-            cmbSupervisor.SelectedIndexChanged += cmbSupervisor_SelectedIndexChanged;
-
-            CarregarOperadores(idCampanha, -1);
-
-            CarregarStatusDeOferta(idCampanha);
-        }
-
-        public void SelecionarSupervisor()
-        {
-            int idCampanha = 0;
-            int idSupervisor = -1;
-
-            if (!cmbCampanha.TextoEhSelecione())
-            {
-                idCampanha = Convert.ToInt32(cmbCampanha.SelectedValue);
-            }
-
-            if (!cmbSupervisor.TextoEhTodos())
-            {
-                idSupervisor = Convert.ToInt32(cmbSupervisor.SelectedValue);
-            }
-
-            CarregarOperadores(idCampanha, idSupervisor);
         }
 
         private void Gravar()
@@ -802,7 +748,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 return;
             }
 
-            int pontuacao = int.Parse(lblPontuacao.Text.Replace("Pontuação Total: ", ""));
+            float pontuacao = float.Parse(lblPontuacao.Text.Replace("Pontuação Total: ", ""));
             string procedimentosOK = "";
             string procedimentosNOK = "";
             string procedimentosNA = "";
@@ -822,13 +768,13 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 procedimentosNA += item.Value + ",";
             }
 
-            int idTipo = Convert.ToInt32(cmbTipo.SelectedValue);
+            int idTipo = iDTipo;
             int idUsuario = AdministracaoMDI._usuario.Id;
             string observacaoAvaliacao = txtObervacaoAvaliador.Text.Replace("'", "''");
 
             Tabulador.Dominio.Entidades.AvaliacaoDeAtendimento _avaliacao = new Tabulador.Dominio.Entidades.AvaliacaoDeAtendimento();
             _avaliacao.id = idAvaliacao;
-            _avaliacao.idTipoDeAvaliacaoDeAtendimento = (_idOfertaBKO > 0)? 1 : idTipo;
+            _avaliacao.idTipoDeAvaliacaoDeAtendimento = (_idOfertaBKO > 0) ? 1 : idTipo;
             _avaliacao.idFormularioDeQualidade = idFormulario;
             _avaliacao.idAtendimento = idAtendimento;
             _avaliacao.pontuacao = pontuacao;
@@ -861,8 +807,8 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 if (_idOfertaBKO == 0)
                 {
                     LimparAvaliacao();
-
-                    gbFiltro.Enabled = true;
+                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -928,14 +874,47 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
             IEnumerable<OfertaDoAtendimento> ofertas = _ofertaDoAtendimentoService.RetornarOfertasDoAtendimento(idAtendimento);
 
-            if(ofertas != null)
+            if (ofertas != null)
             {
                 OfertaDoAtendimento oferta = ofertas.FirstOrDefault();
+                _oferta = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroMigracao(oferta.Id);
 
-                if(oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2)
+                if (oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2)
                 {
-                    //Tabulador.App.Operacao.IndicacaoForm form = new IndicacaoForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDaOferta, false,exibirTodasAsDatasVencimento: true);
+                    pnlOferta.Visible = true;
 
+                    this.Location = new Point(0, 0);
+                    this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+                    this.Height = Screen.PrimaryScreen.Bounds.Height - 80;
+                    OfertaMigracaoPreControleTimForm form = new OfertaMigracaoPreControleTimForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDaOferta, null, false, exibirTodasAsDatasVencimento: true);
+                    form.TopLevel = false;
+                    form.AutoScroll = true;
+                    pnlOferta.Controls.Add(form);
+                    form.FormBorderStyle = FormBorderStyle.None;
+                    form.Show();
+                }
+                else if (oferta.IdTipoDeProduto == 3)
+                {
+                    OfertaRentabilizacaoTimForm form = new OfertaRentabilizacaoTimForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, oferta.IdStatusDaOferta, null, false);
+                    form.ShowDialog();
+                }
+                else if (oferta.IdTipoDeProduto == 4)
+                {
+                    pnlOferta.Visible = true;
+
+                    this.Location = new Point(0, 0);
+                    this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+ 
+                    OfertaPortabilidadeMPForm form = new OfertaPortabilidadeMPForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, "", oferta.IdStatusDaOferta, null, false);
+                    form.TopLevel = false;
+                    form.AutoScroll = true;
+                    pnlOferta.Controls.Add(form);
+                    form.FormBorderStyle = FormBorderStyle.None;
+                    form.Show();
+                }
+                else if (oferta.IdTipoDeProduto == 5)
+                {
+                    //OfertaNETPTVForm form = new OfertaNETPTVForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, oferta.IdStatusDaOferta, false);
                     //form.ShowDialog();
                 }
             }
@@ -952,7 +931,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                 string site = "";
                 string dataAvaliacao = txtDataContato.Text.Split(' ')[0];
                 string NomeSupervisor = txtNomeSupervisor.Text;
-                 string pontuacao = lblPontuacao.Text.Replace("Pontuação Total: ", "");
+                string pontuacao = lblPontuacao.Text.Replace("Pontuação Total: ", "");
 
                 if (NomeSupervisor.Length > 25)
                 {
@@ -1483,7 +1462,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     $"Não foi possível carregar as configurações iniciais!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void btnAnterior_Click(object sender, EventArgs e)
         {
             try
@@ -1579,9 +1558,9 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     else
                         lblPontuacaoItem.Text = "Pontos Perdidos: " + "0";
 
-                    ListaPontuacaoPerdida.RemoveAll(item => item.Key.Equals(idItemFormulario));
-                    int pontuacaoItem = int.Parse(lblPontuacaoItem.Text.Replace("Pontos Perdidos: ", ""));
-                    ListaPontuacaoPerdida.Add(new KeyValuePair<string, int>(idItemFormulario, pontuacaoItem));
+                    AtualizarListaDePontuaçãoPerdida();
+
+                    CalcularPontosPerdidosPorModulo();
 
                     AtualizarPontuacao();
                 }
@@ -1590,6 +1569,39 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             {
                 MessageBox.Show("Não foi possível setar o Procedimento", "ERRO DO SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AtualizarListaDePontuaçãoPerdida()
+        {
+            ListaPontuacaoPerdida.RemoveAll(item => item.Key.Equals(idItemFormulario));
+            int pontuacaoItem = int.Parse(lblPontuacaoItem.Text.Replace("Pontos Perdidos: ", ""));
+            ListaPontuacaoPerdida.Add(new KeyValuePair<string, int>(idItemFormulario, pontuacaoItem));
+        }
+
+        private void CalcularPontosPerdidosPorModulo()
+        {
+            var pontuacaoTotal = 0;
+
+            foreach (var modulo in _moduloList)
+            {
+                foreach (var item in modulo.ItemList)
+                {
+                    if (ListaPontuacaoPerdida.Select(x => x.Key).Contains(item.Id.ToString()))
+                        item.Valor = ListaPontuacaoPerdida.Single(x => x.Key == item.Id.ToString()).Value;
+                }
+            }
+
+            foreach (var modulo in _moduloList)
+            {
+                foreach (var item in modulo.ItemList)
+                {
+                    pontuacaoTotal += item.Peso - item.Valor;
+                }
+                modulo.Valor = pontuacaoTotal;
+                pontuacaoTotal = 0;
+            }
+
+
         }
 
         private void gvProcedimento_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -1609,7 +1621,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         {
             try
             {
-                SelecionarTipo();
+                //SelecionarTipo();
             }
             catch (Exception ex)
             {
@@ -1624,7 +1636,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         {
             try
             {
-                SelecionarCampanha();
+                //SelecionarCampanha();
             }
             catch (Exception ex)
             {
@@ -1639,7 +1651,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         {
             try
             {
-                SelecionarSupervisor();
+                //SelecionarSupervisor();
             }
             catch (Exception ex)
             {
@@ -1649,7 +1661,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     $"Não foi possível carregar os dados para o Supervisor selecionado!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             try
@@ -1664,12 +1676,14 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     $"Não foi possível iniciar uma nova Avaliação!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             try
             {
-                LimparAvaliacao();
+                //LimparAvaliacao();
+                this.Hide();
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -1729,7 +1743,22 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         {
             try
             {
-                CarregarDetalhesDoContato();
+                if (pnlOferta.Visible == false)
+                {
+                    pnlOferta.Visible = true;
+                    tcOferta.Visible = true;
+                    CarregarDetalhesDoContato();
+                }
+                else
+                {
+                    pnlOferta.Visible = false;
+                    tcOferta.Visible = false;
+                    //this.AutoSize = true;
+                    //this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    this.Width = 845;
+                    //this.StartPosition = FormStartPosition.CenterScreen;
+                }
+
             }
             catch (Exception ex)
             {
@@ -1742,12 +1771,12 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
         private void btnDesmarcarTodos_Click(object sender, EventArgs e)
         {
-            clbStatus.SetarTodosRegistros(false);
+            //clbStatus.SetarTodosRegistros(false);
         }
 
         private void btnMarcarTodos_Click(object sender, EventArgs e)
         {
-            clbStatus.SetarTodosRegistros(true);
+            //clbStatus.SetarTodosRegistros(true);
         }
 
         #endregion EVENTOS

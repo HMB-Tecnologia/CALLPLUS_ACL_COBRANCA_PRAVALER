@@ -113,12 +113,14 @@
             this.dgLista.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgLista.EnableHeadersVisualStyles = false;
             this.dgLista.Location = new System.Drawing.Point(0, 0);
+            this.dgLista.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgLista.MultiSelect = false;
             this.dgLista.Name = "dgLista";
             this.dgLista.ReadOnly = true;
             this.dgLista.RowHeadersVisible = false;
+            this.dgLista.RowHeadersWidth = 51;
             this.dgLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLista.Size = new System.Drawing.Size(665, 136);
+            this.dgLista.Size = new System.Drawing.Size(887, 167);
             this.dgLista.TabIndex = 0;
             this.dgLista.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLista_CellDoubleClick);
             // 
@@ -126,6 +128,7 @@
             // 
             this.id.DataPropertyName = "Id";
             this.id.HeaderText = "Id";
+            this.id.MinimumWidth = 6;
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
@@ -134,6 +137,7 @@
             // 
             this.cep.DataPropertyName = "Cep";
             this.cep.HeaderText = "CEP";
+            this.cep.MinimumWidth = 6;
             this.cep.Name = "cep";
             this.cep.ReadOnly = true;
             // 
@@ -141,6 +145,7 @@
             // 
             this.logradouro.DataPropertyName = "Logradouro";
             this.logradouro.HeaderText = "Logradouro";
+            this.logradouro.MinimumWidth = 6;
             this.logradouro.Name = "logradouro";
             this.logradouro.ReadOnly = true;
             // 
@@ -148,6 +153,7 @@
             // 
             this.numero.DataPropertyName = "Numero";
             this.numero.HeaderText = "Numero";
+            this.numero.MinimumWidth = 6;
             this.numero.Name = "numero";
             this.numero.ReadOnly = true;
             // 
@@ -155,6 +161,7 @@
             // 
             this.bairro.DataPropertyName = "Bairro";
             this.bairro.HeaderText = "Bairro";
+            this.bairro.MinimumWidth = 6;
             this.bairro.Name = "bairro";
             this.bairro.ReadOnly = true;
             // 
@@ -162,6 +169,7 @@
             // 
             this.cidade.DataPropertyName = "Cidade";
             this.cidade.HeaderText = "Cidade";
+            this.cidade.MinimumWidth = 6;
             this.cidade.Name = "cidade";
             this.cidade.ReadOnly = true;
             // 
@@ -169,6 +177,7 @@
             // 
             this.uf.DataPropertyName = "Uf";
             this.uf.HeaderText = "UF";
+            this.uf.MinimumWidth = 6;
             this.uf.Name = "uf";
             this.uf.ReadOnly = true;
             // 
@@ -176,6 +185,7 @@
             // 
             this.complemento.DataPropertyName = "Complemento";
             this.complemento.HeaderText = "Complemento";
+            this.complemento.MinimumWidth = 6;
             this.complemento.Name = "complemento";
             this.complemento.ReadOnly = true;
             this.complemento.Visible = false;
@@ -184,6 +194,7 @@
             // 
             this.pontoReferencia.DataPropertyName = "pontoReferencia";
             this.pontoReferencia.HeaderText = "Ponto de Referência";
+            this.pontoReferencia.MinimumWidth = 6;
             this.pontoReferencia.Name = "pontoReferencia";
             this.pontoReferencia.ReadOnly = true;
             this.pontoReferencia.Visible = false;
@@ -192,6 +203,7 @@
             // 
             this.idProspect.DataPropertyName = "idProspect";
             this.idProspect.HeaderText = "idProspect";
+            this.idProspect.MinimumWidth = 6;
             this.idProspect.Name = "idProspect";
             this.idProspect.ReadOnly = true;
             this.idProspect.Visible = false;
@@ -226,13 +238,15 @@
             this.panel1.Controls.Add(this.dgLista);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(665, 386);
+            this.panel1.Size = new System.Drawing.Size(887, 475);
             this.panel1.TabIndex = 471;
             // 
             // tsEndereco
             // 
             this.tsEndereco.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tsEndereco.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsEndereco.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsEndereco_btnNovo,
             this.toolStripSeparator4,
@@ -244,10 +258,10 @@
             this.toolStripSeparator1,
             this.tsEndereco_btnSelecionar,
             this.toolStripSeparator2});
-            this.tsEndereco.Location = new System.Drawing.Point(0, 136);
+            this.tsEndereco.Location = new System.Drawing.Point(0, 167);
             this.tsEndereco.Name = "tsEndereco";
             this.tsEndereco.Padding = new System.Windows.Forms.Padding(0);
-            this.tsEndereco.Size = new System.Drawing.Size(665, 25);
+            this.tsEndereco.Size = new System.Drawing.Size(887, 27);
             this.tsEndereco.TabIndex = 1;
             this.tsEndereco.Text = "toolStrip2";
             // 
@@ -256,7 +270,7 @@
             this.tsEndereco_btnNovo.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.add;
             this.tsEndereco_btnNovo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEndereco_btnNovo.Name = "tsEndereco_btnNovo";
-            this.tsEndereco_btnNovo.Size = new System.Drawing.Size(56, 22);
+            this.tsEndereco_btnNovo.Size = new System.Drawing.Size(69, 24);
             this.tsEndereco_btnNovo.Text = "Novo";
             this.tsEndereco_btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEndereco_btnNovo.Click += new System.EventHandler(this.tsEndereco_btnNovo_Click);
@@ -264,7 +278,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
             // tsEndereco_btnEditar
             // 
@@ -272,7 +286,7 @@
             this.tsEndereco_btnEditar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.edit;
             this.tsEndereco_btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEndereco_btnEditar.Name = "tsEndereco_btnEditar";
-            this.tsEndereco_btnEditar.Size = new System.Drawing.Size(57, 22);
+            this.tsEndereco_btnEditar.Size = new System.Drawing.Size(72, 24);
             this.tsEndereco_btnEditar.Text = "Editar";
             this.tsEndereco_btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEndereco_btnEditar.Click += new System.EventHandler(this.tsEndereco_btnEditar_Click);
@@ -280,7 +294,7 @@
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
             // 
             // tsEndereco_btnCancelar
             // 
@@ -288,7 +302,7 @@
             this.tsEndereco_btnCancelar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.cancel;
             this.tsEndereco_btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEndereco_btnCancelar.Name = "tsEndereco_btnCancelar";
-            this.tsEndereco_btnCancelar.Size = new System.Drawing.Size(73, 22);
+            this.tsEndereco_btnCancelar.Size = new System.Drawing.Size(90, 24);
             this.tsEndereco_btnCancelar.Text = "Cancelar";
             this.tsEndereco_btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEndereco_btnCancelar.Click += new System.EventHandler(this.tsEndereco_btnCancelar_Click);
@@ -296,7 +310,7 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
             // 
             // tsEndereco_btnSalvar
             // 
@@ -304,7 +318,7 @@
             this.tsEndereco_btnSalvar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.save;
             this.tsEndereco_btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEndereco_btnSalvar.Name = "tsEndereco_btnSalvar";
-            this.tsEndereco_btnSalvar.Size = new System.Drawing.Size(58, 22);
+            this.tsEndereco_btnSalvar.Size = new System.Drawing.Size(73, 24);
             this.tsEndereco_btnSalvar.Text = "Salvar";
             this.tsEndereco_btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEndereco_btnSalvar.Click += new System.EventHandler(this.tsEndereco_btnSalvar_Click);
@@ -312,7 +326,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // tsEndereco_btnSelecionar
             // 
@@ -321,7 +335,7 @@
             this.tsEndereco_btnSelecionar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.check;
             this.tsEndereco_btnSelecionar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEndereco_btnSelecionar.Name = "tsEndereco_btnSelecionar";
-            this.tsEndereco_btnSelecionar.Size = new System.Drawing.Size(81, 22);
+            this.tsEndereco_btnSelecionar.Size = new System.Drawing.Size(102, 24);
             this.tsEndereco_btnSelecionar.Text = "Selecionar";
             this.tsEndereco_btnSelecionar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEndereco_btnSelecionar.Click += new System.EventHandler(this.tsEndereco_btnSelecionar_Click);
@@ -330,15 +344,16 @@
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // btnBuscaRapida
             // 
             this.btnBuscaRapida.Enabled = false;
             this.btnBuscaRapida.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.search;
-            this.btnBuscaRapida.Location = new System.Drawing.Point(86, 182);
+            this.btnBuscaRapida.Location = new System.Drawing.Point(115, 224);
+            this.btnBuscaRapida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
-            this.btnBuscaRapida.Size = new System.Drawing.Size(21, 22);
+            this.btnBuscaRapida.Size = new System.Drawing.Size(28, 27);
             this.btnBuscaRapida.TabIndex = 4;
             this.btnBuscaRapida.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnBuscaRapida.UseVisualStyleBackColor = true;
@@ -347,9 +362,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 167);
+            this.label2.Location = new System.Drawing.Point(15, 206);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.Size = new System.Drawing.Size(91, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Busca rápida";
             // 
@@ -358,11 +374,12 @@
             this.txtBuscaRapida.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtBuscaRapida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBuscaRapida.Enabled = false;
-            this.txtBuscaRapida.Location = new System.Drawing.Point(14, 183);
+            this.txtBuscaRapida.Location = new System.Drawing.Point(19, 225);
+            this.txtBuscaRapida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaRapida.MaxLength = 8;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.ReadOnly = true;
-            this.txtBuscaRapida.Size = new System.Drawing.Size(66, 20);
+            this.txtBuscaRapida.Size = new System.Drawing.Size(87, 22);
             this.txtBuscaRapida.TabIndex = 3;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
             // 
@@ -372,13 +389,15 @@
             this.txtSenhaLiberar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSenhaLiberar.Enabled = false;
             this.txtSenhaLiberar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenhaLiberar.Location = new System.Drawing.Point(548, 184);
+            this.txtSenhaLiberar.Location = new System.Drawing.Point(731, 226);
+            this.txtSenhaLiberar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSenhaLiberar.MaxLength = 100;
             this.txtSenhaLiberar.Name = "txtSenhaLiberar";
             this.txtSenhaLiberar.ReadOnly = true;
-            this.txtSenhaLiberar.Size = new System.Drawing.Size(51, 21);
+            this.txtSenhaLiberar.Size = new System.Drawing.Size(67, 24);
             this.txtSenhaLiberar.TabIndex = 8;
             this.txtSenhaLiberar.UseSystemPasswordChar = true;
+            this.txtSenhaLiberar.Visible = false;
             // 
             // txtLoginLiberar
             // 
@@ -387,42 +406,49 @@
             this.txtLoginLiberar.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtLoginLiberar.Enabled = false;
             this.txtLoginLiberar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoginLiberar.Location = new System.Drawing.Point(470, 184);
+            this.txtLoginLiberar.Location = new System.Drawing.Point(627, 226);
+            this.txtLoginLiberar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLoginLiberar.MaxLength = 50;
             this.txtLoginLiberar.Name = "txtLoginLiberar";
             this.txtLoginLiberar.ReadOnly = true;
-            this.txtLoginLiberar.Size = new System.Drawing.Size(72, 21);
+            this.txtLoginLiberar.Size = new System.Drawing.Size(95, 24);
             this.txtLoginLiberar.TabIndex = 7;
+            this.txtLoginLiberar.Visible = false;
             // 
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(467, 168);
+            this.label47.Location = new System.Drawing.Point(623, 207);
+            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(150, 13);
+            this.label47.Size = new System.Drawing.Size(203, 17);
             this.label47.TabIndex = 6;
             this.label47.Text = "Liberar edição (Login e senha)";
+            this.label47.Visible = false;
             // 
             // btnLiberarEdicaoManual
             // 
             this.btnLiberarEdicaoManual.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLiberarEdicaoManual.Enabled = false;
-            this.btnLiberarEdicaoManual.Location = new System.Drawing.Point(604, 183);
+            this.btnLiberarEdicaoManual.Location = new System.Drawing.Point(805, 225);
+            this.btnLiberarEdicaoManual.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLiberarEdicaoManual.Name = "btnLiberarEdicaoManual";
-            this.btnLiberarEdicaoManual.Size = new System.Drawing.Size(48, 23);
+            this.btnLiberarEdicaoManual.Size = new System.Drawing.Size(64, 28);
             this.btnLiberarEdicaoManual.TabIndex = 9;
             this.btnLiberarEdicaoManual.Text = "Liberar";
             this.btnLiberarEdicaoManual.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnLiberarEdicaoManual.UseVisualStyleBackColor = true;
+            this.btnLiberarEdicaoManual.Visible = false;
             this.btnLiberarEdicaoManual.Click += new System.EventHandler(this.btnLiberarEdicaoManual_Click);
             // 
             // btnPesquisarEndereco
             // 
             this.btnPesquisarEndereco.Enabled = false;
             this.btnPesquisarEndereco.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.search2;
-            this.btnPesquisarEndereco.Location = new System.Drawing.Point(112, 182);
+            this.btnPesquisarEndereco.Location = new System.Drawing.Point(149, 224);
+            this.btnPesquisarEndereco.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPesquisarEndereco.Name = "btnPesquisarEndereco";
-            this.btnPesquisarEndereco.Size = new System.Drawing.Size(101, 23);
+            this.btnPesquisarEndereco.Size = new System.Drawing.Size(135, 28);
             this.btnPesquisarEndereco.TabIndex = 5;
             this.btnPesquisarEndereco.Text = "Não sei o CEP";
             this.btnPesquisarEndereco.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -432,9 +458,10 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 335);
+            this.label21.Location = new System.Drawing.Point(15, 412);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(28, 13);
+            this.label21.Size = new System.Drawing.Size(35, 17);
             this.label21.TabIndex = 22;
             this.label21.Text = "UF *";
             // 
@@ -443,19 +470,21 @@
             this.txtLogradouro.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtLogradouro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLogradouro.Enabled = false;
-            this.txtLogradouro.Location = new System.Drawing.Point(112, 234);
+            this.txtLogradouro.Location = new System.Drawing.Point(149, 288);
+            this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLogradouro.MaxLength = 100;
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.ReadOnly = true;
-            this.txtLogradouro.Size = new System.Drawing.Size(540, 20);
+            this.txtLogradouro.Size = new System.Drawing.Size(719, 22);
             this.txtLogradouro.TabIndex = 13;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(113, 257);
+            this.label20.Location = new System.Drawing.Point(151, 316);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(71, 13);
+            this.label20.Size = new System.Drawing.Size(94, 17);
             this.label20.TabIndex = 16;
             this.label20.Text = "Complemento";
             // 
@@ -464,18 +493,20 @@
             this.txtPontoReferencia.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtPontoReferencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPontoReferencia.Enabled = false;
-            this.txtPontoReferencia.Location = new System.Drawing.Point(112, 352);
-            this.txtPontoReferencia.MaxLength = 100;
+            this.txtPontoReferencia.Location = new System.Drawing.Point(149, 433);
+            this.txtPontoReferencia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPontoReferencia.MaxLength = 50;
             this.txtPontoReferencia.Name = "txtPontoReferencia";
-            this.txtPontoReferencia.Size = new System.Drawing.Size(540, 20);
+            this.txtPontoReferencia.Size = new System.Drawing.Size(719, 22);
             this.txtPontoReferencia.TabIndex = 25;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(109, 218);
+            this.label16.Location = new System.Drawing.Point(145, 268);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(68, 13);
+            this.label16.Size = new System.Drawing.Size(91, 17);
             this.label16.TabIndex = 12;
             this.label16.Text = "Logradouro *";
             // 
@@ -484,28 +515,31 @@
             this.txtBairro.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtBairro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBairro.Enabled = false;
-            this.txtBairro.Location = new System.Drawing.Point(14, 312);
+            this.txtBairro.Location = new System.Drawing.Point(19, 384);
+            this.txtBairro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBairro.MaxLength = 100;
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.ReadOnly = true;
-            this.txtBairro.Size = new System.Drawing.Size(311, 20);
+            this.txtBairro.Size = new System.Drawing.Size(414, 22);
             this.txtBairro.TabIndex = 19;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(11, 218);
+            this.label17.Location = new System.Drawing.Point(15, 268);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(35, 13);
+            this.label17.Size = new System.Drawing.Size(44, 17);
             this.label17.TabIndex = 10;
             this.label17.Text = "CEP *";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(328, 296);
+            this.label22.Location = new System.Drawing.Point(437, 364);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(47, 13);
+            this.label22.Size = new System.Drawing.Size(61, 17);
             this.label22.TabIndex = 20;
             this.label22.Text = "Cidade *";
             // 
@@ -514,27 +548,30 @@
             this.txtComplemento.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtComplemento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtComplemento.Enabled = false;
-            this.txtComplemento.Location = new System.Drawing.Point(112, 273);
-            this.txtComplemento.MaxLength = 100;
+            this.txtComplemento.Location = new System.Drawing.Point(149, 336);
+            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtComplemento.MaxLength = 50;
             this.txtComplemento.Name = "txtComplemento";
-            this.txtComplemento.Size = new System.Drawing.Size(540, 20);
+            this.txtComplemento.Size = new System.Drawing.Size(719, 22);
             this.txtComplemento.TabIndex = 17;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(108, 337);
+            this.label19.Location = new System.Drawing.Point(144, 415);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(105, 13);
+            this.label19.Size = new System.Drawing.Size(138, 17);
             this.label19.TabIndex = 24;
             this.label19.Text = "Ponto de Referência";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 257);
+            this.label15.Location = new System.Drawing.Point(15, 316);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.Size = new System.Drawing.Size(67, 17);
             this.label15.TabIndex = 14;
             this.label15.Text = "Número *";
             // 
@@ -543,18 +580,20 @@
             this.txtNumero.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtNumero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNumero.Enabled = false;
-            this.txtNumero.Location = new System.Drawing.Point(14, 273);
+            this.txtNumero.Location = new System.Drawing.Point(19, 336);
+            this.txtNumero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNumero.MaxLength = 10;
             this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(92, 20);
+            this.txtNumero.Size = new System.Drawing.Size(122, 22);
             this.txtNumero.TabIndex = 15;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(11, 296);
+            this.label23.Location = new System.Drawing.Point(15, 364);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(41, 13);
+            this.label23.Size = new System.Drawing.Size(55, 17);
             this.label23.TabIndex = 18;
             this.label23.Text = "Bairro *";
             // 
@@ -563,38 +602,10 @@
             this.cmbUf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUf.Enabled = false;
             this.cmbUf.FormattingEnabled = true;
-            this.cmbUf.Items.AddRange(new object[] {
-            "SELECIONE...",
-            "AC",
-            "AL",
-            "AM",
-            "AP",
-            "BA",
-            "CE",
-            "DF",
-            "ES",
-            "GO",
-            "MA",
-            "MG",
-            "MS",
-            "MT",
-            "PA",
-            "PB",
-            "PE",
-            "PI",
-            "PR",
-            "RJ",
-            "RN",
-            "RO",
-            "RR",
-            "RS",
-            "SC",
-            "SE",
-            "SP",
-            "TO"});
-            this.cmbUf.Location = new System.Drawing.Point(14, 351);
+            this.cmbUf.Location = new System.Drawing.Point(19, 432);
+            this.cmbUf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbUf.Name = "cmbUf";
-            this.cmbUf.Size = new System.Drawing.Size(92, 21);
+            this.cmbUf.Size = new System.Drawing.Size(121, 24);
             this.cmbUf.TabIndex = 23;
             // 
             // txtCep
@@ -602,35 +613,39 @@
             this.txtCep.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtCep.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCep.Enabled = false;
-            this.txtCep.Location = new System.Drawing.Point(14, 234);
+            this.txtCep.Location = new System.Drawing.Point(19, 288);
+            this.txtCep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCep.MaxLength = 8;
             this.txtCep.Name = "txtCep";
             this.txtCep.ReadOnly = true;
-            this.txtCep.Size = new System.Drawing.Size(92, 20);
+            this.txtCep.Size = new System.Drawing.Size(122, 22);
             this.txtCep.TabIndex = 11;
+            this.txtCep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCep_KeyPress);
             // 
             // txtCidade
             // 
             this.txtCidade.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtCidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCidade.Enabled = false;
-            this.txtCidade.Location = new System.Drawing.Point(331, 312);
+            this.txtCidade.Location = new System.Drawing.Point(441, 384);
+            this.txtCidade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCidade.MaxLength = 100;
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.ReadOnly = true;
-            this.txtCidade.Size = new System.Drawing.Size(321, 20);
+            this.txtCidade.Size = new System.Drawing.Size(427, 22);
             this.txtCidade.TabIndex = 21;
             // 
             // EnderecoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(665, 386);
+            this.ClientSize = new System.Drawing.Size(887, 475);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EnderecoForm";

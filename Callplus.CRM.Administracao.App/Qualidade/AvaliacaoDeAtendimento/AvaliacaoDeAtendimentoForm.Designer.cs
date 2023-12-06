@@ -45,6 +45,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnDetalheContato = new System.Windows.Forms.Button();
             this.gbAvaliacao = new System.Windows.Forms.GroupBox();
+            this.lblPontuacaoDosModulos = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.txtNomeAvaliador = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -83,32 +84,18 @@
             this.lblIdContato = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.txtNomeProspect = new System.Windows.Forms.TextBox();
-            this.gbFiltro = new System.Windows.Forms.GroupBox();
-            this.cmbTipo = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbOperador = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbSupervisor = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnPesquisar = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
-            this.cmbCampanha = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnDesmarcarTodos = new System.Windows.Forms.Button();
-            this.btnMarcarTodos = new System.Windows.Forms.Button();
-            this.clbStatus = new System.Windows.Forms.CheckedListBox();
-            this.dtpDataInicial = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnExcluirFeedback = new System.Windows.Forms.Button();
+            this.tcOferta = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pnlOferta = new System.Windows.Forms.Panel();
             this.gbFeedback.SuspendLayout();
             this.gbAuditor.SuspendLayout();
             this.gbAssinatura.SuspendLayout();
             this.gbAvaliacao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProcedimento)).BeginInit();
-            this.gbFiltro.SuspendLayout();
+            this.tcOferta.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbFeedback
@@ -263,6 +250,7 @@
             // 
             // gbAvaliacao
             // 
+            this.gbAvaliacao.Controls.Add(this.lblPontuacaoDosModulos);
             this.gbAvaliacao.Controls.Add(this.label20);
             this.gbAvaliacao.Controls.Add(this.txtNomeAvaliador);
             this.gbAvaliacao.Controls.Add(this.label19);
@@ -295,12 +283,25 @@
             this.gbAvaliacao.Controls.Add(this.lblIdContato);
             this.gbAvaliacao.Controls.Add(this.lblNome);
             this.gbAvaliacao.Controls.Add(this.txtNomeProspect);
-            this.gbAvaliacao.Location = new System.Drawing.Point(12, 37);
+            this.gbAvaliacao.Location = new System.Drawing.Point(12, 43);
             this.gbAvaliacao.Name = "gbAvaliacao";
             this.gbAvaliacao.Size = new System.Drawing.Size(805, 595);
-            this.gbAvaliacao.TabIndex = 22;
+            this.gbAvaliacao.TabIndex = 0;
             this.gbAvaliacao.TabStop = false;
             this.gbAvaliacao.Text = "Avaliação";
+            // 
+            // lblPontuacaoDosModulos
+            // 
+            this.lblPontuacaoDosModulos.AutoSize = true;
+            this.lblPontuacaoDosModulos.BackColor = System.Drawing.Color.Red;
+            this.lblPontuacaoDosModulos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPontuacaoDosModulos.ForeColor = System.Drawing.Color.White;
+            this.lblPontuacaoDosModulos.Location = new System.Drawing.Point(627, 104);
+            this.lblPontuacaoDosModulos.Name = "lblPontuacaoDosModulos";
+            this.lblPontuacaoDosModulos.Size = new System.Drawing.Size(160, 13);
+            this.lblPontuacaoDosModulos.TabIndex = 32;
+            this.lblPontuacaoDosModulos.Text = "Pontuação do Modulo: 100";
+            this.lblPontuacaoDosModulos.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label20
             // 
@@ -320,6 +321,7 @@
             this.txtNomeAvaliador.ReadOnly = true;
             this.txtNomeAvaliador.Size = new System.Drawing.Size(249, 20);
             this.txtNomeAvaliador.TabIndex = 16;
+            this.txtNomeAvaliador.TabStop = false;
             // 
             // label19
             // 
@@ -339,6 +341,7 @@
             this.txtNomeSupervisor.ReadOnly = true;
             this.txtNomeSupervisor.Size = new System.Drawing.Size(217, 20);
             this.txtNomeSupervisor.TabIndex = 14;
+            this.txtNomeSupervisor.TabStop = false;
             // 
             // label18
             // 
@@ -358,6 +361,7 @@
             this.txtNomeOperador.ReadOnly = true;
             this.txtNomeOperador.Size = new System.Drawing.Size(310, 20);
             this.txtNomeOperador.TabIndex = 12;
+            this.txtNomeOperador.TabStop = false;
             // 
             // label2
             // 
@@ -394,6 +398,7 @@
             this.txtDescricao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescricao.Size = new System.Drawing.Size(788, 94);
             this.txtDescricao.TabIndex = 19;
+            this.txtDescricao.TabStop = false;
             // 
             // lblPagina
             // 
@@ -422,7 +427,7 @@
             this.lblPontuacao.AutoSize = true;
             this.lblPontuacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPontuacao.ForeColor = System.Drawing.Color.Blue;
-            this.lblPontuacao.Location = new System.Drawing.Point(651, 569);
+            this.lblPontuacao.Location = new System.Drawing.Point(637, 569);
             this.lblPontuacao.Name = "lblPontuacao";
             this.lblPontuacao.Size = new System.Drawing.Size(130, 13);
             this.lblPontuacao.TabIndex = 0;
@@ -442,7 +447,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(171, 563);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(148, 25);
-            this.btnCancelar.TabIndex = 31;
+            this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar Avaliação";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -460,7 +465,7 @@
             this.btnGravar.Location = new System.Drawing.Point(8, 563);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(157, 25);
-            this.btnGravar.TabIndex = 30;
+            this.btnGravar.TabIndex = 4;
             this.btnGravar.Text = "Gravar Avaliação";
             this.btnGravar.UseVisualStyleBackColor = true;
             this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
@@ -479,7 +484,7 @@
             this.btnProximo.Location = new System.Drawing.Point(168, 405);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(75, 23);
-            this.btnProximo.TabIndex = 24;
+            this.btnProximo.TabIndex = 2;
             this.btnProximo.Text = "Próximo";
             this.btnProximo.UseVisualStyleBackColor = true;
             this.btnProximo.Click += new System.EventHandler(this.btnProximo_Click);
@@ -489,7 +494,7 @@
             this.btnAnterior.Location = new System.Drawing.Point(8, 405);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 23);
-            this.btnAnterior.TabIndex = 22;
+            this.btnAnterior.TabIndex = 1;
             this.btnAnterior.Text = "Anterior";
             this.btnAnterior.UseVisualStyleBackColor = true;
             this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
@@ -522,7 +527,7 @@
             this.gvProcedimento.Name = "gvProcedimento";
             this.gvProcedimento.RowHeadersVisible = false;
             this.gvProcedimento.Size = new System.Drawing.Size(788, 133);
-            this.gvProcedimento.TabIndex = 21;
+            this.gvProcedimento.TabIndex = 0;
             this.gvProcedimento.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProcedimento_CellContentClick);
             this.gvProcedimento.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProcedimento_CellEndEdit);
             this.gvProcedimento.CurrentCellDirtyStateChanged += new System.EventHandler(this.gvProcedimento_CurrentCellDirtyStateChanged);
@@ -614,7 +619,7 @@
             this.txtObervacaoAvaliador.Name = "txtObervacaoAvaliador";
             this.txtObervacaoAvaliador.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObervacaoAvaliador.Size = new System.Drawing.Size(788, 109);
-            this.txtObervacaoAvaliador.TabIndex = 29;
+            this.txtObervacaoAvaliador.TabIndex = 3;
             // 
             // txtTelefone
             // 
@@ -625,6 +630,7 @@
             this.txtTelefone.ReadOnly = true;
             this.txtTelefone.Size = new System.Drawing.Size(104, 20);
             this.txtTelefone.TabIndex = 8;
+            this.txtTelefone.TabStop = false;
             // 
             // lblTelefone1
             // 
@@ -644,6 +650,7 @@
             this.txtDataContato.ReadOnly = true;
             this.txtDataContato.Size = new System.Drawing.Size(139, 20);
             this.txtDataContato.TabIndex = 10;
+            this.txtDataContato.TabStop = false;
             // 
             // label9
             // 
@@ -663,6 +670,7 @@
             this.txtIdCodigo.ReadOnly = true;
             this.txtIdCodigo.Size = new System.Drawing.Size(56, 20);
             this.txtIdCodigo.TabIndex = 1;
+            this.txtIdCodigo.TabStop = false;
             // 
             // txtMailing
             // 
@@ -673,6 +681,7 @@
             this.txtMailing.ReadOnly = true;
             this.txtMailing.Size = new System.Drawing.Size(248, 20);
             this.txtMailing.TabIndex = 3;
+            this.txtMailing.TabStop = false;
             // 
             // lblMailing
             // 
@@ -712,216 +721,7 @@
             this.txtNomeProspect.ReadOnly = true;
             this.txtNomeProspect.Size = new System.Drawing.Size(217, 20);
             this.txtNomeProspect.TabIndex = 5;
-            // 
-            // gbFiltro
-            // 
-            this.gbFiltro.Controls.Add(this.cmbTipo);
-            this.gbFiltro.Controls.Add(this.label4);
-            this.gbFiltro.Controls.Add(this.cmbOperador);
-            this.gbFiltro.Controls.Add(this.label3);
-            this.gbFiltro.Controls.Add(this.cmbSupervisor);
-            this.gbFiltro.Controls.Add(this.label7);
-            this.gbFiltro.Controls.Add(this.btnPesquisar);
-            this.gbFiltro.Controls.Add(this.label8);
-            this.gbFiltro.Controls.Add(this.dtpDataFinal);
-            this.gbFiltro.Controls.Add(this.cmbCampanha);
-            this.gbFiltro.Controls.Add(this.label6);
-            this.gbFiltro.Controls.Add(this.label1);
-            this.gbFiltro.Controls.Add(this.btnDesmarcarTodos);
-            this.gbFiltro.Controls.Add(this.btnMarcarTodos);
-            this.gbFiltro.Controls.Add(this.clbStatus);
-            this.gbFiltro.Controls.Add(this.dtpDataInicial);
-            this.gbFiltro.Controls.Add(this.label5);
-            this.gbFiltro.Location = new System.Drawing.Point(12, 37);
-            this.gbFiltro.Name = "gbFiltro";
-            this.gbFiltro.Size = new System.Drawing.Size(805, 185);
-            this.gbFiltro.TabIndex = 21;
-            this.gbFiltro.TabStop = false;
-            this.gbFiltro.Text = "Filtro";
-            // 
-            // cmbTipo
-            // 
-            this.cmbTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Location = new System.Drawing.Point(17, 33);
-            this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(229, 21);
-            this.cmbTipo.TabIndex = 1;
-            this.cmbTipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(15, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Tipo";
-            // 
-            // cmbOperador
-            // 
-            this.cmbOperador.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbOperador.FormattingEnabled = true;
-            this.cmbOperador.Location = new System.Drawing.Point(251, 120);
-            this.cmbOperador.Name = "cmbOperador";
-            this.cmbOperador.Size = new System.Drawing.Size(237, 21);
-            this.cmbOperador.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(249, 104);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Operador";
-            // 
-            // cmbSupervisor
-            // 
-            this.cmbSupervisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSupervisor.FormattingEnabled = true;
-            this.cmbSupervisor.Location = new System.Drawing.Point(17, 120);
-            this.cmbSupervisor.Name = "cmbSupervisor";
-            this.cmbSupervisor.Size = new System.Drawing.Size(228, 21);
-            this.cmbSupervisor.TabIndex = 5;
-            this.cmbSupervisor.SelectedIndexChanged += new System.EventHandler(this.cmbSupervisor_SelectedIndexChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(14, 104);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Supervisor";
-            // 
-            // btnPesquisar
-            // 
-            this.btnPesquisar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPesquisar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPesquisar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search2;
-            this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPesquisar.Location = new System.Drawing.Point(16, 147);
-            this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(130, 25);
-            this.btnPesquisar.TabIndex = 16;
-            this.btnPesquisar.Text = "Encontrar Contato   ";
-            this.btnPesquisar.UseVisualStyleBackColor = true;
-            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(249, 62);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Data Final";
-            // 
-            // dtpDataFinal
-            // 
-            this.dtpDataFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDataFinal.Location = new System.Drawing.Point(251, 77);
-            this.dtpDataFinal.Name = "dtpDataFinal";
-            this.dtpDataFinal.Size = new System.Drawing.Size(237, 20);
-            this.dtpDataFinal.TabIndex = 9;
-            // 
-            // cmbCampanha
-            // 
-            this.cmbCampanha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCampanha.FormattingEnabled = true;
-            this.cmbCampanha.Location = new System.Drawing.Point(17, 77);
-            this.cmbCampanha.Name = "cmbCampanha";
-            this.cmbCampanha.Size = new System.Drawing.Size(229, 21);
-            this.cmbCampanha.TabIndex = 3;
-            this.cmbCampanha.SelectedIndexChanged += new System.EventHandler(this.cmbCampanha_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(15, 61);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Campanha";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(491, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Status";
-            // 
-            // btnDesmarcarTodos
-            // 
-            this.btnDesmarcarTodos.BackColor = System.Drawing.SystemColors.Control;
-            this.btnDesmarcarTodos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDesmarcarTodos.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.DTodos;
-            this.btnDesmarcarTodos.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDesmarcarTodos.Location = new System.Drawing.Point(685, 147);
-            this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            this.btnDesmarcarTodos.Size = new System.Drawing.Size(111, 25);
-            this.btnDesmarcarTodos.TabIndex = 15;
-            this.btnDesmarcarTodos.Text = "Desmarcar todos   ";
-            this.btnDesmarcarTodos.UseVisualStyleBackColor = true;
-            this.btnDesmarcarTodos.Click += new System.EventHandler(this.btnDesmarcarTodos_Click);
-            // 
-            // btnMarcarTodos
-            // 
-            this.btnMarcarTodos.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMarcarTodos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMarcarTodos.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.STodos;
-            this.btnMarcarTodos.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMarcarTodos.Location = new System.Drawing.Point(493, 148);
-            this.btnMarcarTodos.Name = "btnMarcarTodos";
-            this.btnMarcarTodos.Size = new System.Drawing.Size(111, 25);
-            this.btnMarcarTodos.TabIndex = 14;
-            this.btnMarcarTodos.Text = "Selecionar todos   ";
-            this.btnMarcarTodos.UseVisualStyleBackColor = true;
-            this.btnMarcarTodos.Click += new System.EventHandler(this.btnMarcarTodos_Click);
-            // 
-            // clbStatus
-            // 
-            this.clbStatus.CheckOnClick = true;
-            this.clbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbStatus.FormattingEnabled = true;
-            this.clbStatus.Location = new System.Drawing.Point(494, 33);
-            this.clbStatus.Name = "clbStatus";
-            this.clbStatus.Size = new System.Drawing.Size(302, 109);
-            this.clbStatus.TabIndex = 13;
-            // 
-            // dtpDataInicial
-            // 
-            this.dtpDataInicial.Location = new System.Drawing.Point(251, 33);
-            this.dtpDataInicial.Name = "dtpDataInicial";
-            this.dtpDataInicial.Size = new System.Drawing.Size(237, 20);
-            this.dtpDataInicial.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(249, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Data Inicial";
+            this.txtNomeProspect.TabStop = false;
             // 
             // lblTitulo
             // 
@@ -950,17 +750,45 @@
             this.btnExcluirFeedback.Visible = false;
             this.btnExcluirFeedback.Click += new System.EventHandler(this.btnExcluirFeedback_Click);
             // 
+            // tcOferta
+            // 
+            this.tcOferta.Controls.Add(this.tabPage2);
+            this.tcOferta.Location = new System.Drawing.Point(823, 12);
+            this.tcOferta.Name = "tcOferta";
+            this.tcOferta.SelectedIndex = 0;
+            this.tcOferta.Size = new System.Drawing.Size(530, 588);
+            this.tcOferta.TabIndex = 25;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.pnlOferta);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(522, 562);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Detalhes do Contato";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // pnlOferta
+            // 
+            this.pnlOferta.Location = new System.Drawing.Point(6, 4);
+            this.pnlOferta.Name = "pnlOferta";
+            this.pnlOferta.Size = new System.Drawing.Size(850, 533);
+            this.pnlOferta.TabIndex = 27;
+            // 
             // AvaliacaoDeAtendimentoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1235, 639);
+            this.ClientSize = new System.Drawing.Size(1239, 639);
+            this.Controls.Add(this.tcOferta);
             this.Controls.Add(this.btnExcluirFeedback);
             this.Controls.Add(this.gbFeedback);
             this.Controls.Add(this.btnDetalheContato);
             this.Controls.Add(this.gbAvaliacao);
-            this.Controls.Add(this.gbFiltro);
             this.Controls.Add(this.lblTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -979,8 +807,8 @@
             this.gbAvaliacao.ResumeLayout(false);
             this.gbAvaliacao.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProcedimento)).EndInit();
-            this.gbFiltro.ResumeLayout(false);
-            this.gbFiltro.PerformLayout();
+            this.tcOferta.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1042,24 +870,10 @@
         private System.Windows.Forms.Label lblIdContato;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.TextBox txtNomeProspect;
-        private System.Windows.Forms.GroupBox gbFiltro;
-        private System.Windows.Forms.ComboBox cmbTipo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbOperador;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbSupervisor;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnPesquisar;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dtpDataFinal;
-        private System.Windows.Forms.ComboBox cmbCampanha;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnDesmarcarTodos;
-        private System.Windows.Forms.Button btnMarcarTodos;
-        private System.Windows.Forms.CheckedListBox clbStatus;
-        private System.Windows.Forms.DateTimePicker dtpDataInicial;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.TabControl tcOferta;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel pnlOferta;
+        private System.Windows.Forms.Label lblPontuacaoDosModulos;
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Callplus.CRM.Tabulador.App", "Callplus.CRM.Tabulador.App\Callplus.CRM.Tabulador.App.csproj", "{D4F0EE4D-AC29-4863-9C16-356B2B4BF543}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallplusUtil", "CallplusUtil\CallplusUtil.csproj", "{A39A0285-492A-42D5-B94A-3A35E17D917B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Callplus.CRM.Administracao.App", "Callplus.CRM.Administracao.App\Callplus.CRM.Administracao.App.csproj", "{3B36F488-F90A-4E97-BDEA-2870904BB25F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Callplus.CRM.Web.Api.Services", "Callplus.CRM.Web.Api\Callplus.CRM.Web.Api.Services\Callplus.CRM.Web.Api.Services.csproj", "{7764E9FC-1867-4B6F-8212-2A1C644820E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{3B36F488-F90A-4E97-BDEA-2870904BB25F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B36F488-F90A-4E97-BDEA-2870904BB25F}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B36F488-F90A-4E97-BDEA-2870904BB25F}.Release|x86.Build.0 = Release|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Debug|x86.Build.0 = Debug|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{7764E9FC-1867-4B6F-8212-2A1C644820E2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,27 +89,30 @@ Global
 		SolutionGuid = {DB39A282-FBA2-4311-BB09-7B5C08938ED3}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://192.168.25.241:8080/tfs/callplusdesktop
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Callplus.CRM.Tabulador.App\\Callplus.CRM.Tabulador.App.csproj
-		SccProjectName1 = Callplus.CRM.Tabulador.App
-		SccLocalPath1 = Callplus.CRM.Tabulador.App
-		SccProjectUniqueName2 = Callplus.CRM.Tabulador.Dominio\\Callplus.CRM.Tabulador.Dominio.csproj
-		SccProjectName2 = Callplus.CRM.Tabulador.Dominio
-		SccLocalPath2 = Callplus.CRM.Tabulador.Dominio
+		SccProjectUniqueName0 = Callplus.CRM.Tabulador.App\\Callplus.CRM.Tabulador.App.csproj
+		SccProjectName0 = Callplus.CRM.Tabulador.App
+		SccLocalPath0 = Callplus.CRM.Tabulador.App
+		SccProjectUniqueName1 = Callplus.CRM.Tabulador.Dominio\\Callplus.CRM.Tabulador.Dominio.csproj
+		SccProjectName1 = Callplus.CRM.Tabulador.Dominio
+		SccLocalPath1 = Callplus.CRM.Tabulador.Dominio
+		SccProjectUniqueName2 = Callplus.CRM.Tabulador.Servico\\Callplus.CRM.Tabulador.Servico.csproj
+		SccProjectName2 = Callplus.CRM.Tabulador.Servico
+		SccLocalPath2 = Callplus.CRM.Tabulador.Servico
 		SccProjectUniqueName3 = Callplus.CRM.Tabulador.Infra.Dados\\Callplus.CRM.Tabulador.Infra.Dados.csproj
 		SccProjectName3 = Callplus.CRM.Tabulador.Infra.Dados
 		SccLocalPath3 = Callplus.CRM.Tabulador.Infra.Dados
-		SccProjectUniqueName4 = Callplus.CRM.Tabulador.Servico\\Callplus.CRM.Tabulador.Servico.csproj
-		SccProjectName4 = Callplus.CRM.Tabulador.Servico
-		SccLocalPath4 = Callplus.CRM.Tabulador.Servico
-		SccProjectUniqueName5 = CallplusUtil\\CallplusUtil.csproj
-		SccProjectName5 = CallplusUtil
-		SccLocalPath5 = CallplusUtil
-		SccProjectUniqueName6 = Callplus.CRM.Administracao.App\\Callplus.CRM.Administracao.App.csproj
-		SccProjectName6 = Callplus.CRM.Administracao.App
-		SccLocalPath6 = Callplus.CRM.Administracao.App
+		SccProjectUniqueName4 = CallplusUtil\\CallplusUtil.csproj
+		SccProjectName4 = CallplusUtil
+		SccLocalPath4 = CallplusUtil
+		SccProjectUniqueName5 = Callplus.CRM.Administracao.App\\Callplus.CRM.Administracao.App.csproj
+		SccProjectName5 = Callplus.CRM.Administracao.App
+		SccLocalPath5 = Callplus.CRM.Administracao.App
+		SccLocalPath6 = .
+		SccProjectUniqueName7 = Callplus.CRM.Web.Api\\Callplus.CRM.Web.Api.Services\\Callplus.CRM.Web.Api.Services.csproj
+		SccProjectName7 = Callplus.CRM.Web.Api/Callplus.CRM.Web.Api.Services
+		SccLocalPath7 = Callplus.CRM.Web.Api\\Callplus.CRM.Web.Api.Services
 	EndGlobalSection
 EndGlobal

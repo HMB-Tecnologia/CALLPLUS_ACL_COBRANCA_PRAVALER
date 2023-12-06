@@ -72,6 +72,7 @@
             this.label165 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.tcAtendimento_tpDadosProspect = new System.Windows.Forms.TabPage();
+            this._containerDeLayoutDinamico = new Callplus.CRM.Tabulador.App.Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos();
             this.tcAtendimento = new System.Windows.Forms.TabControl();
             this.dgResultadoPesquisa = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -82,15 +83,17 @@
             this.cmbFiltrosDaCampanha = new System.Windows.Forms.ComboBox();
             this.lblFiltroSelecionado = new System.Windows.Forms.Label();
             this.lblFiltro = new System.Windows.Forms.Label();
-            this.btnNovoProspect = new System.Windows.Forms.Button();
             this.btnNovoContato = new System.Windows.Forms.Button();
             this.grbResultado = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnUltimoProspectTrabalhado = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cmbCampanhaDoNovoCliente = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this._containerDeLayoutDinamico = new Callplus.CRM.Tabulador.App.Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos();
+            this.btnNovoProspect = new System.Windows.Forms.Button();
+            this.txtCpf = new System.Windows.Forms.TextBox();
+            this.lblCpf = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tcAtendimento_tpHistorico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
@@ -111,6 +114,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCpf);
+            this.groupBox1.Controls.Add(this.lblCpf);
+            this.groupBox1.Controls.Add(this.btnUltimoProspectTrabalhado);
             this.groupBox1.Controls.Add(this.btnConsultaRapida);
             this.groupBox1.Controls.Add(this.txtTelefone);
             this.groupBox1.Controls.Add(this.lblIdProspect);
@@ -118,7 +124,7 @@
             this.groupBox1.Controls.Add(this.txtIdProspect);
             this.groupBox1.Location = new System.Drawing.Point(12, 37);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(216, 68);
+            this.groupBox1.Size = new System.Drawing.Size(432, 68);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consulta Rápida";
@@ -126,7 +132,7 @@
             // btnConsultaRapida
             // 
             this.btnConsultaRapida.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.search;
-            this.btnConsultaRapida.Location = new System.Drawing.Point(184, 32);
+            this.btnConsultaRapida.Location = new System.Drawing.Point(275, 32);
             this.btnConsultaRapida.Name = "btnConsultaRapida";
             this.btnConsultaRapida.Size = new System.Drawing.Size(25, 23);
             this.btnConsultaRapida.TabIndex = 15;
@@ -136,18 +142,17 @@
             // txtTelefone
             // 
             this.txtTelefone.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtTelefone.Location = new System.Drawing.Point(87, 34);
+            this.txtTelefone.Location = new System.Drawing.Point(85, 34);
             this.txtTelefone.MaxLength = 11;
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(91, 20);
             this.txtTelefone.TabIndex = 3;
-            this.txtTelefone.TextChanged += new System.EventHandler(this.txtTelefone_TextChanged);
             this.txtTelefone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefone_KeyPress);
             // 
             // lblIdProspect
             // 
             this.lblIdProspect.AutoSize = true;
-            this.lblIdProspect.Location = new System.Drawing.Point(4, 16);
+            this.lblIdProspect.Location = new System.Drawing.Point(3, 19);
             this.lblIdProspect.Name = "lblIdProspect";
             this.lblIdProspect.Size = new System.Drawing.Size(61, 13);
             this.lblIdProspect.TabIndex = 2;
@@ -156,7 +161,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(84, 16);
+            this.label1.Location = new System.Drawing.Point(82, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 2;
@@ -165,7 +170,7 @@
             // txtIdProspect
             // 
             this.txtIdProspect.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtIdProspect.Location = new System.Drawing.Point(6, 35);
+            this.txtIdProspect.Location = new System.Drawing.Point(6, 34);
             this.txtIdProspect.Name = "txtIdProspect";
             this.txtIdProspect.Size = new System.Drawing.Size(74, 20);
             this.txtIdProspect.TabIndex = 1;
@@ -193,7 +198,7 @@
             this.tcAtendimento_tpHistorico.Location = new System.Drawing.Point(4, 22);
             this.tcAtendimento_tpHistorico.Name = "tcAtendimento_tpHistorico";
             this.tcAtendimento_tpHistorico.Padding = new System.Windows.Forms.Padding(3);
-            this.tcAtendimento_tpHistorico.Size = new System.Drawing.Size(759, 334);
+            this.tcAtendimento_tpHistorico.Size = new System.Drawing.Size(759, 215);
             this.tcAtendimento_tpHistorico.TabIndex = 1;
             this.tcAtendimento_tpHistorico.Text = "Histórico de Atendimento";
             this.tcAtendimento_tpHistorico.UseVisualStyleBackColor = true;
@@ -212,7 +217,7 @@
             // 
             this.splitContainer5.Panel2.AutoScroll = true;
             this.splitContainer5.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer5.Size = new System.Drawing.Size(753, 328);
+            this.splitContainer5.Size = new System.Drawing.Size(753, 209);
             this.splitContainer5.SplitterDistance = 361;
             this.splitContainer5.TabIndex = 0;
             // 
@@ -221,6 +226,7 @@
             this.dgHistoricoAtendimento.AllowUserToAddRows = false;
             this.dgHistoricoAtendimento.AllowUserToDeleteRows = false;
             this.dgHistoricoAtendimento.AllowUserToResizeRows = false;
+            this.dgHistoricoAtendimento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -263,8 +269,9 @@
             this.dgHistoricoAtendimento.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgHistoricoAtendimento.RowHeadersVisible = false;
             this.dgHistoricoAtendimento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgHistoricoAtendimento.Size = new System.Drawing.Size(361, 328);
+            this.dgHistoricoAtendimento.Size = new System.Drawing.Size(361, 209);
             this.dgHistoricoAtendimento.TabIndex = 119;
+            this.dgHistoricoAtendimento.Visible = false;
             this.dgHistoricoAtendimento.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgHistoricoAtendimento_CellDoubleClick);
             // 
             // id
@@ -274,7 +281,6 @@
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
-            this.id.Width = 21;
             // 
             // colIdProspect_dgHistorico
             // 
@@ -290,7 +296,6 @@
             this.data.HeaderText = "Data";
             this.data.Name = "data";
             this.data.ReadOnly = true;
-            this.data.Width = 120;
             // 
             // operador
             // 
@@ -298,7 +303,6 @@
             this.operador.HeaderText = "Operador";
             this.operador.Name = "operador";
             this.operador.ReadOnly = true;
-            this.operador.Width = 200;
             // 
             // colTelefone_dgHistorico
             // 
@@ -306,15 +310,14 @@
             this.colTelefone_dgHistorico.HeaderText = "Numero";
             this.colTelefone_dgHistorico.Name = "colTelefone_dgHistorico";
             this.colTelefone_dgHistorico.ReadOnly = true;
-            this.colTelefone_dgHistorico.Width = 130;
+            this.colTelefone_dgHistorico.Visible = false;
             // 
             // colResultado_dgHistorico
             // 
             this.colResultado_dgHistorico.DataPropertyName = "ResultadoInteracao";
-            this.colResultado_dgHistorico.HeaderText = "Resultado da Interação";
+            this.colResultado_dgHistorico.HeaderText = "Status";
             this.colResultado_dgHistorico.Name = "colResultado_dgHistorico";
             this.colResultado_dgHistorico.ReadOnly = true;
-            this.colResultado_dgHistorico.Width = 394;
             // 
             // colDataAgendamento_dgHistorico
             // 
@@ -347,7 +350,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(388, 328);
+            this.tabControl1.Size = new System.Drawing.Size(388, 209);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage_dados
@@ -371,7 +374,7 @@
             this.tabPage_dados.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dados.Name = "tabPage_dados";
             this.tabPage_dados.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dados.Size = new System.Drawing.Size(380, 302);
+            this.tabPage_dados.Size = new System.Drawing.Size(380, 183);
             this.tabPage_dados.TabIndex = 0;
             this.tabPage_dados.Text = "Dados do Atendimento";
             this.tabPage_dados.UseVisualStyleBackColor = true;
@@ -379,7 +382,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(6, 123);
+            this.label45.Location = new System.Drawing.Point(196, 3);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(37, 13);
             this.label45.TabIndex = 133;
@@ -388,7 +391,7 @@
             // lblHistoricoMagia
             // 
             this.lblHistoricoMagia.AutoSize = true;
-            this.lblHistoricoMagia.Location = new System.Drawing.Point(470, 346);
+            this.lblHistoricoMagia.Location = new System.Drawing.Point(255, 120);
             this.lblHistoricoMagia.Name = "lblHistoricoMagia";
             this.lblHistoricoMagia.Size = new System.Drawing.Size(35, 13);
             this.lblHistoricoMagia.TabIndex = 123;
@@ -408,30 +411,30 @@
             // 
             this.txtHistorico_observacao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHistorico_observacao.Location = new System.Drawing.Point(6, 178);
+            this.txtHistorico_observacao.Location = new System.Drawing.Point(6, 136);
             this.txtHistorico_observacao.MaxLength = 11;
             this.txtHistorico_observacao.Multiline = true;
             this.txtHistorico_observacao.Name = "txtHistorico_observacao";
             this.txtHistorico_observacao.ReadOnly = true;
             this.txtHistorico_observacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtHistorico_observacao.Size = new System.Drawing.Size(599, 165);
+            this.txtHistorico_observacao.Size = new System.Drawing.Size(368, 41);
             this.txtHistorico_observacao.TabIndex = 125;
             // 
             // txtHistorico_telefoneAgendamento
             // 
             this.txtHistorico_telefoneAgendamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHistorico_telefoneAgendamento.Location = new System.Drawing.Point(235, 100);
+            this.txtHistorico_telefoneAgendamento.Location = new System.Drawing.Point(197, 97);
             this.txtHistorico_telefoneAgendamento.MaxLength = 11;
             this.txtHistorico_telefoneAgendamento.Name = "txtHistorico_telefoneAgendamento";
             this.txtHistorico_telefoneAgendamento.ReadOnly = true;
-            this.txtHistorico_telefoneAgendamento.Size = new System.Drawing.Size(375, 20);
+            this.txtHistorico_telefoneAgendamento.Size = new System.Drawing.Size(177, 20);
             this.txtHistorico_telefoneAgendamento.TabIndex = 123;
             // 
             // label163
             // 
             this.label163.AutoSize = true;
-            this.label163.Location = new System.Drawing.Point(6, 162);
+            this.label163.Location = new System.Drawing.Point(6, 120);
             this.label163.Name = "label163";
             this.label163.Size = new System.Drawing.Size(65, 13);
             this.label163.TabIndex = 122;
@@ -439,59 +442,57 @@
             // 
             // txtHistorico_dataAgendamento
             // 
-            this.txtHistorico_dataAgendamento.Location = new System.Drawing.Point(7, 100);
+            this.txtHistorico_dataAgendamento.Location = new System.Drawing.Point(7, 97);
             this.txtHistorico_dataAgendamento.MaxLength = 11;
             this.txtHistorico_dataAgendamento.Name = "txtHistorico_dataAgendamento";
             this.txtHistorico_dataAgendamento.ReadOnly = true;
-            this.txtHistorico_dataAgendamento.Size = new System.Drawing.Size(222, 20);
+            this.txtHistorico_dataAgendamento.Size = new System.Drawing.Size(184, 20);
             this.txtHistorico_dataAgendamento.TabIndex = 128;
             // 
             // txtHistorico_operador
             // 
-            this.txtHistorico_operador.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHistorico_operador.Location = new System.Drawing.Point(7, 19);
             this.txtHistorico_operador.MaxLength = 11;
             this.txtHistorico_operador.Name = "txtHistorico_operador";
             this.txtHistorico_operador.ReadOnly = true;
-            this.txtHistorico_operador.Size = new System.Drawing.Size(603, 20);
+            this.txtHistorico_operador.Size = new System.Drawing.Size(184, 20);
             this.txtHistorico_operador.TabIndex = 132;
             // 
             // txtHistorico_telefoneConectado
             // 
             this.txtHistorico_telefoneConectado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHistorico_telefoneConectado.Location = new System.Drawing.Point(235, 61);
+            this.txtHistorico_telefoneConectado.Location = new System.Drawing.Point(197, 58);
             this.txtHistorico_telefoneConectado.MaxLength = 11;
             this.txtHistorico_telefoneConectado.Name = "txtHistorico_telefoneConectado";
             this.txtHistorico_telefoneConectado.ReadOnly = true;
-            this.txtHistorico_telefoneConectado.Size = new System.Drawing.Size(375, 20);
+            this.txtHistorico_telefoneConectado.Size = new System.Drawing.Size(177, 20);
             this.txtHistorico_telefoneConectado.TabIndex = 124;
             // 
             // txtHistorico_statusAtendimento
             // 
             this.txtHistorico_statusAtendimento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHistorico_statusAtendimento.Location = new System.Drawing.Point(7, 139);
+            this.txtHistorico_statusAtendimento.Location = new System.Drawing.Point(197, 19);
             this.txtHistorico_statusAtendimento.MaxLength = 11;
             this.txtHistorico_statusAtendimento.Name = "txtHistorico_statusAtendimento";
             this.txtHistorico_statusAtendimento.ReadOnly = true;
-            this.txtHistorico_statusAtendimento.Size = new System.Drawing.Size(603, 20);
+            this.txtHistorico_statusAtendimento.Size = new System.Drawing.Size(177, 20);
             this.txtHistorico_statusAtendimento.TabIndex = 134;
             // 
             // txtHistorico_dataAtendimento
             // 
-            this.txtHistorico_dataAtendimento.Location = new System.Drawing.Point(7, 61);
+            this.txtHistorico_dataAtendimento.Location = new System.Drawing.Point(7, 58);
             this.txtHistorico_dataAtendimento.MaxLength = 11;
             this.txtHistorico_dataAtendimento.Name = "txtHistorico_dataAtendimento";
             this.txtHistorico_dataAtendimento.ReadOnly = true;
-            this.txtHistorico_dataAtendimento.Size = new System.Drawing.Size(222, 20);
+            this.txtHistorico_dataAtendimento.Size = new System.Drawing.Size(184, 20);
             this.txtHistorico_dataAtendimento.TabIndex = 130;
             // 
             // label168
             // 
             this.label168.AutoSize = true;
-            this.label168.Location = new System.Drawing.Point(4, 84);
+            this.label168.Location = new System.Drawing.Point(4, 81);
             this.label168.Name = "label168";
             this.label168.Size = new System.Drawing.Size(99, 13);
             this.label168.TabIndex = 127;
@@ -500,7 +501,7 @@
             // label166
             // 
             this.label166.AutoSize = true;
-            this.label166.Location = new System.Drawing.Point(232, 84);
+            this.label166.Location = new System.Drawing.Point(194, 81);
             this.label166.Name = "label166";
             this.label166.Size = new System.Drawing.Size(118, 13);
             this.label166.TabIndex = 120;
@@ -509,7 +510,7 @@
             // label165
             // 
             this.label165.AutoSize = true;
-            this.label165.Location = new System.Drawing.Point(232, 45);
+            this.label165.Location = new System.Drawing.Point(194, 42);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(104, 13);
             this.label165.TabIndex = 121;
@@ -518,7 +519,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(4, 45);
+            this.label36.Location = new System.Drawing.Point(4, 42);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(92, 13);
             this.label36.TabIndex = 129;
@@ -531,22 +532,32 @@
             this.tcAtendimento_tpDadosProspect.Location = new System.Drawing.Point(4, 22);
             this.tcAtendimento_tpDadosProspect.Name = "tcAtendimento_tpDadosProspect";
             this.tcAtendimento_tpDadosProspect.Padding = new System.Windows.Forms.Padding(3);
-            this.tcAtendimento_tpDadosProspect.Size = new System.Drawing.Size(759, 179);
+            this.tcAtendimento_tpDadosProspect.Size = new System.Drawing.Size(759, 215);
             this.tcAtendimento_tpDadosProspect.TabIndex = 0;
             this.tcAtendimento_tpDadosProspect.Text = "Dados do Prospect";
             this.tcAtendimento_tpDadosProspect.UseVisualStyleBackColor = true;
             // 
+            // _containerDeLayoutDinamico
+            // 
+            this._containerDeLayoutDinamico.AutoScroll = true;
+            this._containerDeLayoutDinamico.AutoSize = true;
+            this._containerDeLayoutDinamico.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._containerDeLayoutDinamico.Location = new System.Drawing.Point(3, 3);
+            this._containerDeLayoutDinamico.Name = "_containerDeLayoutDinamico";
+            this._containerDeLayoutDinamico.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this._containerDeLayoutDinamico.Size = new System.Drawing.Size(753, 209);
+            this._containerDeLayoutDinamico.TabIndex = 0;
+            // 
             // tcAtendimento
             // 
-            this.tcAtendimento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tcAtendimento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcAtendimento.Controls.Add(this.tcAtendimento_tpDadosProspect);
             this.tcAtendimento.Controls.Add(this.tcAtendimento_tpHistorico);
-            this.tcAtendimento.Location = new System.Drawing.Point(12, 354);
+            this.tcAtendimento.Location = new System.Drawing.Point(12, 280);
             this.tcAtendimento.Name = "tcAtendimento";
             this.tcAtendimento.SelectedIndex = 0;
-            this.tcAtendimento.Size = new System.Drawing.Size(767, 205);
+            this.tcAtendimento.Size = new System.Drawing.Size(767, 241);
             this.tcAtendimento.TabIndex = 3;
             // 
             // dgResultadoPesquisa
@@ -600,12 +611,13 @@
             this.groupBox2.Controls.Add(this.cmbFiltrosDaCampanha);
             this.groupBox2.Controls.Add(this.lblFiltroSelecionado);
             this.groupBox2.Controls.Add(this.lblFiltro);
-            this.groupBox2.Location = new System.Drawing.Point(12, 111);
+            this.groupBox2.Location = new System.Drawing.Point(174, 527);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(595, 68);
+            this.groupBox2.Size = new System.Drawing.Size(605, 68);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Consulta Personalizada";
+            this.groupBox2.Visible = false;
             // 
             // btnConsultaPersonalizada
             // 
@@ -620,6 +632,7 @@
             // 
             // cmbCampanhas
             // 
+            this.cmbCampanhas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCampanhas.FormattingEnabled = true;
             this.cmbCampanhas.Location = new System.Drawing.Point(6, 33);
             this.cmbCampanhas.Name = "cmbCampanhas";
@@ -640,7 +653,7 @@
             // 
             this.txtFitroSelecionado.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtFitroSelecionado.Enabled = false;
-            this.txtFitroSelecionado.Location = new System.Drawing.Point(406, 34);
+            this.txtFitroSelecionado.Location = new System.Drawing.Point(406, 33);
             this.txtFitroSelecionado.MaxLength = 11;
             this.txtFitroSelecionado.Name = "txtFitroSelecionado";
             this.txtFitroSelecionado.Size = new System.Drawing.Size(152, 20);
@@ -648,6 +661,7 @@
             // 
             // cmbFiltrosDaCampanha
             // 
+            this.cmbFiltrosDaCampanha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFiltrosDaCampanha.Enabled = false;
             this.cmbFiltrosDaCampanha.FormattingEnabled = true;
             this.cmbFiltrosDaCampanha.Location = new System.Drawing.Point(279, 33);
@@ -674,27 +688,16 @@
             this.lblFiltro.TabIndex = 11;
             this.lblFiltro.Text = "Filtro";
             // 
-            // btnNovoProspect
-            // 
-            this.btnNovoProspect.Enabled = false;
-            this.btnNovoProspect.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.add;
-            this.btnNovoProspect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNovoProspect.Location = new System.Drawing.Point(283, 30);
-            this.btnNovoProspect.Name = "btnNovoProspect";
-            this.btnNovoProspect.Size = new System.Drawing.Size(95, 23);
-            this.btnNovoProspect.TabIndex = 1;
-            this.btnNovoProspect.Text = "Novo Cliente";
-            this.btnNovoProspect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNovoProspect.UseVisualStyleBackColor = true;
-            this.btnNovoProspect.Click += new System.EventHandler(this.btnNovoProspect_Click);
-            // 
             // btnNovoContato
             // 
-            this.btnNovoContato.Location = new System.Drawing.Point(6, 31);
+            this.btnNovoContato.Enabled = false;
+            this.btnNovoContato.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.add;
+            this.btnNovoContato.Location = new System.Drawing.Point(13, 29);
             this.btnNovoContato.Name = "btnNovoContato";
-            this.btnNovoContato.Size = new System.Drawing.Size(121, 23);
+            this.btnNovoContato.Size = new System.Drawing.Size(131, 23);
             this.btnNovoContato.TabIndex = 0;
-            this.btnNovoContato.Text = "Novo Contato Manual";
+            this.btnNovoContato.Text = "Novo Atendimento";
+            this.btnNovoContato.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNovoContato.UseVisualStyleBackColor = true;
             this.btnNovoContato.Click += new System.EventHandler(this.btnNovoContato_Click);
             // 
@@ -703,7 +706,7 @@
             this.grbResultado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grbResultado.Controls.Add(this.dgResultadoPesquisa);
-            this.grbResultado.Location = new System.Drawing.Point(12, 185);
+            this.grbResultado.Location = new System.Drawing.Point(12, 111);
             this.grbResultado.Name = "grbResultado";
             this.grbResultado.Size = new System.Drawing.Size(767, 166);
             this.grbResultado.TabIndex = 3;
@@ -723,60 +726,102 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnNovoContato);
-            this.groupBox3.Location = new System.Drawing.Point(613, 111);
+            this.groupBox3.Location = new System.Drawing.Point(12, 527);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(156, 68);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ações";
             // 
+            // btnUltimoProspectTrabalhado
+            // 
+            this.btnUltimoProspectTrabalhado.BackColor = System.Drawing.SystemColors.Control;
+            this.btnUltimoProspectTrabalhado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUltimoProspectTrabalhado.Enabled = false;
+            this.btnUltimoProspectTrabalhado.FlatAppearance.BorderSize = 0;
+            this.btnUltimoProspectTrabalhado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnUltimoProspectTrabalhado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUltimoProspectTrabalhado.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnUltimoProspectTrabalhado.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.check;
+            this.btnUltimoProspectTrabalhado.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUltimoProspectTrabalhado.Location = new System.Drawing.Point(306, 32);
+            this.btnUltimoProspectTrabalhado.Name = "btnUltimoProspectTrabalhado";
+            this.btnUltimoProspectTrabalhado.Size = new System.Drawing.Size(121, 24);
+            this.btnUltimoProspectTrabalhado.TabIndex = 144;
+            this.btnUltimoProspectTrabalhado.Text = "Último Trabalhado";
+            this.btnUltimoProspectTrabalhado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUltimoProspectTrabalhado.UseVisualStyleBackColor = true;
+            this.btnUltimoProspectTrabalhado.Click += new System.EventHandler(this.btnUltimoProspectTrabalhado_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cmbCampanhaDoNovoCliente);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.btnNovoProspect);
-            this.groupBox4.Location = new System.Drawing.Point(234, 37);
+            this.groupBox4.Location = new System.Drawing.Point(446, 37);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(535, 68);
+            this.groupBox4.Size = new System.Drawing.Size(333, 68);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cadastrar Novo Cliente";
             // 
             // cmbCampanhaDoNovoCliente
             // 
+            this.cmbCampanhaDoNovoCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCampanhaDoNovoCliente.FormattingEnabled = true;
-            this.cmbCampanhaDoNovoCliente.Location = new System.Drawing.Point(10, 32);
+            this.cmbCampanhaDoNovoCliente.Location = new System.Drawing.Point(7, 34);
             this.cmbCampanhaDoNovoCliente.Name = "cmbCampanhaDoNovoCliente";
-            this.cmbCampanhaDoNovoCliente.Size = new System.Drawing.Size(267, 21);
+            this.cmbCampanhaDoNovoCliente.Size = new System.Drawing.Size(221, 21);
             this.cmbCampanhaDoNovoCliente.TabIndex = 17;
             this.cmbCampanhaDoNovoCliente.SelectionChangeCommitted += new System.EventHandler(this.cmbCampanhaDoNovoCliente_SelectionChangeCommitted);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 16);
+            this.label4.Location = new System.Drawing.Point(4, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 17;
             this.label4.Text = "Campanha";
             // 
-            // _containerDeLayoutDinamico
+            // btnNovoProspect
             // 
-            this._containerDeLayoutDinamico.AutoScroll = true;
-            this._containerDeLayoutDinamico.AutoSize = true;
-            this._containerDeLayoutDinamico.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._containerDeLayoutDinamico.Location = new System.Drawing.Point(3, 3);
-            this._containerDeLayoutDinamico.Name = "_containerDeLayoutDinamico";
-            this._containerDeLayoutDinamico.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this._containerDeLayoutDinamico.Size = new System.Drawing.Size(753, 173);
-            this._containerDeLayoutDinamico.TabIndex = 0;
+            this.btnNovoProspect.Enabled = false;
+            this.btnNovoProspect.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.add;
+            this.btnNovoProspect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNovoProspect.Location = new System.Drawing.Point(232, 33);
+            this.btnNovoProspect.Name = "btnNovoProspect";
+            this.btnNovoProspect.Size = new System.Drawing.Size(91, 23);
+            this.btnNovoProspect.TabIndex = 1;
+            this.btnNovoProspect.Text = "Novo Cliente";
+            this.btnNovoProspect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNovoProspect.UseVisualStyleBackColor = true;
+            this.btnNovoProspect.Click += new System.EventHandler(this.btnNovoProspect_Click);
+            // 
+            // txtCpf
+            // 
+            this.txtCpf.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtCpf.Location = new System.Drawing.Point(181, 34);
+            this.txtCpf.MaxLength = 11;
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Size = new System.Drawing.Size(91, 20);
+            this.txtCpf.TabIndex = 146;
+            // 
+            // lblCpf
+            // 
+            this.lblCpf.AutoSize = true;
+            this.lblCpf.Location = new System.Drawing.Point(178, 19);
+            this.lblCpf.Name = "lblCpf";
+            this.lblCpf.Size = new System.Drawing.Size(27, 13);
+            this.lblCpf.TabIndex = 145;
+            this.lblCpf.Text = "CPF";
             // 
             // ConsultaDeProspectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(791, 583);
+            this.ClientSize = new System.Drawing.Size(791, 605);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label2);
@@ -828,15 +873,6 @@
         private System.Windows.Forms.TabPage tcAtendimento_tpHistorico;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.DataGridView dgHistoricoAtendimento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdProspect_dgHistorico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn data;
-        private System.Windows.Forms.DataGridViewTextBoxColumn operador;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelefone_dgHistorico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colResultado_dgHistorico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDataAgendamento_dgHistorico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelefoneAgendamento_dgHistorico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colObservacao_dgHistorico;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage_dados;
         private System.Windows.Forms.Label label45;
@@ -876,5 +912,17 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox cmbCampanhaDoNovoCliente;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnUltimoProspectTrabalhado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdProspect_dgHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data;
+        private System.Windows.Forms.DataGridViewTextBoxColumn operador;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelefone_dgHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colResultado_dgHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDataAgendamento_dgHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelefoneAgendamento_dgHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colObservacao_dgHistorico;
+        private System.Windows.Forms.TextBox txtCpf;
+        private System.Windows.Forms.Label lblCpf;
     }
 }

@@ -17,6 +17,7 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public bool ReceberAvaliacaoDeQualidade { get; set; }
         public bool Ativo { get; set; }
         public bool SenhaExpirada { get; set; }
+        public bool GerarNota { get; set; }
         public bool Protegido { get; set; }
         public int IdCriador { get; set; }
         public DateTime DataCriacao { get; set; }
@@ -47,5 +48,7 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
             get { return _IDUsuario; }
             set { _IDUsuario = value; }
         }
+
+        public bool alterarProdutoBKO { get; set; }
     }
 }

@@ -120,7 +120,6 @@
             // 
             // tsComboRespostas
             // 
-            this.tsComboRespostas.DropDownWidth = 300;
             this.tsComboRespostas.Name = "tsComboRespostas";
             this.tsComboRespostas.Size = new System.Drawing.Size(121, 25);
             // 

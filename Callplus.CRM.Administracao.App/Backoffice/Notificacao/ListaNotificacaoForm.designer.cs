@@ -59,7 +59,7 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 26;
+            this.txtBuscaRapida.TabIndex = 0;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscaRapida_KeyPress);
             // 
             // label3
@@ -99,7 +99,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 66);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
             // 
@@ -112,7 +112,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(228, 30);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 158;
+            this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
@@ -130,7 +130,7 @@
             this.btnNovo.Location = new System.Drawing.Point(800, 29);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(96, 25);
-            this.btnNovo.TabIndex = 163;
+            this.btnNovo.TabIndex = 3;
             this.btnNovo.Text = "Novo ";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -149,7 +149,7 @@
             this.btnFechar.Location = new System.Drawing.Point(902, 29);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(96, 25);
-            this.btnFechar.TabIndex = 22;
+            this.btnFechar.TabIndex = 4;
             this.btnFechar.Text = "Fechar   ";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
@@ -161,7 +161,7 @@
             this.dtpDataFinal.Location = new System.Drawing.Point(121, 32);
             this.dtpDataFinal.Name = "dtpDataFinal";
             this.dtpDataFinal.Size = new System.Drawing.Size(101, 20);
-            this.dtpDataFinal.TabIndex = 3;
+            this.dtpDataFinal.TabIndex = 1;
             // 
             // dtpDataInicial
             // 
@@ -170,7 +170,7 @@
             this.dtpDataInicial.Location = new System.Drawing.Point(14, 32);
             this.dtpDataInicial.Name = "dtpDataInicial";
             this.dtpDataInicial.Size = new System.Drawing.Size(101, 20);
-            this.dtpDataInicial.TabIndex = 1;
+            this.dtpDataInicial.TabIndex = 0;
             // 
             // label5
             // 
@@ -206,7 +206,7 @@
             this.btnBuscaRapida.Location = new System.Drawing.Point(991, 5);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
             this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
-            this.btnBuscaRapida.TabIndex = 27;
+            this.btnBuscaRapida.TabIndex = 1;
             this.btnBuscaRapida.UseVisualStyleBackColor = true;
             this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             // 

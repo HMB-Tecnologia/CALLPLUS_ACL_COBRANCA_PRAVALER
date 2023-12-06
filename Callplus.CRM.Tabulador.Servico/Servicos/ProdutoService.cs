@@ -42,9 +42,19 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _produtoDao.ListarProdutoDaOfertaPorFaixaDeRecarga(idAtendimento);
         }
 
+        public IEnumerable<Produto> ListarProdutoDaOfertaPorFaixaDeRecargaBKO(long idProspect)
+        {
+            return _produtoDao.ListarProdutoDaOfertaPorFaixaDeRecargaBKO(idProspect);
+        }
+
         public IEnumerable<ProdutoDaOfertaDto> ListarProdutoDaOfertaPorNome(long idCampanha, string nome, bool? ativo, bool? ativoBko)
         {
             return _produtoDao.ListarProdutoDaOfertaPorNome(idCampanha, nome, ativo, ativoBko);
+        }
+
+        public IEnumerable<ProdutoDaOfertaDto> ListarProdutoDaOfertaPorIdProspect(long idCampanha, long idProspect, bool? ativo, bool? ativoBko)
+        {
+            return _produtoDao.ListarProdutoDaOfertaPorIdProspect(idCampanha, idProspect, ativo, ativoBko);
         }
 
         public IEnumerable<TipoDeProduto> ListarTipoDeProduto(bool ativo)

@@ -38,6 +38,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmbAuditoria = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.TextBox();
             this.txtCpf = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnExportar = new System.Windows.Forms.Button();
@@ -74,7 +78,7 @@
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 604);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1370, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 24);
             this.statusStrip1.TabIndex = 17;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -104,7 +108,7 @@
             // txtBuscaRapida
             // 
             this.txtBuscaRapida.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscaRapida.Location = new System.Drawing.Point(1272, 6);
+            this.txtBuscaRapida.Location = new System.Drawing.Point(910, 6);
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
@@ -119,7 +123,7 @@
             this.btnBuscaRapida.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnBuscaRapida.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
             this.btnBuscaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscaRapida.Location = new System.Drawing.Point(1333, 5);
+            this.btnBuscaRapida.Location = new System.Drawing.Point(971, 5);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
             this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
             this.btnBuscaRapida.TabIndex = 27;
@@ -134,7 +138,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(1196, 10);
+            this.label3.Location = new System.Drawing.Point(834, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 25;
@@ -155,6 +159,10 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.cmbAuditoria);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.txtCpf);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnExportar);
@@ -180,15 +188,61 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1346, 180);
+            this.groupBox1.Size = new System.Drawing.Size(984, 180);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(7, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Data";
+            // 
+            // cmbAuditoria
+            // 
+            this.cmbAuditoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAuditoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAuditoria.FormattingEnabled = true;
+            this.cmbAuditoria.Items.AddRange(new object[] {
+            "DATA DA VENDA",
+            "DATA DA AUDITORIA"});
+            this.cmbAuditoria.Location = new System.Drawing.Point(10, 31);
+            this.cmbAuditoria.Name = "cmbAuditoria";
+            this.cmbAuditoria.Size = new System.Drawing.Size(134, 21);
+            this.cmbAuditoria.TabIndex = 28;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(7, 132);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(38, 13);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "Nome:";
+            // 
+            // txtNome
+            // 
+            this.txtNome.BackColor = System.Drawing.Color.White;
+            this.txtNome.Location = new System.Drawing.Point(10, 148);
+            this.txtNome.MaxLength = 100;
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(372, 20);
+            this.txtNome.TabIndex = 26;
+            // 
             // txtCpf
             // 
             this.txtCpf.BackColor = System.Drawing.Color.White;
-            this.txtCpf.Location = new System.Drawing.Point(121, 71);
+            this.txtCpf.Location = new System.Drawing.Point(269, 73);
             this.txtCpf.MaxLength = 11;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(113, 20);
@@ -201,7 +255,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(118, 55);
+            this.label7.Location = new System.Drawing.Point(266, 57);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 13);
             this.label7.TabIndex = 6;
@@ -215,7 +269,7 @@
             this.btnExportar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnExportar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.import;
             this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportar.Location = new System.Drawing.Point(1244, 52);
+            this.btnExportar.Location = new System.Drawing.Point(882, 58);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(96, 23);
             this.btnExportar.TabIndex = 21;
@@ -230,7 +284,7 @@
             this.btnGerarDados.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGerarDados.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.search;
             this.btnGerarDados.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGerarDados.Location = new System.Drawing.Point(1244, 23);
+            this.btnGerarDados.Location = new System.Drawing.Point(882, 29);
             this.btnGerarDados.Name = "btnGerarDados";
             this.btnGerarDados.Size = new System.Drawing.Size(96, 23);
             this.btnGerarDados.TabIndex = 20;
@@ -249,7 +303,7 @@
             this.btnFechar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnFechar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.close;
             this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFechar.Location = new System.Drawing.Point(1244, 81);
+            this.btnFechar.Location = new System.Drawing.Point(882, 87);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(96, 25);
             this.btnFechar.TabIndex = 22;
@@ -260,7 +314,7 @@
             // linkNenhum_StatusAuditoria
             // 
             this.linkNenhum_StatusAuditoria.AutoSize = true;
-            this.linkNenhum_StatusAuditoria.Location = new System.Drawing.Point(783, 16);
+            this.linkNenhum_StatusAuditoria.Location = new System.Drawing.Point(859, 13);
             this.linkNenhum_StatusAuditoria.Name = "linkNenhum_StatusAuditoria";
             this.linkNenhum_StatusAuditoria.Size = new System.Drawing.Size(47, 13);
             this.linkNenhum_StatusAuditoria.TabIndex = 18;
@@ -271,7 +325,7 @@
             // linkTodos_StatusAuditoria
             // 
             this.linkTodos_StatusAuditoria.AutoSize = true;
-            this.linkTodos_StatusAuditoria.Location = new System.Drawing.Point(740, 16);
+            this.linkTodos_StatusAuditoria.Location = new System.Drawing.Point(816, 13);
             this.linkTodos_StatusAuditoria.Name = "linkTodos_StatusAuditoria";
             this.linkTodos_StatusAuditoria.Size = new System.Drawing.Size(37, 13);
             this.linkTodos_StatusAuditoria.TabIndex = 17;
@@ -282,7 +336,7 @@
             // linkNenhum_Campanha
             // 
             this.linkNenhum_Campanha.AutoSize = true;
-            this.linkNenhum_Campanha.Location = new System.Drawing.Point(344, 16);
+            this.linkNenhum_Campanha.Location = new System.Drawing.Point(511, 13);
             this.linkNenhum_Campanha.Name = "linkNenhum_Campanha";
             this.linkNenhum_Campanha.Size = new System.Drawing.Size(47, 13);
             this.linkNenhum_Campanha.TabIndex = 14;
@@ -293,7 +347,7 @@
             // linkTodos_Campanha
             // 
             this.linkTodos_Campanha.AutoSize = true;
-            this.linkTodos_Campanha.Location = new System.Drawing.Point(301, 16);
+            this.linkTodos_Campanha.Location = new System.Drawing.Point(468, 13);
             this.linkTodos_Campanha.Name = "linkTodos_Campanha";
             this.linkTodos_Campanha.Size = new System.Drawing.Size(37, 13);
             this.linkTodos_Campanha.TabIndex = 13;
@@ -308,9 +362,9 @@
             this.cmbOperador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOperador.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbOperador.FormattingEnabled = true;
-            this.cmbOperador.Location = new System.Drawing.Point(13, 149);
+            this.cmbOperador.Location = new System.Drawing.Point(10, 111);
             this.cmbOperador.Name = "cmbOperador";
-            this.cmbOperador.Size = new System.Drawing.Size(221, 21);
+            this.cmbOperador.Size = new System.Drawing.Size(253, 21);
             this.cmbOperador.TabIndex = 11;
             // 
             // label9
@@ -319,7 +373,7 @@
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(10, 134);
+            this.label9.Location = new System.Drawing.Point(7, 96);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 13);
             this.label9.TabIndex = 10;
@@ -332,9 +386,9 @@
             this.cmbSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSupervisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSupervisor.FormattingEnabled = true;
-            this.cmbSupervisor.Location = new System.Drawing.Point(14, 110);
+            this.cmbSupervisor.Location = new System.Drawing.Point(10, 73);
             this.cmbSupervisor.Name = "cmbSupervisor";
-            this.cmbSupervisor.Size = new System.Drawing.Size(220, 21);
+            this.cmbSupervisor.Size = new System.Drawing.Size(252, 21);
             this.cmbSupervisor.TabIndex = 9;
             this.cmbSupervisor.SelectionChangeCommitted += new System.EventHandler(this.cmbSupervisor_SelectionChangeCommitted);
             // 
@@ -344,7 +398,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(11, 94);
+            this.label8.Location = new System.Drawing.Point(7, 57);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 13);
             this.label8.TabIndex = 8;
@@ -353,10 +407,10 @@
             // txtTelefone
             // 
             this.txtTelefone.BackColor = System.Drawing.Color.White;
-            this.txtTelefone.Location = new System.Drawing.Point(14, 71);
+            this.txtTelefone.Location = new System.Drawing.Point(269, 111);
             this.txtTelefone.MaxLength = 11;
             this.txtTelefone.Name = "txtTelefone";
-            this.txtTelefone.Size = new System.Drawing.Size(101, 20);
+            this.txtTelefone.Size = new System.Drawing.Size(113, 20);
             this.txtTelefone.TabIndex = 5;
             this.txtTelefone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefone_KeyPress);
             // 
@@ -366,7 +420,7 @@
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(11, 55);
+            this.label12.Location = new System.Drawing.Point(266, 95);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(49, 13);
             this.label12.TabIndex = 4;
@@ -376,7 +430,7 @@
             // 
             this.dtpDataFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataFinal.Location = new System.Drawing.Point(121, 32);
+            this.dtpDataFinal.Location = new System.Drawing.Point(269, 31);
             this.dtpDataFinal.Name = "dtpDataFinal";
             this.dtpDataFinal.Size = new System.Drawing.Size(113, 20);
             this.dtpDataFinal.TabIndex = 3;
@@ -385,9 +439,9 @@
             // 
             this.dtpDataInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataInicial.Location = new System.Drawing.Point(14, 32);
+            this.dtpDataInicial.Location = new System.Drawing.Point(150, 31);
             this.dtpDataInicial.Name = "dtpDataInicial";
-            this.dtpDataInicial.Size = new System.Drawing.Size(101, 20);
+            this.dtpDataInicial.Size = new System.Drawing.Size(113, 20);
             this.dtpDataInicial.TabIndex = 1;
             // 
             // label5
@@ -396,7 +450,7 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(118, 18);
+            this.label5.Location = new System.Drawing.Point(266, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 2;
@@ -408,7 +462,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(11, 16);
+            this.label6.Location = new System.Drawing.Point(147, 15);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 0;
@@ -418,7 +472,7 @@
             // 
             this.chkAuditoria.CheckOnClick = true;
             this.chkAuditoria.FormattingEnabled = true;
-            this.chkAuditoria.Location = new System.Drawing.Point(656, 32);
+            this.chkAuditoria.Location = new System.Drawing.Point(732, 29);
             this.chkAuditoria.Name = "chkAuditoria";
             this.chkAuditoria.Size = new System.Drawing.Size(410, 139);
             this.chkAuditoria.TabIndex = 19;
@@ -429,7 +483,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(653, 16);
+            this.label4.Location = new System.Drawing.Point(729, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 13);
             this.label4.TabIndex = 16;
@@ -439,9 +493,9 @@
             // 
             this.chkCampanha.CheckOnClick = true;
             this.chkCampanha.FormattingEnabled = true;
-            this.chkCampanha.Location = new System.Drawing.Point(240, 32);
+            this.chkCampanha.Location = new System.Drawing.Point(407, 29);
             this.chkCampanha.Name = "chkCampanha";
-            this.chkCampanha.Size = new System.Drawing.Size(410, 139);
+            this.chkCampanha.Size = new System.Drawing.Size(319, 139);
             this.chkCampanha.TabIndex = 15;
             // 
             // label1
@@ -450,7 +504,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(237, 16);
+            this.label1.Location = new System.Drawing.Point(404, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 12;
@@ -479,7 +533,7 @@
             this.dgResultado.ReadOnly = true;
             this.dgResultado.RowHeadersVisible = false;
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgResultado.Size = new System.Drawing.Size(1346, 365);
+            this.dgResultado.Size = new System.Drawing.Size(984, 365);
             this.dgResultado.TabIndex = 2;
             this.dgResultado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgResultado_CellDoubleClick);
             // 
@@ -489,7 +543,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1370, 628);
+            this.ClientSize = new System.Drawing.Size(1008, 628);
             this.Controls.Add(this.txtBuscaRapida);
             this.Controls.Add(this.btnBuscaRapida);
             this.Controls.Add(this.label3);
@@ -545,5 +599,9 @@
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.TextBox txtCpf;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cmbAuditoria;
     }
 }

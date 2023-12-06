@@ -28,6 +28,9 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
 
         private readonly CampanhaService _campanhaService;
         private readonly DiscadorService _discadorService;
+        private int _idCampanha;
+        private string _nomeCampanha;
+        private bool _duplicarCampanha = false;
 
         #endregion PROPRIEDADES
 
@@ -45,6 +48,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
             this.MaximizeBox = true;
             this.MinimizeBox = false;
 
+            if (AdministracaoMDI._usuario.Protegido) btnDuplicar.Visible = true;//remover depois
+
             CarregarDiscadores();
         }
 
@@ -53,7 +58,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
             IEnumerable<Discador> _discadores = _discadorService.Listar(-1, true);
             cmbDiscador.PreencherComTodos(_discadores, x => x.Id, x => x.Nome);
         }
-        
+
         private void CarregarGrid(bool buscaRapida)
         {
             int idRegistro = -1;
@@ -86,10 +91,13 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
         {
             dgResultado.Columns["Data"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
-            for (int i = dgResultado.Columns["Data"].Index + 1; i < dgResultado.Columns.Count; i++)
-            {
-                dgResultado.Columns[i].Visible = false;
-            }
+            //for (int i = dgResultado.Columns["Data"].Index + 1; i < dgResultado.Columns.Count; i++)
+            //{
+            //    dgResultado.Columns[i].Visible = false;
+            //}
+
+            //dgResultado.ClearSelection();
+            //dgResultado.CurrentCell = null;
         }
 
         private void IniciarNovoRegistro()
@@ -136,6 +144,19 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
             CallplusFormsUtil.ExibirMensagens(mensagens);
 
             return mensagens.Any() == false;
+        }
+
+        private void DuplicarCampanha(int idcampanha, bool duplicar, Tabulador.Dominio.Entidades.Campanha _novaCampanha)
+        {
+            CampanhaForm f = new CampanhaForm("DETALHES DA CAMPANHA", idcampanha, duplicar, _novaCampanha);
+
+            if (!f.espelho)
+                ExibirForm(f);
+
+            if (f.Atualizar)
+            {
+                CarregarGrid(false);
+            }
         }
 
         #endregion METODOS
@@ -232,6 +253,53 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
 
                 MessageBox.Show(
                     $"Não foi possível iniciar a edição do registro!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDuplicar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool podeDuplicar = _idCampanha > 0 ? true : false;
+                if (!podeDuplicar)
+                {
+                    MessageBox.Show("Selecione a campanha que deseja espelhar!", "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show("Deseja Espelhar a Campanha: " + _nomeCampanha, "Aviso do Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    CampanhaEspelhoForm f = new CampanhaEspelhoForm();
+
+                    ExibirForm(f);
+
+                    if (f.Cancelar)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        _duplicarCampanha = true;
+                        DuplicarCampanha(_idCampanha, _duplicarCampanha, f._novaCampanha);
+                        _idCampanha = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                MessageBox.Show($"Não foi possível duplicar campanha!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgResultado_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                _idCampanha = (int)dgResultado.Rows[e.RowIndex].Cells["Id"].Value;
+                _nomeCampanha = (string)dgResultado.Rows[e.RowIndex].Cells["Nome"].Value;
             }
         }
 

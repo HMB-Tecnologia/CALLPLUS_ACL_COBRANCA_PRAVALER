@@ -82,6 +82,8 @@
             this.containerDeLayoutDeCampoDinamico = new Callplus.CRM.Administracao.App.Controles.CamposDinamicos.ContainerDeLayoutDeCampoDinamico();
             this.tcAuditoria_tpDadosDoCliente = new System.Windows.Forms.TabPage();
             this.gbDadosPessoais = new System.Windows.Forms.GroupBox();
+            this.lblSexo = new System.Windows.Forms.Label();
+            this.cmbSexo = new System.Windows.Forms.ComboBox();
             this.lIdade = new System.Windows.Forms.Label();
             this.cmbProfissao = new System.Windows.Forms.ComboBox();
             this.lblProfissao = new System.Windows.Forms.Label();
@@ -124,7 +126,14 @@
             this.txtCep = new System.Windows.Forms.TextBox();
             this.txtCidade = new System.Windows.Forms.TextBox();
             this.tcAuditoria_tpDadosDoProduto = new System.Windows.Forms.TabPage();
+            this.txtUrl = new System.Windows.Forms.TextBox();
             this.gbDadosPagamento = new System.Windows.Forms.GroupBox();
+            this.lblOndeReceberContrato = new System.Windows.Forms.Label();
+            this.cmbOndeReceberContrato = new System.Windows.Forms.ComboBox();
+            this.lblReceberContrato = new System.Windows.Forms.Label();
+            this.cmbReceberContrato = new System.Windows.Forms.ComboBox();
+            this.lblNumeroFaturaWhatsApp = new System.Windows.Forms.Label();
+            this.txtNumeroFaturaWhatsApp = new System.Windows.Forms.TextBox();
             this.lblFormaPagamento = new System.Windows.Forms.Label();
             this.lblConta = new System.Windows.Forms.Label();
             this.txtEmailFaturaDigital = new System.Windows.Forms.TextBox();
@@ -137,17 +146,26 @@
             this.txtPrimeiraFatura = new System.Windows.Forms.TextBox();
             this.lblBanco = new System.Windows.Forms.Label();
             this.txtAgencia = new System.Windows.Forms.TextBox();
-            this.lblFaturaDigital = new System.Windows.Forms.Label();
             this.txtCicloFechamento = new System.Windows.Forms.TextBox();
             this.lblPrimeiraFatura = new System.Windows.Forms.Label();
             this.lblDiaVencimento = new System.Windows.Forms.Label();
-            this.cmbFaturaDigital = new System.Windows.Forms.ComboBox();
             this.lblCicloFechamento = new System.Windows.Forms.Label();
+            this.lblUrl = new System.Windows.Forms.Label();
             this.gbDadosOferta = new System.Windows.Forms.GroupBox();
+            this.gbLiberarMplay = new System.Windows.Forms.GroupBox();
+            this.txtLoginProduto = new System.Windows.Forms.TextBox();
+            this.txtSenhaProduto = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.btnLiberarProduto = new System.Windows.Forms.Button();
             this.txtNumeroMigrado = new System.Windows.Forms.TextBox();
             this.cmbProduto = new System.Windows.Forms.ComboBox();
             this.lblProduto = new System.Windows.Forms.Label();
             this.lblNumeroMigrado = new System.Windows.Forms.Label();
+            this.cmbOfertaAparelho = new System.Windows.Forms.ComboBox();
+            this.lblDesejaAparelho = new System.Windows.Forms.Label();
+            this.cmbFaturaDigital = new System.Windows.Forms.ComboBox();
+            this.lblFaturaDigital = new System.Windows.Forms.Label();
             this.tcAuditoria_tpHistorico = new System.Windows.Forms.TabPage();
             this.label31 = new System.Windows.Forms.Label();
             this.txtObservacoes_historico = new System.Windows.Forms.TextBox();
@@ -180,6 +198,7 @@
             this.tcAuditoria_tpDadosDoProduto.SuspendLayout();
             this.gbDadosPagamento.SuspendLayout();
             this.gbDadosOferta.SuspendLayout();
+            this.gbLiberarMplay.SuspendLayout();
             this.tcAuditoria_tpHistorico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorico)).BeginInit();
             this.SuspendLayout();
@@ -732,6 +751,8 @@
             // 
             // gbDadosPessoais
             // 
+            this.gbDadosPessoais.Controls.Add(this.lblSexo);
+            this.gbDadosPessoais.Controls.Add(this.cmbSexo);
             this.gbDadosPessoais.Controls.Add(this.lIdade);
             this.gbDadosPessoais.Controls.Add(this.cmbProfissao);
             this.gbDadosPessoais.Controls.Add(this.lblProfissao);
@@ -762,11 +783,34 @@
             this.gbDadosPessoais.TabStop = false;
             this.gbDadosPessoais.Text = "Dados Pessoais";
             // 
+            // lblSexo
+            // 
+            this.lblSexo.AutoSize = true;
+            this.lblSexo.Location = new System.Drawing.Point(644, 29);
+            this.lblSexo.Name = "lblSexo";
+            this.lblSexo.Size = new System.Drawing.Size(31, 13);
+            this.lblSexo.TabIndex = 24;
+            this.lblSexo.Text = "Sexo";
+            // 
+            // cmbSexo
+            // 
+            this.cmbSexo.BackColor = System.Drawing.SystemColors.Window;
+            this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSexo.FormattingEnabled = true;
+            this.cmbSexo.Items.AddRange(new object[] {
+            "SELECIONE...",
+            "MASCULINO",
+            "FEMININO"});
+            this.cmbSexo.Location = new System.Drawing.Point(647, 46);
+            this.cmbSexo.Name = "cmbSexo";
+            this.cmbSexo.Size = new System.Drawing.Size(102, 21);
+            this.cmbSexo.TabIndex = 23;
+            // 
             // lIdade
             // 
             this.lIdade.AutoSize = true;
             this.lIdade.ForeColor = System.Drawing.Color.Blue;
-            this.lIdade.Location = new System.Drawing.Point(714, 18);
+            this.lIdade.Location = new System.Drawing.Point(597, 31);
             this.lIdade.Name = "lIdade";
             this.lIdade.Size = new System.Drawing.Size(44, 13);
             this.lIdade.TabIndex = 8;
@@ -777,38 +821,42 @@
             this.cmbProfissao.BackColor = System.Drawing.SystemColors.Window;
             this.cmbProfissao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProfissao.FormattingEnabled = true;
-            this.cmbProfissao.Location = new System.Drawing.Point(232, 118);
+            this.cmbProfissao.Location = new System.Drawing.Point(232, 132);
             this.cmbProfissao.Name = "cmbProfissao";
             this.cmbProfissao.Size = new System.Drawing.Size(234, 21);
             this.cmbProfissao.TabIndex = 20;
+            this.cmbProfissao.Visible = false;
             // 
             // lblProfissao
             // 
             this.lblProfissao.AutoSize = true;
-            this.lblProfissao.Location = new System.Drawing.Point(229, 102);
+            this.lblProfissao.Location = new System.Drawing.Point(229, 116);
             this.lblProfissao.Name = "lblProfissao";
             this.lblProfissao.Size = new System.Drawing.Size(50, 13);
             this.lblProfissao.TabIndex = 19;
             this.lblProfissao.Text = "Profissão";
+            this.lblProfissao.Visible = false;
             // 
             // cmbFaixaRenda
             // 
             this.cmbFaixaRenda.BackColor = System.Drawing.SystemColors.Window;
             this.cmbFaixaRenda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFaixaRenda.FormattingEnabled = true;
-            this.cmbFaixaRenda.Location = new System.Drawing.Point(472, 118);
+            this.cmbFaixaRenda.Location = new System.Drawing.Point(472, 132);
             this.cmbFaixaRenda.Name = "cmbFaixaRenda";
             this.cmbFaixaRenda.Size = new System.Drawing.Size(286, 21);
             this.cmbFaixaRenda.TabIndex = 22;
+            this.cmbFaixaRenda.Visible = false;
             // 
             // lblFaixaRenda
             // 
             this.lblFaixaRenda.AutoSize = true;
-            this.lblFaixaRenda.Location = new System.Drawing.Point(469, 102);
+            this.lblFaixaRenda.Location = new System.Drawing.Point(469, 116);
             this.lblFaixaRenda.Name = "lblFaixaRenda";
             this.lblFaixaRenda.Size = new System.Drawing.Size(82, 13);
             this.lblFaixaRenda.TabIndex = 21;
             this.lblFaixaRenda.Text = "Faixa de Renda";
+            this.lblFaixaRenda.Visible = false;
             // 
             // cmbEstadoCivil
             // 
@@ -816,24 +864,26 @@
             this.cmbEstadoCivil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstadoCivil.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cmbEstadoCivil.FormattingEnabled = true;
-            this.cmbEstadoCivil.Location = new System.Drawing.Point(9, 118);
+            this.cmbEstadoCivil.Location = new System.Drawing.Point(9, 132);
             this.cmbEstadoCivil.Name = "cmbEstadoCivil";
             this.cmbEstadoCivil.Size = new System.Drawing.Size(217, 21);
             this.cmbEstadoCivil.TabIndex = 18;
+            this.cmbEstadoCivil.Visible = false;
             // 
             // lblEstadoCivil
             // 
             this.lblEstadoCivil.AutoSize = true;
-            this.lblEstadoCivil.Location = new System.Drawing.Point(6, 102);
+            this.lblEstadoCivil.Location = new System.Drawing.Point(6, 116);
             this.lblEstadoCivil.Name = "lblEstadoCivil";
             this.lblEstadoCivil.Size = new System.Drawing.Size(62, 13);
             this.lblEstadoCivil.TabIndex = 17;
             this.lblEstadoCivil.Text = "Estado Civil";
+            this.lblEstadoCivil.Visible = false;
             // 
             // lblTelRecado
             // 
             this.lblTelRecado.AutoSize = true;
-            this.lblTelRecado.Location = new System.Drawing.Point(637, 60);
+            this.lblTelRecado.Location = new System.Drawing.Point(637, 73);
             this.lblTelRecado.Name = "lblTelRecado";
             this.lblTelRecado.Size = new System.Drawing.Size(90, 13);
             this.lblTelRecado.TabIndex = 15;
@@ -842,7 +892,7 @@
             // lblTelCelular
             // 
             this.lblTelCelular.AutoSize = true;
-            this.lblTelCelular.Location = new System.Drawing.Point(403, 60);
+            this.lblTelCelular.Location = new System.Drawing.Point(403, 73);
             this.lblTelCelular.Name = "lblTelCelular";
             this.lblTelCelular.Size = new System.Drawing.Size(91, 13);
             this.lblTelCelular.TabIndex = 11;
@@ -851,7 +901,7 @@
             // lblTelResidencial
             // 
             this.lblTelResidencial.AutoSize = true;
-            this.lblTelResidencial.Location = new System.Drawing.Point(518, 60);
+            this.lblTelResidencial.Location = new System.Drawing.Point(518, 73);
             this.lblTelResidencial.Name = "lblTelResidencial";
             this.lblTelResidencial.Size = new System.Drawing.Size(107, 13);
             this.lblTelResidencial.TabIndex = 13;
@@ -861,7 +911,7 @@
             // 
             this.txtTelRecado.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtTelRecado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelRecado.Location = new System.Drawing.Point(640, 76);
+            this.txtTelRecado.Location = new System.Drawing.Point(640, 89);
             this.txtTelRecado.MaxLength = 11;
             this.txtTelRecado.Name = "txtTelRecado";
             this.txtTelRecado.Size = new System.Drawing.Size(118, 20);
@@ -873,7 +923,7 @@
             // 
             this.txtTelCelular.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtTelCelular.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelCelular.Location = new System.Drawing.Point(406, 76);
+            this.txtTelCelular.Location = new System.Drawing.Point(406, 89);
             this.txtTelCelular.MaxLength = 11;
             this.txtTelCelular.Name = "txtTelCelular";
             this.txtTelCelular.Size = new System.Drawing.Size(111, 20);
@@ -885,7 +935,7 @@
             // 
             this.txtTelResidencial.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtTelResidencial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelResidencial.Location = new System.Drawing.Point(523, 76);
+            this.txtTelResidencial.Location = new System.Drawing.Point(523, 89);
             this.txtTelResidencial.MaxLength = 10;
             this.txtTelResidencial.Name = "txtTelResidencial";
             this.txtTelResidencial.Size = new System.Drawing.Size(111, 20);
@@ -896,7 +946,7 @@
             // txtDataNascimento
             // 
             this.txtDataNascimento.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtDataNascimento.Location = new System.Drawing.Point(640, 34);
+            this.txtDataNascimento.Location = new System.Drawing.Point(523, 47);
             this.txtDataNascimento.Mask = "00/00/0000";
             this.txtDataNascimento.Name = "txtDataNascimento";
             this.txtDataNascimento.Size = new System.Drawing.Size(118, 20);
@@ -908,7 +958,7 @@
             // lblDataNascimento
             // 
             this.lblDataNascimento.AutoSize = true;
-            this.lblDataNascimento.Location = new System.Drawing.Point(637, 18);
+            this.lblDataNascimento.Location = new System.Drawing.Point(520, 31);
             this.lblDataNascimento.Name = "lblDataNascimento";
             this.lblDataNascimento.Size = new System.Drawing.Size(70, 13);
             this.lblDataNascimento.TabIndex = 6;
@@ -917,28 +967,31 @@
             // lblRg
             // 
             this.lblRg.AutoSize = true;
-            this.lblRg.Location = new System.Drawing.Point(520, 18);
+            this.lblRg.Location = new System.Drawing.Point(520, -9);
             this.lblRg.Name = "lblRg";
             this.lblRg.Size = new System.Drawing.Size(23, 13);
             this.lblRg.TabIndex = 4;
             this.lblRg.Text = "RG";
+            this.lblRg.Visible = false;
             // 
             // txtRg
             // 
             this.txtRg.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtRg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRg.Location = new System.Drawing.Point(523, 34);
+            this.txtRg.Location = new System.Drawing.Point(523, 9);
             this.txtRg.MaxLength = 100;
             this.txtRg.Name = "txtRg";
             this.txtRg.Size = new System.Drawing.Size(111, 20);
             this.txtRg.TabIndex = 5;
+            this.txtRg.Visible = false;
             this.txtRg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRg_KeyPress);
+            this.txtRg.Leave += new System.EventHandler(this.txtRg_Leave);
             // 
             // txtNome
             // 
             this.txtNome.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtNome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNome.Location = new System.Drawing.Point(9, 34);
+            this.txtNome.Location = new System.Drawing.Point(9, 47);
             this.txtNome.MaxLength = 100;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(391, 20);
@@ -950,7 +1003,7 @@
             // 
             this.txtCpf.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtCpf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCpf.Location = new System.Drawing.Point(406, 34);
+            this.txtCpf.Location = new System.Drawing.Point(406, 47);
             this.txtCpf.MaxLength = 100;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(111, 20);
@@ -961,7 +1014,7 @@
             // lblCpf
             // 
             this.lblCpf.AutoSize = true;
-            this.lblCpf.Location = new System.Drawing.Point(403, 18);
+            this.lblCpf.Location = new System.Drawing.Point(403, 31);
             this.lblCpf.Name = "lblCpf";
             this.lblCpf.Size = new System.Drawing.Size(34, 13);
             this.lblCpf.TabIndex = 2;
@@ -970,7 +1023,7 @@
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(6, 18);
+            this.lblNome.Location = new System.Drawing.Point(6, 31);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(42, 13);
             this.lblNome.TabIndex = 0;
@@ -979,7 +1032,7 @@
             // lblNomeMae
             // 
             this.lblNomeMae.AutoSize = true;
-            this.lblNomeMae.Location = new System.Drawing.Point(6, 60);
+            this.lblNomeMae.Location = new System.Drawing.Point(6, 73);
             this.lblNomeMae.Name = "lblNomeMae";
             this.lblNomeMae.Size = new System.Drawing.Size(81, 13);
             this.lblNomeMae.TabIndex = 9;
@@ -991,7 +1044,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNomeDaMae.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtNomeDaMae.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNomeDaMae.Location = new System.Drawing.Point(10, 76);
+            this.txtNomeDaMae.Location = new System.Drawing.Point(10, 89);
             this.txtNomeDaMae.MaxLength = 100;
             this.txtNomeDaMae.Name = "txtNomeDaMae";
             this.txtNomeDaMae.Size = new System.Drawing.Size(390, 20);
@@ -1159,6 +1212,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(92, 20);
             this.txtNumero.TabIndex = 6;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // label23
             // 
@@ -1192,8 +1246,14 @@
             // 
             // tcAuditoria_tpDadosDoProduto
             // 
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.txtUrl);
             this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.gbDadosPagamento);
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.lblUrl);
             this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.gbDadosOferta);
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.cmbOfertaAparelho);
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.lblDesejaAparelho);
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.cmbFaturaDigital);
+            this.tcAuditoria_tpDadosDoProduto.Controls.Add(this.lblFaturaDigital);
             this.tcAuditoria_tpDadosDoProduto.Location = new System.Drawing.Point(4, 22);
             this.tcAuditoria_tpDadosDoProduto.Name = "tcAuditoria_tpDadosDoProduto";
             this.tcAuditoria_tpDadosDoProduto.Padding = new System.Windows.Forms.Padding(3);
@@ -1202,8 +1262,26 @@
             this.tcAuditoria_tpDadosDoProduto.Text = "Dados do Produto";
             this.tcAuditoria_tpDadosDoProduto.UseVisualStyleBackColor = true;
             // 
+            // txtUrl
+            // 
+            this.txtUrl.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUrl.Enabled = false;
+            this.txtUrl.Location = new System.Drawing.Point(208, 315);
+            this.txtUrl.MaxLength = 250;
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(138, 20);
+            this.txtUrl.TabIndex = 361;
+            this.txtUrl.Visible = false;
+            // 
             // gbDadosPagamento
             // 
+            this.gbDadosPagamento.Controls.Add(this.lblOndeReceberContrato);
+            this.gbDadosPagamento.Controls.Add(this.cmbOndeReceberContrato);
+            this.gbDadosPagamento.Controls.Add(this.lblReceberContrato);
+            this.gbDadosPagamento.Controls.Add(this.cmbReceberContrato);
+            this.gbDadosPagamento.Controls.Add(this.lblNumeroFaturaWhatsApp);
+            this.gbDadosPagamento.Controls.Add(this.txtNumeroFaturaWhatsApp);
             this.gbDadosPagamento.Controls.Add(this.lblFormaPagamento);
             this.gbDadosPagamento.Controls.Add(this.lblConta);
             this.gbDadosPagamento.Controls.Add(this.txtEmailFaturaDigital);
@@ -1216,23 +1294,95 @@
             this.gbDadosPagamento.Controls.Add(this.txtPrimeiraFatura);
             this.gbDadosPagamento.Controls.Add(this.lblBanco);
             this.gbDadosPagamento.Controls.Add(this.txtAgencia);
-            this.gbDadosPagamento.Controls.Add(this.lblFaturaDigital);
             this.gbDadosPagamento.Controls.Add(this.txtCicloFechamento);
             this.gbDadosPagamento.Controls.Add(this.lblPrimeiraFatura);
             this.gbDadosPagamento.Controls.Add(this.lblDiaVencimento);
-            this.gbDadosPagamento.Controls.Add(this.cmbFaturaDigital);
             this.gbDadosPagamento.Controls.Add(this.lblCicloFechamento);
-            this.gbDadosPagamento.Location = new System.Drawing.Point(6, 79);
+            this.gbDadosPagamento.Location = new System.Drawing.Point(5, 145);
             this.gbDadosPagamento.Name = "gbDadosPagamento";
-            this.gbDadosPagamento.Size = new System.Drawing.Size(764, 111);
+            this.gbDadosPagamento.Size = new System.Drawing.Size(764, 153);
             this.gbDadosPagamento.TabIndex = 1;
             this.gbDadosPagamento.TabStop = false;
             this.gbDadosPagamento.Text = "Dados de Pagamento";
             // 
+            // lblOndeReceberContrato
+            // 
+            this.lblOndeReceberContrato.AutoSize = true;
+            this.lblOndeReceberContrato.Enabled = false;
+            this.lblOndeReceberContrato.Location = new System.Drawing.Point(142, 107);
+            this.lblOndeReceberContrato.Name = "lblOndeReceberContrato";
+            this.lblOndeReceberContrato.Size = new System.Drawing.Size(126, 13);
+            this.lblOndeReceberContrato.TabIndex = 357;
+            this.lblOndeReceberContrato.Text = "Onde Receber Contrato?";
+            this.lblOndeReceberContrato.Visible = false;
+            // 
+            // cmbOndeReceberContrato
+            // 
+            this.cmbOndeReceberContrato.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOndeReceberContrato.Enabled = false;
+            this.cmbOndeReceberContrato.FormattingEnabled = true;
+            this.cmbOndeReceberContrato.Items.AddRange(new object[] {
+            "SELECIONE...",
+            "E-MAIL",
+            "CORREIO"});
+            this.cmbOndeReceberContrato.Location = new System.Drawing.Point(146, 123);
+            this.cmbOndeReceberContrato.Name = "cmbOndeReceberContrato";
+            this.cmbOndeReceberContrato.Size = new System.Drawing.Size(130, 21);
+            this.cmbOndeReceberContrato.TabIndex = 358;
+            this.cmbOndeReceberContrato.Visible = false;
+            // 
+            // lblReceberContrato
+            // 
+            this.lblReceberContrato.AutoSize = true;
+            this.lblReceberContrato.Enabled = false;
+            this.lblReceberContrato.Location = new System.Drawing.Point(6, 107);
+            this.lblReceberContrato.Name = "lblReceberContrato";
+            this.lblReceberContrato.Size = new System.Drawing.Size(134, 13);
+            this.lblReceberContrato.TabIndex = 355;
+            this.lblReceberContrato.Text = "Deseja Receber Contrato *";
+            this.lblReceberContrato.Visible = false;
+            // 
+            // cmbReceberContrato
+            // 
+            this.cmbReceberContrato.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbReceberContrato.Enabled = false;
+            this.cmbReceberContrato.FormattingEnabled = true;
+            this.cmbReceberContrato.Items.AddRange(new object[] {
+            "SELECIONE...",
+            "NÃO",
+            "SIM"});
+            this.cmbReceberContrato.Location = new System.Drawing.Point(10, 123);
+            this.cmbReceberContrato.Name = "cmbReceberContrato";
+            this.cmbReceberContrato.Size = new System.Drawing.Size(130, 21);
+            this.cmbReceberContrato.TabIndex = 356;
+            this.cmbReceberContrato.Visible = false;
+            this.cmbReceberContrato.SelectedIndexChanged += new System.EventHandler(this.cmbReceberContrato_SelectedIndexChanged);
+            // 
+            // lblNumeroFaturaWhatsApp
+            // 
+            this.lblNumeroFaturaWhatsApp.AutoSize = true;
+            this.lblNumeroFaturaWhatsApp.Location = new System.Drawing.Point(618, 22);
+            this.lblNumeroFaturaWhatsApp.Name = "lblNumeroFaturaWhatsApp";
+            this.lblNumeroFaturaWhatsApp.Size = new System.Drawing.Size(133, 13);
+            this.lblNumeroFaturaWhatsApp.TabIndex = 352;
+            this.lblNumeroFaturaWhatsApp.Text = "Número Fatura WhatsApp ";
+            // 
+            // txtNumeroFaturaWhatsApp
+            // 
+            this.txtNumeroFaturaWhatsApp.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtNumeroFaturaWhatsApp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNumeroFaturaWhatsApp.Location = new System.Drawing.Point(622, 38);
+            this.txtNumeroFaturaWhatsApp.MaxLength = 11;
+            this.txtNumeroFaturaWhatsApp.Name = "txtNumeroFaturaWhatsApp";
+            this.txtNumeroFaturaWhatsApp.Size = new System.Drawing.Size(133, 20);
+            this.txtNumeroFaturaWhatsApp.TabIndex = 26;
+            this.txtNumeroFaturaWhatsApp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroFaturaWhatsApp_KeyPress);
+            this.txtNumeroFaturaWhatsApp.Leave += new System.EventHandler(this.txtNumeroFaturaWhatsApp_Leave);
+            // 
             // lblFormaPagamento
             // 
             this.lblFormaPagamento.AutoSize = true;
-            this.lblFormaPagamento.Location = new System.Drawing.Point(6, 64);
+            this.lblFormaPagamento.Location = new System.Drawing.Point(6, 21);
             this.lblFormaPagamento.Name = "lblFormaPagamento";
             this.lblFormaPagamento.Size = new System.Drawing.Size(115, 13);
             this.lblFormaPagamento.TabIndex = 10;
@@ -1241,7 +1391,7 @@
             // lblConta
             // 
             this.lblConta.AutoSize = true;
-            this.lblConta.Location = new System.Drawing.Point(663, 65);
+            this.lblConta.Location = new System.Drawing.Point(409, 64);
             this.lblConta.Name = "lblConta";
             this.lblConta.Size = new System.Drawing.Size(42, 13);
             this.lblConta.TabIndex = 16;
@@ -1251,12 +1401,11 @@
             // 
             this.txtEmailFaturaDigital.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtEmailFaturaDigital.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEmailFaturaDigital.Location = new System.Drawing.Point(130, 38);
+            this.txtEmailFaturaDigital.Location = new System.Drawing.Point(510, 80);
             this.txtEmailFaturaDigital.MaxLength = 100;
             this.txtEmailFaturaDigital.Name = "txtEmailFaturaDigital";
-            this.txtEmailFaturaDigital.ReadOnly = true;
-            this.txtEmailFaturaDigital.Size = new System.Drawing.Size(269, 20);
-            this.txtEmailFaturaDigital.TabIndex = 3;
+            this.txtEmailFaturaDigital.Size = new System.Drawing.Size(245, 20);
+            this.txtEmailFaturaDigital.TabIndex = 14;
             this.txtEmailFaturaDigital.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmailFaturaDigital_KeyPress);
             this.txtEmailFaturaDigital.Leave += new System.EventHandler(this.txtEmailFaturaDigital_Leave);
             // 
@@ -1265,20 +1414,20 @@
             this.cmbBanco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBanco.Enabled = false;
             this.cmbBanco.FormattingEnabled = true;
-            this.cmbBanco.Location = new System.Drawing.Point(224, 80);
+            this.cmbBanco.Location = new System.Drawing.Point(9, 79);
             this.cmbBanco.Name = "cmbBanco";
-            this.cmbBanco.Size = new System.Drawing.Size(338, 21);
-            this.cmbBanco.TabIndex = 13;
+            this.cmbBanco.Size = new System.Drawing.Size(299, 21);
+            this.cmbBanco.TabIndex = 20;
             this.cmbBanco.SelectedIndexChanged += new System.EventHandler(this.cmbBanco_SelectedIndexChanged);
             // 
             // cmbDiaDeVencimentoDaFatura
             // 
             this.cmbDiaDeVencimentoDaFatura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiaDeVencimentoDaFatura.FormattingEnabled = true;
-            this.cmbDiaDeVencimentoDaFatura.Location = new System.Drawing.Point(405, 37);
+            this.cmbDiaDeVencimentoDaFatura.Location = new System.Drawing.Point(263, 37);
             this.cmbDiaDeVencimentoDaFatura.Name = "cmbDiaDeVencimentoDaFatura";
             this.cmbDiaDeVencimentoDaFatura.Size = new System.Drawing.Size(157, 21);
-            this.cmbDiaDeVencimentoDaFatura.TabIndex = 5;
+            this.cmbDiaDeVencimentoDaFatura.TabIndex = 16;
             this.cmbDiaDeVencimentoDaFatura.SelectedIndexChanged += new System.EventHandler(this.cmbDiaDeVencimentoDaFatura_SelectedIndexChanged);
             // 
             // txtConta
@@ -1286,27 +1435,27 @@
             this.txtConta.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtConta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConta.Enabled = false;
-            this.txtConta.Location = new System.Drawing.Point(666, 81);
+            this.txtConta.Location = new System.Drawing.Point(412, 80);
             this.txtConta.MaxLength = 12;
             this.txtConta.Name = "txtConta";
             this.txtConta.Size = new System.Drawing.Size(92, 20);
-            this.txtConta.TabIndex = 17;
+            this.txtConta.TabIndex = 24;
             this.txtConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConta_KeyPress);
             // 
             // cmbFormaPagamento
             // 
             this.cmbFormaPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFormaPagamento.FormattingEnabled = true;
-            this.cmbFormaPagamento.Location = new System.Drawing.Point(9, 80);
+            this.cmbFormaPagamento.Location = new System.Drawing.Point(9, 37);
             this.cmbFormaPagamento.Name = "cmbFormaPagamento";
-            this.cmbFormaPagamento.Size = new System.Drawing.Size(209, 21);
-            this.cmbFormaPagamento.TabIndex = 11;
+            this.cmbFormaPagamento.Size = new System.Drawing.Size(248, 21);
+            this.cmbFormaPagamento.TabIndex = 18;
             this.cmbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cmbFormaPagamento_SelectedIndexChanged);
             // 
             // lblEmailFaturaDigital
             // 
             this.lblEmailFaturaDigital.AutoSize = true;
-            this.lblEmailFaturaDigital.Location = new System.Drawing.Point(127, 23);
+            this.lblEmailFaturaDigital.Location = new System.Drawing.Point(507, 64);
             this.lblEmailFaturaDigital.Name = "lblEmailFaturaDigital";
             this.lblEmailFaturaDigital.Size = new System.Drawing.Size(92, 13);
             this.lblEmailFaturaDigital.TabIndex = 2;
@@ -1315,7 +1464,7 @@
             // lblAgencia
             // 
             this.lblAgencia.AutoSize = true;
-            this.lblAgencia.Location = new System.Drawing.Point(565, 65);
+            this.lblAgencia.Location = new System.Drawing.Point(311, 64);
             this.lblAgencia.Name = "lblAgencia";
             this.lblAgencia.Size = new System.Drawing.Size(53, 13);
             this.lblAgencia.TabIndex = 14;
@@ -1325,7 +1474,7 @@
             // 
             this.txtPrimeiraFatura.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPrimeiraFatura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPrimeiraFatura.Location = new System.Drawing.Point(568, 38);
+            this.txtPrimeiraFatura.Location = new System.Drawing.Point(426, 38);
             this.txtPrimeiraFatura.MaxLength = 100;
             this.txtPrimeiraFatura.Name = "txtPrimeiraFatura";
             this.txtPrimeiraFatura.ReadOnly = true;
@@ -1335,7 +1484,7 @@
             // lblBanco
             // 
             this.lblBanco.AutoSize = true;
-            this.lblBanco.Location = new System.Drawing.Point(221, 65);
+            this.lblBanco.Location = new System.Drawing.Point(7, 64);
             this.lblBanco.Name = "lblBanco";
             this.lblBanco.Size = new System.Drawing.Size(45, 13);
             this.lblBanco.TabIndex = 12;
@@ -1346,27 +1495,18 @@
             this.txtAgencia.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtAgencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAgencia.Enabled = false;
-            this.txtAgencia.Location = new System.Drawing.Point(568, 81);
+            this.txtAgencia.Location = new System.Drawing.Point(314, 80);
             this.txtAgencia.MaxLength = 8;
             this.txtAgencia.Name = "txtAgencia";
             this.txtAgencia.Size = new System.Drawing.Size(92, 20);
-            this.txtAgencia.TabIndex = 15;
+            this.txtAgencia.TabIndex = 22;
             this.txtAgencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAgencia_KeyPress);
-            // 
-            // lblFaturaDigital
-            // 
-            this.lblFaturaDigital.AutoSize = true;
-            this.lblFaturaDigital.Location = new System.Drawing.Point(6, 22);
-            this.lblFaturaDigital.Name = "lblFaturaDigital";
-            this.lblFaturaDigital.Size = new System.Drawing.Size(112, 13);
-            this.lblFaturaDigital.TabIndex = 0;
-            this.lblFaturaDigital.Text = "Deseja Fatura Digital *";
             // 
             // txtCicloFechamento
             // 
             this.txtCicloFechamento.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtCicloFechamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCicloFechamento.Location = new System.Drawing.Point(666, 38);
+            this.txtCicloFechamento.Location = new System.Drawing.Point(524, 38);
             this.txtCicloFechamento.MaxLength = 100;
             this.txtCicloFechamento.Name = "txtCicloFechamento";
             this.txtCicloFechamento.ReadOnly = true;
@@ -1376,7 +1516,7 @@
             // lblPrimeiraFatura
             // 
             this.lblPrimeiraFatura.AutoSize = true;
-            this.lblPrimeiraFatura.Location = new System.Drawing.Point(565, 22);
+            this.lblPrimeiraFatura.Location = new System.Drawing.Point(423, 22);
             this.lblPrimeiraFatura.Name = "lblPrimeiraFatura";
             this.lblPrimeiraFatura.Size = new System.Drawing.Size(86, 13);
             this.lblPrimeiraFatura.TabIndex = 6;
@@ -1385,11 +1525,174 @@
             // lblDiaVencimento
             // 
             this.lblDiaVencimento.AutoSize = true;
-            this.lblDiaVencimento.Location = new System.Drawing.Point(402, 21);
+            this.lblDiaVencimento.Location = new System.Drawing.Point(260, 21);
             this.lblDiaVencimento.Name = "lblDiaVencimento";
-            this.lblDiaVencimento.Size = new System.Drawing.Size(152, 13);
+            this.lblDiaVencimento.Size = new System.Drawing.Size(111, 13);
             this.lblDiaVencimento.TabIndex = 4;
-            this.lblDiaVencimento.Text = "Dia de Vencimento da Fatura *";
+            this.lblDiaVencimento.Text = "Vencimento da Fatura";
+            // 
+            // lblCicloFechamento
+            // 
+            this.lblCicloFechamento.AutoSize = true;
+            this.lblCicloFechamento.Location = new System.Drawing.Point(521, 21);
+            this.lblCicloFechamento.Name = "lblCicloFechamento";
+            this.lblCicloFechamento.Size = new System.Drawing.Size(92, 13);
+            this.lblCicloFechamento.TabIndex = 8;
+            this.lblCicloFechamento.Text = "Ciclo Fechamento";
+            // 
+            // lblUrl
+            // 
+            this.lblUrl.AutoSize = true;
+            this.lblUrl.Location = new System.Drawing.Point(205, 300);
+            this.lblUrl.Name = "lblUrl";
+            this.lblUrl.Size = new System.Drawing.Size(32, 13);
+            this.lblUrl.TabIndex = 360;
+            this.lblUrl.Text = "URL:";
+            this.lblUrl.Visible = false;
+            // 
+            // gbDadosOferta
+            // 
+            this.gbDadosOferta.Controls.Add(this.gbLiberarMplay);
+            this.gbDadosOferta.Controls.Add(this.txtNumeroMigrado);
+            this.gbDadosOferta.Controls.Add(this.cmbProduto);
+            this.gbDadosOferta.Controls.Add(this.lblProduto);
+            this.gbDadosOferta.Controls.Add(this.lblNumeroMigrado);
+            this.gbDadosOferta.Location = new System.Drawing.Point(5, 10);
+            this.gbDadosOferta.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.gbDadosOferta.Name = "gbDadosOferta";
+            this.gbDadosOferta.Size = new System.Drawing.Size(764, 129);
+            this.gbDadosOferta.TabIndex = 2;
+            this.gbDadosOferta.TabStop = false;
+            this.gbDadosOferta.Text = "Dados da Oferta";
+            // 
+            // gbLiberarMplay
+            // 
+            this.gbLiberarMplay.Controls.Add(this.txtLoginProduto);
+            this.gbLiberarMplay.Controls.Add(this.txtSenhaProduto);
+            this.gbLiberarMplay.Controls.Add(this.label33);
+            this.gbLiberarMplay.Controls.Add(this.label32);
+            this.gbLiberarMplay.Controls.Add(this.btnLiberarProduto);
+            this.gbLiberarMplay.Location = new System.Drawing.Point(9, 18);
+            this.gbLiberarMplay.Name = "gbLiberarMplay";
+            this.gbLiberarMplay.Size = new System.Drawing.Size(248, 63);
+            this.gbLiberarMplay.TabIndex = 363;
+            this.gbLiberarMplay.TabStop = false;
+            this.gbLiberarMplay.Text = "Liberar Alteração de Produto";
+            // 
+            // txtLoginProduto
+            // 
+            this.txtLoginProduto.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtLoginProduto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLoginProduto.Location = new System.Drawing.Point(9, 34);
+            this.txtLoginProduto.MaxLength = 100;
+            this.txtLoginProduto.Name = "txtLoginProduto";
+            this.txtLoginProduto.Size = new System.Drawing.Size(95, 20);
+            this.txtLoginProduto.TabIndex = 2;
+            // 
+            // txtSenhaProduto
+            // 
+            this.txtSenhaProduto.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtSenhaProduto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSenhaProduto.Location = new System.Drawing.Point(110, 34);
+            this.txtSenhaProduto.MaxLength = 100;
+            this.txtSenhaProduto.Name = "txtSenhaProduto";
+            this.txtSenhaProduto.PasswordChar = '*';
+            this.txtSenhaProduto.Size = new System.Drawing.Size(77, 20);
+            this.txtSenhaProduto.TabIndex = 4;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(107, 17);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(38, 13);
+            this.label33.TabIndex = 365;
+            this.label33.Text = "Senha";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 17);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(33, 13);
+            this.label32.TabIndex = 364;
+            this.label32.Text = "Login";
+            // 
+            // btnLiberarProduto
+            // 
+            this.btnLiberarProduto.Location = new System.Drawing.Point(193, 32);
+            this.btnLiberarProduto.Name = "btnLiberarProduto";
+            this.btnLiberarProduto.Size = new System.Drawing.Size(49, 22);
+            this.btnLiberarProduto.TabIndex = 6;
+            this.btnLiberarProduto.Text = "Liberar";
+            this.btnLiberarProduto.UseVisualStyleBackColor = true;
+            this.btnLiberarProduto.Click += new System.EventHandler(this.btnLiberarProduto_Click);
+            // 
+            // txtNumeroMigrado
+            // 
+            this.txtNumeroMigrado.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtNumeroMigrado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNumeroMigrado.Location = new System.Drawing.Point(565, 101);
+            this.txtNumeroMigrado.MaxLength = 100;
+            this.txtNumeroMigrado.Name = "txtNumeroMigrado";
+            this.txtNumeroMigrado.ReadOnly = true;
+            this.txtNumeroMigrado.Size = new System.Drawing.Size(190, 20);
+            this.txtNumeroMigrado.TabIndex = 10;
+            this.txtNumeroMigrado.Leave += new System.EventHandler(this.txtNumeroMigrado_Leave);
+            // 
+            // cmbProduto
+            // 
+            this.cmbProduto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProduto.Enabled = false;
+            this.cmbProduto.FormattingEnabled = true;
+            this.cmbProduto.Location = new System.Drawing.Point(10, 100);
+            this.cmbProduto.Name = "cmbProduto";
+            this.cmbProduto.Size = new System.Drawing.Size(549, 21);
+            this.cmbProduto.TabIndex = 8;
+            this.cmbProduto.SelectedIndexChanged += new System.EventHandler(this.cmbProduto_SelectedIndexChanged);
+            // 
+            // lblProduto
+            // 
+            this.lblProduto.AutoSize = true;
+            this.lblProduto.Location = new System.Drawing.Point(6, 84);
+            this.lblProduto.Name = "lblProduto";
+            this.lblProduto.Size = new System.Drawing.Size(51, 13);
+            this.lblProduto.TabIndex = 0;
+            this.lblProduto.Text = "Produto *";
+            // 
+            // lblNumeroMigrado
+            // 
+            this.lblNumeroMigrado.AutoSize = true;
+            this.lblNumeroMigrado.Location = new System.Drawing.Point(562, 85);
+            this.lblNumeroMigrado.Name = "lblNumeroMigrado";
+            this.lblNumeroMigrado.Size = new System.Drawing.Size(85, 13);
+            this.lblNumeroMigrado.TabIndex = 2;
+            this.lblNumeroMigrado.Text = "Número Migrado";
+            // 
+            // cmbOfertaAparelho
+            // 
+            this.cmbOfertaAparelho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOfertaAparelho.FormattingEnabled = true;
+            this.cmbOfertaAparelho.Items.AddRange(new object[] {
+            "SELECIONE...",
+            "NÃO",
+            "SIM"});
+            this.cmbOfertaAparelho.Location = new System.Drawing.Point(11, 315);
+            this.cmbOfertaAparelho.Name = "cmbOfertaAparelho";
+            this.cmbOfertaAparelho.Size = new System.Drawing.Size(191, 21);
+            this.cmbOfertaAparelho.TabIndex = 359;
+            this.cmbOfertaAparelho.Visible = false;
+            this.cmbOfertaAparelho.SelectedIndexChanged += new System.EventHandler(this.cmbDesejaAparelho_SelectedIndexChanged);
+            // 
+            // lblDesejaAparelho
+            // 
+            this.lblDesejaAparelho.AutoSize = true;
+            this.lblDesejaAparelho.Location = new System.Drawing.Point(9, 300);
+            this.lblDesejaAparelho.Name = "lblDesejaAparelho";
+            this.lblDesejaAparelho.Size = new System.Drawing.Size(189, 13);
+            this.lblDesejaAparelho.TabIndex = 358;
+            this.lblDesejaAparelho.Text = "Deseja Receber Oferta de Aparelho? *";
+            this.lblDesejaAparelho.Visible = false;
             // 
             // cmbFaturaDigital
             // 
@@ -1399,73 +1702,22 @@
             "SELECIONE...",
             "NÃO",
             "SIM"});
-            this.cmbFaturaDigital.Location = new System.Drawing.Point(9, 37);
+            this.cmbFaturaDigital.Location = new System.Drawing.Point(639, 315);
             this.cmbFaturaDigital.Name = "cmbFaturaDigital";
-            this.cmbFaturaDigital.Size = new System.Drawing.Size(115, 21);
-            this.cmbFaturaDigital.TabIndex = 1;
+            this.cmbFaturaDigital.Size = new System.Drawing.Size(130, 21);
+            this.cmbFaturaDigital.TabIndex = 12;
+            this.cmbFaturaDigital.Visible = false;
             this.cmbFaturaDigital.SelectedIndexChanged += new System.EventHandler(this.cmbFaturaDigital_SelectedIndexChanged);
             // 
-            // lblCicloFechamento
+            // lblFaturaDigital
             // 
-            this.lblCicloFechamento.AutoSize = true;
-            this.lblCicloFechamento.Location = new System.Drawing.Point(663, 21);
-            this.lblCicloFechamento.Name = "lblCicloFechamento";
-            this.lblCicloFechamento.Size = new System.Drawing.Size(92, 13);
-            this.lblCicloFechamento.TabIndex = 8;
-            this.lblCicloFechamento.Text = "Ciclo Fechamento";
-            // 
-            // gbDadosOferta
-            // 
-            this.gbDadosOferta.Controls.Add(this.txtNumeroMigrado);
-            this.gbDadosOferta.Controls.Add(this.cmbProduto);
-            this.gbDadosOferta.Controls.Add(this.lblProduto);
-            this.gbDadosOferta.Controls.Add(this.lblNumeroMigrado);
-            this.gbDadosOferta.Location = new System.Drawing.Point(6, 6);
-            this.gbDadosOferta.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.gbDadosOferta.Name = "gbDadosOferta";
-            this.gbDadosOferta.Size = new System.Drawing.Size(764, 67);
-            this.gbDadosOferta.TabIndex = 2;
-            this.gbDadosOferta.TabStop = false;
-            this.gbDadosOferta.Text = "Dados da Oferta";
-            // 
-            // txtNumeroMigrado
-            // 
-            this.txtNumeroMigrado.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtNumeroMigrado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNumeroMigrado.Location = new System.Drawing.Point(568, 35);
-            this.txtNumeroMigrado.MaxLength = 100;
-            this.txtNumeroMigrado.Name = "txtNumeroMigrado";
-            this.txtNumeroMigrado.ReadOnly = true;
-            this.txtNumeroMigrado.Size = new System.Drawing.Size(190, 20);
-            this.txtNumeroMigrado.TabIndex = 3;
-            // 
-            // cmbProduto
-            // 
-            this.cmbProduto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProduto.FormattingEnabled = true;
-            this.cmbProduto.Location = new System.Drawing.Point(9, 34);
-            this.cmbProduto.Name = "cmbProduto";
-            this.cmbProduto.Size = new System.Drawing.Size(553, 21);
-            this.cmbProduto.TabIndex = 1;
-            this.cmbProduto.SelectedIndexChanged += new System.EventHandler(this.cmbProduto_SelectedIndexChanged);
-            // 
-            // lblProduto
-            // 
-            this.lblProduto.AutoSize = true;
-            this.lblProduto.Location = new System.Drawing.Point(6, 18);
-            this.lblProduto.Name = "lblProduto";
-            this.lblProduto.Size = new System.Drawing.Size(51, 13);
-            this.lblProduto.TabIndex = 0;
-            this.lblProduto.Text = "Produto *";
-            // 
-            // lblNumeroMigrado
-            // 
-            this.lblNumeroMigrado.AutoSize = true;
-            this.lblNumeroMigrado.Location = new System.Drawing.Point(565, 19);
-            this.lblNumeroMigrado.Name = "lblNumeroMigrado";
-            this.lblNumeroMigrado.Size = new System.Drawing.Size(85, 13);
-            this.lblNumeroMigrado.TabIndex = 2;
-            this.lblNumeroMigrado.Text = "Número Migrado";
+            this.lblFaturaDigital.AutoSize = true;
+            this.lblFaturaDigital.Location = new System.Drawing.Point(636, 300);
+            this.lblFaturaDigital.Name = "lblFaturaDigital";
+            this.lblFaturaDigital.Size = new System.Drawing.Size(112, 13);
+            this.lblFaturaDigital.TabIndex = 0;
+            this.lblFaturaDigital.Text = "Deseja Fatura Digital *";
+            this.lblFaturaDigital.Visible = false;
             // 
             // tcAuditoria_tpHistorico
             // 
@@ -1718,7 +1970,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(806, 607);
+            this.ClientSize = new System.Drawing.Size(806, 610);
             this.Controls.Add(this.lblLoginValidado);
             this.Controls.Add(this.txtAutorizacao);
             this.Controls.Add(this.label14);
@@ -1762,10 +2014,13 @@
             this.gbEnderecoResidencial.ResumeLayout(false);
             this.gbEnderecoResidencial.PerformLayout();
             this.tcAuditoria_tpDadosDoProduto.ResumeLayout(false);
+            this.tcAuditoria_tpDadosDoProduto.PerformLayout();
             this.gbDadosPagamento.ResumeLayout(false);
             this.gbDadosPagamento.PerformLayout();
             this.gbDadosOferta.ResumeLayout(false);
             this.gbDadosOferta.PerformLayout();
+            this.gbLiberarMplay.ResumeLayout(false);
+            this.gbLiberarMplay.PerformLayout();
             this.tcAuditoria_tpHistorico.ResumeLayout(false);
             this.tcAuditoria_tpHistorico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorico)).EndInit();
@@ -1914,5 +2169,23 @@
         private System.Windows.Forms.TextBox txtAvaliador;
         private System.Windows.Forms.Label lblAvaliador;
         private System.Windows.Forms.Button btnAvaliacao;
+        private System.Windows.Forms.Label lblNumeroFaturaWhatsApp;
+        private System.Windows.Forms.TextBox txtNumeroFaturaWhatsApp;
+        private System.Windows.Forms.TextBox txtUrl;
+        private System.Windows.Forms.Label lblUrl;
+        private System.Windows.Forms.Label lblDesejaAparelho;
+        private System.Windows.Forms.ComboBox cmbOfertaAparelho;
+        private System.Windows.Forms.GroupBox gbLiberarMplay;
+        private System.Windows.Forms.Button btnLiberarProduto;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtLoginProduto;
+        private System.Windows.Forms.TextBox txtSenhaProduto;
+        private System.Windows.Forms.Label lblReceberContrato;
+        private System.Windows.Forms.ComboBox cmbReceberContrato;
+        private System.Windows.Forms.Label lblOndeReceberContrato;
+        private System.Windows.Forms.ComboBox cmbOndeReceberContrato;
+        private System.Windows.Forms.Label lblSexo;
+        private System.Windows.Forms.ComboBox cmbSexo;
     }
 }

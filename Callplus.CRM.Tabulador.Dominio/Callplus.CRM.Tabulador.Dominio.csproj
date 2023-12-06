@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Callplus.CRM.Tabulador.Dominio</RootNamespace>
     <AssemblyName>Callplus.CRM.Tabulador.Dominio</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,12 @@
     <Compile Include="Dto\ProdutoDoScriptDeAtendimentoDto.cs" />
     <Compile Include="Entidades\Aparelho.cs" />
     <Compile Include="Entidades\CampanhaDoStatusDeAtendimento.cs" />
+    <Compile Include="Entidades\CampanhaDoStatusDeAuditoria.cs" />
+    <Compile Include="Entidades\CepCorreios.cs" />
+    <Compile Include="Entidades\CepExpress.cs" />
+    <Compile Include="Entidades\CicloDeVencimentoDeFatura.cs" />
+    <Compile Include="Entidades\ConfiguracaoDeEscalaDePausa.cs" />
+    <Compile Include="Entidades\ConfiguracaoDeVencimentoDeFatura.cs" />
     <Compile Include="Entidades\ConfiguracaoDoStatusDeOferta.cs" />
     <Compile Include="Entidades\ConsultarCep.cs" />
     <Compile Include="Entidades\EscalaDeTrabalho.cs" />
@@ -83,14 +90,18 @@
     <Compile Include="Entidades\FaqDoProcedimentoDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\FeedbackDaAvaliacaoDeAtendimento.cs" />
     <Compile Include="Entidades\FormularioDeQualidade.cs" />
+    <Compile Include="Entidades\FrasesGamificacao.cs" />
+    <Compile Include="Entidades\Gamificacao.cs" />
     <Compile Include="Entidades\GrauDeParentesco.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoMigracaoBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoNetPtvBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoPortabilidadeBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoRentabilizacaoBKO.cs" />
+    <Compile Include="Entidades\HistoricoDePausa.cs" />
     <Compile Include="Entidades\HistoricoLeitura.cs" />
-    <Compile Include="Entidades\Indicacao.cs" />
     <Compile Include="Entidades\IndicacaoDoAtendimento.cs" />
+    <Compile Include="Entidades\NivelDeConfianca.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoWeb.cs" />
     <Compile Include="Entidades\ProcedimentoDoItemDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\ItemDoModuloDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\LayoutDinamico\ConfiguracaoDeCampoDoLayoutDinamico.cs" />
@@ -99,8 +110,8 @@
     <Compile Include="Entidades\OfertaDoAtendimento.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoNETPTV.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoClaroMigracaoBKO.cs" />
-    <Compile Include="Entidades\OfertaDoAtendimentoClaroPortabilidade.cs" />
-    <Compile Include="Entidades\OfertaDoAtendimentoClaroPortabilidadeBKO.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoMPPortabilidade.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoMPPortabilidadeBKO.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoClaroRentabilizacao.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoClaroRentabilizacaoBKO.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoNETPTVBKO.cs" />
@@ -114,6 +125,7 @@
     <Compile Include="Entidades\ProdutoPermitidoParaFaixaDeRecarga.cs" />
     <Compile Include="Entidades\RegionalClaro.cs" />
     <Compile Include="Entidades\RespostaDaPesquisaDoAtendimento.cs" />
+    <Compile Include="Entidades\RetornoCep.cs" />
     <Compile Include="Entidades\ScriptAtendimento\EtapaDoScriptDeAtendimento.cs" />
     <Compile Include="Entidades\FaqDeAtendimento.cs" />
     <Compile Include="Entidades\FormaDePagamento.cs" />
@@ -131,22 +143,28 @@
     <Compile Include="Entidades\ResultadoDoAtendimento.cs" />
     <Compile Include="Entidades\ScriptAtendimento\RespostaDaEtapaDoScriptDeAtendimento.cs" />
     <Compile Include="Entidades\ScriptAtendimento\ScriptDeAtendimento.cs" />
+    <Compile Include="Entidades\SiglaUfBrasil.cs" />
     <Compile Include="Entidades\SolicitacaoDeAcessoAoSistema.cs" />
     <Compile Include="Entidades\StatusDeAtendimento.cs" />
     <Compile Include="Entidades\StatusDeAuditoria.cs" />
+    <Compile Include="Entidades\StatusDeEntregaBluechip.cs" />
     <Compile Include="Entidades\StatusDeOferta.cs" />
+    <Compile Include="Entidades\StatusDeOfertaDaCampanha.cs" />
     <Compile Include="Entidades\TelefoneDoProspect.cs" />
     <Compile Include="Entidades\TipoDeAvaliacaoDeAtendimento.cs" />
-    <Compile Include="Entidades\TipoDeDiscagem.cs" />
+    <Compile Include="Entidades\TipoDeFrasesGamificacao.cs" />
     <Compile Include="Entidades\TipoDePlanoPorOperadora.cs" />
     <Compile Include="Entidades\TipoDeProduto.cs" />
     <Compile Include="Entidades\TipoDeStatusDeOferta.cs" />
     <Compile Include="Entidades\TipoDeStatusDeAtendimento.cs" />
+    <Compile Include="Entidades\TipoDiscagem.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\VariavelDoChecklist.cs" />
     <Compile Include="Entidades\VariavelDoScriptDeAtendimento.cs" />
+    <Compile Include="Entidades\VencimentoFatura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tipos\Perfil.cs" />
+    <Compile Include="Tipos\TipoDeAuditoria.cs" />
     <Compile Include="Tipos\TipoPermissao.cs" />
     <Compile Include="Tipos\TipoFormaDePagamento.cs" />
     <Compile Include="Tipos\OrigemDeAtendimento.cs" />

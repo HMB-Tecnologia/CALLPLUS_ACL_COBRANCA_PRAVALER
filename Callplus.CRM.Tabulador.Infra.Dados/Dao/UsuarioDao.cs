@@ -12,7 +12,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
         public IEnumerable<Usuario> Listar(int id, bool ativo, int idPerfil = -1, int idCampanha = -1, int idSupervisor = -1)
         {
-            var sql = "APP_CRM_USUARIO_LISTAR";
+            //var sql = "APP_CRM_USUARIO_LISTAR";
+            var sql = "APP_CRM_USUARIO_LISTAR_2";
+
 
             var args = new
             {
@@ -30,7 +32,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
         public DataTable Listar(int id, int idCampanha, int idPerfil, int idSupervisor, string nome, string login, bool ativo)
         {
-            var sql = "APP_CRM_USUARIO_LISTAR_EXIBICAO ";
+            //var sql = "APP_CRM_USUARIO_LISTAR_EXIBICAO ";
+            var sql = "APP_CRM_USUARIO_LISTAR_EXIBICAO_2 ";
+
             sql += string.Format("@id = {0}, @idCampanha = {1}, @idPerfil = {2}, @idSupervisor = {3}, @nome = '{4}', @login = '{5}', @ativo = {6}",
             id, idCampanha, idPerfil, idSupervisor, nome, login, ativo);
 
@@ -46,8 +50,10 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
         public int Gravar(Usuario usuario, string campanhas, int idCampanhaPrincipal)
         {
-            var sql = "APP_CRM_USUARIO_GRAVAR";
+            
 
+            var sql = "APP_CRM_USUARIO_GRAVAR_2";
+            
             var args = new
             {
                 Id = usuario.Id,
@@ -61,17 +67,52 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 PermiteExportacao = usuario.PermiteExportacao,
                 Ativo = usuario.Ativo,
                 SenhaExpirada = usuario.SenhaExpirada,
+                GerarNota = usuario.GerarNota,
                 IdResponsavel = (usuario.Id == 0 ? usuario.IdCriador : usuario.IdModificador),
                 Observacao = usuario.Observacao,
-                Campanha = campanhas,
+                Campanha = campanhas.Replace("-",""),
                 IdCampanhaPrincipal = idCampanhaPrincipal,
                 IdEscalaDeTrabalho = usuario.IdEscalaDeTrabalho,
                 ReceberAvaliacaoQualidade = usuario.ReceberAvaliacaoDeQualidade,
                 Cpf = usuario.CPF,
-                DataNascimento = usuario.DataNascimento
+                DataNascimento = usuario.DataNascimento,
+                alterarProdutoBKO = usuario.alterarProdutoBKO
             };
 
             return ExecutarProcedureSingleOrDefault<int>(sql, args);
+        }
+
+        public string GravarEmMassa(string idsUsuarios, int idPerfil, bool ativo, bool senhaExpirada, int idResponsavel, string campanhas, int idCampanhaPrincipal, int idSupervisor)
+        {           
+            var sql = "APP_CRM_USUARIO_GRAVAR_EM_MASSA";
+
+            var args = new
+            {
+                IdsUsuarios = idsUsuarios,
+                IdPerfil = idPerfil,                
+                Ativo = ativo,
+                SenhaExpirada = senhaExpirada,
+                IdResponsavel = idResponsavel,                
+                Campanha = campanhas,
+                IdCampanhaPrincipal = idCampanhaPrincipal,
+                IdSupervisor = idSupervisor
+            };
+
+            return ExecutarProcedureSingleOrDefault<string>(sql, args);
+        }
+
+        public IEnumerable<Usuario> ListarAuditoresAtivos(bool ativo)
+        {
+            var sql = "APP_CRM_USUARIO_AUDITOR_ATIVO";
+
+            var args = new
+            {
+                Ativo = ativo
+            };
+
+            var resultado = ExecutarProcedure<Usuario>(sql, args);
+
+            return resultado;
         }
 
         public DataTable RetornarUsuariosIdSupervisor(int idSupervisor)

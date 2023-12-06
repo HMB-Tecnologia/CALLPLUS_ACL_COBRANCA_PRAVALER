@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChecklistForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSimular = new System.Windows.Forms.Button();
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
@@ -173,7 +173,7 @@
             this.btnSimular.Location = new System.Drawing.Point(738, 634);
             this.btnSimular.Name = "btnSimular";
             this.btnSimular.Size = new System.Drawing.Size(93, 25);
-            this.btnSimular.TabIndex = 14;
+            this.btnSimular.TabIndex = 6;
             this.btnSimular.Text = "Simular";
             this.btnSimular.UseVisualStyleBackColor = true;
             this.btnSimular.Visible = false;
@@ -187,7 +187,7 @@
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObservacao.Size = new System.Drawing.Size(386, 49);
-            this.txtObservacao.TabIndex = 12;
+            this.txtObservacao.TabIndex = 4;
             // 
             // btnSalvar
             // 
@@ -202,7 +202,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 634);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 13;
+            this.btnSalvar.TabIndex = 5;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -213,7 +213,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(763, 56);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 5;
+            this.chkAtivo.TabIndex = 2;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -224,7 +224,7 @@
             this.txtNome.MaxLength = 50;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(386, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtNome.TabIndex = 0;
             // 
             // label2
             // 
@@ -250,7 +250,7 @@
             this.pnlEtapa.Name = "pnlEtapa";
             this.pnlEtapa.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.pnlEtapa.Size = new System.Drawing.Size(801, 442);
-            this.pnlEtapa.TabIndex = 19;
+            this.pnlEtapa.TabIndex = 0;
             // 
             // cmbEtapa
             // 
@@ -313,7 +313,7 @@
             this.rtb1.Name = "rtb1";
             this.rtb1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.rtb1.Size = new System.Drawing.Size(789, 216);
-            this.rtb1.TabIndex = 1;
+            this.rtb1.TabIndex = 0;
             this.rtb1.Text = "";
             this.rtb1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtb1_LinkClicked);
             this.rtb1.SelectionChanged += new System.EventHandler(this.rtb1_SelectionChanged);
@@ -786,7 +786,7 @@
             this.tsEtapa_btnExcluir.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.delete;
             this.tsEtapa_btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsEtapa_btnExcluir.Name = "tsEtapa_btnExcluir";
-            this.tsEtapa_btnExcluir.Size = new System.Drawing.Size(61, 22);
+            this.tsEtapa_btnExcluir.Size = new System.Drawing.Size(62, 22);
             this.tsEtapa_btnExcluir.Text = "Excluir";
             this.tsEtapa_btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.tsEtapa_btnExcluir.Click += new System.EventHandler(this.tsEtapa_btnExcluir_Click);
@@ -834,15 +834,15 @@
             this.dgEtapa.AllowUserToDeleteRows = false;
             this.dgEtapa.AllowUserToResizeRows = false;
             this.dgEtapa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgEtapa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgEtapa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgEtapa.ColumnHeadersHeight = 25;
             this.dgEtapa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgEtapa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -919,7 +919,7 @@
             this.txtTitulo.MaxLength = 50;
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(353, 20);
-            this.txtTitulo.TabIndex = 4;
+            this.txtTitulo.TabIndex = 1;
             // 
             // label3
             // 
@@ -948,7 +948,7 @@
             this.txtPalavraChave.Name = "txtPalavraChave";
             this.txtPalavraChave.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPalavraChave.Size = new System.Drawing.Size(427, 49);
-            this.txtPalavraChave.TabIndex = 10;
+            this.txtPalavraChave.TabIndex = 3;
             // 
             // clbRegionais
             // 
@@ -1157,15 +1157,15 @@
             this.gvProdutoDoChecklist.AllowUserToDeleteRows = false;
             this.gvProdutoDoChecklist.AllowUserToResizeRows = false;
             this.gvProdutoDoChecklist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvProdutoDoChecklist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvProdutoDoChecklist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvProdutoDoChecklist.ColumnHeadersHeight = 25;
             this.gvProdutoDoChecklist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gvProdutoDoChecklist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

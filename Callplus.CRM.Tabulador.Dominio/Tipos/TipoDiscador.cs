@@ -6,6 +6,8 @@
         Akiva = 2,
         Callflex = 3,
         Olos = 4,
-        OlosAPI = 5
+        OlosAPI = 5,
+        Receptivo = 6,
+        ExpertVoice = 7
     }
 }

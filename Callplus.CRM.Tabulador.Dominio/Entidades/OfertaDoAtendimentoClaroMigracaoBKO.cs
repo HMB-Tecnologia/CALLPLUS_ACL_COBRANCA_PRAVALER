@@ -44,5 +44,12 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public string observacao { get; set; }
         public DateTime dataRegistroOferta { get; set; }
         public DateTime dataCriacao { get; set; }
+        public bool? codigo21 { get; set; }
+        public bool? receberContrato { get; set; }
+        public long? NumeroFaturaWhatsApp { get; set; }
+        public bool OfertaAparelho { get; set; }
+        public string Url { get; set; }
+        public string ondeReceberContrato { get; set; }
+        public string Sexo { get; set; }
     }
 }

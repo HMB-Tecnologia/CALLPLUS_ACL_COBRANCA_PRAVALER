@@ -5,6 +5,7 @@ using CallplusUtil.Validacoes;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -52,20 +53,25 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 
         private void CarregarConfiguracaoInicial()
         {
+            cmbPerfil.SelectedIndexChanged -= cmbPerfil_SelectedIndexChanged;
+            cmbCampanhaPrincipal.SelectedIndexChanged -= cmbCampanhaPrincipal_SelectedIndexChanged;
+
             CarregarPerfil();
-            CarregarCampanhas();
+            //CarregarCampanhas();
             CarregarCampanhaPrincipal();
             CarregarSupervisor();
             CarregarEmpresa();
             CarregarEscalaDeTrabalho();
-
-            CarregarEstadoInicialDosControles();
-
+            
             if (_usuario != null)
             {
                 cmbPerfil.SelectedValue = _usuario.IdPerfil.ToString();
+                ConfigurarPerfil();
                 CarregarDadosDoUsuario();
             }
+
+            cmbPerfil.SelectedIndexChanged += cmbPerfil_SelectedIndexChanged;
+            cmbCampanhaPrincipal.SelectedIndexChanged += cmbCampanhaPrincipal_SelectedIndexChanged;
         }
 
         private void CarregarEstadoInicialDosControles()
@@ -93,11 +99,16 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 
         private void CarregarCampanhas()
         {
+            clbCampanha.Items.Clear();
+
             if (_campanhas != null)
             {
+                Campanha c = _campanhas.Where(x => x.Id == Convert.ToInt32(cmbCampanhaPrincipal.SelectedValue.ToString())).FirstOrDefault();
+
                 foreach (var item in _campanhas)
                 {
-                    clbCampanha.Items.Add(item.Nome, false);
+                    if (item.IdDiscador == c.IdDiscador && item.idTipoDaCampanha == c.idTipoDaCampanha && item.Id != c.Id)
+                        clbCampanha.Items.Add(item.Nome, false);
                 }
             }
         }
@@ -159,36 +170,41 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 
             txtObservacao.Text = _usuario.Observacao;
 
+            chkAlterarProdutoBko.Checked = _usuario.alterarProdutoBKO;
+
             if (cmbPerfil.Text.ToUpper() == "ADMINISTRADOR")
             {
                 if (_usuario.PermiteExportacao)
-                {
                     chkExportarRelatorio.Checked = true;
-                }
                 else
-                {
                     chkExportarRelatorio.Checked = false;
-                }
 
                 if (_usuario.ReceberAvaliacaoDeQualidade)
-                {
                     chkReceberAvaliacaoQualidade.Checked = true;
-                }
                 else
-                {
                     chkReceberAvaliacaoQualidade.Checked = false;
-                }
+
+                if (_usuario.GerarNota)
+                    chkGerarNotaConfianca.Checked = true;
+                else
+                    chkGerarNotaConfianca.Checked = false;
 
                 txtEmail.Text = _usuario.Email;
             }
             else if (cmbPerfil.Text.ToUpper() == "OPERADOR")
             {
-                CarregarCampanhaDoUsuario();
+                _campanhasDoUsuario = _campanhaService.ListarCampanhasDoUsuario(_usuario.Id);
 
                 var campanhaPrincipal = _campanhasDoUsuario.FirstOrDefault(x => x.Principal == true);
 
                 if (campanhaPrincipal != null)
+                {
                     cmbCampanhaPrincipal.SelectedValue = campanhaPrincipal?.Id.ToString();
+
+                    CarregarCampanhas();
+
+                    CarregarCampanhaDoUsuario();
+                }
 
                 cmbSupervisor.SelectedValue = _usuario.IdSupervisor.ToString();
 
@@ -225,8 +241,6 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 
         private void CarregarCampanhaDoUsuario()
         {
-            _campanhasDoUsuario = _campanhaService.ListarCampanhasDoUsuario(_usuario.Id);
-
             clbCampanha.SetarTodosRegistros(false);
 
             for (int i = 0; i < this.clbCampanha.Items.Count; ++i)
@@ -248,6 +262,8 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 clbCampanha.SetarTodosRegistros(true);
                 chkExportarRelatorio.Enabled = true;
                 chkReceberAvaliacaoQualidade.Enabled = true;
+                chkAlterarProdutoBko.Enabled = true;
+                chkGerarNotaConfianca.Enabled = true;
 
                 txtNome.Enabled = true;
                 txtEmail.Enabled = true;
@@ -261,6 +277,8 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 clbCampanha.Enabled = true;
                 lnkMarcarTodos.Enabled = true;
                 lnkDesmarcarTodos.Enabled = true;
+                chkAlterarProdutoBko.Enabled = false;
+                chkGerarNotaConfianca.Enabled = false;
                 cmbCampanhaPrincipal.ResetarComSelecione(true);
                 cmbEscalaDeTrabalho.ResetarComSelecione(true);
 
@@ -271,13 +289,30 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 txtObservacao.Enabled = true;
                 btnSalvar.Enabled = true;
             }
-            else if (cmbPerfil.Text.ToUpper() != "SELECIONE...")
+            else if (cmbPerfil.Text.ToUpper() == "ADM OPERACAO")
+            {
+                clbCampanha.SetarTodosRegistros(true);
+                chkExportarRelatorio.Enabled = true;
+                chkReceberAvaliacaoQualidade.Enabled = true;
+                chkAlterarProdutoBko.Enabled = false;
+                chkGerarNotaConfianca.Enabled = false;
+
+                txtNome.Enabled = true;
+                txtEmail.Enabled = true;
+
+                gbDadosAcesso.Enabled = true;
+                txtObservacao.Enabled = true;
+                btnSalvar.Enabled = true;
+            }
+            else if (!cmbPerfil.TextoEhSelecione())
             {
                 clbCampanha.Enabled = true;
                 lnkMarcarTodos.Enabled = true;
                 lnkDesmarcarTodos.Enabled = true;
                 chkExportarRelatorio.Enabled = true;
                 chkReceberAvaliacaoQualidade.Enabled = true;
+                chkAlterarProdutoBko.Enabled = true;
+                chkGerarNotaConfianca.Enabled = true;
 
                 txtNome.Enabled = true;
                 txtEmail.Enabled = true;
@@ -294,11 +329,11 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
             StringBuilder mensagem = new StringBuilder();
             List<string> mensagens = new List<string>();
 
-            if (clbCampanha.CheckedItems.Count == 0 && cmbPerfil.Text.ToUpper() != "ADMINISTRADOR")
-            {
-                mensagens.Add("Selecione a(s) Campanha(s).");
-                result = false;
-            }
+            //if (clbCampanha.CheckedItems.Count == 0 && cmbPerfil.Text.ToUpper() != "ADMINISTRADOR")
+            //{
+            //    mensagens.Add("Selecione a(s) Campanha(s).");
+            //    result = false;
+            //}
 
             if ((cmbCampanhaPrincipal.Text == "SELECIONE..." || cmbCampanhaPrincipal.SelectedValue == null) && cmbPerfil.Text.ToUpper() == "OPERADOR")
             {
@@ -306,11 +341,11 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 result = false;
             }
 
-            if (!clbCampanha.CheckedItems.Contains(cmbCampanhaPrincipal.Text) && cmbPerfil.Text.ToUpper() == "OPERADOR" && cmbCampanhaPrincipal.Text != "SELECIONE...")
-            {
-                mensagens.Add("A Campanha Principal deve pertencer à lista de Campanhas.");
-                result = false;
-            }
+            //if (!clbCampanha.CheckedItems.Contains(cmbCampanhaPrincipal.Text) && cmbPerfil.Text.ToUpper() == "OPERADOR" && cmbCampanhaPrincipal.Text != "SELECIONE...")
+            //{
+            //    mensagens.Add("A Campanha Principal deve pertencer à lista de Campanhas.");
+            //    result = false;
+            //}
 
             if (txtNome.Text.Trim() == "")
             {
@@ -346,15 +381,33 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 result = false;
             }
 
-            bool vinculadoNET = false;
+            //bool vinculadoNET = false;
 
-            foreach (var item in clbCampanha.CheckedItems)
+            //foreach (var item in clbCampanha.CheckedItems)
+            //{
+            //    if (item.ToString().Contains("NET "))
+            //    {
+            //        vinculadoNET = true;
+            //        break;
+            //    }
+            //}
+
+            if (string.IsNullOrEmpty(txtCpf.Text))
             {
-                if (item.ToString().Contains("NET "))
-                {
-                    vinculadoNET = true;
-                    break;
-                }
+                mensagens.Add("Informe o CPF.");
+                result = false;
+            }
+
+            if (!string.IsNullOrEmpty(txtCpf.Text) && !Texto.CpfPossuiFormatoValido(txtCpf.Text))
+            {
+                mensagens.Add("CPF inválido.");
+                result = false;
+            }
+
+            if (dtpDataNascimento.Value == dtpDataNascimento.MinDate)
+            {
+                mensagens.Add("Data de Nascimento inválida."); ;
+                result = false;
             }
 
             if (txtLogin.Text.Trim() == "")
@@ -366,26 +419,6 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
             if (txtSenha.Text.Trim() == "" && (_usuario == null || chkSenha.Checked))
             {
                 mensagens.Add("Informe a Senha.");
-                result = false;
-            }
-
-            if (vinculadoNET && string.IsNullOrEmpty(txtCpf.Text))
-            {
-                mensagens.Add("Informe o CPF.");
-                result = false;
-            }
-
-            if (!string.IsNullOrEmpty(txtCpf.Text)
-                && !Texto.CpfPossuiFormatoValido(txtCpf.Text)
-                && txtCpf.Text.IsNumericInt())
-            {
-                mensagens.Add("CPF inválido.");
-                result = false;
-            }
-
-            if (dtpDataNascimento.Value == dtpDataNascimento.MinDate)
-            {
-                mensagens.Add("Data de Nascimento inválida."); ;
                 result = false;
             }
 
@@ -433,8 +466,15 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 _usuario.Ativo = chkAtivo.Checked;
                 _usuario.SenhaExpirada = chkSenhaExpirada.Checked;
 
+                _usuario.GerarNota = chkGerarNotaConfianca.Checked;
+
+
                 if (txtCpf.Text != "")
-                    _usuario.CPF = Convert.ToInt64(txtCpf.Text);
+                {
+                    long cpf = 0;
+                    long.TryParse(txtCpf.Text, out cpf);
+                    _usuario.CPF = cpf;
+                }
                 else
                     _usuario.CPF = null;
 
@@ -443,6 +483,7 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 _usuario.Observacao = txtObservacao.Text;
 
                 _usuario.IdModificador = AdministracaoMDI._usuario.Id;
+                _usuario.alterarProdutoBKO = chkAlterarProdutoBko.Checked;
 
                 string campanha = "";
 
@@ -460,6 +501,8 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
                 }
 
                 int idCampanhaPrincipal = Convert.ToInt32(cmbCampanhaPrincipal.SelectedValue);
+
+                campanha = campanha + idCampanhaPrincipal + ",";
 
                 _usuario.Id = _usuarioService.Gravar(_usuario, campanha, idCampanhaPrincipal);
 
@@ -512,15 +555,18 @@ namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 
         private void cmbCampanhaPrincipal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < clbCampanha.Items.Count; i++)
-            {
-                if (cmbCampanhaPrincipal.Text == clbCampanha.Items[i].ToString())
-                {
-                    clbCampanha.SetItemChecked(i, true);
+            if (!cmbCampanhaPrincipal.TextoEhSelecione())
+                CarregarCampanhas();
 
-                    break;
-                }
-            }
+            //for (int i = 0; i < clbCampanha.Items.Count; i++)
+            //{
+            //    if (cmbCampanhaPrincipal.Text == clbCampanha.Items[i].ToString())
+            //    {
+            //        clbCampanha.SetItemChecked(i, true);
+
+            //        break;    wssw
+            //    }
+            //}
         }
 
         private void cmbPerfil_SelectedIndexChanged(object sender, EventArgs e)

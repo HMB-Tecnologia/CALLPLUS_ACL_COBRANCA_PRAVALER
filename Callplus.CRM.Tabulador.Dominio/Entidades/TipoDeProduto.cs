@@ -11,5 +11,7 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public long Id { get; set; }        
         public string Nome { get; set; }
         public bool Ativo { get; set; }
+        public bool PermiteFaixaDeRecarga { get; set; }
+
     }
 }

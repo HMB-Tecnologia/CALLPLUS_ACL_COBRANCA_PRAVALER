@@ -32,6 +32,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _usuarioDao.Gravar(usuario, campanhas, idCampanhaPrincipal);
         }
 
+        public string GravarEmMassa(string idsUsuarios, int idPerfil, bool ativo, bool senhaExpirada, int idResponsavel, string campanhas, int idCampanhaPrincipal, int idSupervisor)
+        {
+            return _usuarioDao.GravarEmMassa(idsUsuarios, idPerfil, ativo, senhaExpirada, idResponsavel, campanhas, idCampanhaPrincipal, idSupervisor);
+        }
+
         public IEnumerable<Empresa> ListarEmpresa(bool ativo)
         {
             return _usuarioDao.ListarEmpresa(ativo);
@@ -49,6 +54,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _usuarioDao.Listar(id, ativo, idPerfil, idCampanha, idSupervisor: idSupervisor);
         }
 
+        public IEnumerable<Usuario> ListarAuditoresAtivos(bool ativo)
+        {
+            return _usuarioDao.ListarAuditoresAtivos(ativo);
+        }
+
         public IEnumerable<Usuario> ListarSupervisores(bool ativo, int idCampanha = -1)
         {
             int id = -1;
@@ -56,10 +66,22 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _usuarioDao.Listar(id, ativo, idPerfil, idCampanha);
         }
 
+        public IEnumerable<Usuario> ListarAuditores(bool ativo, int idCampanha = -1)
+        {
+            int id = -1;
+            int idPerfil = (int)Perfil.BACKOFFICE;
+            return _usuarioDao.Listar(id, ativo, idPerfil, idCampanha);
+        }
+
         public IEnumerable<Usuario> ListarAvaliadores(bool ativo, int idPerfil, int idCampanha)
         {
             int id = -1;
             return _usuarioDao.Listar(id, ativo, idPerfil, idCampanha).Where(x => x.IdPerfil != 2 && x.IdPerfil != 4);
+        }
+        public IEnumerable<Usuario> ListarAgentes(bool ativo, int idPerfil, int idCampanha)
+        {
+            int id = -1;
+            return _usuarioDao.Listar(id, ativo, idPerfil, idCampanha).Where(x => x.IdPerfil == 2);
         }
 
         public IEnumerable<string> VerificarSeLoginExiste(string login, int? id)

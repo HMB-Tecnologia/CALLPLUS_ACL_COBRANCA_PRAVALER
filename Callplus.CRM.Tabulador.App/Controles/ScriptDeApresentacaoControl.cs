@@ -19,17 +19,21 @@ namespace Callplus.CRM.Tabulador.App.Controles
             _scriptDeAtendimentoService = new ScriptDeAtendimentoService();
             InitializeComponent();
 
-            //((Control)webBrowserEtapa).Enabled = false;
-            webBrowserEtapa.DocumentCompleted += (sender, args) =>
+            try
             {
-                if (_carregarHtmPendente)
+                //((Control)webBrowserEtapa).Enabled = false;
+                webBrowserEtapa.DocumentCompleted += (sender, args) =>
                 {
-                    _carregarHtmPendente = false;
-                    webBrowserEtapa.DocumentText = _htmlPendente;
-                    _htmlPendente = "";
-                }
-            };
-
+                    if (_carregarHtmPendente)
+                    {
+                        _carregarHtmPendente = false;
+                        webBrowserEtapa.DocumentText = _htmlPendente;
+                        _htmlPendente = "";
+                    }
+                };
+            }
+            catch
+            { }
         }
 
         #region PROPRIEDADES
@@ -92,8 +96,6 @@ namespace Callplus.CRM.Tabulador.App.Controles
                 lblResposta.Visible = false;
                 toolSeparatorResposta.Visible = false;
                 tsComboRespostas.Visible = false;
-                btnApresentarOferta.Enabled = true;
-
                 // webBrowser1.DocumentText = "";
             }
 
@@ -158,14 +160,19 @@ namespace Callplus.CRM.Tabulador.App.Controles
             tsComboRespostas.ComboBox.PreencherComSelecione(listaFake);
             tsComboRespostas.ComboBox.ResetarComSelecione(habilitar: true);
 
-            string html = AtribuirVariaveisDaEtapa(etapa.DescricaoHtml) ?? "";
-
-            if (webBrowserEtapa.ReadyState != WebBrowserReadyState.Complete)
+            try
             {
-                _carregarHtmPendente = true;
-                _htmlPendente = html;
+                string html = AtribuirVariaveisDaEtapa(etapa.DescricaoHtml) ?? "";
+
+                if (webBrowserEtapa.ReadyState != WebBrowserReadyState.Complete)
+                {
+                    _carregarHtmPendente = true;
+                    _htmlPendente = html;
+                }
+                webBrowserEtapa.DocumentText = html;
             }
-            webBrowserEtapa.DocumentText = html;
+            catch
+            { }
             
             if (etapa == null) return;
 
@@ -192,7 +199,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
 
             }
 
-            tsComboRespostas.ComboBox.SelectionChangeCommitted += ComboRespostas_OnSelectionChangeCommitted;
+            tsComboRespostas.ComboBox.SelectionChangeCommitted -= ComboRespostas_OnSelectionChangeCommitted;
         }
 
         private void ConfigurarFimDoScript()

@@ -55,7 +55,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
         }
 
         public IEnumerable<string> VerificarPermissaoPorLoginESenha(int idUsuario, string login, string senha,
-            bool verificarPerfilSupervisor, bool permitePerfilAdministrador)
+            bool verificarPerfilSupervisor, bool permitePerfilAdministrador, bool _contatoManual = false)
         {
             var sql = "APP_CRM_PERMISSAO_VERIFICAR_POR_LOGIN_E_SENHA";
             var args = new
@@ -64,7 +64,8 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 login = login,
                 senha = senha,
                 verificarPerfilSupervisor = verificarPerfilSupervisor,
-                permitePerfilAdministrador = permitePerfilAdministrador
+                permitePerfilAdministrador = permitePerfilAdministrador,
+                ContatoManual = _contatoManual
             };
 
             var resultado = ExecutarProcedure<string>(sql, args);

@@ -20,13 +20,18 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long FinalizarAtendimento(ResultadoDoAtendimento resultado)
         {
-           return _atendimentoDao.FinalizarAtendimento(resultado);
+            return _atendimentoDao.FinalizarAtendimento(resultado);
         }
 
-        public Atendimento IniciarAtendimento(int idOperador, long idProspect, int idSupervisor, int? idDiscador,string numeroChamadorDiscador, 
-            string ip, string host, OrigemDeAtendimento origem)
+        public long AtualizarTicketDiscador(long idAtendimento, string ticket)
         {
-            Atendimento atendimento = _atendimentoDao.IniciarAtendimento(idOperador, idProspect, idSupervisor, idDiscador, numeroChamadorDiscador, ip, host, origem);
+            return _atendimentoDao.AtualizarTicketDiscador(idAtendimento, ticket);
+        }
+
+        public Atendimento IniciarAtendimento(int idOperador, long idProspect, int idSupervisor, int? idDiscador, string numeroChamadorDiscador,
+            string ip, string host, OrigemDeAtendimento origem, int? idUsuarioPermissao, string loginHuawei)
+        {
+            Atendimento atendimento = _atendimentoDao.IniciarAtendimento(idOperador, idProspect, idSupervisor, idDiscador, numeroChamadorDiscador, ip, host, origem, idUsuarioPermissao, loginHuawei);
 
             if (atendimento == null)
                 throw new SystemException("Não foi possível iniciar um novo atendimento.");
@@ -44,10 +49,30 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _atendimentoDao.RetornarHistoricoDeAtendimento(idProspect, idUsuario);
         }
-        
-        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveis()
+
+        public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveis(int idCampanha)
         {
-            return _atendimentoDao.RetornarDatasDeVencimentoDeFaturaDisponiveis();
+            return _atendimentoDao.RetornarDatasDeVencimentoDeFaturaDisponiveis(idCampanha);
+        }
+
+        public IEnumerable<ConfiguracaoDaEscalaDePausa> ListarConfiguracaoDeEscalaDePausa(int idUsuario, int idCampanha)
+        {
+            return _atendimentoDao.ListarConfiguracaoDeEscalaDePausa(-1, idUsuario, idCampanha);
+        }
+
+        public IEnumerable<HistoricoDePausa> ListarHistoricoDePausa(int idUsuario)
+        {
+            return _atendimentoDao.ListarHistoricoDePausa(idUsuario);
+        }
+
+        public HistoricoDePausa RetornarPausaAtiva(int idUsuario)
+        {
+            return _atendimentoDao.ListarHistoricoDePausa(idUsuario).Where(x => x.dataTermino == null).FirstOrDefault();
+        }
+
+        public ConfiguracaoDaEscalaDePausa RetornarConfiguracaoDeEscalaDePausa(int id, int idUsuario, int idCampanha)
+        {
+            return _atendimentoDao.ListarConfiguracaoDeEscalaDePausa(id, idUsuario, idCampanha).FirstOrDefault();
         }
 
         public IEnumerable<string> VerificarSePodeRealizarAgendamento(long idAtendimento, long telefone, DateTime? dataAgendamento, int idTipodeAgendamento)
@@ -55,14 +80,34 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _atendimentoDao.VerificarSePodeRealizarAgendamento(idAtendimento, telefone, dataAgendamento, idTipodeAgendamento);
         }
 
-        public IEnumerable<string> VerificarSePodeRealizarVenda(int idCampanha, long telefone, string codigoMailing)
+        public IEnumerable<string> VerificarSePodeRealizarVenda(int idCampanha, long telefone, long idProspect)
         {
-            return _atendimentoDao.VerificarSePodeRealizarVenda(idCampanha, telefone, codigoMailing);
+            return _atendimentoDao.VerificarSePodeRealizarVenda(idCampanha, telefone, idProspect);
+        }
+
+        public IEnumerable<string> VerificarSePodeAtivarPausa(int idCampanha, int idConfiguracaoDeEscalaDePausa)
+        {
+            return _atendimentoDao.VerificarSePodeAtivarPausa(idCampanha, idConfiguracaoDeEscalaDePausa);
+        }
+
+        public long GravarPausa(long? id, int idUsuario, int idPausa)
+        {
+            return _atendimentoDao.GravarPausa(id, idUsuario, idPausa);
         }
 
         public DadosDoRanking RetornarDadosDosAtendimentos(int idOperador, int idCampanha)
         {
             return _atendimentoDao.RetornarDadosDosAtendimentos(idOperador, idCampanha);
+        }
+
+        public long VerificarSeExisteVendaPendente(int idCampanha, long idProspec)
+        {
+            return _atendimentoDao.VerificarSeExisteVendaPendente(idCampanha, idProspec);
+        }
+
+        public long RetornarProximoIdProspectParaAtendimento(int idOperador)
+        {
+            return _atendimentoDao.RetornarProximoIdProspectParaAtendimento(idOperador);
         }
 
         #region INDICACAO
@@ -97,6 +142,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _atendimentoDao.ValidarSupervisor(id, login, senha);
         }
+
         #endregion INDICACAO        
     }
 }

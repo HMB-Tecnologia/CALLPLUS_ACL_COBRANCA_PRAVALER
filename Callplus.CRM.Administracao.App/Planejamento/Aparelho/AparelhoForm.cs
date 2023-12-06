@@ -374,7 +374,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Aparelho
 
                 atualizar = true;
                 MessageBox.Show("Salvo com sucesso!");
-                this.Close();
+                Close();
 
             }
         }

@@ -1,4 +1,5 @@
-﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
+﻿using Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoForm;
+using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using CallplusUtil.Forms;
@@ -110,7 +111,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
 
         private void IniciarNovoRegistro()
         {
-            AvaliacaoDeAtendimentoForm f = new AvaliacaoDeAtendimentoForm("NOVA AVALIAÇÃO", 0, 0, "", false);
+            NovaAvaliacaoDeAtendimento f = new NovaAvaliacaoDeAtendimento("NOVA AVALIAÇÃO", 0, 0, "", false);
 
             f.Iniciar();
 

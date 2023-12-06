@@ -22,5 +22,6 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public long? TelefoneAgendamento { get; set; }
         public DateTime? DataAgendamento { get; set; }
         public string Observacao { get; set; }
+        public int? IdUsuarioPermissao { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
-using Callplus.CRM.Tabulador.Dominio.TipoDiscagem;
 using Callplus.CRM.Tabulador.Infra.Dados.Dao;
 using System;
 using System.Collections.Generic;
@@ -44,11 +43,6 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public string RetornarRamalUsuario(int idUsuario, int idDiscador)
         {
             return _discadorDao.RetornarRamalUsuario(idUsuario, idDiscador);
-        }
-
-        public IEnumerable<Dominio.Entidades.TipoDeDiscagem> TipoDeDiscagemListar(bool ativo)
-        {
-            return _discadorDao.TipoDeDiscagemListar(ativo);
         }
     }
 }

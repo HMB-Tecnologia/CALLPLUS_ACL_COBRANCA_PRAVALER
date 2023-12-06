@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PausaForm));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpDataTermino = new System.Windows.Forms.DateTimePicker();
+            this.dtpDataInicio = new System.Windows.Forms.DateTimePicker();
             this.chkAtivo = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -41,10 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtCaminhoDoArquivo = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
-            this.dtpDataInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtpDataTermino = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,9 +61,44 @@
             this.groupBox3.Location = new System.Drawing.Point(12, 37);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(452, 145);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dados Cadastrais";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(234, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Data Término";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 92);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Data Início";
+            // 
+            // dtpDataTermino
+            // 
+            this.dtpDataTermino.Location = new System.Drawing.Point(237, 108);
+            this.dtpDataTermino.MinDate = new System.DateTime(2018, 12, 28, 0, 0, 0, 0);
+            this.dtpDataTermino.Name = "dtpDataTermino";
+            this.dtpDataTermino.Size = new System.Drawing.Size(209, 20);
+            this.dtpDataTermino.TabIndex = 3;
+            // 
+            // dtpDataInicio
+            // 
+            this.dtpDataInicio.Location = new System.Drawing.Point(9, 108);
+            this.dtpDataInicio.MinDate = new System.DateTime(2018, 12, 28, 15, 6, 47, 0);
+            this.dtpDataInicio.Name = "dtpDataInicio";
+            this.dtpDataInicio.Size = new System.Drawing.Size(213, 20);
+            this.dtpDataInicio.TabIndex = 2;
+            this.dtpDataInicio.Value = new System.DateTime(2018, 12, 28, 15, 6, 47, 0);
             // 
             // chkAtivo
             // 
@@ -71,7 +106,7 @@
             this.chkAtivo.Location = new System.Drawing.Point(10, 69);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
-            this.chkAtivo.TabIndex = 5;
+            this.chkAtivo.TabIndex = 1;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
@@ -90,7 +125,7 @@
             this.txtNome.MaxLength = 100;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(436, 20);
-            this.txtNome.TabIndex = 1;
+            this.txtNome.TabIndex = 0;
             // 
             // lblTitulo
             // 
@@ -112,7 +147,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 188);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(452, 284);
-            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carregamento";
             // 
@@ -133,7 +168,7 @@
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtObservacao.Size = new System.Drawing.Size(419, 182);
-            this.txtObservacao.TabIndex = 10;
+            this.txtObservacao.TabIndex = 2;
             // 
             // cmdCarregarArquivo
             // 
@@ -148,7 +183,7 @@
             this.cmdCarregarArquivo.Location = new System.Drawing.Point(406, 40);
             this.cmdCarregarArquivo.Name = "cmdCarregarArquivo";
             this.cmdCarregarArquivo.Size = new System.Drawing.Size(31, 22);
-            this.cmdCarregarArquivo.TabIndex = 8;
+            this.cmdCarregarArquivo.TabIndex = 1;
             this.cmdCarregarArquivo.UseVisualStyleBackColor = true;
             this.cmdCarregarArquivo.Click += new System.EventHandler(this.cmdCarregarArquivo_Click);
             // 
@@ -168,7 +203,7 @@
             this.txtCaminhoDoArquivo.Name = "txtCaminhoDoArquivo";
             this.txtCaminhoDoArquivo.ReadOnly = true;
             this.txtCaminhoDoArquivo.Size = new System.Drawing.Size(382, 20);
-            this.txtCaminhoDoArquivo.TabIndex = 7;
+            this.txtCaminhoDoArquivo.TabIndex = 0;
             // 
             // btnSalvar
             // 
@@ -183,45 +218,10 @@
             this.btnSalvar.Location = new System.Drawing.Point(12, 482);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
-            this.btnSalvar.TabIndex = 10;
+            this.btnSalvar.TabIndex = 2;
             this.btnSalvar.Text = "Salvar  ";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
-            // 
-            // dtpDataInicio
-            // 
-            this.dtpDataInicio.Location = new System.Drawing.Point(9, 108);
-            this.dtpDataInicio.MinDate = new System.DateTime(2018, 12, 28, 15, 6, 47, 0);
-            this.dtpDataInicio.Name = "dtpDataInicio";
-            this.dtpDataInicio.Size = new System.Drawing.Size(213, 20);
-            this.dtpDataInicio.TabIndex = 6;
-            this.dtpDataInicio.Value = new System.DateTime(2018, 12, 28, 15, 6, 47, 0);
-            // 
-            // dtpDataTermino
-            // 
-            this.dtpDataTermino.Location = new System.Drawing.Point(237, 108);
-            this.dtpDataTermino.MinDate = new System.DateTime(2018, 12, 28, 0, 0, 0, 0);
-            this.dtpDataTermino.Name = "dtpDataTermino";
-            this.dtpDataTermino.Size = new System.Drawing.Size(209, 20);
-            this.dtpDataTermino.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 92);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Data Início";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(234, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Data Término";
             // 
             // PausaForm
             // 

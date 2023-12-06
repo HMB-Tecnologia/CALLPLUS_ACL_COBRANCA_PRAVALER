@@ -12,6 +12,8 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public int IdFormularioDeQualidade { get; set; }
         public string Nome { get; set; }
         public int Valor { get; set; }
-        public bool Ativo { get; set; }        
+        public bool Ativo { get; set; }
+        public int Peso { get; set; }
+        public List<ItemDoModuloDoFormularioDeQualidade> ItemList { get; set; }
     }
 }

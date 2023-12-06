@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsuarioForm));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkAlterarProdutoBko = new System.Windows.Forms.CheckBox();
             this.chkReceberAvaliacaoQualidade = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cmbEscalaDeTrabalho = new System.Windows.Forms.ComboBox();
@@ -51,6 +52,10 @@
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dtpDataNascimento = new System.Windows.Forms.DateTimePicker();
+            this.txtCpf = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.cmbEmpresa = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -63,10 +68,7 @@
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
-            this.txtCpf = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dtpDataNascimento = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
+            this.chkGerarNotaConfianca = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.gbDadosAcesso.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -74,6 +76,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkGerarNotaConfianca);
+            this.groupBox3.Controls.Add(this.chkAlterarProdutoBko);
             this.groupBox3.Controls.Add(this.chkReceberAvaliacaoQualidade);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.cmbEscalaDeTrabalho);
@@ -88,16 +92,27 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(15, 40);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(370, 342);
+            this.groupBox3.Size = new System.Drawing.Size(388, 355);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Configurações";
+            // 
+            // chkAlterarProdutoBko
+            // 
+            this.chkAlterarProdutoBko.AutoSize = true;
+            this.chkAlterarProdutoBko.Enabled = false;
+            this.chkAlterarProdutoBko.Location = new System.Drawing.Point(18, 332);
+            this.chkAlterarProdutoBko.Name = "chkAlterarProdutoBko";
+            this.chkAlterarProdutoBko.Size = new System.Drawing.Size(211, 17);
+            this.chkAlterarProdutoBko.TabIndex = 12;
+            this.chkAlterarProdutoBko.Text = "Alterar Produto em Auditoria de Vendas";
+            this.chkAlterarProdutoBko.UseVisualStyleBackColor = true;
             // 
             // chkReceberAvaliacaoQualidade
             // 
             this.chkReceberAvaliacaoQualidade.AutoSize = true;
             this.chkReceberAvaliacaoQualidade.Enabled = false;
-            this.chkReceberAvaliacaoQualidade.Location = new System.Drawing.Point(139, 315);
+            this.chkReceberAvaliacaoQualidade.Location = new System.Drawing.Point(139, 309);
             this.chkReceberAvaliacaoQualidade.Name = "chkReceberAvaliacaoQualidade";
             this.chkReceberAvaliacaoQualidade.Size = new System.Drawing.Size(188, 17);
             this.chkReceberAvaliacaoQualidade.TabIndex = 11;
@@ -107,7 +122,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 272);
+            this.label11.Location = new System.Drawing.Point(15, 266);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(99, 13);
             this.label11.TabIndex = 8;
@@ -118,7 +133,7 @@
             this.cmbEscalaDeTrabalho.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbEscalaDeTrabalho.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbEscalaDeTrabalho.FormattingEnabled = true;
-            this.cmbEscalaDeTrabalho.Location = new System.Drawing.Point(18, 288);
+            this.cmbEscalaDeTrabalho.Location = new System.Drawing.Point(18, 282);
             this.cmbEscalaDeTrabalho.Name = "cmbEscalaDeTrabalho";
             this.cmbEscalaDeTrabalho.Size = new System.Drawing.Size(335, 21);
             this.cmbEscalaDeTrabalho.TabIndex = 9;
@@ -173,7 +188,7 @@
             // 
             this.chkExportarRelatorio.AutoSize = true;
             this.chkExportarRelatorio.Enabled = false;
-            this.chkExportarRelatorio.Location = new System.Drawing.Point(18, 315);
+            this.chkExportarRelatorio.Location = new System.Drawing.Point(18, 309);
             this.chkExportarRelatorio.Name = "chkExportarRelatorio";
             this.chkExportarRelatorio.Size = new System.Drawing.Size(115, 17);
             this.chkExportarRelatorio.TabIndex = 10;
@@ -225,9 +240,9 @@
             this.gbDadosAcesso.Controls.Add(this.txtSenha);
             this.gbDadosAcesso.Controls.Add(this.txtLogin);
             this.gbDadosAcesso.Controls.Add(this.label3);
-            this.gbDadosAcesso.Location = new System.Drawing.Point(391, 292);
+            this.gbDadosAcesso.Location = new System.Drawing.Point(409, 292);
             this.gbDadosAcesso.Name = "gbDadosAcesso";
-            this.gbDadosAcesso.Size = new System.Drawing.Size(370, 90);
+            this.gbDadosAcesso.Size = new System.Drawing.Size(373, 103);
             this.gbDadosAcesso.TabIndex = 3;
             this.gbDadosAcesso.TabStop = false;
             this.gbDadosAcesso.Text = "Dados de Acesso";
@@ -313,12 +328,48 @@
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(391, 40);
+            this.groupBox1.Location = new System.Drawing.Point(409, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 246);
+            this.groupBox1.Size = new System.Drawing.Size(373, 246);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Pessoais";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(180, 196);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(104, 13);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Data de Nascimento";
+            // 
+            // dtpDataNascimento
+            // 
+            this.dtpDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataNascimento.Location = new System.Drawing.Point(183, 212);
+            this.dtpDataNascimento.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpDataNascimento.Name = "dtpDataNascimento";
+            this.dtpDataNascimento.Size = new System.Drawing.Size(170, 20);
+            this.dtpDataNascimento.TabIndex = 11;
+            // 
+            // txtCpf
+            // 
+            this.txtCpf.Location = new System.Drawing.Point(18, 212);
+            this.txtCpf.MaxLength = 100;
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Size = new System.Drawing.Size(159, 20);
+            this.txtCpf.TabIndex = 9;
+            this.txtCpf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCpf_KeyPress);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 196);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(27, 13);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "CPF";
             // 
             // cmbEmpresa
             // 
@@ -402,17 +453,17 @@
             // 
             // txtObservacao
             // 
-            this.txtObservacao.Location = new System.Drawing.Point(15, 401);
+            this.txtObservacao.Location = new System.Drawing.Point(15, 414);
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtObservacao.Size = new System.Drawing.Size(746, 49);
+            this.txtObservacao.Size = new System.Drawing.Size(767, 49);
             this.txtObservacao.TabIndex = 5;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 385);
+            this.label8.Location = new System.Drawing.Point(12, 398);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 4;
@@ -428,7 +479,7 @@
             this.btnSalvar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSalvar.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.save;
             this.btnSalvar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSalvar.Location = new System.Drawing.Point(14, 456);
+            this.btnSalvar.Location = new System.Drawing.Point(14, 469);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(93, 25);
             this.btnSalvar.TabIndex = 6;
@@ -436,48 +487,23 @@
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // txtCpf
+            // chkGerarNotaConfianca
             // 
-            this.txtCpf.Location = new System.Drawing.Point(18, 212);
-            this.txtCpf.MaxLength = 100;
-            this.txtCpf.Name = "txtCpf";
-            this.txtCpf.Size = new System.Drawing.Size(159, 20);
-            this.txtCpf.TabIndex = 9;
-            this.txtCpf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCpf_KeyPress);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 196);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(27, 13);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "CPF";
-            // 
-            // dtpDataNascimento
-            // 
-            this.dtpDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataNascimento.Location = new System.Drawing.Point(183, 212);
-            this.dtpDataNascimento.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dtpDataNascimento.Name = "dtpDataNascimento";
-            this.dtpDataNascimento.Size = new System.Drawing.Size(170, 20);
-            this.dtpDataNascimento.TabIndex = 11;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(180, 196);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(104, 13);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Data de Nascimento";
+            this.chkGerarNotaConfianca.AutoSize = true;
+            this.chkGerarNotaConfianca.Enabled = false;
+            this.chkGerarNotaConfianca.Location = new System.Drawing.Point(235, 332);
+            this.chkGerarNotaConfianca.Name = "chkGerarNotaConfianca";
+            this.chkGerarNotaConfianca.Size = new System.Drawing.Size(144, 17);
+            this.chkGerarNotaConfianca.TabIndex = 13;
+            this.chkGerarNotaConfianca.Text = "Gerar Nota de Confiança";
+            this.chkGerarNotaConfianca.UseVisualStyleBackColor = true;
             // 
             // UsuarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(776, 493);
+            this.ClientSize = new System.Drawing.Size(806, 508);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtObservacao);
             this.Controls.Add(this.btnSalvar);
@@ -543,5 +569,7 @@
         private System.Windows.Forms.DateTimePicker dtpDataNascimento;
         private System.Windows.Forms.TextBox txtCpf;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chkAlterarProdutoBko;
+        private System.Windows.Forms.CheckBox chkGerarNotaConfianca;
     }
 }

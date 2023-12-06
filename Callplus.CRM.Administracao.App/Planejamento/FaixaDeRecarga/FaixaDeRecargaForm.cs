@@ -37,20 +37,11 @@ namespace Callplus.CRM.Administracao.App.Planejamento.CriarFaixaDeRecarga
 
         #region METODOS
 
-        private void CarregarConfiguracaoIncial()
-        {
-            this.ShowIcon = false;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            CarregarDados();
-        }
-
         private void CarregarDados()
         {
             if (_faixa != null)
             {
-                txtId.Text = _faixa.Id.ToString();
+                //txtId.Text = _faixa.Id.ToString();
                 txtFaixa.Text = _faixa.Nome;
                 chkAtivo.Checked = _faixa.Ativo;
             }
@@ -66,10 +57,12 @@ namespace Callplus.CRM.Administracao.App.Planejamento.CriarFaixaDeRecarga
                 {
                      edicao = false;
                     _faixa = new Tabulador.Dominio.Entidades.FaixaDeRecarga();
+                    _faixa.idCriador = AdministracaoMDI._usuario.Id;
                 }
 
                 _faixa.Nome = txtFaixa.Text;
                 _faixa.Ativo = chkAtivo.Checked;
+                _faixa.idModificador = AdministracaoMDI._usuario.Id;
 
                 _faixasDeRecargaService.GravarFaixaDeRecarga(_faixa);
 
@@ -103,7 +96,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.CriarFaixaDeRecarga
 
         private void CarregarConfiguracaoInicial()
         {
-            this.ShowIcon = false;
+            //this.ShowIcon = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 
 namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
@@ -128,6 +129,14 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
         {
             DataTable dt = new DataTable();            
             IDataReader reader = Connection.ExecuteReader(sql, arguments, commandTimeout: 300);
+            dt.Load(reader);
+            return dt;
+        }
+
+        protected async Task<DataTable> CarregarDataTableAsync(string sql, object arguments)
+        {
+            DataTable dt = new DataTable();
+            IDataReader reader = await Connection.ExecuteReaderAsync(sql, arguments, commandTimeout: 300);
             dt.Load(reader);
             return dt;
         }

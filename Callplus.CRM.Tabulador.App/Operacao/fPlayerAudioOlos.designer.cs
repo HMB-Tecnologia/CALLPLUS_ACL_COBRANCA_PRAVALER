@@ -1,4 +1,4 @@
-﻿namespace v1Tabulare_z13.operador
+﻿namespace Callplus.operador
 {
     partial class fPlayerAudioOlos
     {

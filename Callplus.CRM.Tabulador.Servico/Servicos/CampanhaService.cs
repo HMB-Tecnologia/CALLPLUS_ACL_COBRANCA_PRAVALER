@@ -43,7 +43,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _campanhaDao.ListarBancoDaCampanha(idCampanha, ativo);
         }
 
-        public IEnumerable<FormaDePagamento> ListarFormasDePagamento(int id, bool ativo)
+        public IEnumerable<FormaDePagamento> ListarFormasDePagamento(int id, bool? ativo)
         {
             return _campanhaDao.ListarFormasDePagamento(id, ativo);
         }
@@ -73,6 +73,8 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _campanhaDao.Listar(id, idDiscador, nome, ativo);
         }
 
+
+        //TODO - Buscar somente campanhas ativas - Rei Almeida
         public IEnumerable<Campanha> Listar(bool? ativo)
         {
             return _campanhaDao.Listar(-1, ativo);
@@ -90,14 +92,34 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return BProspect.RetornarNomeDeArquivoDeAudioPorDataVencimento(diaVencimentoFatura, idCampanha);
         }
 
-        public int Gravar(Campanha campanha, string idsStatusDeAtendimento)
-        {
-            return _campanhaDao.Gravar(campanha, idsStatusDeAtendimento);
-        }
-
         public int AtualizarDadosDeCadastroManual(int idCampanha, int idMailing)
         {
             return _campanhaDao.AtualizarDadosDeCadastroManual(idCampanha, idMailing);
+        }
+
+        public int Gravar(Campanha campanha, bool? espelho, int? idCampanha)
+        {
+            return _campanhaDao.Gravar(campanha, espelho, idCampanha);
+        }
+
+        public Campanha RetornarInformacoesDaCampanha(int idCampanha)
+        {
+            return _campanhaDao.RetornarInformacoesDaCampanha(idCampanha);
+        }
+
+        public IEnumerable<Campanha> ListarTipoDaCampanha(bool? ativo)
+        {
+            return _campanhaDao.ListarTipoDaCampanha(-1, ativo);
+        }
+
+        public IEnumerable<string> RetornarMensagemDeRevendaHabilitada()
+        {
+            return _campanhaDao.RetornarMensagemDeRevendaHabilitada();
+        }
+
+        public int VincularUsuarioAhCampanha(int idUsuario, int idCampanha)
+        {
+            return _campanhaDao.VincularUsuarioAhCampanha(idUsuario, idCampanha);
         }
     }
 }

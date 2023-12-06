@@ -13,9 +13,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             _consultaDeProspectsDao = new ConsultadDeProspectDao();
         }
 
-        public DataTable PesquisarProspects(int idUsuario, long telefone, long idProspect)
+        public DataTable PesquisarProspects(int idUsuario, string cpf , long telefone, long idProspect)
         {
-            return _consultaDeProspectsDao.PesquisarProspects(idUsuario, telefone, idProspect);
+            return _consultaDeProspectsDao.PesquisarProspects(idUsuario, cpf, telefone, idProspect);
 
         }
 
@@ -23,6 +23,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _consultaDeProspectsDao.PesquisarProspectsPersonalizado(idUsuario, idCampanha, idCampoPesquisa, valor);
 
+        }
+
+        public long PesquisarProspectPorTelefone(long telefone, int idUsuario)
+        {
+            return _consultaDeProspectsDao.PesquisarProspectPorTelefone(telefone);
         }
     }
 }

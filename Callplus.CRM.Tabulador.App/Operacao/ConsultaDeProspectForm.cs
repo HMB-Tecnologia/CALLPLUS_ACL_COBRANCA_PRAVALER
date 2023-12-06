@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Callplus.CRM.Tabulador.App.Login;
 using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Dominio.Entidades.LayoutDinamico;
+using Callplus.CRM.Tabulador.Dominio.Tipos;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using CallplusUtil.Forms;
 using CallplusUtil.Validacoes;
 using NLog;
+using Olos.SimpleSockets;
 
 namespace Callplus.CRM.Tabulador.App.Operacao
 {
@@ -25,11 +28,13 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         private readonly Usuario _usuarioLogado;
         private Campanha _campanhaParaCadastroManual;
         private readonly ResultadoDeConsultaDeProspect _resultadoDaConsultaDeProspect;
+        private readonly VerificacaoService _VerificacaoService;
         private Prospect _prospectSelecionado;
         private IEnumerable<Campanha> _campanhasDoUsuario;
         private IEnumerable<ConfiguracaoDeCampoDoLayoutDinamico> _configuracoesDeCampoDoLayoutDinamico;
+        SimpleClientSocket client = new SimpleClientSocket();
 
-        public ConsultaDeProspectForm(Usuario usuario)
+        public ConsultaDeProspectForm(Usuario usuario, long ultimoProspectTrabalhado, bool ConectadoOlos)
         {
             _logger = LogManager.GetCurrentClassLogger();
 
@@ -40,19 +45,23 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             _campanhaService = new CampanhaService();
             _atendimentoService = new AtendimentoService();
             _configuracaoDeCampoDoLayoutDinamicoService = new ConfiguracaoDeCampoDoLayoutDinamicoService();
-
             _resultadoDaConsultaDeProspect = new ResultadoDeConsultaDeProspect();
-
-
+            _VerificacaoService = new VerificacaoService();
             _usuarioLogado = usuario;
+            _idUltimoProspectTrabalhado = ultimoProspectTrabalhado;
+            _conectadoOlos = ConectadoOlos;
+
             InitializeComponent();
         }
 
         #region PROPRIEDADES
 
         private readonly ILogger _logger;
+        private long _idUltimoProspectTrabalhado;
+        private bool _conectadoOlos; 
 
 
+        public int? IdUsuarioPermissao { get; private set; }
 
         #endregion PROPRIEDADES
 
@@ -62,7 +71,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         {
             var mensagens = new List<string>();
 
-            if (string.IsNullOrEmpty(txtTelefone.Text) && string.IsNullOrEmpty(txtIdProspect.Text))
+            if (string.IsNullOrEmpty(txtTelefone.Text) && string.IsNullOrEmpty(txtIdProspect.Text) && string.IsNullOrEmpty(txtCpf.Text))
             {
                 mensagens.Add("Um dos campos deve ser preenchido para realizar a consulta.");
             }
@@ -73,18 +82,40 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void CarregarConfiguracaoInicial()
         {
-            btnNovoContato.Enabled = false;
-            CarregarCmbCampanha();
-            CarregarCmbCampanhaDoNovoCliente();
+            //btnNovoContato.Enabled = false;
+
+            if (_idUltimoProspectTrabalhado > 0)
+                btnUltimoProspectTrabalhado.Enabled = true;
+            else
+                btnUltimoProspectTrabalhado.Enabled = false;
+
+            CarregarCampanhas();
+
+            cmbCampanhaDoNovoCliente.Enabled = false;
+
+            AtivarBtnNovoProspect();
+
+            if (_conectadoOlos)
+                btnNovoProspect.Enabled = true;
         }
 
-        private void CarregarCmbCampanhaDoNovoCliente()
+        private void CarregarCampanhas()
         {
             _campanhasDoUsuario = _campanhaService.ListarCampanhasDoUsuario(_usuarioLogado.Id);
+            cmbCampanhas.PreencherComSelecione(_campanhasDoUsuario, x => x.Id, x => x.Nome);
             cmbCampanhaDoNovoCliente.PreencherComSelecione(_campanhasDoUsuario, x => x.Id, x => x.Nome);
+
+            foreach (var item in _campanhasDoUsuario)
+            {
+                if(item.Principal)
+                {
+                    cmbCampanhaDoNovoCliente.Text = item.Nome;
+                    break;
+                }
+            }
         }
 
-        private void CarregarCmbFiltrosDaCampanha()
+        private void CarregarFiltrosDaCampanha()
         {
             if (VerificarSeTextoDoCmbFiltrosDaCampanhaEhSelecione()) return;
             int? idLayout = RetornarIdLayoutDinamicoDaCampanha();
@@ -134,6 +165,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             int idUsuario = _usuarioLogado?.Id ?? 0;
             long telefone = -1;
             long idProspect = -1;
+            string cpf = "";
 
             if (!string.IsNullOrEmpty(txtTelefone.Text))
                 telefone = long.Parse(txtTelefone.Text);
@@ -141,14 +173,20 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             if (!string.IsNullOrEmpty(txtIdProspect.Text))
                 idProspect = long.Parse(txtIdProspect.Text);
 
+            if (!string.IsNullOrEmpty(txtCpf.Text))
+            {
+                cpf = txtCpf.Text;
+            }
+
             ResetarControles();
 
-            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, telefone, idProspect);
+            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf , telefone, idProspect);
             dgResultadoPesquisa.DataSource = datatable;
 
+            //MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void CarregarDetalhesDoProspect(long idProspect)
+        public void CarregarDetalhesDoProspect(long idProspect)
         {
             LimparHistorico();
 
@@ -199,11 +237,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void ExbirDetalhesDoHistoricoDeAtendimento(int indice)
         {
-
             var historico = new HistoricoAtendimentoDto();
 
             historico = (HistoricoAtendimentoDto)dgHistoricoAtendimento.Rows[indice].DataBoundItem;
-
 
             txtHistorico_operador.Text = historico?.NomeOperador;
             txtHistorico_dataAtendimento.Text = historico?.DataAtendimento?.ToString("dd/MM/yyyy HH:mm:ss");
@@ -212,7 +248,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             txtHistorico_telefoneConectado.Text = historico?.Telefone.ToString();
             txtHistorico_telefoneAgendamento.Text = historico?.TelefoneAgendamento.ToString();
             txtHistorico_statusAtendimento.Text = historico?.ResultadoInteracao;
-
         }
 
         private void CarregarLayoutDinamicoDaCampanhaDoProspect(long idProspect, Campanha campanha)
@@ -229,11 +264,28 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             _containerDeLayoutDinamico.Visible = true;
         }
 
-        private void RecarregarGridAposCriarNovoProspect(long? idNovoCliente)
+        private void RecarregarGridAposCriarNovoProspect(long idNovoCliente)
         {
             if (!(idNovoCliente > 0)) return;
-            // Metodo criado para futuras modificações
 
+            int idUsuario = _usuarioLogado?.Id ?? 0;
+            long telefone = -1;
+            string cpf = "";
+
+            if (!string.IsNullOrEmpty(txtTelefone.Text))
+                telefone = long.Parse(txtTelefone.Text);
+
+            ResetarControles();
+
+            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf, telefone, idNovoCliente);
+            dgResultadoPesquisa.DataSource = datatable;
+
+        }
+
+        public class ResultadoDeConsultaDeProspect
+        {
+            public Prospect ProspectLocalizado { get; set; }
+            public bool IniciarContatoManual { get; set; }
         }
 
         public ResultadoDeConsultaDeProspect RealizarPesquisaParaAtendimento()
@@ -244,17 +296,33 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void AbrirFormNovoProspect(Campanha campanha)
         {
-
             CadastroManualDeProspect CadastroManualDeProspect = new CadastroManualDeProspect(_usuarioLogado, campanha.Id);
-            long? idNovoCliente = CadastroManualDeProspect.CadastrarNovoCliente(campanha.Id);
+            long idNovoCliente = CadastroManualDeProspect.CadastrarNovoCliente(campanha.Id);
 
             RecarregarGridAposCriarNovoProspect(idNovoCliente);
         }
-
-        private void CarregarCmbCampanha()
+        
+        private void ValidarOlos()
         {
-            _campanhasDoUsuario = _campanhaService.ListarCampanhasDoUsuario(_usuarioLogado.Id);
-            cmbCampanhas.PreencherComSelecione(_campanhasDoUsuario, x => x.Id, x => x.Nome);
+            var mensagens = new List<string>();
+
+            if (!cmbCampanhaDoNovoCliente.TextoEhSelecione())
+            {
+                var idCampanha = Convert.ToInt32(cmbCampanhaDoNovoCliente.SelectedValue);
+
+                if (idCampanha == 13 && _conectadoOlos) 
+                {
+                    btnNovoProspect.Enabled = false;
+                    mensagens.Add("Não é possível adicionar um novo cliente nessa campanha.");
+                }
+               
+                if (!_conectadoOlos && idCampanha != 13)
+                {
+                    btnNovoProspect.Enabled = false;
+                    mensagens.Add("Só é possível adicionar um novo cliente para campanha CLARO AQUISIÇÃO TALK.");
+                    CallplusFormsUtil.ExibirMensagens(mensagens);
+                }
+            }
         }
 
         private void AtivarBtnNovoProspect()
@@ -265,6 +333,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             {
                 idCampanha = Convert.ToInt32(cmbCampanhaDoNovoCliente.SelectedValue);
                 _campanhaParaCadastroManual = _campanhaService.RetornarCampanha(idCampanha);
+
                 if (_campanhaParaCadastroManual?.HabilitaCadastroManual == true)
                 {
                     btnNovoProspect.Enabled = true;
@@ -282,6 +351,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             {
                 _resultadoDaConsultaDeProspect.IniciarContatoManual = true;
                 _resultadoDaConsultaDeProspect.ProspectLocalizado = _prospectSelecionado;
+
                 this.Close();
             }
             else
@@ -309,8 +379,26 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
             mensagens.AddRange(msgsServ);
 
-            CallplusFormsUtil.ExibirMensagens(mensagens);
-            return mensagens.Any() == false;
+            var deveSolicitarPermicao = msgsServ.Any();
+
+            if (deveSolicitarPermicao)
+            {
+                var podeIniciarAtendimentoManual = false;
+                var resposta = MessageBox.Show(string.Join("/n", msgsServ) + ". Deseja solicitar autorização?", "Alerta do Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (resposta == DialogResult.Yes)
+                {
+                    podeIniciarAtendimentoManual = _VerificacaoService.PermitirContatoManual(_usuarioLogado);
+                    IdUsuarioPermissao = _VerificacaoService.IdUsuarioPermissao;
+                }
+
+                return podeIniciarAtendimentoManual;
+            }
+            else
+            {
+                return !mensagens.Any();
+            }
+
         }
 
         private void VerificarSePodePesquisar()
@@ -353,6 +441,29 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             return !mensagens.Any();
         }
 
+        private void ConfigurarUltimoProspectTrabalhado()
+        {
+            if (_idUltimoProspectTrabalhado > 0)
+            {
+                int idUsuario = _usuarioLogado?.Id ?? 0;
+                long telefone = -1;
+                long idProspect = _idUltimoProspectTrabalhado;
+                string cpf = "";
+
+                if (!string.IsNullOrEmpty(txtTelefone.Text))
+                    telefone = long.Parse(txtTelefone.Text);
+
+                if (!string.IsNullOrEmpty(txtIdProspect.Text))
+                    idProspect = long.Parse(txtIdProspect.Text);
+
+                ResetarControles();
+
+                var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf, telefone, idProspect);
+
+                dgResultadoPesquisa.DataSource = datatable;
+            }
+        }
+
         #endregion METODOS
 
         #region EVENTOS
@@ -376,8 +487,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             try
             {
                 RealizarConsultaRapida();
-                MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                //MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -391,10 +501,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             e.Handled = Texto.CaractereNumerico(e.KeyChar);
         }
 
-        private void txtTelefone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void dgResultadoPesquisa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -439,20 +545,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 MessageBox.Show($"Não foi possível carregar os detalhes do Histórico do Prospect!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void cmbCampanhasCadastroCliente_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                AtivarBtnNovoProspect();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-                MessageBox.Show($"Não foi possível validar o botão de novo cadastro!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        
         private void btnNovoProspect_Click(object sender, EventArgs e)
         {
             try
@@ -475,7 +568,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         {
             try
             {
-                CarregarCmbFiltrosDaCampanha();
+                CarregarFiltrosDaCampanha();
             }
             catch (Exception ex)
             {
@@ -486,12 +579,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void btnConsultaRapida_Click(object sender, EventArgs e)
         {
-
             try
             {
                 RealizarConsultaRapida();
-                MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             catch (Exception ex)
             {
@@ -504,9 +594,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         {
             try
             {
-                RealizarConsultaPersonalizada();
-                MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                //RealizarConsultaPersonalizada();
+                //MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -529,8 +618,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             }
         }
 
-        #endregion EVENTOS
-
         private void cmbCampanhaDoNovoCliente_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
@@ -543,11 +630,21 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 MessageBox.Show($"Erro ao selecionar campanha!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnUltimoProspectTrabalhado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConfigurarUltimoProspectTrabalhado();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                MessageBox.Show($"Não foi possível carregar os detalhes do Prospect!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 
-    public class ResultadoDeConsultaDeProspect
-    {
-        public Prospect ProspectLocalizado { get; set; }
-        public bool IniciarContatoManual { get; set; }
-    }
+    #endregion EVENTOS
+
 }

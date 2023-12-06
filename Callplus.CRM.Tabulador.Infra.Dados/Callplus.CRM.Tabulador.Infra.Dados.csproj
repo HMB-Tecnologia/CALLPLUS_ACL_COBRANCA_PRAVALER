@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Callplus.CRM.Tabulador.Infra.Dados</RootNamespace>
     <AssemblyName>Callplus.CRM.Tabulador.Infra.Dados</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    <Reference Include="Dapper, Version=1.39.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.39\lib\net45\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Dao\AtendimentoDao.cs" />
     <Compile Include="Dao\AvaliacaoDeAtendimentoDao.cs" />
+    <Compile Include="Dao\BluechipDAO.cs" />
+    <Compile Include="Dao\CepExpressDao.cs" />
     <Compile Include="Dao\ChecklistDao.cs" />
     <Compile Include="Dao\ConfiguracaoDeCampoDoLayoutDinamicoDao.cs" />
     <Compile Include="Dao\ConsultadDeProspectDao.cs" />
@@ -62,11 +64,14 @@
     <Compile Include="Dao\FaqDeAtendimentoDao.cs" />
     <Compile Include="Dao\FeedbackDaAvaliacaoDeAtendimentoDao.cs" />
     <Compile Include="Dao\FormularioDeQualidadeDao.cs" />
+    <Compile Include="Dao\FrasesGamificacaoDao.cs" />
+    <Compile Include="Dao\GamificacaoDao.cs" />
     <Compile Include="Dao\GrauDeParentescoDao.cs" />
     <Compile Include="Dao\LayoutDinamicoDao.cs" />
     <Compile Include="Dao\LoginDao.cs" />
     <Compile Include="Dao\AuditoriaDeOfertaDao.cs" />
     <Compile Include="Dao\MailingDao.cs" />
+    <Compile Include="Dao\NivelDeConfiancaDao.cs" />
     <Compile Include="Dao\NotificacaoDao.cs" />
     <Compile Include="Dao\PausaDao.cs" />
     <Compile Include="Dao\PermissaoDao.cs" />
@@ -74,13 +79,18 @@
     <Compile Include="Dao\PesquisaDao.cs" />
     <Compile Include="Dao\PlanoPorOperadoraParaComparacaoDao.cs" />
     <Compile Include="Dao\RelatorioDao.cs" />
+    <Compile Include="Dao\RetornoDeCepDao.cs" />
     <Compile Include="Dao\ScriptDeAtendimentoDao.cs" />
     <Compile Include="Dao\PerfilDao.cs" />
     <Compile Include="Dao\ProdutoDao.cs" />
     <Compile Include="Dao\OfertaDoAtendimentoDao.cs" />
     <Compile Include="Dao\StatusDeAuditoriaDao.cs" />
     <Compile Include="Dao\StatusDeOfertaDao.cs" />
+    <Compile Include="Dao\TipoDeFraseDao.cs" />
+    <Compile Include="Dao\TipoDiscagemDao.cs" />
     <Compile Include="Dao\UsuarioDao.cs" />
+    <Compile Include="Dao\CicloDeVencimentoDeFaturaDao.cs" />
+    <Compile Include="Dao\VencimentoDeFaturaDao.cs" />
     <Compile Include="Util\ConnectionFactory.cs" />
     <Compile Include="Util\DaoUtil.cs" />
     <Compile Include="Dao\CampanhaDao.cs" />

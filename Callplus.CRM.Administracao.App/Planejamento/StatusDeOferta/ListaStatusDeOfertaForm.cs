@@ -26,7 +26,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
         private readonly ILogger _logger;
         private readonly CampanhaService _campanhaService;
         private readonly StatusDeOfertaService _statusDeOfertaService;
-        private Tabulador.Dominio.Entidades.StatusDeOferta _statusDeOferta;
+        private Tabulador.Dominio.Entidades.StatusDeAtendimento _statusDeAtendimento;
         private IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas;
 
         #endregion PROPRIEDADE
@@ -43,9 +43,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
         {
             dgDados.Columns["Id"].Width = 35;
 
-            dgDados.Columns["DataCriacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgDados.Columns["DataCriacao"].Name = "NewColumnName";
-            dgDados.Columns["DataModificacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgDados.Columns["Data Criacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgDados.Columns["Data Modificacao"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgDados.Columns["Nome"].Width = 250;
 
@@ -56,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void IniciarNovoRegistro()
         {
-            StatusDeOfertaForm f = new StatusDeOfertaForm( 0, "NOVO STATUS DE ATENDIMENTO");
+            StatusDeOfertaForm f = new StatusDeOfertaForm( 0, "NOVO STATUS DE OFERTA");
 
             f.Iniciar();
 
@@ -85,7 +84,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void CarregarGrid(bool buscaRapida)
         {
-            int idStatus = -1;
+            int? idStatus = -1;
             string nome = txtNome.Text;
             int idTipoTipoStatus = -1;
             bool ativo = chkAtivos.Checked;
@@ -102,11 +101,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
                 }
                 else
                 {
-                    idStatus = int.Parse(cmbCampanha.SelectedValue.ToString());
                     nome = txtNome.Text.Trim();
                 }
 
-                dgDados.DataSource = _statusDeOfertaService.ListarStatusDeOferta(idcampanha, idTipoTipoStatus, ativo);
+                dgDados.DataSource = _statusDeOfertaService.ListarStatusDeOfertaExibicao(idcampanha, ativo, nome, idStatus);
 
                 lblTotalRegistros.Text = dgDados.RowCount.ToString() + " Registro(s)";
 
@@ -199,11 +197,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
                 MessageBox.Show(
                     $"Não foi possível realizar a pesquisa!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            btnPesquisar_Click(sender, e);
         }
 
         private void chkListarAtivos_CheckedChanged(object sender, EventArgs e)

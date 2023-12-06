@@ -20,7 +20,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.FormularioDeQualidade
     public partial class ListaFormularioDeQualidadeForm : Form
     {
         public ListaFormularioDeQualidadeForm()
-        {
+        { 
             _logger = LogManager.GetCurrentClassLogger();
             _campanhaService = new CampanhaService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using v1Tabulare_z13.ws;
+using Callplus.ws;
 
-namespace v1Tabulare_z13.operador
+namespace Callplus.operador
 {
     public partial class fPlayerAudioOlos : Form
     {

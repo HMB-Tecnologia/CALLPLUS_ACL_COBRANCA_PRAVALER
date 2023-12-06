@@ -34,7 +34,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public IEnumerable<FormaDePagamento> ListarFormasDePagamento(int id, bool ativo)
+        public IEnumerable<FormaDePagamento> ListarFormasDePagamento(int id, bool? ativo)
         {
             var sql = "APP_CRM_FORMA_DE_PAGAMENTO_LISTAR";
             var args = new { Id = id, Ativo = ativo };
@@ -105,6 +105,81 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return nomeArquivo;
         }
 
+        public Campanha RetornarInformacoesDaCampanha(int idCampanha)
+        {
+            var sql = "APP_CRM_RETORNAR_INFORMACOES_DA_CAMPANHA";
+            var args = new { IdCampanha = idCampanha };
+
+            Campanha campanha = ExecutarProcedureSingleOrDefault<Campanha>(sql, args);
+
+            return campanha;
+        }
+
+        public IEnumerable<string> RetornarMensagemDeRevendaHabilitada()
+        {
+            var sql = "APP_CRM_RETORNAR_MENSAGEM_DE_REVENDA_HABILITADA";
+
+            var args = new { };
+
+            var resultado = ExecutarProcedure<string>(sql, args);
+            return resultado;
+        }
+
+        public int Gravar(Campanha campanha, bool? espelho, int? idCampanha)
+        {
+
+            var sql = "APP_CRM_CAMPANHA_GRAVAR";
+
+            var args = new
+
+            {
+                id								 = campanha.Id,
+                idCriador						 = campanha.IdCriador,
+                idModificador					 = campanha.IdModificador,
+                nomeCampanha					 = campanha.Nome,
+                idDiscador						 = campanha.IdDiscador,
+                IdTipoDaCampanha				 = campanha.idTipoDaCampanha,
+                idTipoDeDiscagem				 = campanha.IdTipoDeDiscagem,
+                afterCall						 = campanha.AfterCall,
+                metaVenda						 = campanha.MetaVenda,
+                idScriptApresentacao			 = campanha.IdScriptApresentacao,
+                idScriptFinalizacao				 = campanha.IdScriptFinalizacao,
+                idLayoutCampoDinamico			 = campanha.IdLayoutCampoDinamico,
+                idLayoutCampoDinamicoBko		 = campanha.IdLayoutCampoDinamicoBko,
+                enderecoDeImportacaoDoMailing	 = campanha.EnderecoDeImportacaoDoMailing,
+                idMailingCadastroManual			 = campanha.IdMailingCadastroManual,
+                idStatusTabulacaoAutomaticaVenda = campanha.IdStatusTabulacaoAutomaticaVenda,
+                idStatusTabulacaoAutomatica		 = campanha.IdStatusTabulacaoAutomatica,
+                habilitaCadastroManual			 = campanha.HabilitaCadastroManual,
+                habilitaDiscagemManual			 = campanha.HabilitaDiscagemManual,
+                habilitarContatoManual			 = campanha.HabilitarContatoManual,
+                habilitaHistorico				 = campanha.HabilitaHistorico,
+                habilitaIndicacao				 = campanha.HabilitaIndicacao,
+                habilitaComparadorDePlanos		 = campanha.HabilitaComparadorDePlanos,
+                habilitaPesquisa				 = campanha.HabilitaPesquisa,
+                habilitaCepExpress               = campanha.HabilitaCepExpress,
+                habilitaRevenda                  = campanha.HabilitaRevenda,
+                observacao                       = campanha.Observacao,
+                ativo							 = campanha.Ativo,
+                idsBancos						 = campanha.idBancosDaCampanha,
+                idsFormasPagamento				 = campanha.idFormasDePagamento,
+                idsStatusAtendimento		     = campanha.idStatusDeAtendimento,
+                idsStatusOferta					 = campanha.idStatusDeOferta,
+                idsStatusAuditoria				 = campanha.idStatusDeAuditoria,
+                Espelho							 = espelho,
+                idCampanhaEspelho				 = idCampanha,
+                aparelhos						 = campanha.Aparelhos,
+                variaveisDoScript				 = campanha.VariaveisDoScript,
+                checkListVenda					 = campanha.CheckListVenda,
+                planosComparacao				 = campanha.PlanosComparacao,
+                formularioQualidade				 = campanha.FormularioQualidade,
+                faqAtendimento                   = campanha.FaqAtendimento,
+                IdTipoDeAuditoria                = campanha.IdTipoDeAuditoria
+            };
+
+            return ExecutarProcedureSingleOrDefault<int>(sql, args);
+        }
+
         public int AtualizarDadosDeCadastroManual(int idCampanha, int idMailing)
         {
             var sql = "APP_CRM_CAMPANHA_GRAVAR_MAILING_CADASTRO_MANUAL";
@@ -113,46 +188,8 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 IdCampanha = idCampanha,
                 IdMailing = idMailing
             };
-            return ExecutarProcedureSingleOrDefault<int>(sql, args);
-        }
-
-        public int Gravar(Campanha campanha, string idsStatusDeAtendimento)
-        {
-
-            var sql = "APP_CRM_CAMPANHA_GRAVAR";
-            var args = new
-
-            {
-                Id = campanha.Id,
-                IdDiscador = campanha.IdDiscador,
-                IdTipoDeDiscagem = campanha.IdTipoDeDiscagem,
-                IdScriptApresentacao = campanha.IdScriptApresentacao,
-                IdScriptFinalizacao = campanha.IdScriptFinalizacao,
-                NomeCampanha = campanha.Nome,
-                AfterCall = campanha.AfterCall,
-                Ativo = campanha.Ativo,
-                IdCriador = campanha.IdCriador,
-                IdModificador = campanha.IdModificador,
-                Observacao = campanha.Observacao,
-                IdLayoutCampoDinamico = campanha.IdLayoutCampoDinamico,
-                HabilitaDiscagemManual = campanha.HabilitaDiscagemManual,
-                HabilitaHistorico = campanha.HabilitaHistorico,
-                HabilitaCadastroManual = campanha.HabilitaCadastroManual,
-                IdStatusTabulacaoAutomatica = campanha.IdStatusTabulacaoAutomatica,
-                EnderecoDeImportacaoDoMailing = campanha.EnderecoDeImportacaoDoMailing,
-                MetaVenda = campanha.MetaVenda,
-                IdStatusTabulacaoAutomaticaVenda = campanha.IdStatusTabulacaoAutomaticaVenda,
-                IdLayoutCampoDinamicoBko = campanha.IdLayoutCampoDinamicoBko,
-                HabilitaIndicacao = campanha.HabilitaIndicacao,
-                HabilitaComparadorDePlanos = campanha.HabilitaComparadorDePlanos,
-                HabilitaPesquisa = campanha.HabilitaPesquisa,
-                HabilitarContatoManual = campanha.HabilitarContatoManual,
-                IdMailingCadastroManual = campanha.IdMailingCadastroManual,
-                IdsStatusAtendimento = idsStatusDeAtendimento
-            };
 
             return ExecutarProcedureSingleOrDefault<int>(sql, args);
-
         }
 
         public string RetornarNomeDeArquivoDeAudioPorProduto(int idProduto, int idCampanha)
@@ -198,5 +235,26 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             var resultado = ExecutarProcedure<Campanha>(sql, args);
             return resultado;
         }
+
+        public IEnumerable<Campanha> ListarTipoDaCampanha(int id, bool? ativo)
+        {
+            var sql = "APP_CRM_TIPO_DE_CAMPANHA_LISTAR";
+            var args = new { Ativo = ativo };
+            var resultado = ExecutarProcedure<Campanha>(sql, args);
+            return resultado;
+        }
+
+        public int VincularUsuarioAhCampanha(int idUsuario, int idCampanha)
+        {
+            var sql = "APP_CRM_CAMPANHA_VINCULAR_USUARIO";
+            var args = new
+            {
+                IdUsuario = idUsuario,
+                IdCampanha = idCampanha
+            };
+
+            return ExecutarProcedureSingleOrDefault<int>(sql, args);
+        }
+
     }
 }

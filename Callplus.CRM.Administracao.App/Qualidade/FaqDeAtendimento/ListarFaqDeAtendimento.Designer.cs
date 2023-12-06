@@ -39,8 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPergunta = new System.Windows.Forms.TextBox();
             this.lblPergunta = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.cmbCampanha = new System.Windows.Forms.ComboBox();
@@ -122,7 +122,7 @@
             this.txtBuscaRapida.MaxLength = 10;
             this.txtBuscaRapida.Name = "txtBuscaRapida";
             this.txtBuscaRapida.Size = new System.Drawing.Size(55, 20);
-            this.txtBuscaRapida.TabIndex = 41;
+            this.txtBuscaRapida.TabIndex = 0;
             this.txtBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnBuscaRapida_KeyPress);
             // 
             // btnBuscaRapida
@@ -135,7 +135,7 @@
             this.btnBuscaRapida.Location = new System.Drawing.Point(991, 9);
             this.btnBuscaRapida.Name = "btnBuscaRapida";
             this.btnBuscaRapida.Size = new System.Drawing.Size(25, 22);
-            this.btnBuscaRapida.TabIndex = 42;
+            this.btnBuscaRapida.TabIndex = 1;
             this.btnBuscaRapida.UseVisualStyleBackColor = true;
             this.btnBuscaRapida.Click += new System.EventHandler(this.btnBuscaRapida_Click);
             this.btnBuscaRapida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnBuscaRapida_KeyPress);
@@ -167,8 +167,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.txtPergunta);
             this.groupBox1.Controls.Add(this.lblPergunta);
-            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.btnNovo);
             this.groupBox1.Controls.Add(this.btnPesquisar);
             this.groupBox1.Controls.Add(this.cmbCampanha);
@@ -177,9 +177,16 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 37);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1004, 64);
-            this.groupBox1.TabIndex = 43;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ações";
+            // 
+            // txtPergunta
+            // 
+            this.txtPergunta.Location = new System.Drawing.Point(294, 33);
+            this.txtPergunta.Name = "txtPergunta";
+            this.txtPergunta.Size = new System.Drawing.Size(268, 20);
+            this.txtPergunta.TabIndex = 1;
             // 
             // lblPergunta
             // 
@@ -189,15 +196,6 @@
             this.lblPergunta.Size = new System.Drawing.Size(50, 13);
             this.lblPergunta.TabIndex = 8;
             this.lblPergunta.Text = "Pergunta";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(291, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(271, 21);
-            this.comboBox1.TabIndex = 7;
             // 
             // btnNovo
             // 
@@ -213,7 +211,7 @@
             this.btnNovo.Location = new System.Drawing.Point(833, 29);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(80, 25);
-            this.btnNovo.TabIndex = 5;
+            this.btnNovo.TabIndex = 3;
             this.btnNovo.Text = "Novo ";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -227,7 +225,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(568, 32);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(27, 23);
-            this.btnPesquisar.TabIndex = 4;
+            this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
@@ -238,7 +236,7 @@
             this.cmbCampanha.Location = new System.Drawing.Point(14, 32);
             this.cmbCampanha.Name = "cmbCampanha";
             this.cmbCampanha.Size = new System.Drawing.Size(271, 21);
-            this.cmbCampanha.TabIndex = 1;
+            this.cmbCampanha.TabIndex = 0;
             // 
             // btnFechar
             // 
@@ -254,7 +252,7 @@
             this.btnFechar.Location = new System.Drawing.Point(918, 29);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(80, 25);
-            this.btnFechar.TabIndex = 6;
+            this.btnFechar.TabIndex = 4;
             this.btnFechar.Text = "Fechar   ";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
@@ -330,6 +328,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkListarAtivos;
         private System.Windows.Forms.Label lblPergunta;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtPergunta;
     }
 }

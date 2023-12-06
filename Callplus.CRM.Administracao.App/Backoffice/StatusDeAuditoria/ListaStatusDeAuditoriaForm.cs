@@ -123,6 +123,11 @@ namespace Callplus.CRM.Administracao.App.Backoffice.StatusDeAuditoria
                     if (txtBuscaRapida.Text != "")
                         id = int.Parse(txtBuscaRapida.Text);
                 }
+                else
+                {
+                    idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
+                    nome = txtNome.Text;
+                }
 
                 dgResultado.DataSource = _statusDeAuditoria.ListarExibicao(id, nome, ativo, idCampanha);
 

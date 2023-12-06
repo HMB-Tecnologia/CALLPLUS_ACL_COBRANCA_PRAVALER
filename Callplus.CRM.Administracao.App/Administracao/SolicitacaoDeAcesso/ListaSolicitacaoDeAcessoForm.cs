@@ -7,6 +7,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Callplus.CRM.Administracao.App.Administracao.SolicitacaoDeAcesso
@@ -83,7 +84,7 @@ namespace Callplus.CRM.Administracao.App.Administracao.SolicitacaoDeAcesso
             CarregarOperadores(idSupervisor);
         }
 
-        private void CarregarGrid(bool buscaRapida)
+        private async Task CarregarGrid(bool buscaRapida)
         {
             int idRegistro = -1;            
             int idSupervisor = -1;
@@ -103,7 +104,7 @@ namespace Callplus.CRM.Administracao.App.Administracao.SolicitacaoDeAcesso
                     idOperador = int.Parse(cmbOperador.SelectedValue.ToString());
                 }
 
-                dgResultado.DataSource = _loginService.ListarSolicitacaoDeAcesso(idRegistro, idSupervisor, idOperador, ativo);
+                dgResultado.DataSource = await _loginService.ListarSolicitacaoDeAcesso(idRegistro, idSupervisor, idOperador, ativo);
 
                 lblTotalRegistros.Text = dgResultado.RowCount.ToString() + " Registro(s)";
 

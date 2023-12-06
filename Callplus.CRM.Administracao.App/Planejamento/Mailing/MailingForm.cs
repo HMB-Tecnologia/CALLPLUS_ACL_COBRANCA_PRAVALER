@@ -9,6 +9,9 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text;
 using Callplus.CRM.Tabulador.Dominio.Tipos;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Net;
 
 namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 {
@@ -96,9 +99,96 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             }
         }
 
+
+
+
+      
+
         private void EnviarDadosParaDiscador()
         {
-            _mailingService.ExportarMailingDiscador(_mailing.id);
+            var path = "C://temp";
+            string[] parteNome = txtNome.Text.Split('_');
+            var idMailingDiscador = parteNome[0];
+
+
+            var nomeDoArquivo = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + idMailingDiscador + "_FULL.txt";
+            var _file = _mailingService.ExportarMailing(_mailing.id);
+
+            //TODO - Ajustando método para importar para área FTP.
+            // _mailingService.ExportarMailingDiscador(_mailing.id);
+            try
+            {
+                if (!Directory.Exists(path + "//exportTempFiles"))
+                {
+                    Directory.CreateDirectory(path + "//exportTempFiles");
+                }
+
+                using (StreamWriter stream = File.AppendText(path + "//exportTempFiles//" + nomeDoArquivo))
+                {
+                    //var sw = new StreamWriter(stream);
+
+                    var _dt = _mailingService.ExportarMailing(_mailing.id);
+
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        if (!string.IsNullOrEmpty(_dt.Rows[i][0].ToString().Trim()))
+                            stream.WriteLine(_dt.Rows[i][0].ToString());
+                    }
+
+
+                }
+
+
+                FtpWebRequest ftpRequest;
+                FtpWebResponse ftpResponse;
+
+                try
+                {
+                    ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(@"ftp://172.20.20.227:21/callflex/importar/" + nomeDoArquivo));
+                    ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                    ftpRequest.Proxy = null;
+                    ftpRequest.UseBinary = true;
+                    ftpRequest.UsePassive = true;//coloquei agora
+                    ftpRequest.Credentials = new NetworkCredential("ccaedu", "9eb5fbc4095d");
+
+
+                    FileInfo arquivo = new FileInfo(path + "//exportTempFiles//" + nomeDoArquivo);
+                    byte[] fileContents = new byte[arquivo.Length];
+
+                    using (FileStream fr = arquivo.OpenRead())
+                    {
+                        fr.Read(fileContents, 0, Convert.ToInt32(arquivo.Length));
+                    }
+
+                    File.Delete(path + "//exportTempFiles//" + nomeDoArquivo);
+
+                    using (Stream writer = ftpRequest.GetRequestStream())
+                    {
+                        writer.Write(fileContents, 0, fileContents.Length);
+                    }
+
+                    //obtem o FtpWebResponse da operação de upload
+                    ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+                    MessageBox.Show("Upload de arquivo concluído!\n" + ftpResponse.StatusDescription);
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Erro ao salvar arquivo no FTP: " + ex.Message);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Falha ao Gerar o Arquivo, verifique permissões de pasta! " + ex);
+            }
+
+
         }
 
         private void btnSalvar_Click(object sender, System.EventArgs e)
@@ -183,6 +273,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
                 if (_mailing == null) _mailing = new Tabulador.Dominio.Entidades.Mailing();
 
                 TransferirArquivoParaServidorCallplus();
+
                 _mailing.idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
                 _mailing.nome = txtNome.Text.Trim();
                 _mailing.ativo = chkAtivo.Checked;
@@ -208,6 +299,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             {
                 Directory.CreateDirectory(_caminhoServidorProcessamento);
             }
+
             File.Copy(_arquivoOrigem, _arquivoDestino, true);
         }
 
@@ -215,21 +307,46 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
         {
             var mensagens = new List<string>();
 
+            string nomeDoArquivo = "";
+
             if (cmbCampanha.TextoEhSelecione() || string.IsNullOrEmpty(cmbCampanha.Text))
                 mensagens.Add("Favor selecionar a campanha!");
 
             if (string.IsNullOrEmpty(txtNome.Text.Trim()))
                 mensagens.Add("[Nome] deve ser informado.");
 
-            if (_mailing == null)
+            if (chkIndicacao.Checked == false)
             {
-                if (string.IsNullOrEmpty(_arquivoOrigem.Trim()))
-                    mensagens.Add("Você deve selecionar o arquivo a ser importado!");
+                var indiceBarra = txtCaminhoDoArquivo.Text.LastIndexOf(@"\") + 1;
+                var indicePonto = txtCaminhoDoArquivo.Text.LastIndexOf(".");
+
+                if (_mailing == null || _mailing.id == 0)
+                {
+                    if (string.IsNullOrEmpty(_arquivoOrigem.Trim()))
+                        mensagens.Add("Você deve selecionar o arquivo a ser importado!");
+                    else
+                        nomeDoArquivo = (txtCaminhoDoArquivo.Text.Remove(indicePonto).Substring(indiceBarra));
+                }
+
+                var regex = new Regex("^[a-zA-Z0-9_-]*$");
+                var formatoCorreto = regex.IsMatch(nomeDoArquivo);
+
+                if (formatoCorreto == false)
+                {
+                    mensagens.Add("Nome do arquivo de Mailing não pode conter espaços ou caracteres especiais!");
+                }
             }
-            else if (_mailing.id == 0)
+            else
             {
-                if (string.IsNullOrEmpty(_arquivoOrigem.Trim()))
-                    mensagens.Add("Você deve selecionar o arquivo a ser importado!");
+                var regex = new Regex("^[\\s-a-zA-Z0-9_-]*$");
+                string nomeDaCampanha = txtNome.Text;
+
+                var formatoCorreto = regex.IsMatch(nomeDaCampanha);
+
+                if (formatoCorreto == false)
+                {
+                    mensagens.Add("Nome do arquivo não pode conter caracteres especiais!");
+                }
             }
 
             if (ExisteNomeDoMailing())
@@ -237,13 +354,12 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
             ExibirMensagens(mensagens);
             return mensagens.Any() == false;
-
         }
 
         private bool ExisteNomeDoMailing()
         {
-            if (_mailing != null) return false;
-            return _mailingService.VerificarSeExisteNomeDoMailing(txtNome.Text.Trim());
+            if (_mailing == null) return false;
+            return _mailingService.VerificarSeExisteNomeDoMailing(txtNome.Text.Trim());//
         }
 
         private void ExibirMensagens(List<string> mensagens)
@@ -323,7 +439,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             saveFileDialog.RestoreDirectory = true;
             saveFileDialog.Title = "Exportar Mailing";
 
-            saveFileDialog.FileName = "CALLPLUS-DISCADOR-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+            //saveFileDialog.FileName = "CALLPLUS-DISCADOR-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+            saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + _mailing.id + "_FULL.txt";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -346,6 +463,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
                                     if (!string.IsNullOrEmpty(_dt.Rows[i][0].ToString().Trim()))
                                         sw.WriteLine(_dt.Rows[i][0].ToString());
                                 }
+
                                 sw.Close();
                                 retry = DialogResult.Cancel;
                             }
@@ -354,6 +472,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
                                 retry = MessageBox.Show(myException.Message, "Erro Exportação", MessageBoxButtons.RetryCancel, MessageBoxIcon.Asterisk);
                             }
                         }
+
                         MessageBox.Show("Arquivo gerado com sucesso!", "Callplus Software");
                     }
                 }
@@ -364,6 +483,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             }
 
         }
+
+
+
+
         #endregion Metodos  
 
     }

@@ -302,6 +302,7 @@
             // txtMensagem
             // 
             this.txtMensagem.Location = new System.Drawing.Point(15, 96);
+            this.txtMensagem.MaxLength = 8000;
             this.txtMensagem.Multiline = true;
             this.txtMensagem.Name = "txtMensagem";
             this.txtMensagem.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;

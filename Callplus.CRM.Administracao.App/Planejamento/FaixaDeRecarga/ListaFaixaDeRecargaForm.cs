@@ -58,7 +58,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.CriarFaixaDeRecarga
                 }
                 else
                 {
-
+                    nome = txtFaixa.Text.Trim() ;
                 }
 
                 dgResultado.DataSource = _faixasDeRecargaService.ListarFaixasDeRecargaExistentes(id, nome, ativo);
@@ -181,10 +181,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.CriarFaixaDeRecarga
         {
             this.Hide();
             this.Close();
-        }
-        private void TxtFaixa_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            BtnPesquisar_Click(sender, e);
         }
 
         private void btnBuscaRapida_Click(object sender, EventArgs e)

@@ -35,9 +35,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _permissaoDao.QuantidadeVendaParaNaoTitularExcedida(idUsuario, idCampanha);
         }
 
-        public IEnumerable<string> VerificarPermissaoPorLoginESenha(int idUsuario, string login, string senha, bool verificarPerfilSupervisor, bool permitePerfilAdministrador)
+        public IEnumerable<string> VerificarPermissaoPorLoginESenha(int idUsuario, string login, string senha, bool verificarPerfilSupervisor, bool permitePerfilAdministrador, bool _contatoManual = false)
         {
-            return _permissaoDao.VerificarPermissaoPorLoginESenha(idUsuario, login, senha, verificarPerfilSupervisor, permitePerfilAdministrador);
+            return _permissaoDao.VerificarPermissaoPorLoginESenha(idUsuario, login, senha, verificarPerfilSupervisor, permitePerfilAdministrador, _contatoManual);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
     {
         private readonly FaixasDeRecargaDao _faixasDeRecargaDao;
 
+        public bool Selecionado { get; set; }
+
         public FaixasDeRecargaService()
         {
             _faixasDeRecargaDao = new FaixasDeRecargaDao();
@@ -31,11 +33,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _faixasDeRecargaDao.ListarFaixasDeRecargaDoProduto(idProduto);
         }
 
-
-
-        public int Salvar(ProdutoPermitidoParaFaixaDeRecarga produtoPermitidoParaFaixaDeRecarga)
+        public int GravarProdutoPermitidoParaFaixaDeRecarga(ProdutoPermitidoParaFaixaDeRecarga produtoPermitidoParaFaixaDeRecarga, string idsFaixas)
         {
-            return _faixasDeRecargaDao.Salvar(produtoPermitidoParaFaixaDeRecarga);
+            return _faixasDeRecargaDao.GravarProdutoPermitidoParaFaixaDeRecarga(produtoPermitidoParaFaixaDeRecarga, idsFaixas);
         }
 
         public DataTable ListarFaixasDeRecargaExistentes(int? id, string nome, bool? ativo)
