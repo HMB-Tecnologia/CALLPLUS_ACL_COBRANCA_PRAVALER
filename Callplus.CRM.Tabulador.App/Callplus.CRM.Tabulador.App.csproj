@@ -292,11 +292,11 @@
     <Compile Include="Operacao\NotificacaoForm.Designer.cs">
       <DependentUpon>NotificacaoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operacao\OfertaMigracaoPreControleClaroForm.cs">
+    <Compile Include="Operacao\CobrancaPravalerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operacao\OfertaMigracaoPreControleClaroForm.designer.cs">
-      <DependentUpon>OfertaMigracaoPreControleClaroForm.cs</DependentUpon>
+    <Compile Include="Operacao\CobrancaPravalerForm.designer.cs">
+      <DependentUpon>CobrancaPravalerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Operacao\OfertaNETPTVForm.cs">
       <SubType>Form</SubType>
@@ -410,8 +410,8 @@
     <EmbeddedResource Include="Operacao\NotificacaoForm.resx">
       <DependentUpon>NotificacaoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Operacao\OfertaMigracaoPreControleClaroForm.resx">
-      <DependentUpon>OfertaMigracaoPreControleClaroForm.cs</DependentUpon>
+    <EmbeddedResource Include="Operacao\CobrancaPravalerForm.resx">
+      <DependentUpon>CobrancaPravalerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Operacao\OfertaNETPTVForm.resx">
       <DependentUpon>OfertaNETPTVForm.cs</DependentUpon>

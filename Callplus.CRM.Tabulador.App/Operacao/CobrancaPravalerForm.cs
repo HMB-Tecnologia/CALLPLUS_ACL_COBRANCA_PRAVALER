@@ -1326,10 +1326,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             e.Handled = char.IsWhiteSpace(e.KeyChar);
         }
 
-        #endregion EVENTOS        
+		#endregion EVENTOS        
 
-        #region VARIÁVEIS
+		#region VARIÁVEIS
 
-        #endregion VARIÁVEIS
-    }
+		#endregion VARIÁVEIS
+	}
 }
