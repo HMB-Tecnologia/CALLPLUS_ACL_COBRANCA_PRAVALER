@@ -2,7 +2,7 @@
 
 namespace Callplus.CRM.Tabulador.Dominio.Entidades
 {
-    public class OfertaDoAtendimentoClaroMigracao : OfertaDoAtendimento
+    public class CobrancaAtendimentoPravaler : OfertaDoAtendimento
     {
         public string ondeReceberContrato;
 

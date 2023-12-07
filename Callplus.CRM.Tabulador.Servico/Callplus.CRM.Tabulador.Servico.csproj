@@ -49,6 +49,9 @@
     <Compile Include="Servicos\AtendimentoService.cs" />
     <Compile Include="Servicos\AvaliacaoDeAtendimentoService.cs" />
     <Compile Include="Servicos\CampanhaService.cs" />
+    <Compile Include="Servicos\NegociacaoService.cs" />
+    <Compile Include="Servicos\TituloService.cs" />
+    <Compile Include="Servicos\ContratoService.cs" />
     <Compile Include="Servicos\CepExpressService.cs" />
     <Compile Include="Servicos\ChecklistService.cs" />
     <Compile Include="Servicos\ConfiguracaoDeCampoDoLayoutDinamicoService.cs" />

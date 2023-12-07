@@ -48,7 +48,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             if (idCampanha != null)
                 _campanhaAtual = _campanhaService.RetornarCampanha((int)idCampanha);
 
-            _oferta = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroMigracao(idOferta);
+            _oferta = _ofertaDoAtendimentoService.RetornarCobrancaAtendimentoPravaler(idOferta);
 
             InitializeComponent();
         }
@@ -71,8 +71,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private Usuario _usuario;
         private Prospect _prospect;
-        private OfertaDoAtendimentoClaroMigracao _oferta;
-        private OfertaDoAtendimentoClaroMigracao _preVenda;
+        private CobrancaAtendimentoPravaler _oferta;
+        private CobrancaAtendimentoPravaler _preVenda;
 
         public delegate void PararTempoHandler(int? idUsuarioAprovacao);
         public event PararTempoHandler PararTempoEvent;

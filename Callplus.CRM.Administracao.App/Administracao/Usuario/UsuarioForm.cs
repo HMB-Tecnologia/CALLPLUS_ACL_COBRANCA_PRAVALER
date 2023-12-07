@@ -5,14 +5,13 @@ using CallplusUtil.Validacoes;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 namespace Callplus.CRM.Administracao.App.Administracao.Usuario
 {
-    public partial class UsuarioForm : Form
+	public partial class UsuarioForm : Form
     {
         public UsuarioForm(string titulo, Tabulador.Dominio.Entidades.Usuario usuario, IEnumerable<Campanha> campanhas,
             IEnumerable<Perfil> perfis, IEnumerable<Tabulador.Dominio.Entidades.Usuario> supervisores)

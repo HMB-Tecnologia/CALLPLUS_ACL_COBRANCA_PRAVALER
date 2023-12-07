@@ -53,6 +53,9 @@
     <Compile Include="Dao\AtendimentoDao.cs" />
     <Compile Include="Dao\AvaliacaoDeAtendimentoDao.cs" />
     <Compile Include="Dao\BluechipDAO.cs" />
+    <Compile Include="Dao\NegociacaoDao.cs" />
+    <Compile Include="Dao\ContratoDao.cs" />
+    <Compile Include="Dao\TituloDao.cs" />
     <Compile Include="Dao\CepExpressDao.cs" />
     <Compile Include="Dao\ChecklistDao.cs" />
     <Compile Include="Dao\ConfiguracaoDeCampoDoLayoutDinamicoDao.cs" />

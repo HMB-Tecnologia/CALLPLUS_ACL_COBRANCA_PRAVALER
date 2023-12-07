@@ -56,7 +56,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _ofertaDoAtendimentoDao.ValidarLoginDaOperadora(idOperadora, login);
         }
 
-        public OfertaDoAtendimentoClaroMigracao RetornarOfertaDoAtendimentoPreVendaMigracao(long idOferta)
+        public CobrancaAtendimentoPravaler RetornarOfertaDoAtendimentoPreVendaMigracao(long idOferta)
         {
             return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoPreVendaMigracao(idOferta);
         }
@@ -117,7 +117,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         #region CLARO_MIGRACAO
 
-        public long GravarOfertaDoAtendimentoClaroMigracao(OfertaDoAtendimentoClaroMigracao oferta)
+        public long GravarOfertaDoAtendimentoClaroMigracao(CobrancaAtendimentoPravaler oferta)
         {
             return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroMigracao(oferta);
         }
@@ -127,7 +127,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroMigracaoBKO(ofertaBko);
         }
 
-        public OfertaDoAtendimentoClaroMigracao RetornarOfertaDoAtendimentoClaroMigracao(long id)
+        public CobrancaAtendimentoPravaler RetornarCobrancaAtendimentoPravaler(long id)
         {
             return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroMigracao(id);
         }

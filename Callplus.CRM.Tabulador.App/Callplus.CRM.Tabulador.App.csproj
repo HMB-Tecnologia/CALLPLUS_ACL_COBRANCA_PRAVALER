@@ -280,6 +280,24 @@
     <Compile Include="Operacao\EnderecoForm.Designer.cs">
       <DependentUpon>EnderecoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operacao\CadastrarTituloForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\CadastrarTituloForm.designer.cs">
+      <DependentUpon>CadastrarTituloForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\DetalheTituloForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\DetalheTituloForm.designer.cs">
+      <DependentUpon>DetalheTituloForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\NegociacaoInclusaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operacao\NegociacaoInclusaoForm.designer.cs">
+      <DependentUpon>NegociacaoInclusaoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Operacao\fPlayerAudioOlos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -403,6 +421,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Operacao\EnderecoForm.resx">
       <DependentUpon>EnderecoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\CadastrarTituloForm.resx">
+      <DependentUpon>CadastrarTituloForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\DetalheTituloForm.resx">
+      <DependentUpon>DetalheTituloForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operacao\NegociacaoInclusaoForm.resx">
+      <DependentUpon>NegociacaoInclusaoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Operacao\fPlayerAudioOlos.resx">
       <DependentUpon>fPlayerAudioOlos.cs</DependentUpon>

@@ -112,7 +112,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         private readonly StatusDeOfertaService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
 
-        private OfertaDoAtendimentoClaroMigracao _oferta;
+        private CobrancaAtendimentoPravaler _oferta;
 
         bool modoFeedback = false;
         bool feedbackRealizado = false;
@@ -877,7 +877,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             if (ofertas != null)
             {
                 OfertaDoAtendimento oferta = ofertas.FirstOrDefault();
-                _oferta = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroMigracao(oferta.Id);
+                _oferta = _ofertaDoAtendimentoService.RetornarCobrancaAtendimentoPravaler(oferta.Id);
 
                 if (oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2)
                 {

@@ -31,14 +31,13 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public OfertaDoAtendimento RetornarOfertaElegivelParaAtendimento(long idAtendimento, int idCampanha, int idMailing)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_RETORNAR_OFERTA_ELEGIVEL_3";
+			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_RETORNAR_OFERTA_ELEGIVEL";
 
 
 			var args = new
 			{
 				IdAtendimento = idAtendimento,
-				idCampanha = idCampanha,
-				IdMailing = idMailing
+				idCampanha = idCampanha
 			};
 
 			var resultado = ExecutarProcedure<OfertaDoAtendimento>(sql, args).FirstOrDefault();
@@ -102,7 +101,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public OfertaDoAtendimentoClaroMigracao RetornarOfertaDoAtendimentoPreVendaMigracao(long id)
+		public CobrancaAtendimentoPravaler RetornarOfertaDoAtendimentoPreVendaMigracao(long id)
 		{
 			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_PRE_VENDA_LISTAR";
 
@@ -111,7 +110,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 				Id = id
 			};
 
-			var resultado = ExecutarProcedure<OfertaDoAtendimentoClaroMigracao>(sql, args).FirstOrDefault();
+			var resultado = ExecutarProcedure<CobrancaAtendimentoPravaler>(sql, args).FirstOrDefault();
 
 			return resultado;
 		}
@@ -250,7 +249,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		#region CLARO_MIGRACAO
 
-		public long GravarOfertaDoAtendimentoClaroMigracao(OfertaDoAtendimentoClaroMigracao oferta)
+		public long GravarOfertaDoAtendimentoClaroMigracao(CobrancaAtendimentoPravaler oferta)
 		{
 			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_CLARO_MIGRACAO_GRAVAR";
 
@@ -388,7 +387,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public OfertaDoAtendimentoClaroMigracao RetornarOfertaDoAtendimentoClaroMigracao(long id)
+		public CobrancaAtendimentoPravaler RetornarOfertaDoAtendimentoClaroMigracao(long id)
 		{
 			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_CLARO_MIGRACAO_LISTAR_1";
 
@@ -398,7 +397,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 				IdAtendimento = -1
 			};
 
-			var resultado = ExecutarProcedure<OfertaDoAtendimentoClaroMigracao>(sql, args).FirstOrDefault();
+			var resultado = ExecutarProcedure<CobrancaAtendimentoPravaler>(sql, args).FirstOrDefault();
 
 			return resultado;
 		}

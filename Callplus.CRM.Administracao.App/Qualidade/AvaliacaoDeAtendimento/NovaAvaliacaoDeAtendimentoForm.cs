@@ -83,7 +83,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
         private readonly ProspectService _prospectService;
         private readonly StatusDeOfertaService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
-        private OfertaDoAtendimentoClaroMigracao _oferta;
+        private CobrancaAtendimentoPravaler _oferta;
 
         bool modoFeedback = false;
         bool feedbackRealizado = false;
