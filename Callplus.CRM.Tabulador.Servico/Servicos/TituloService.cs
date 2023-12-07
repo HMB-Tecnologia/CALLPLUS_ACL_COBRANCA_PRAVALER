@@ -16,7 +16,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             _Dao = new TituloDao();
         }
 
-        public IEnumerable<Titulo> Listar(long idRegistro, bool ativo)
+        public DataTable Listar(long idRegistro, bool ativo)
         {
             return _Dao.Listar(idRegistro, ativo);
         }

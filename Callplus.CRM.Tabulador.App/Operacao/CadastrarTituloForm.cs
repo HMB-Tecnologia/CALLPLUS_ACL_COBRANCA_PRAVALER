@@ -203,7 +203,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void cadastrarTitulo_Load(object sender, EventArgs e)
 		{
-			
+			ResetarCampos();
 		}
 
 		private void btnIncluir_Click(object sender, EventArgs e)

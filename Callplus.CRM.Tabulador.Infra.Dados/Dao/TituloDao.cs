@@ -12,19 +12,18 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
     {
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
-        public IEnumerable<Titulo> Listar(long id, bool ativo)
+        public DataTable Listar(long id, bool ativo)
         {
-            var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
-
-            var args = new
+			var sql = " EXEC SP_RETORNAR_STATUS_TITULO ";
+			sql += $" @IDStatus = {id}";
+			var args = new
             {
-                Id = id,   
-                Ativo = ativo
-            };
+                Id = id
+			};
 
-            var resultado = ExecutarProcedure<Titulo>(sql, args);
+			var resultado = CarregarDataTable(sql, args);
 
-            return resultado;
+			return resultado;
         }
 
         public DataTable ListarExibicao(int id, int idCampanha, string nome, bool ativo)
@@ -123,6 +122,46 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 			return mensagens;
 
+		}
+
+		public List<Titulo> RetornarTitulosDoContrato(long idTitulo, bool baixado)
+		{
+			var titulos = new List<Titulo>();
+
+			var sql = "";
+			sql += "EXEC APP_CRM_TITULOS_DO_CONTRATO_LISTAR";
+			sql += $" @IDContrato = {idTitulo},";
+			sql += $" @baixado = {(baixado ? 1 : 0)}";
+
+			var args = new
+			{
+
+			};
+
+			var resultado = CarregarDataTable(sql, args);
+
+			for (int i = 0; i < resultado.Rows.Count; i++)
+			{
+				var titulo = new Titulo
+				{
+					IDTitulo = long.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "IDTitulo")),
+					NumeroDocumento = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "NumeroDocumento"),
+					DataEmissao = DateTime.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "DataLancamento")),
+					DataVencimento = DateTime.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "DataPagamento")),
+					Montante = decimal.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Montante")),
+					AtribuicaoEspecial = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "AtribuicaoEspecial"),
+					TipoDocumento = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "TipoDocumento"),
+					FormaPagamento = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "FormaPagamento"),
+					Status = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Status")
+				};
+
+				var idNeg = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "IDNegociacao");
+				if (string.IsNullOrEmpty(idNeg) == false)
+					titulo.IDNegociacao = long.Parse(idNeg);
+
+				titulos.Add(titulo);
+			}
+			return titulos;
 		}
 	}
 }

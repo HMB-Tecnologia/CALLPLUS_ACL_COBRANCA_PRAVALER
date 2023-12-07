@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CobrancaPravalerForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tsOferta = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
 			this.tsOferta_cmbTipoStatusOferta = new System.Windows.Forms.ToolStripComboBox();
@@ -390,9 +390,9 @@
 			// 
 			// colBtnDetalhe_detalhesTitulo
 			// 
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle2.NullValue = "Ações";
-			this.colBtnDetalhe_detalhesTitulo.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.NullValue = "Ações";
+			this.colBtnDetalhe_detalhesTitulo.DefaultCellStyle = dataGridViewCellStyle1;
 			this.colBtnDetalhe_detalhesTitulo.HeaderText = "Ações";
 			this.colBtnDetalhe_detalhesTitulo.Name = "colBtnDetalhe_detalhesTitulo";
 			this.colBtnDetalhe_detalhesTitulo.Text = "Ações";
@@ -529,7 +529,7 @@
 			this.panel1.Size = new System.Drawing.Size(911, 169);
 			this.panel1.TabIndex = 4;
 			// 
-			// OfertaMigracaoPreControleClaroForm
+			// CobrancaPravalerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -545,7 +545,7 @@
 			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "OfertaMigracaoPreControleClaroForm";
+			this.Name = "CobrancaPravalerForm";
 			this.Text = "Cobrança Pravaler";
 			this.Load += new System.EventHandler(this.OfertaMigracaoPreControleClaroForm_Load);
 			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OfertaMigracaoPreControleClaroForm_KeyPress);

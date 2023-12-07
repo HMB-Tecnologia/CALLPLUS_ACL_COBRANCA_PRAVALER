@@ -2845,7 +2845,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				return;
 			}
 
-			CobrancaPravalerForm formRenta = new CobrancaPravalerForm(_usuario, oferta.Id, _prospectDoAtendimento, _containerDeLayoutDinamico, _atendimentoEmAndamento, true, statusOferta.Id, false);
+			CobrancaPravalerForm formRenta = new CobrancaPravalerForm(_usuario, oferta.Id, _prospectDoAtendimento, _containerDeLayoutDinamico, _atendimentoEmAndamento, true, statusOferta.Id, true);
 			_pilhaDeJanelas.Push(formRenta);
 			formRenta.StartPosition = FormStartPosition.CenterScreen;
 			formRenta.ShowDialog();

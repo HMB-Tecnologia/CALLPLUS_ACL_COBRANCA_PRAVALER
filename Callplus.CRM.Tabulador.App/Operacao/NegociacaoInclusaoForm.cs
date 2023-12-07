@@ -626,10 +626,5 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 row.Cells[nameof(colSelecioneTitulo)].Value = true;
             }
         }
-
-        private void dgDetalhesDoTitulo_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

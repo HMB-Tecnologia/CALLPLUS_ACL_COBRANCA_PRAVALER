@@ -146,7 +146,7 @@
 			// 
 			// pictureBox8
 			// 
-			this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+			this.pictureBox8.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.fundoAzul;
 			this.pictureBox8.Location = new System.Drawing.Point(780, 28);
 			this.pictureBox8.Name = "pictureBox8";
 			this.pictureBox8.Size = new System.Drawing.Size(155, 63);
@@ -249,9 +249,9 @@
 			this.lblBancoDeDados.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblBancoDeDados.Location = new System.Drawing.Point(493, 74);
 			this.lblBancoDeDados.Name = "lblBancoDeDados";
-			this.lblBancoDeDados.Size = new System.Drawing.Size(234, 17);
+			this.lblBancoDeDados.Size = new System.Drawing.Size(112, 17);
 			this.lblBancoDeDados.TabIndex = 40;
-			this.lblBancoDeDados.Text = "CALLPLUS_ACL_MP_POR_2023_1";
+			this.lblBancoDeDados.Text = "CALLPLUS_ACL";
 			// 
 			// ptbLogoEmpresa
 			// 

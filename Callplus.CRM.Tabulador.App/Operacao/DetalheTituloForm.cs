@@ -3,7 +3,9 @@ using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace Callplus.CRM.Tabulador.App.Operacao
@@ -55,7 +57,16 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void CarregarStatusTitulo(long idStatus)
 		{
 			var titulo = _tituloService.Listar(idStatus, true);
-			cmbStatusTitulo.PreencherComSelecione(titulo, x => x.IDTitulo, x => x.Status);
+			DataRow dataRow = titulo.NewRow();
+			dataRow[""] = "SELECIONE...";
+			dataRow[""] = "-1";
+			titulo.Rows.Add(dataRow);
+
+			cmbStatusTitulo.DataSource = titulo;
+			cmbStatusTitulo.ValueMember = "IDStatus";
+			cmbStatusTitulo.DisplayMember = "Status";
+			cmbStatusTitulo.SelectedValue = "-1";
+			//cmbStatusTitulo.PreencherComSelecione(titulo, x => x.IDTitulo, x => x.Status);
 		}
 
 		private void CarregarCamposIniciais()
