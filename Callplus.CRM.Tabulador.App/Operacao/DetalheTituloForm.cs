@@ -32,7 +32,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		#endregion PROPRIEDADES
 
-		private void fDetalheTitulo_Load(object sender, EventArgs e)
+		private void DetalheTitulo_Load(object sender, EventArgs e)
 		{
 			ResetarCampos();
 		}
@@ -58,8 +58,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		{
 			var titulo = _tituloService.Listar(idStatus, true);
 			DataRow dataRow = titulo.NewRow();
-			dataRow[""] = "SELECIONE...";
-			dataRow[""] = "-1";
+			dataRow["Status"] = "SELECIONE...";
+			dataRow["IDStatus"] = "-1";
 			titulo.Rows.Add(dataRow);
 
 			cmbStatusTitulo.DataSource = titulo;

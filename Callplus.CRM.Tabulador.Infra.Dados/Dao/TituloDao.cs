@@ -9,66 +9,73 @@ using System.Net.NetworkInformation;
 namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 {
 	public class TituloDao : DaoBase
-    {
-        protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
+	{
+		protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
-        public DataTable Listar(long id, bool ativo)
-        {
+		public DataTable Listar(long id, bool ativo)
+		{
 			var sql = " EXEC SP_RETORNAR_STATUS_TITULO ";
 			sql += $" @IDStatus = {id}";
 			var args = new
-            {
-                Id = id
+			{
+				Id = id
 			};
 
 			var resultado = CarregarDataTable(sql, args);
 
 			return resultado;
-        }
+		}
 
-        public DataTable ListarExibicao(int id, int idCampanha, string nome, bool ativo)
-        {
-            var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR_EXIBICAO ";
-            sql += string.Format("@id = {0}, @idCampanha = {1}, @nome = '{2}', @ativo = {3}",
-            id, idCampanha, nome, ativo);
+		public DataTable ListarExibicao(int id, int idCampanha, string nome, bool ativo)
+		{
+			var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR_EXIBICAO ";
+			sql += string.Format("@id = {0}, @idCampanha = {1}, @nome = '{2}', @ativo = {3}",
+			id, idCampanha, nome, ativo);
 
-            var args = new
-            {
+			var args = new
+			{
 
-            };
+			};
 
-            var resultado = CarregarDataTable(sql, args);
+			var resultado = CarregarDataTable(sql, args);
 
-            return resultado;
-        }
+			return resultado;
+		}
 
-        public Titulo RetornarTitulo(int id)
-        {
-            var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
+		public Titulo RetornarTitulo(int id)
+		{
+			var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
 
-            var args = new
-            {
-                Id = id
-            };
+			var args = new
+			{
+				Id = id
+			};
 
-            var resultado = ExecutarProcedure<Titulo>(sql, args);
+			var resultado = ExecutarProcedure<Titulo>(sql, args);
 
-            return resultado.FirstOrDefault();
-        }
+			return resultado.FirstOrDefault();
+		}
 
-        public int Gravar(long idProspect, List<Titulo> listaTitulos)
-        {
-            var sql = "APP_CRM_DADOS_CEP_EXPRESS_GRAVAR";
+		public void Gravar(long idProspect, Titulo titulo)
+		{
 
-            var args = new
-            {
+			var sql = " EXEC APP_CRM_NOVO_TITULO_SALVAR ";
+			sql += $" @NumeroDocumento = '{titulo.NumeroDocumento}',";
+			sql += $" @DataEmissao = '{titulo.DataEmissao:MM/dd/yyyy}',";
+			sql += $" @DataVencimento = '{titulo.DataVencimento:MM/dd/yyyy}',";
+			sql += $" @AtribuicaoEspecial = '{titulo.AtribuicaoEspecial}',";
+			sql += $" @TipoDocumento = '{titulo.TipoDocumento}',";
+			sql += $" @FormaPagamento = '{titulo.FormaPagamento}',";
+			sql += $" @Montante = '{titulo.Montante.ToString().Replace(",", ".")}',";
+			sql += $" @IdProspect = {idProspect}";
 
-            };
+			var args = new
+			{
 
-            var resultado = ExecuteProcedureScalar(sql, args);
+			};
 
-            return Convert.ToInt32(resultado);
-        }
+			ExecutarSql(sql, args);
+		}
 
 		public void AtualizarStatusDoTitulo(MarcacaoStatusTitulo marcacao)
 		{
@@ -89,10 +96,10 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 			var args = new
 			{
-                
+
 			};
 
-			ExecutarProcedure<Titulo>(sql, args);
+			ExecutarSql(sql, args);
 		}
 
 		public List<string> PodeAtualizarStatusDoTitulo(long idTitulo, int idStatusTitulo, long idStatusAtendimento, int idUsuario, DateTime dataVencimento, DateTime dataNegociacaoFutura, DateTime dataVencimentoAtualizada)

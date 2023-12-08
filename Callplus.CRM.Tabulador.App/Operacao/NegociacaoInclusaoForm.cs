@@ -18,8 +18,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		public NegociacaoInclusaoForm(Usuario usuario)
         {
             _usuario = usuario;
+            _negociacaoService = new NegociacaoService();
 
-            InitializeComponent();
+			InitializeComponent();
         }
 
         private void fNegociacao_Inclusao_Load(object sender, EventArgs e)
@@ -56,7 +57,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                     IncluirNovaNegociacao();
                     MessageBox.Show("Concluído!", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
-
                 }
                 catch (Exception erro)
                 {
@@ -97,7 +97,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         }
 
         private void cmbTipoAcordo_SelectionChangeCommitted(object sender, EventArgs e)
-        {
+        { 
             int idStatusTitulo = 0;
             idStatusTitulo = int.Parse(cmbTipoAcordo.SelectedValue.ToString());
         }
@@ -113,13 +113,13 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			//cmbTipoAcordo.PreencherComSelecione(tipoAcordo, x => x.);
 
 			DataRow dataRow = tipoAcordo.NewRow();
-			dataRow["id"] = "SELECIONE...";
-			dataRow["nome"] = "-1";
+			dataRow["tipo"] = "SELECIONE...";
+			dataRow["id"] = "-1";
 			tipoAcordo.Rows.Add(dataRow);
 
 			cmbTipoAcordo.DataSource = tipoAcordo;
 			cmbTipoAcordo.ValueMember = "id";
-			cmbTipoAcordo.DisplayMember = "nome";
+			cmbTipoAcordo.DisplayMember = "tipo";
 			cmbTipoAcordo.DropDownStyle = ComboBoxStyle.DropDown;
 			cmbTipoAcordo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 			cmbTipoAcordo.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -129,9 +129,24 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private void CarregarPrazoNegociacao()
         {
-			var tipoAcordo = _negociacaoService.RetornarPrazoNegociacao(ativo: true);
+			var prazo = _negociacaoService.RetornarPrazoNegociacao(ativo: true);
+
 			//cmbPrazo.PreencherComSelecione(cmbPrazo, x => x.id, x.);
-        }
+
+			DataRow dataRow = prazo.NewRow();
+			dataRow["nome"] = "SELECIONE...";
+			dataRow["id"] = "-1";
+			prazo.Rows.Add(dataRow);
+
+			cmbPrazo.DataSource = prazo;
+			cmbPrazo.ValueMember = "id";
+			cmbPrazo.DisplayMember = "nome";
+			cmbPrazo.DropDownStyle = ComboBoxStyle.DropDown;
+			cmbPrazo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cmbPrazo.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cmbPrazo.SelectedValue = "-1";
+			cmbPrazo.DropDownStyle = ComboBoxStyle.DropDownList;
+		}
 
         private void ResetarCampos()
         {
@@ -142,7 +157,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             txtValorParcelas.Text = string.Empty;
             mskDataVencimento.Text = string.Empty;
             cmbQuantidadeParcela.Text = "1";
-            cmbPrazo.ResetarComSelecione(true);
+            //cmbPrazo.ResetarComSelecione(true);
         }
 
         public void NovaNegociacao(Contrato contrato, int idStatus)
@@ -156,7 +171,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 AtualizarGridTitulos(_contratoDaNegociacao.Titulos);
                 ShowDialog();
             }
-
         }
 
         private Negociacao CriarNegociacao()
@@ -554,7 +568,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 mensagens.Add("Informe o prazo!");
             }
 
-            int prazo = int.Parse(cmbPrazo.SelectedValue.ToString());
+            int prazo = int.Parse(cmbPrazo?.SelectedValue.ToString());
             if (prazo != 1 && cmbQuantidadeParcela.Text == "1")
             {
                 mensagens.Add("Para esse tipo de acordo a quantidade de parcelas deve ser maior que 1!");

@@ -14,7 +14,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             _Dao = new ContratoDao();
         }
 
-        public IEnumerable<Contrato> Listar(long id, bool baixado)
+        public List<Contrato> Listar(long id, bool baixado)
         {
             return _Dao.Listar(id, baixado);
         }

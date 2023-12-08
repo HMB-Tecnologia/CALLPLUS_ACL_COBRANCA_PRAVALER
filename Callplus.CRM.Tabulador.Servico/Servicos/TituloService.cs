@@ -26,9 +26,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _Dao.ListarExibicao(idRegistro, idCampanha, nome, ativo);
         }
 
-        public int Gravar(long idProspect, List<Titulo> listaTitulos)
+        public void Gravar(long idProspect, Titulo titulo)
         {
-            return _Dao.Gravar(idProspect, listaTitulos);
+            _Dao.Gravar(idProspect, titulo);
         }
 
         public Titulo RetornarTitulo(int id)

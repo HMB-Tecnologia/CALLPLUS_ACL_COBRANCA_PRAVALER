@@ -12,7 +12,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 		private TituloDao _tituloDao = new TituloDao();
 
-        public IEnumerable<Contrato> Listar(long id, bool baixado)
+        public List<Contrato> Listar(long id, bool baixado)
         {
 			var sql = "EXEC APP_CRM_CONTRATOS_DO_CLIENTE_RETORNAR";
 			sql += $" @IDProspect = {id}";

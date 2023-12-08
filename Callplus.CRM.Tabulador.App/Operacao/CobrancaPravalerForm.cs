@@ -65,7 +65,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private bool _permiteEditar;
 		private bool _checklistAplicado;
 
-		private IEnumerable<Contrato> _contratosDoCliente;
+		private List<Contrato> _contratosDoCliente;
 		private ContratoService _contratoService;
 		private NegociacaoService _negociacaoService;
 		private Atendimento _atendimento;
@@ -81,10 +81,11 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			Atualizar = false;
 			tsOferta_cmbStatusOferta.Enabled = false;
 			tsOferta_btnChecklist.Enabled = false;
+			txtObservacao.Text = _oferta.Observacao;
 
 			CarregarTipoDeStatusDeOferta();
-			CarregarDadosIniciais();
 			CarregarControleDeEdicao();
+			CarregarContratosDoProspect(_prospect.Id);
 		}
 
 		private void CarregarControleDeEdicao()
@@ -104,11 +105,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					item.Enabled = false;
 				}
 			}
-		}
-
-		private void CarregarDadosIniciais()
-		{
-			txtObservacao.Text = _oferta.Observacao;
 		}
 
 		private void CarregarStatusDeOferta(object tipo)
@@ -279,6 +275,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			{
 				_contrato = ObterContratoDoAtendimentoPorId(_contrato.IDContrato);
 				AtualizarGridTitulos(_contrato.Titulos);
+				AtualizarGridHistoricoNegociacoesContrato(_contrato.IDContrato);
 			}
 		}
 
@@ -358,6 +355,52 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			var titulos = contrato?.Titulos;
 
 			return titulos?.First(titulo => titulo.IDTitulo == idTitulo);
+		}
+
+		private void CarregarContratosDoProspect(long idProspect)
+		{
+			dgContrato.CellClick -= dgContratos_CellClick;
+
+			var contratos = _contratoService.Listar(idProspect, false);
+			_contratosDoCliente = contratos;
+			AtualizarGridContratos(_contratosDoCliente);
+
+			dgContrato.CellClick += dgContratos_CellClick;
+		}
+
+		private void dgContratos_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			var indice = e.RowIndex;
+
+			if (indice < 0) return;
+
+			_contrato = null;
+
+			var idContratoGrid = dgContrato.Rows[indice].Cells[nameof(colID_Contratos)].Value?.ToString();
+			long.TryParse(idContratoGrid, out long idContratoSelecionado);
+
+			_contrato = ObterContratoDoAtendimentoPorId(idContratoSelecionado);
+
+			if (_contrato == null) return;
+			var titulos = _contrato.Titulos;
+
+			btnNovoTitulo.Enabled = true;
+
+			AtualizarGridTitulos(titulos);
+		}
+
+		private void AtualizarGridContratos(List<Contrato> contratos)
+		{
+			dgContrato.Rows.Clear();
+			foreach (var contrato in contratos)
+			{
+				var indice = dgContrato.Rows.Add();
+
+				dgContrato.Rows[indice].Cells[nameof(colID_Contratos)].Value = contrato.IDContrato;
+				dgContrato.Rows[indice].Cells[nameof(colCodigoContratos_Contratos)].Value = contrato.CodCliente;
+				dgContrato.Rows[indice].Cells[nameof(colNomeCliente_Contratos)].Value = contrato.Descricao;
+				dgContrato.Rows[indice].Cells[nameof(colCDA_contrato)].Value = contrato.Cda;
+			}
 		}
 
 		#endregion METODOS
@@ -516,7 +559,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_contrato = null;
 
 			var idContratoGrid = dgContrato.Rows[e.RowIndex].Cells[nameof(colID_Contratos)].Value?.ToString();
-			
+
 			long.TryParse(idContratoGrid, out long idContratoSelecionado);
 			_contrato = ObterContratoDoAtendimentoPorId(idContratoSelecionado);
 
@@ -524,9 +567,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			btnNovoTitulo.Enabled = true;
 			AtualizarGridTitulos(_contrato.Titulos);
-			
-			//Colocar um condicional if aqui para atualziar a grid de contrato quando for preciso
-			AtualizarGridHistoricoNegociacoesContrato(_contrato.IDContrato);
+
+			if (_contrato != null)
+				AtualizarGridHistoricoNegociacoesContrato(_contrato.IDContrato);
 		}
 	}
 }

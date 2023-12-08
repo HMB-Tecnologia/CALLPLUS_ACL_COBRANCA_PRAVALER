@@ -13,7 +13,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public IEnumerable<Negociacao> Listar(long id, bool baixado)
 		{
-			var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
+			var sql = "";
 
 			var args = new
 			{
@@ -28,7 +28,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public DataTable ListarExibicao(int id, int idCampanha, string nome, bool ativo)
 		{
-			var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR_EXIBICAO ";
+			var sql = " ";
 			sql += string.Format("@id = {0}, @idCampanha = {1}, @nome = '{2}', @ativo = {3}",
 			id, idCampanha, nome, ativo);
 
@@ -44,7 +44,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public Negociacao RetornarContrato(long id, bool baixado)
 		{
-			var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
+			var sql = "";
 
 			var args = new
 			{
@@ -59,7 +59,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public int Gravar(Negociacao id)
 		{
-			var sql = "APP_CRM_DADOS_CEP_EXPRESS_GRAVAR";
+			var sql = "";
 
 			var args = new
 			{
@@ -105,7 +105,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 			};
 
-			var resultado = ExecuteProcedureScalar(sql, args);
+			ExecutarSql(sql, args);
 		}
 
 		public void IncluirParcelaNegociacao(Parcela parcela, long idNegociacao, int idUsuario)
@@ -125,7 +125,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 			};
 
-			var resultado = ExecuteProcedureScalar(sql, args);
+			ExecutarSql(sql, args);
 		}
 
 		public DataTable RetornarHistoricoNegociacaoPorIdContrato(long idContrato)

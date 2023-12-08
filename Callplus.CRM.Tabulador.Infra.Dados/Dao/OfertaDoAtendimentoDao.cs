@@ -31,8 +31,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public OfertaDoAtendimento RetornarOfertaElegivelParaAtendimento(long idAtendimento, int idCampanha, int idMailing)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_RETORNAR_OFERTA_ELEGIVEL";
-
+			var sql = "APP_CRM_COBRANCA_DO_ATENDIMENTO_RETORNAR_OFERTA_ELEGIVEL";
 
 			var args = new
 			{

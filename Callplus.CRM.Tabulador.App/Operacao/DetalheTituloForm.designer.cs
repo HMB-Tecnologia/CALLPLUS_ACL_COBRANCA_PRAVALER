@@ -429,7 +429,7 @@
             this.Name = "fDetalheTitulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalhes do Título";
-            this.Load += new System.EventHandler(this.fDetalheTitulo_Load);
+            this.Load += new System.EventHandler(this.DetalheTitulo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
