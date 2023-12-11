@@ -42,7 +42,7 @@ namespace Callplus.CRM.Tabulador.App.Login
         private string _modulo = "OPE";
         private string _maquinaUsuario = "";
         private string _enderecoIP = "";
-        private string _release = "01.003";
+        private string _release = "01.000";
 
         #endregion PROPRIEDADES
 

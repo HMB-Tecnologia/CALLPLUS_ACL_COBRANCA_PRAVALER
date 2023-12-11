@@ -25,6 +25,17 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _statusDeAtendimentoDao.Listar(id, ativo);
         }
 
+
+        public IEnumerable<Canal> ListarCanal()
+        {
+            return _statusDeAtendimentoDao.ListarCanal();
+        }
+
+        public IEnumerable<TipoContato> ListarTipoContato()
+        {
+            return _statusDeAtendimentoDao.ListarTipoContato();
+        }
+
         public IEnumerable<KeyValuePair<int, string>> ListarTipoDeStatusDeAtendimento(bool ativo = true)
         {
             return _statusDeAtendimentoDao.ListarTipoDeStatusDeAtendimento(ativo);
@@ -44,6 +55,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _statusDeAtendimentoDao.ListarPorTipoCampanha(id, idTipoStatus, idCampanha, idTipoDeCampanha);
         }
+
         public DataTable ListaStatusDeAtendimento(int? idcampanha, bool? ativo, string nome, int? idStatus)
         {
             return _statusDeAtendimentoDao.ListaStatusDeAtendimento(idcampanha, ativo, nome, idStatus);

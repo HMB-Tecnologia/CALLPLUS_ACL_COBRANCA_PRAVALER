@@ -1187,6 +1187,20 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			cmbStatus.PreencherComSelecione(statusAtendimento, x => x.Id, x => x.Nome);
 		}
 
+		private void CarregarComboCanal()
+		{
+			IEnumerable<Canal> canal = _statusDeAtendimentoService.ListarCanal();
+
+			cmbCanal.PreencherComSelecione(canal, x => x.Id, x => x.Nome);
+		}
+
+		private void CarregarComboTipoContato()
+		{
+            IEnumerable<TipoContato> contato = _statusDeAtendimentoService.ListarTipoContato();
+
+            cmbTipoContato.PreencherComSelecione(contato, x => x.Id, x => x.Nome);
+        }
+
 		private void CarregarComboStatusDoOperador(IEnumerable<KeyValuePair<int, string>> listaIncluir = null)
 		{
 			var listaStatus = new List<KeyValuePair<int, string>>();
@@ -2161,6 +2175,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			cmbTipoStatus.ResetarComSelecione(habilitar: true);
 			cmbStatus.ResetarComSelecione(habilitar: false);
+			
+			cmbCanal.ResetarComSelecione(true);
+			cmbTipoContato.ResetarComSelecione(true);
 
 			ConfigurarComboTelefoneDoAgendamento(idProspect);
 		}
@@ -2295,6 +2312,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			cmbTipoStatus.ResetarComSelecione(habilitar: false);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 
+			cmbCanal.ResetarComSelecione(false);
+			cmbTipoContato.ResetarComSelecione(false);
+
 			txtObservacaoOperador.Text = "";
 			LimparCamposAgendamento();
 		}
@@ -2427,6 +2447,16 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			resultado.Atendimento = atendimento;
 			resultado.StatusDoAtendimento = status;
 			resultado.Telefone = RetornarTelefoneDaInteracao();
+
+			if (!cmbCanal.TextoEhSelecione())
+			{
+				resultado.IdCanal = Convert.ToInt32(cmbCanal.SelectedValue);
+			}
+
+			if (!cmbTipoContato.TextoEhSelecione())
+			{
+				resultado.IdTipoContato = Convert.ToInt32(cmbTipoContato.SelectedValue);
+			}
 
 			if (resultado.Telefone == 0)
 				resultado.Telefone = (long)_prospectDoAtendimento.Telefone01;
@@ -2845,7 +2875,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				return;
 			}
 
-			CobrancaPravalerForm formRenta = new CobrancaPravalerForm(_usuario, oferta.Id, _prospectDoAtendimento, _containerDeLayoutDinamico, _atendimentoEmAndamento, true, statusOferta.Id, true);
+			CobrancaPravalerForm formRenta = new CobrancaPravalerForm(_usuario, oferta.Id, _prospectDoAtendimento, _containerDeLayoutDinamico, _atendimentoEmAndamento, false, true, statusOferta.Id, true);
 			_pilhaDeJanelas.Push(formRenta);
 			formRenta.StartPosition = FormStartPosition.CenterScreen;
 			formRenta.ShowDialog();
@@ -2936,7 +2966,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			{
 				var idBanco = Convert.ToInt32(cmbBanco.SelectedValue);
 
-				GravarStatusDaOferta(_ofertaAtual, _statusOferta, _prospectDoAtendimento.Campo003, _prospectDoAtendimento.Campo001, idBanco);
+				GravarStatusDaOferta(_ofertaAtual, _statusOferta, _prospectDoAtendimento.Campo003, _prospectDoAtendimento.Campo005, idBanco);
 
 			}
 
@@ -3137,8 +3167,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				cmbTipoStatus.Desabilitar();
 				cmbStatus.Desabilitar();
 				cmbTelAgendamento.Desabilitar();
-				//TODO - Manter observação sempre ativa - Rei Almeida
-				//txtObservacaoOperador.Enabled = false;
+				cmbTipoContato.Desabilitar();
+				cmbCanal.Desabilitar();
+
 				dtAgendamento.Enabled = false;
 				txtHoraAgendamento.Enabled = false;
 				ConfigurarMenuDeAtendimento(false, false);
@@ -3154,6 +3185,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				cmbTipoStatus.Habilitar();
 				cmbStatus.Habilitar();
 				cmbTelAgendamento.Habilitar();
+
+				cmbCanal.Habilitar();
+				cmbTipoContato.Habilitar();
+
 				txtObservacaoOperador.Enabled = true;
 				dtAgendamento.Enabled = true;
 				txtHoraAgendamento.Enabled = true;
@@ -3565,7 +3600,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 
 
-						GravarStatusDaOferta(ofertaAtual, statusDaOferta, _prospectDoAtendimento.Campo003, _prospectDoAtendimento.Campo001, null);
+						GravarStatusDaOferta(ofertaAtual, statusDaOferta, _prospectDoAtendimento.Campo003, _prospectDoAtendimento.Campo005, null);
 
 						_ofertaAtual = ofertaAtual;
 						_statusOferta = statusDaOferta;
@@ -3970,7 +4005,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 					Campanha campanhaDoProspect = _campanhaService.RetornarCampanha(_prospectDoAtendimento.IdCampanha);
 
-					CarregarBanco();
+					//CarregarBanco();
 
 
 					if (!VerificarSePodeIniciarAtendimentoPreditivo(campanhaDoProspect)) return;
@@ -4137,7 +4172,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				cmbCampanha.PreencherComSelecione(_campanhasDoUsuario, campanha => campanha.Id, campanha => campanha.Nome);
 
 			CarregarComboTipoStatusDeAtendimento();
-
+			CarregarComboCanal();
+			CarregarComboTipoContato();
 
 		}
 

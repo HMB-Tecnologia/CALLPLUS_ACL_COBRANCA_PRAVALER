@@ -1,4 +1,5 @@
 ﻿using Callplus.CRM.Tabulador.App.Controles.CamposDinamicos;
+using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
@@ -16,7 +17,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 	public partial class CobrancaPravalerForm : Form
 	{
 		public CobrancaPravalerForm(Usuario usuario, long idOferta, Prospect prospect, ContainerDeLayoutDeCamposDinamicos camposDinamicos, Atendimento atendimento,
-			bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
+        bool bloqueioStatus ,bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
 		{
 			_logger = LogManager.GetCurrentClassLogger();
 
@@ -38,8 +39,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_idStatusOferta = idStatusOferta;
 			_permiteEditar = edicao;
 			_fecharAoGravar = fecharAoGravar;
+            _bloqueioStatus = bloqueioStatus;
 
-			InitializeComponent();
+            InitializeComponent();
 		}
 
 		#region PROPRIEDADES
@@ -59,8 +61,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private Prospect _prospect;
 		private Contrato _contrato;
 		private CobrancaAtendimentoPravaler _oferta;
-
-		private int? _idStatusOferta;
+        private bool _bloqueioStatus;
+        private int? _idStatusOferta;
 		private bool _fecharAoGravar;
 		private bool _permiteEditar;
 		private bool _checklistAplicado;
@@ -86,7 +88,12 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			CarregarTipoDeStatusDeOferta();
 			CarregarControleDeEdicao();
 			CarregarContratosDoProspect(_prospect.Id);
-		}
+
+            if (_idStatusOferta != null && _idStatusOferta > 0)
+            {
+                ConfigurarStatusDaOferta(_idStatusOferta.Value);
+            }
+        }
 
 		private void CarregarControleDeEdicao()
 		{
@@ -348,7 +355,58 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			return podeContinuar;
 		}
 
-		private Titulo ObterTituloDoAtendimentoPorId(long idContrato, long idTitulo)
+        private void tsOferta_cmbStatusOferta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarProduto();
+        }
+
+        private void ConfigurarStatusDaOferta(int idStatusOferta)
+        {
+            tsOferta_cmbStatusOferta.SelectedIndexChanged -= tsOferta_cmbStatusOferta_SelectedIndexChanged;
+
+            var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta(idStatusOferta, _prospect.IdCampanha);
+            tsOferta_cmbTipoStatusOferta.ComboBox.SelectedValue = statusOferta.IdTipoDeStatusDeOferta.ToString();
+            tsOferta_cmbStatusOferta.ComboBox.SelectedValue = statusOferta.Id.ToString();
+
+            tsOferta_cmbTipoStatusOferta.Enabled = !_bloqueioStatus;
+            tsOferta_cmbStatusOferta.Enabled = !_bloqueioStatus;
+
+            tsOferta_cmbStatusOferta.SelectedIndexChanged += tsOferta_cmbStatusOferta_SelectedIndexChanged;
+        }
+
+        private void CarregarProduto()
+        {
+            int idTipoDeProduto = -1;
+            bool ativo = true;
+            bool? ativoBko = null;
+
+            //if (_idStatusOferta == 21)
+            //{
+            //    idTipoDeProduto = 2;
+            //    cmbProduto.ResetarComSelecione(habilitar: true);
+            //}
+            //else
+            //{
+            //    idTipoDeProduto = 1;
+            //    cmbProduto.ResetarComSelecione(habilitar: false);
+            //}
+
+            IEnumerable<ProdutoDaOfertaDto> produtos = null;
+
+            //if (_filtraPorFaixaDeRecarga && _campanhaAtual.Id != 16)
+            //{
+            //    produtos = _produtoService.ListarProdutoDaOfertaPorFaixaDeRecarga(_oferta.IdAtendimento).Where(x => x.idTipo == idTipoDeProduto).Distinct();
+            //}            
+            //else
+            //{
+            //produtos = _produtoService.ListarProdutoDaOfertaPorIdProspect(_prospect.IdCampanha, _prospect.Id, ativo, ativoBko).Where(x => x.idTipo == idTipoDeProduto).Distinct();
+            ////}
+
+            //cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
+            //cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
+        }
+
+        private Titulo ObterTituloDoAtendimentoPorId(long idContrato, long idTitulo)
 		{
 			var contrato = ObterContratoDoAtendimentoPorId(idContrato);
 

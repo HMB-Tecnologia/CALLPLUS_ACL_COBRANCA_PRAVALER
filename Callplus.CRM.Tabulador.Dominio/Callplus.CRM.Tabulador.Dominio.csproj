@@ -53,6 +53,7 @@
     <Compile Include="Entidades\Aparelho.cs" />
     <Compile Include="Entidades\CampanhaDoStatusDeAtendimento.cs" />
     <Compile Include="Entidades\CampanhaDoStatusDeAuditoria.cs" />
+    <Compile Include="Entidades\Canal.cs" />
     <Compile Include="Entidades\CepCorreios.cs" />
     <Compile Include="Entidades\CepExpress.cs" />
     <Compile Include="Entidades\CicloDeVencimentoDeFatura.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Entidades\StatusDeOferta.cs" />
     <Compile Include="Entidades\StatusDeOfertaDaCampanha.cs" />
     <Compile Include="Entidades\TelefoneDoProspect.cs" />
+    <Compile Include="Entidades\TipoContato.cs" />
     <Compile Include="Entidades\TipoDeAvaliacaoDeAtendimento.cs" />
     <Compile Include="Entidades\TipoDeFrasesGamificacao.cs" />
     <Compile Include="Entidades\TipoDePlanoPorOperadora.cs" />

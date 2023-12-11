@@ -31,17 +31,17 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeOferta status, string nome, string cpf, int? idBanco)
         {            
             //TODO: ALTERAR PARA CONSIDERAR O TIPO DA OFERTA NÃO UTILIZANDO O ID
-            if (oferta.IdTipoDeProduto == 0) 
+            //if (oferta.IdTipoDeProduto == 0) 
                 return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroMigracao(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf);
 
-            if (oferta.IdTipoDeProduto == 0)
-                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroRentabilizacao(oferta.Id, oferta.IdAtendimento, status.Id);
+            //if (oferta.IdTipoDeProduto == 0)
+            //    return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroRentabilizacao(oferta.Id, oferta.IdAtendimento, status.Id);
 
-            if (oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2 || oferta.IdTipoDeProduto == 3 || oferta.IdTipoDeProduto == 4 || oferta.IdTipoDeProduto == 5)
-                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroPortabilidade(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf, idBanco);
+            //if (oferta.IdTipoDeProduto == 0 || oferta.IdTipoDeProduto == 0 || oferta.IdTipoDeProduto == 0 || oferta.IdTipoDeProduto == 4 || oferta.IdTipoDeProduto == 5)
+            //    return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroPortabilidade(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf, idBanco);
 
-            if (oferta.IdTipoDeProduto == 0)
-                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoNETPTV(oferta.Id, oferta.IdAtendimento, status.Id);
+            //if (oferta.IdTipoDeProduto == 0)
+            //    return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoNETPTV(oferta.Id, oferta.IdAtendimento, status.Id);
 
             throw new InvalidOperationException("O tipo da Oferta do Atendimento não pôde ser reconhecido");
         }

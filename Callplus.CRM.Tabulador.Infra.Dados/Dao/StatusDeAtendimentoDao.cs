@@ -172,5 +172,31 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             return resultado;
         }
+
+        public IEnumerable<Canal> ListarCanal()
+        {
+            var sql = "APP_CRM_CANAL_LISTAR";
+            var args = new
+            {
+
+            };
+
+            var resultado = ExecutarProcedure<Canal>(sql, args);
+
+            return resultado;
+        }
+
+        public IEnumerable<TipoContato> ListarTipoContato()
+        {
+            var sql = "APP_CRM_TIPO_CONTATO_LISTAR";
+            var args = new
+            {
+
+            };
+
+            var resultado = ExecutarProcedure<TipoContato>(sql, args);
+
+            return resultado;
+        }
     }
 }

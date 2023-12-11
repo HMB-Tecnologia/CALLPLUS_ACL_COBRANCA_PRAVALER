@@ -24,7 +24,10 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
                 TelefoneAgendamento = resultado.TelefoneAgendamento,
                 DataAgendamento = resultado.DataAgendamento,
                 Observacao = resultado.Observacao,
-                IdUsuarioPermissao = resultado.IdUsuarioPermissao
+                IdUsuarioPermissao = resultado.IdUsuarioPermissao,
+                resultado.IdCanal,
+                resultado.IdTipoContato
+
             };
 
             return ExecutarProcedureSingleOrDefault<long>(sql, args);
