@@ -160,7 +160,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             //cmbPrazo.ResetarComSelecione(true);
         }
 
-        public void NovaNegociacao(Contrato contrato, int idStatus)
+        public void NovaNegociacao(Contrato contrato)
         {
             _contratoDaNegociacao = contrato;
             if (_contratoDaNegociacao != null)
@@ -168,7 +168,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
                 AtualizarDadosDoContrato(contrato);
                 CarregarTipoAcordo();
                 CarregarPrazoNegociacao();
-                AtualizarGridTitulos(_contratoDaNegociacao.Titulos);
+                //AtualizarGridTitulos(_contratoDaNegociacao.Titulos);
                 ShowDialog();
             }
         }
@@ -180,33 +180,26 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             negociacao.IdTipoAcordo = int.Parse(cmbTipoAcordo.SelectedValue.ToString());
             negociacao.NumeroNegociacao = txtNumeroNegociacao.Text;
 
-            double valorAtualizado = 0;
-            double.TryParse(txtValorPrincipal.Text, out valorAtualizado);
-            negociacao.ValorPrincipal = valorAtualizado;
+			double.TryParse(txtValorPrincipal.Text, out double valorAtualizado);
+			negociacao.ValorPrincipal = valorAtualizado;
 
-            double valorParcelas = 0;
-            double.TryParse(txtValorParcelas.Text, out valorParcelas);
-            negociacao.ValorDasParcelas = valorParcelas;
+			double.TryParse(txtValorParcelas.Text, out double valorParcelas);
+			negociacao.ValorDasParcelas = valorParcelas;
 
-            double multa = 0;
-            double.TryParse(txtMulta.Text, out multa);
-            negociacao.Multa = multa;
+            double.TryParse(txtMulta.Text, out double multa);
+			negociacao.Multa = multa;
 
-            double juros = 0;
-            double.TryParse(txtJuros.Text, out juros);
-            negociacao.Juros = juros;
+			double.TryParse(txtJuros.Text, out double juros);
+			negociacao.Juros = juros;
 
-            int idPrazo = 0;
-            int.TryParse(cmbPrazo.Text, out idPrazo);
-            negociacao.IdPrazo = int.Parse(cmbPrazo.SelectedValue.ToString());
+			int.TryParse(cmbPrazo.Text, out int idPrazo);
+			negociacao.IdPrazo = int.Parse(cmbPrazo.SelectedValue.ToString());
 
-            int quantidade = 0;
-            int.TryParse(cmbQuantidadeParcela.Text, out quantidade);
-            negociacao.QuantidadeDeParcela = quantidade;
+			int.TryParse(cmbQuantidadeParcela.Text, out int quantidade);
+			negociacao.QuantidadeDeParcela = quantidade;
 
-            DateTime dataVencimento;
-            DateTime.TryParse(mskDataVencimento.Text, out dataVencimento);
-            negociacao.DataVencimento = dataVencimento;
+			DateTime.TryParse(mskDataVencimento.Text, out DateTime dataVencimento);
+			negociacao.DataVencimento = dataVencimento;
 
             negociacao.IdUsuario = _usuario.Id;
 
@@ -215,15 +208,14 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private Titulo RetornarTituloDoContratoEmTela(long idTitulo)
         {
-            var titulo = _contratoDaNegociacao.Titulos.First(x => x.IDTitulo == idTitulo);
-            return titulo;
+            //var titulo = _contratoDaNegociacao.Titulos.First(x => x.IDTitulo == idTitulo);
+            //return titulo;
+            return null;
         }
 
         private void AtualizarDadosDoContrato(Contrato contrato)
         {
-            txtIDContrato.Text = contrato.IDContrato.ToString();
-            txtCodCliente.Text = contrato.CodCliente;
-            txtNomeCliente.Text = contrato.Descricao;
+            txtIDContrato.Text = contrato.Id.ToString();
         }
 
         private void AtualizarGridTitulos(List<Titulo> titulos)
@@ -446,23 +438,23 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
         private List<Titulo> ObterTitulosSelecionados()
         {
-            return _contratoDaNegociacao.Titulos;
+            //return _contratoDaNegociacao.Titulos;
+            return null;
         }
 
         private void AtualizarTotalDaNegociacao()
         {
             decimal valorTotalNegociado = 0;
-            var titulosSelecionados = ObterTitulosSelecionados();
-            foreach (var titulo in titulosSelecionados)
-            {
-                if (VerificarSeExisteAcordo(titulo.IDTitulo) == false)
-                    valorTotalNegociado += titulo.Montante;
-            }
+            //var titulosSelecionados = ObterTitulosSelecionados();
+            //foreach (var titulo in titulosSelecionados)
+            //{
+            //    if (VerificarSeExisteAcordo(titulo.IDTitulo) == false)
+            //        valorTotalNegociado += titulo.Montante;
+            //}
 
-            txtTotalNegociado.Text = $"R$ {valorTotalNegociado:N2}";
-            txtValorPrincipal.Text = valorTotalNegociado.ToString();
+            //txtTotalNegociado.Text = $"R$ {valorTotalNegociado:N2}";
+            //txtValorPrincipal.Text = valorTotalNegociado.ToString();
         }
-
 
         private void txtValorBoleto_KeyPress(object sender, KeyPressEventArgs e)
         {

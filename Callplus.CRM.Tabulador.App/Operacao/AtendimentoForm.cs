@@ -7686,7 +7686,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					gbDadosComplementares.Visible = true;
 				}
 
-				FinalizarScriptDeOferta(statusDaOferta);
+				FinalizarScriptDeOferta(statusDaOferta); 
 			}
 			catch (Exception ex)
 			{

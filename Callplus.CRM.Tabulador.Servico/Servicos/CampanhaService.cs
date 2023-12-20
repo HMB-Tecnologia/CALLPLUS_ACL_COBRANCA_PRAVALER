@@ -121,5 +121,10 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         {
             return _campanhaDao.VincularUsuarioAhCampanha(idUsuario, idCampanha);
         }
-    }
+
+		public string RetornarCaminhoDoServidorSemCampanha()
+		{
+			return _campanhaDao.RetornarCaminhoDoServidorSemCampanha();
+		}
+	}
 }

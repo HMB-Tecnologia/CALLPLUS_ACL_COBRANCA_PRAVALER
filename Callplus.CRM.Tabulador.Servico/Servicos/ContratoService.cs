@@ -19,9 +19,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _Dao.Listar(id, baixado);
         }
 
-        public DataTable ListarExibicao(int idRegistro, int idCampanha, string nome, bool ativo)
+        public DataTable ListarExibicao(long id, bool baixado)
         {
-            return _Dao.ListarExibicao(idRegistro, idCampanha, nome, ativo);
+            return _Dao.ListarExibicao(id, baixado);
         }
 
         public int Gravar(Contrato contrato)

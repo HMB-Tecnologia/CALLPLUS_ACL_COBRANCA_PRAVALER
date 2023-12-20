@@ -7,141 +7,147 @@ using System.Text;
 
 namespace Callplus.CRM.Tabulador.Servico.Servicos
 {
-    public class MailingService
-    {
-        private readonly MailingDao _mailingDao;
+	public class MailingService
+	{
+		private readonly MailingDao _mailingDao;
 
-        public MailingService()
-        {
-            _mailingDao = new MailingDao();
-        }
+		public MailingService()
+		{
+			_mailingDao = new MailingDao();
+		}
 
-        public IEnumerable<Mailing> Listar(int id, bool ativo)
-        {
-            return _mailingDao.Listar(id, ativo);
-        }
+		public IEnumerable<Mailing> Listar(int id, bool ativo)
+		{
+			return _mailingDao.Listar(id, ativo);
+		}
 
-        public DataTable Listar(int id, int idCampanha, string nome, bool ativo)
-        {
-            return _mailingDao.Listar(id, idCampanha, nome, ativo);
-        }
+		public DataTable Listar(int id, int idCampanha, string nome, bool ativo)
+		{
+			return _mailingDao.Listar(id, idCampanha, nome, ativo);
+		}
 
-        public int Gravar(Mailing mailing)
-        {
-            return _mailingDao.Gravar(mailing);
-        }
+		public int Gravar(Mailing mailing)
+		{
+			return _mailingDao.Gravar(mailing);
+		}
 
-        public bool VerificarSeExisteNomeDoMailing(string nome)
-        {
-            return _mailingDao.VerificarSeExisteNomeDoMailing(nome);
-        }
+		public bool VerificarSeExisteNomeDoMailing(string nome)
+		{
+			return _mailingDao.VerificarSeExisteNomeDoMailing(nome);
+		}
 
-        public DataTable ExportarMailing(int idMailing)
-        {
-            return _mailingDao.ExportarMailing(idMailing);
-        }
+		public DataTable ExportarMailing(int idMailing)
+		{
+			return _mailingDao.ExportarMailing(idMailing);
+		}
 
-        public bool VerificarSeMailingEstaProcessadoComSucesso(int idMailing)
-        {
-            return _mailingDao.VerificarSeMailingEstaProcessadoComSucesso(idMailing);
-        }
+		public bool VerificarSeMailingEstaProcessadoComSucesso(int idMailing)
+		{
+			return _mailingDao.VerificarSeMailingEstaProcessadoComSucesso(idMailing);
+		}
 
-        public void ExportarMailingDiscador(int idMailing)
-        {
-            _mailingDao.ExportarMailingDiscador(idMailing);
-        }
+		public void ExportarMailingDiscador(int idMailing)
+		{
+			_mailingDao.ExportarMailingDiscador(idMailing);
+		}
 
-        public IEnumerable<Mailing> Listar(int? id, int? idCampanha, bool? ativo)
-        {
-            return _mailingDao.Listar(id, idCampanha, ativo);
-        }
+		public IEnumerable<Mailing> Listar(int? id, int? idCampanha, bool? ativo)
+		{
+			return _mailingDao.Listar(id, idCampanha, ativo);
+		}
 
-        //public List<Mailing> RetornoMailingsTrabalhadosDia(DateTime dataInicio, DateTime dataTermino, string codMailing, int idCampanha)
-        //{
-        //    try
-        //    {
-        //        var listaMailings = new List<Mailing>();
+		public string GravarArquivoDeMailingEMarcacoes(string sqlArquivoMailing, string sqlArquivoMarcacoes, int idMailing)
+		{
+			return _mailingDao.GravarArquivoDeMailingEMarcacoes(sqlArquivoMailing, sqlArquivoMarcacoes, idMailing);
+		}
 
-        //        var sSql = _mailingDao.RetornoMailingsTrabalhadosDia(dataInicio, dataTermino, codMailing, idCampanha);
 
-        //        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60); //Timeout para 5minutos
+		//public List<Mailing> RetornoMailingsTrabalhadosDia(DateTime dataInicio, DateTime dataTermino, string codMailing, int idCampanha)
+		//{
+		//    try
+		//    {
+		//        var listaMailings = new List<Mailing>();
 
-        //        foreach (DataRow linha in dataTable.Rows)
-        //        {
-        //            var mailing = new Mailing()
-        //            {
-        //                idCampanha = (int)linha["idCampanha"],
-        //                nome = linha["nome"].ToString(),
-        //            };
+		//        var sSql = _mailingDao.RetornoMailingsTrabalhadosDia(dataInicio, dataTermino, codMailing, idCampanha);
 
-        //            listaMailings.Add(mailing);
-        //        }
+		//        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60); //Timeout para 5minutos
 
-        //        return listaMailings;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+		//        foreach (DataRow linha in dataTable.Rows)
+		//        {
+		//            var mailing = new Mailing()
+		//            {
+		//                idCampanha = (int)linha["idCampanha"],
+		//                nome = linha["nome"].ToString(),
+		//            };
 
-        //public List<string> RetornoTelefoniaPorDiaIdMailing(DateTime dataInicio, DateTime dataTermino, string nomeArquivo, int idCampanha, string codMailing, int tipoExportacaoContatosNaoTrabalhados)
-        //{
-        //    try
-        //    {
-        //        var listaTelefonia = new List<string>();
+		//            listaMailings.Add(mailing);
+		//        }
 
-        //        var sSql = _mailingDao.RetornoTelefoniaPorDiaIdMailing(dataInicio, dataTermino, nomeArquivo, idCampanha, codMailing, tipoExportacaoContatosNaoTrabalhados);
+		//        return listaMailings;
+		//    }
+		//    catch (Exception ex)
+		//    {
+		//        throw ex;
+		//    }
+		//}
 
-        //        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60);
+		//public List<string> RetornoTelefoniaPorDiaIdMailing(DateTime dataInicio, DateTime dataTermino, string nomeArquivo, int idCampanha, string codMailing, int tipoExportacaoContatosNaoTrabalhados)
+		//{
+		//    try
+		//    {
+		//        var listaTelefonia = new List<string>();
 
-        //        foreach (DataRow linha in dataTable.Rows)
-        //        {
-        //            var builder = new StringBuilder();
+		//        var sSql = _mailingDao.RetornoTelefoniaPorDiaIdMailing(dataInicio, dataTermino, nomeArquivo, idCampanha, codMailing, tipoExportacaoContatosNaoTrabalhados);
 
-        //            builder.Append(linha["a"]);
+		//        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60);
 
-        //            listaTelefonia.Add(builder.ToString());
-        //        }
+		//        foreach (DataRow linha in dataTable.Rows)
+		//        {
+		//            var builder = new StringBuilder();
 
-        //        return listaTelefonia;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+		//            builder.Append(linha["a"]);
 
-        //public List<string> RetornoOcorrenciasPorDiaIdMailing(DateTime dataInicio, DateTime dataTermino, string nomeArquivo, int idCampanha, string codMailing)
-        //{
-        //    try
-        //    {
-        //        var listaTelefonia = new List<string>();
+		//            listaTelefonia.Add(builder.ToString());
+		//        }
 
-        //        var sSql = _mailingDao.RetornoOcorrenciasPorDiaIdMailing(dataInicio, dataTermino, nomeArquivo, idCampanha, codMailing);
+		//        return listaTelefonia;
+		//    }
+		//    catch (Exception ex)
+		//    {
+		//        throw ex;
+		//    }
+		//}
 
-        //        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60);
+		//public List<string> RetornoOcorrenciasPorDiaIdMailing(DateTime dataInicio, DateTime dataTermino, string nomeArquivo, int idCampanha, string codMailing)
+		//{
+		//    try
+		//    {
+		//        var listaTelefonia = new List<string>();
 
-        //        foreach (DataRow linha in dataTable.Rows)
-        //        {
-        //            var builder = new StringBuilder();
+		//        var sSql = _mailingDao.RetornoOcorrenciasPorDiaIdMailing(dataInicio, dataTermino, nomeArquivo, idCampanha, codMailing);
 
-        //            builder.Append(linha["a"]);
+		//        var dataTable = PontoBr.Banco.SqlServer.RetornarDataTable(sSql, 20 * 60);
 
-        //            listaTelefonia.Add(builder.ToString());
-        //        }
+		//        foreach (DataRow linha in dataTable.Rows)
+		//        {
+		//            var builder = new StringBuilder();
 
-        //        return listaTelefonia;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+		//            builder.Append(linha["a"]);
 
-        //public DataTable RetornarBaseB(string codMailing, string dataInicio, string dataTermino, bool todos, string nomeCampanha)
-        //{
-        //    string sSql = _mailingDao.RetornarBaseB(codMailing, dataInicio, dataTermino, todos, nomeCampanha);
-        //}
-    }
+		//            listaTelefonia.Add(builder.ToString());
+		//        }
+
+		//        return listaTelefonia;
+		//    }
+		//    catch (Exception ex)
+		//    {
+		//        throw ex;
+		//    }
+		//}
+
+		//public DataTable RetornarBaseB(string codMailing, string dataInicio, string dataTermino, bool todos, string nomeCampanha)
+		//{
+		//    string sSql = _mailingDao.RetornarBaseB(codMailing, dataInicio, dataTermino, todos, nomeCampanha);
+		//}
+	}
 }

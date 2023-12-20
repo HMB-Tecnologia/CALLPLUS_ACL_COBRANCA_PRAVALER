@@ -61,6 +61,7 @@
     <Compile Include="Entidades\ConfiguracaoDeVencimentoDeFatura.cs" />
     <Compile Include="Entidades\ConfiguracaoDoStatusDeOferta.cs" />
     <Compile Include="Entidades\ConsultarCep.cs" />
+    <Compile Include="Entidades\DadosMarcacoes.cs" />
     <Compile Include="Entidades\Contrato.cs" />
     <Compile Include="Entidades\EscalaDeTrabalho.cs" />
     <Compile Include="Entidades\FaixaDeRecarga.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Entidades\HistoricoDePausa.cs" />
     <Compile Include="Entidades\HistoricoLeitura.cs" />
     <Compile Include="Entidades\IndicacaoDoAtendimento.cs" />
+    <Compile Include="Entidades\DadosMailing.cs" />
     <Compile Include="Entidades\MarcacaoStatusTitulo.cs" />
     <Compile Include="Entidades\Negociacao.cs" />
     <Compile Include="Entidades\NivelDeConfianca.cs" />

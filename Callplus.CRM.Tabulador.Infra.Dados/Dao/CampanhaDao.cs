@@ -256,5 +256,12 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return ExecutarProcedureSingleOrDefault<int>(sql, args);
         }
 
-    }
+		public string RetornarCaminhoDoServidorSemCampanha()
+		{
+			var sql = "APP_CRM_CAMINHO_DO_SERVIDOR_SEM_CAMPANHA_LISTAR";
+			var args = new { };
+			var resultado = ExecutarProcedureSingleOrDefault<string>(sql, args);
+			return resultado;
+		}
+	}
 }

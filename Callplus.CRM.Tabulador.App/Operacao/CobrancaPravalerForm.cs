@@ -1,6 +1,7 @@
 ﻿using Callplus.CRM.Tabulador.App.Controles.CamposDinamicos;
 using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
+using Callplus.CRM.Tabulador.Infra.Dados.Util;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using CallplusUtil.Forms;
@@ -17,7 +18,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 	public partial class CobrancaPravalerForm : Form
 	{
 		public CobrancaPravalerForm(Usuario usuario, long idOferta, Prospect prospect, ContainerDeLayoutDeCamposDinamicos camposDinamicos, Atendimento atendimento,
-        bool bloqueioStatus ,bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
+		bool bloqueioStatus, bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
 		{
 			_logger = LogManager.GetCurrentClassLogger();
 
@@ -39,9 +40,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_idStatusOferta = idStatusOferta;
 			_permiteEditar = edicao;
 			_fecharAoGravar = fecharAoGravar;
-            _bloqueioStatus = bloqueioStatus;
+			_bloqueioStatus = bloqueioStatus;
 
-            InitializeComponent();
+			InitializeComponent();
 		}
 
 		#region PROPRIEDADES
@@ -61,8 +62,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private Prospect _prospect;
 		private Contrato _contrato;
 		private CobrancaAtendimentoPravaler _oferta;
-        private bool _bloqueioStatus;
-        private int? _idStatusOferta;
+		private bool _bloqueioStatus;
+		private int? _idStatusOferta;
 		private bool _fecharAoGravar;
 		private bool _permiteEditar;
 		private bool _checklistAplicado;
@@ -89,11 +90,11 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			CarregarControleDeEdicao();
 			CarregarContratosDoProspect(_prospect.Id);
 
-            if (_idStatusOferta != null && _idStatusOferta > 0)
-            {
-                ConfigurarStatusDaOferta(_idStatusOferta.Value);
-            }
-        }
+			if (_idStatusOferta != null && _idStatusOferta > 0)
+			{
+				ConfigurarStatusDaOferta(_idStatusOferta.Value);
+			}
+		}
 
 		private void CarregarControleDeEdicao()
 		{
@@ -264,59 +265,52 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 		}
 
-		private void NovoTitulo()
-		{
-			var f = new CadastrarTituloForm(_prospect);
-			f.ShowDialog();
-
-			RecarregarDadosAtualizadosDosContratosDoProspect();
-		}
-
 		private void RecarregarDadosAtualizadosDosContratosDoProspect()
 		{
 			if (_prospect == null) return;
 
-			_contratosDoCliente = _contratoService.Listar(_prospect.Id, baixado: false);
+			var dt = _contratoService.ListarExibicao(_prospect.Id, false);
+			ConverteDatatableParaListaDeContratoCliente(dt);
 
-			if (_contrato != null)
+			if (_contratosDoCliente != null)
 			{
-				_contrato = ObterContratoDoAtendimentoPorId(_contrato.IDContrato);
-				AtualizarGridTitulos(_contrato.Titulos);
-				AtualizarGridHistoricoNegociacoesContrato(_contrato.IDContrato);
+				_contrato = ObterContratoDoAtendimentoPorId(_contrato.Id);
+				//AtualizarGridTitulos(_contrato.Titulos);
+				AtualizarGridHistoricoNegociacoesContrato(_contrato.Id);
 			}
 		}
 
 		private void AtualizarGridHistoricoNegociacoesContrato(long idContrato)
 		{
-			dgAcordos.DataSource = _negociacaoService.RetornarHistoricoNegociacaoPorIdContrato(idContrato);
+			dgAcordo.DataSource = _negociacaoService.RetornarHistoricoNegociacaoPorIdContrato(idContrato);
 		}
 
 		private Contrato ObterContratoDoAtendimentoPorId(long idContrato)
 		{
-			return _contratosDoCliente?.FirstOrDefault(x => x?.IDContrato == idContrato);
+			return _contratosDoCliente.ToList()?.FirstOrDefault(x => x?.Id == idContrato);
 		}
 
 		private void AtualizarGridTitulos(List<Titulo> titulos)
 		{
-			decimal valorTotalTitulos = 0;
-			dgDetalhesDoTitulo.Rows.Clear();
-			foreach (var titulo in titulos)
-			{
-				var indice = dgDetalhesDoTitulo.Rows.Add();
-				valorTotalTitulos += titulo.Montante;
+			//decimal valorTotalTitulos = 0;
+			//dgDetalhesDoTitulo.Rows.Clear();
+			//foreach (var titulo in titulos)
+			//{
+			//	var indice = dgDetalhesDoTitulo.Rows.Add();
+			//	valorTotalTitulos += titulo.Montante;
 
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colID_detalhesTitulo)].Value = titulo.IDTitulo;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colNumeroDocumento)].Value = titulo.NumeroDocumento;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colEmissao_detalhesTitulo)].Value = titulo.DataEmissao.ToString("dd/MM/yyyy");
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colVencimento_detalhesTitulo)].Value = titulo.DataVencimento.ToString("dd/MM/yyyy");
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colValor_detalhesTiulo)].Value = titulo.Montante;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colAtribuicaoRazaoEspecial)].Value = titulo.AtribuicaoEspecial;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colTipoDocumento_detalhesTitulo)].Value = titulo.TipoDocumento;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colFormaDePagamento)].Value = titulo.FormaPagamento;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colCodNegociacao_detalhesTitulo)].Value = titulo.IDNegociacao;
-				dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colStatusTitulo_detalhesTiulo)].Value = titulo.Status;
-			}
-			txtValorTotalTitulosDetalhe.Text = $"R$ {valorTotalTitulos:N2}";
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colID_detalhesTitulo)].Value = titulo.IDTitulo;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colNumeroDocumento)].Value = titulo.NumeroDocumento;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colEmissao_detalhesTitulo)].Value = titulo.DataEmissao.ToString("dd/MM/yyyy");
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colVencimento_detalhesTitulo)].Value = titulo.DataVencimento.ToString("dd/MM/yyyy");
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colValor_detalhesTiulo)].Value = titulo.Montante;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colAtribuicaoRazaoEspecial)].Value = titulo.AtribuicaoEspecial;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colTipoDocumento_detalhesTitulo)].Value = titulo.TipoDocumento;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colFormaDePagamento)].Value = titulo.FormaPagamento;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colCodNegociacao_detalhesTitulo)].Value = titulo.IDNegociacao;
+			//	dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colStatusTitulo_detalhesTiulo)].Value = titulo.Status;
+			//}
+			//txtValorTotalTitulosDetalhe.Text = $"R$ {valorTotalTitulos:N2}";
 		}
 
 		public void NovoAcordo()
@@ -324,8 +318,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			if (PodeIncluirNovaNegociacao() == false) return;
 
 			var f = new NegociacaoInclusaoForm(_usuario);
-			var idStatus = 0;//_atendimento?.id?.IDStatus ?? 0;
-			f.NovaNegociacao(_contrato, idStatus);
+			f.NovaNegociacao(_contrato);
 
 			RecarregarDadosAtualizadosDosContratosDoProspect();
 		}
@@ -339,7 +332,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 			else
 			{
-				var idContrato = _contrato.IDContrato;
+				var idContrato = _contrato.Id;
 				var idUsuario = _usuario.Id;
 				var msgs = _negociacaoService.PodeIncluirNegociacao(idContrato, idUsuario);
 				mensagens.AddRange(msgs);
@@ -355,75 +348,96 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			return podeContinuar;
 		}
 
-        private void tsOferta_cmbStatusOferta_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CarregarProduto();
-        }
-
-        private void ConfigurarStatusDaOferta(int idStatusOferta)
-        {
-            tsOferta_cmbStatusOferta.SelectedIndexChanged -= tsOferta_cmbStatusOferta_SelectedIndexChanged;
-
-            var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta(idStatusOferta, _prospect.IdCampanha);
-            tsOferta_cmbTipoStatusOferta.ComboBox.SelectedValue = statusOferta.IdTipoDeStatusDeOferta.ToString();
-            tsOferta_cmbStatusOferta.ComboBox.SelectedValue = statusOferta.Id.ToString();
-
-            tsOferta_cmbTipoStatusOferta.Enabled = !_bloqueioStatus;
-            tsOferta_cmbStatusOferta.Enabled = !_bloqueioStatus;
-
-            tsOferta_cmbStatusOferta.SelectedIndexChanged += tsOferta_cmbStatusOferta_SelectedIndexChanged;
-        }
-
-        private void CarregarProduto()
-        {
-            int idTipoDeProduto = -1;
-            bool ativo = true;
-            bool? ativoBko = null;
-
-            //if (_idStatusOferta == 21)
-            //{
-            //    idTipoDeProduto = 2;
-            //    cmbProduto.ResetarComSelecione(habilitar: true);
-            //}
-            //else
-            //{
-            //    idTipoDeProduto = 1;
-            //    cmbProduto.ResetarComSelecione(habilitar: false);
-            //}
-
-            IEnumerable<ProdutoDaOfertaDto> produtos = null;
-
-            //if (_filtraPorFaixaDeRecarga && _campanhaAtual.Id != 16)
-            //{
-            //    produtos = _produtoService.ListarProdutoDaOfertaPorFaixaDeRecarga(_oferta.IdAtendimento).Where(x => x.idTipo == idTipoDeProduto).Distinct();
-            //}            
-            //else
-            //{
-            //produtos = _produtoService.ListarProdutoDaOfertaPorIdProspect(_prospect.IdCampanha, _prospect.Id, ativo, ativoBko).Where(x => x.idTipo == idTipoDeProduto).Distinct();
-            ////}
-
-            //cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
-            //cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
-        }
-
-        private Titulo ObterTituloDoAtendimentoPorId(long idContrato, long idTitulo)
+		private void tsOferta_cmbStatusOferta_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var contrato = ObterContratoDoAtendimentoPorId(idContrato);
+			CarregarProduto();
+		}
 
-			var titulos = contrato?.Titulos;
+		private void ConfigurarStatusDaOferta(int idStatusOferta)
+		{
+			tsOferta_cmbStatusOferta.SelectedIndexChanged -= tsOferta_cmbStatusOferta_SelectedIndexChanged;
 
-			return titulos?.First(titulo => titulo.IDTitulo == idTitulo);
+			var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta(idStatusOferta, _prospect.IdCampanha);
+			tsOferta_cmbTipoStatusOferta.ComboBox.SelectedValue = statusOferta.IdTipoDeStatusDeOferta.ToString();
+			tsOferta_cmbStatusOferta.ComboBox.SelectedValue = statusOferta.Id.ToString();
+
+			tsOferta_cmbTipoStatusOferta.Enabled = !_bloqueioStatus;
+			tsOferta_cmbStatusOferta.Enabled = !_bloqueioStatus;
+
+			tsOferta_cmbStatusOferta.SelectedIndexChanged += tsOferta_cmbStatusOferta_SelectedIndexChanged;
+		}
+
+		private void CarregarProduto()
+		{
+			int idTipoDeProduto = -1;
+			bool ativo = true;
+			bool? ativoBko = null;
+
+			//if (_idStatusOferta == 21)
+			//{
+			//    idTipoDeProduto = 2;
+			//    cmbProduto.ResetarComSelecione(habilitar: true);
+			//}
+			//else
+			//{
+			//    idTipoDeProduto = 1;
+			//    cmbProduto.ResetarComSelecione(habilitar: false);
+			//}
+
+			IEnumerable<ProdutoDaOfertaDto> produtos = null;
+
+			//if (_filtraPorFaixaDeRecarga && _campanhaAtual.Id != 16)
+			//{
+			//    produtos = _produtoService.ListarProdutoDaOfertaPorFaixaDeRecarga(_oferta.IdAtendimento).Where(x => x.idTipo == idTipoDeProduto).Distinct();
+			//}            
+			//else
+			//{
+			//produtos = _produtoService.ListarProdutoDaOfertaPorIdProspect(_prospect.IdCampanha, _prospect.Id, ativo, ativoBko).Where(x => x.idTipo == idTipoDeProduto).Distinct();
+			////}
+
+			//cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
+			//cmbProduto.PreencherComSelecione(produtos, x => x.idProduto, x => x.Produto);
+		}
+
+		private Titulo ObterTituloDoAtendimentoPorId(long idContrato, long idTitulo)
+		{
+			//var contrato = ObterContratoDoAtendimentoPorId(idContrato);
+
+			//var titulos = contrato?.Titulos;
+
+			return null;// titulos?.First(titulo => titulo.IDTitulo == idTitulo);
 		}
 
 		private void CarregarContratosDoProspect(long idProspect)
 		{
 			dgContrato.CellClick -= dgContratos_CellClick;
 
-			var contratos = _contratoService.Listar(idProspect, false);
-			_contratosDoCliente = contratos;
-			AtualizarGridContratos(_contratosDoCliente);
+			var dt = _contratoService.ListarExibicao(idProspect, false);
+			dgContrato.DataSource = dt;
+
+			ConverteDatatableParaListaDeContratoCliente(dt);
+
+			//AtualizarGridContratos(idProspect, false);
 
 			dgContrato.CellClick += dgContratos_CellClick;
+
+			RealizarAjustesGrid();
+		}
+
+		private void ConverteDatatableParaListaDeContratoCliente(DataTable dt)
+		{
+			_contratosDoCliente = (from rw in dt.AsEnumerable()
+								   select new Contrato()
+								   {
+									   Id = Convert.ToInt32(rw["Id"])
+								   }).ToList();
+		}
+
+		private void RealizarAjustesGrid()
+		{
+			dgContrato.Columns["Id"].Width = 35;
+			dgContrato.Columns["Vencimento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+			dgContrato.Columns["CodContrato"].HeaderCell.Value = "Contrato";
 		}
 
 		private void dgContratos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -434,31 +448,23 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			_contrato = null;
 
-			var idContratoGrid = dgContrato.Rows[indice].Cells[nameof(colID_Contratos)].Value?.ToString();
+			var idContratoGrid = dgContrato.Rows[indice].Cells["Id"].Value?.ToString();
 			long.TryParse(idContratoGrid, out long idContratoSelecionado);
 
 			_contrato = ObterContratoDoAtendimentoPorId(idContratoSelecionado);
 
-			if (_contrato == null) return;
-			var titulos = _contrato.Titulos;
+			//if (_contrato == null) return;
+			//var titulos = _contrato.Titulos;
 
-			btnNovoTitulo.Enabled = true;
+			//btnNovoTitulo.Enabled = true;
 
-			AtualizarGridTitulos(titulos);
+			//AtualizarGridTitulos(titulos);
 		}
 
-		private void AtualizarGridContratos(List<Contrato> contratos)
+		private void AtualizarGridContratos(long idProspect, bool atualizar)
 		{
-			dgContrato.Rows.Clear();
-			foreach (var contrato in contratos)
-			{
-				var indice = dgContrato.Rows.Add();
-
-				dgContrato.Rows[indice].Cells[nameof(colID_Contratos)].Value = contrato.IDContrato;
-				dgContrato.Rows[indice].Cells[nameof(colCodigoContratos_Contratos)].Value = contrato.CodCliente;
-				dgContrato.Rows[indice].Cells[nameof(colNomeCliente_Contratos)].Value = contrato.Descricao;
-				dgContrato.Rows[indice].Cells[nameof(colCDA_contrato)].Value = contrato.Cda;
-			}
+			if (atualizar)
+				dgContrato.DataSource = _contratoService.ListarExibicao(idProspect, false);
 		}
 
 		#endregion METODOS
@@ -558,7 +564,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		{
 			try
 			{
-				NovoTitulo();
+				//NovoTitulo();
 			}
 			catch (Exception ex)
 			{
@@ -571,43 +577,43 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void dgDetalhesDoTitulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-			try
-			{
-				var senderGrid = (DataGridView)sender;
-				bool botaoDetalheFoiClicado = senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn
-					&& e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == nameof(colBtnDetalhe_detalhesTitulo);
+			//try
+			//{
+			//	var senderGrid = (DataGridView)sender;
+			//	bool botaoDetalheFoiClicado = senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn
+			//		&& e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == nameof(colBtnDetalhe_detalhesTitulo);
 
-				if (botaoDetalheFoiClicado)
-				{
-					var idTiluloSelecionado = senderGrid.Rows[e.RowIndex].Cells[nameof(colID_detalhesTitulo)].Value;
-					if (idTiluloSelecionado != null && long.TryParse(idTiluloSelecionado.ToString(), out long idTtitulo))
-					{
-						var idContrato = _contrato?.IDContrato;
-						var idStatus = 0;//_statusDoAtendimento?.IDStatus ?? 0;
+			//	if (botaoDetalheFoiClicado)
+			//	{
+			//		var idTiluloSelecionado = senderGrid.Rows[e.RowIndex].Cells[nameof(colID_detalhesTitulo)].Value;
+			//		if (idTiluloSelecionado != null && long.TryParse(idTiluloSelecionado.ToString(), out long idTtitulo))
+			//		{
+			//			var idContrato = _contrato?.Id;
+			//			var idStatus = 0;//_statusDoAtendimento?.IDStatus ?? 0;
 
-						if (idContrato != null)
-						{
-							var titulo = ObterTituloDoAtendimentoPorId(idContrato.Value, idTtitulo);
-							if (titulo == null)
-							{
-								MessageBox.Show("Não foi possível obter o Tílulo para exibição dos detalhes", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								return;
-							}
+			//			if (idContrato != null)
+			//			{
+			//				var titulo = ObterTituloDoAtendimentoPorId(idContrato.Value, idTtitulo);
+			//				if (titulo == null)
+			//				{
+			//					MessageBox.Show("Não foi possível obter o Tílulo para exibição dos detalhes", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//					return;
+			//				}
 
-							DetalheTituloForm f = new DetalheTituloForm(_usuario, _atendimento);
-							f.ExibirDetalhes(titulo, _atendimento);
-							RecarregarDadosAtualizadosDosContratosDoProspect();
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.Error(ex);
+			//				DetalheTituloForm f = new DetalheTituloForm(_usuario, _atendimento);
+			//				f.ExibirDetalhes(titulo, _atendimento);
+			//				RecarregarDadosAtualizadosDosContratosDoProspect();
+			//			}
+			//		}
+			//	}
+			//}
+			//catch (Exception ex)
+			//{
+			//	_logger.Error(ex);
 
-				MessageBox.Show(
-					$"Ocorreu um erro inesperado ao carregar os dealhes do título!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			//	MessageBox.Show(
+			//		$"Ocorreu um erro inesperado ao carregar os dealhes do título!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//}
 		}
 
 		private void dgContrato_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -616,18 +622,20 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			_contrato = null;
 
-			var idContratoGrid = dgContrato.Rows[e.RowIndex].Cells[nameof(colID_Contratos)].Value?.ToString();
+			var idContratoGrid = dgContrato.Rows[e.RowIndex].Cells["ID"].Value?.ToString();
 
 			long.TryParse(idContratoGrid, out long idContratoSelecionado);
 			_contrato = ObterContratoDoAtendimentoPorId(idContratoSelecionado);
 
 			if (_contrato == null) return;
 
-			btnNovoTitulo.Enabled = true;
-			AtualizarGridTitulos(_contrato.Titulos);
+			//btnNovoTitulo.Enabled = true;
+			//AtualizarGridTitulos(_contrato.Titulos);
 
 			if (_contrato != null)
-				AtualizarGridHistoricoNegociacoesContrato(_contrato.IDContrato);
+				AtualizarGridHistoricoNegociacoesContrato(_contrato.Id);
+
+			tcOferta.SelectedTab = tcOferta_tpAcordo;
 		}
 	}
 }

@@ -190,5 +190,20 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             return sSql;
         }
-    }
+
+		public string GravarArquivoDeMailingEMarcacoes(string sqlArquivoMailing, string sqlArquivoMarcacoes, int idMailing)
+		{
+			var sql = "APP_CRM_ARQUIVO_DE_MAILING_E_MARCACOES_PRAVALER_GRAVAR ";
+
+			var args = new
+			{
+				sqlArquivoMailing,
+                sqlArquivoMarcacoes,
+                idMailing
+			};
+
+			var resultado = ExecuteProcedureScalar(sql, args);
+            return resultado?.ToString();
+		}
+	}
 }

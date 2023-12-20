@@ -28,23 +28,20 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			for (int i = 0; i < resultado.Rows.Count; i++)
 			{
 				var contrato = new Contrato();
-				contrato.IDContrato = long.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "IDContrato"));
-				contrato.CodCliente = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "CodCliente");
-				contrato.Descricao = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Descricao");
-				contrato.Cda = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Cda");
+				contrato.Id = long.Parse(DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Id"));
+				contrato.Cpf = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Cpf");
+				contrato.CodContrato = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "CodContrato");
+				contrato.Valor = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Valor");
+				contrato.Vencimento = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Vencimento");
 				contrato.Campo01 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo01");
 				contrato.Campo02 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo02");
 				contrato.Campo03 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo03");
 				contrato.Campo04 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo04");
 				contrato.Campo05 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo05");
 				contrato.Campo06 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo06");
-				contrato.Campo07 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo07");
-				contrato.Campo08 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo08");
-				contrato.Campo09 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo09");
-				contrato.Campo10 = DaoUtil.ObterValorDaColunaEmDataTable(resultado, index: i, nomeDaColuna: "Campo10");
 
-				var titulos = _tituloDao.RetornarTitulosDoContrato(contrato.IDContrato, baixado);
-				contrato.Titulos = titulos;//RetornarTitulosDoContrato(contrato.IDContrato, baixado);
+				//var titulos = _tituloDao.RetornarTitulosDoContrato(contrato.Id, baixado);
+				//contrato.Titulos = titulos;//RetornarTitulosDoContrato(contrato.IDContrato, baixado);
 
 				contratos.Add(contrato);
 			}
@@ -91,23 +88,21 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return titulos;
 		}
 
-		public DataTable ListarExibicao(int id, int idCampanha, string nome, bool ativo)
+		public DataTable ListarExibicao(long id, bool baixado)
         {
-            var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR_EXIBICAO ";
-            sql += string.Format("@id = {0}, @idCampanha = {1}, @nome = '{2}', @ativo = {3}",
-            id, idCampanha, nome, ativo);
+			var sql = "EXEC APP_CRM_CONTRATOS_DO_CLIENTE_LISTAR_EXIBICAO";
+			sql += $" @IDProspect = {id}";
 
-            var args = new
-            {
+			var args = new
+			{
 
-            };
+			};
 
-            var resultado = CarregarDataTable(sql, args);
+			var resultado = CarregarDataTable(sql, args);
+			return resultado;
+		}
 
-            return resultado;
-        }
-
-        public Contrato RetornarContrato(long id, bool baixado)
+		public Contrato RetornarContrato(long id, bool baixado)
         {
             var sql = "APP_CRM_DADOS_CEP_EXPRESS_LISTAR";
 
