@@ -146,7 +146,7 @@
 			// 
 			// pictureBox8
 			// 
-			this.pictureBox8.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.fundoAzul;
+			this.pictureBox8.Image = global::Callplus.CRM.Administracao.App.Properties.Resources.pravaler_logo;
 			this.pictureBox8.Location = new System.Drawing.Point(780, 28);
 			this.pictureBox8.Name = "pictureBox8";
 			this.pictureBox8.Size = new System.Drawing.Size(155, 63);
@@ -249,9 +249,9 @@
 			this.lblBancoDeDados.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblBancoDeDados.Location = new System.Drawing.Point(493, 74);
 			this.lblBancoDeDados.Name = "lblBancoDeDados";
-			this.lblBancoDeDados.Size = new System.Drawing.Size(112, 17);
+			this.lblBancoDeDados.Size = new System.Drawing.Size(78, 17);
 			this.lblBancoDeDados.TabIndex = 40;
-			this.lblBancoDeDados.Text = "CALLPLUS_ACL";
+			this.lblBancoDeDados.Text = "CALLPLUS";
 			// 
 			// ptbLogoEmpresa
 			// 
@@ -464,7 +464,7 @@
 			this.lklProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklProduto.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklProduto.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklProduto.Location = new System.Drawing.Point(28, 48);
+			this.lklProduto.Location = new System.Drawing.Point(28, 91);
 			this.lklProduto.Name = "lklProduto";
 			this.lklProduto.Size = new System.Drawing.Size(65, 17);
 			this.lklProduto.TabIndex = 56;
@@ -480,7 +480,7 @@
 			this.lklStatusDeAtendimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklStatusDeAtendimento.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklStatusDeAtendimento.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklStatusDeAtendimento.Location = new System.Drawing.Point(28, 70);
+			this.lklStatusDeAtendimento.Location = new System.Drawing.Point(28, 48);
 			this.lklStatusDeAtendimento.Name = "lklStatusDeAtendimento";
 			this.lklStatusDeAtendimento.Size = new System.Drawing.Size(151, 17);
 			this.lklStatusDeAtendimento.TabIndex = 52;
@@ -512,7 +512,7 @@
 			this.lklStatusDeOferta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklStatusDeOferta.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklStatusDeOferta.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklStatusDeOferta.Location = new System.Drawing.Point(28, 91);
+			this.lklStatusDeOferta.Location = new System.Drawing.Point(28, 69);
 			this.lklStatusDeOferta.Name = "lklStatusDeOferta";
 			this.lklStatusDeOferta.Size = new System.Drawing.Size(112, 17);
 			this.lklStatusDeOferta.TabIndex = 53;
@@ -693,7 +693,7 @@
 			this.lklFaqDeAtendimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklFaqDeAtendimento.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklFaqDeAtendimento.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklFaqDeAtendimento.Location = new System.Drawing.Point(33, 113);
+			this.lklFaqDeAtendimento.Location = new System.Drawing.Point(33, 26);
 			this.lklFaqDeAtendimento.Name = "lklFaqDeAtendimento";
 			this.lklFaqDeAtendimento.Size = new System.Drawing.Size(139, 17);
 			this.lklFaqDeAtendimento.TabIndex = 60;
@@ -741,7 +741,7 @@
 			this.lklAvaliacaoDeAtendimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklAvaliacaoDeAtendimento.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklAvaliacaoDeAtendimento.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklAvaliacaoDeAtendimento.Location = new System.Drawing.Point(33, 70);
+			this.lklAvaliacaoDeAtendimento.Location = new System.Drawing.Point(33, 113);
 			this.lklAvaliacaoDeAtendimento.Name = "lklAvaliacaoDeAtendimento";
 			this.lklAvaliacaoDeAtendimento.Size = new System.Drawing.Size(179, 17);
 			this.lklAvaliacaoDeAtendimento.TabIndex = 54;
@@ -757,7 +757,7 @@
 			this.lklFormularioDeQualidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklFormularioDeQualidade.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklFormularioDeQualidade.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklFormularioDeQualidade.Location = new System.Drawing.Point(33, 48);
+			this.lklFormularioDeQualidade.Location = new System.Drawing.Point(33, 70);
 			this.lklFormularioDeQualidade.Name = "lklFormularioDeQualidade";
 			this.lklFormularioDeQualidade.Size = new System.Drawing.Size(171, 17);
 			this.lklFormularioDeQualidade.TabIndex = 58;
@@ -789,12 +789,12 @@
 			this.lklChecklistDeVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklChecklistDeVenda.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklChecklistDeVenda.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklChecklistDeVenda.Location = new System.Drawing.Point(33, 26);
+			this.lklChecklistDeVenda.Location = new System.Drawing.Point(33, 48);
 			this.lklChecklistDeVenda.Name = "lklChecklistDeVenda";
-			this.lklChecklistDeVenda.Size = new System.Drawing.Size(136, 17);
+			this.lklChecklistDeVenda.Size = new System.Drawing.Size(140, 17);
 			this.lklChecklistDeVenda.TabIndex = 56;
 			this.lklChecklistDeVenda.TabStop = true;
-			this.lklChecklistDeVenda.Text = "Checklists de Venda";
+			this.lklChecklistDeVenda.Text = "Checklists de Acordo";
 			this.lklChecklistDeVenda.Visible = false;
 			this.lklChecklistDeVenda.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lklChecklistVenda_LinkClicked);
 			// 
@@ -827,7 +827,7 @@
 			this.lklNotificacaoParaOperacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklNotificacaoParaOperacao.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklNotificacaoParaOperacao.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklNotificacaoParaOperacao.Location = new System.Drawing.Point(27, 48);
+			this.lklNotificacaoParaOperacao.Location = new System.Drawing.Point(27, 26);
 			this.lklNotificacaoParaOperacao.Name = "lklNotificacaoParaOperacao";
 			this.lklNotificacaoParaOperacao.Size = new System.Drawing.Size(185, 17);
 			this.lklNotificacaoParaOperacao.TabIndex = 61;
@@ -923,10 +923,10 @@
 			this.lklAuditoriaDeVenda.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
 			this.lklAuditoriaDeVenda.Location = new System.Drawing.Point(27, 4);
 			this.lklAuditoriaDeVenda.Name = "lklAuditoriaDeVenda";
-			this.lklAuditoriaDeVenda.Size = new System.Drawing.Size(136, 17);
+			this.lklAuditoriaDeVenda.Size = new System.Drawing.Size(140, 17);
 			this.lklAuditoriaDeVenda.TabIndex = 58;
 			this.lklAuditoriaDeVenda.TabStop = true;
-			this.lklAuditoriaDeVenda.Text = "Auditorias de Venda";
+			this.lklAuditoriaDeVenda.Text = "Auditorias de Acordo";
 			this.lklAuditoriaDeVenda.Visible = false;
 			this.lklAuditoriaDeVenda.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lklAuditoriaVendas_LinkClicked);
 			// 
@@ -937,7 +937,7 @@
 			this.lklStatusDeAuditoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lklStatusDeAuditoria.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 			this.lklStatusDeAuditoria.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
-			this.lklStatusDeAuditoria.Location = new System.Drawing.Point(27, 26);
+			this.lklStatusDeAuditoria.Location = new System.Drawing.Point(27, 48);
 			this.lklStatusDeAuditoria.Name = "lklStatusDeAuditoria";
 			this.lklStatusDeAuditoria.Size = new System.Drawing.Size(128, 17);
 			this.lklStatusDeAuditoria.TabIndex = 62;

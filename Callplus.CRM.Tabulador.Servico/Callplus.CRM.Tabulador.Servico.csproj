@@ -50,6 +50,7 @@
     <Compile Include="Servicos\AvaliacaoDeAtendimentoService.cs" />
     <Compile Include="Servicos\CampanhaService.cs" />
     <Compile Include="Servicos\NegociacaoService.cs" />
+    <Compile Include="Servicos\BancoDeDadosService.cs" />
     <Compile Include="Servicos\TituloService.cs" />
     <Compile Include="Servicos\ContratoService.cs" />
     <Compile Include="Servicos\CepExpressService.cs" />

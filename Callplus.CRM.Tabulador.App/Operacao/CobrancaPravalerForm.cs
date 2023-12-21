@@ -120,7 +120,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			tsOferta_btnChecklist.Enabled = false;
 			int idTipo = -1;
 
-			if (tsOferta_cmbTipoStatusOferta.Text.ToUpper() == "ACEITE")
+			if (tsOferta_cmbTipoStatusOferta.Text.ToUpper() == "ACORDO")
 				tsOferta_btnChecklist.Enabled = true;
 
 			int.TryParse(tipo.ToString(), out idTipo);

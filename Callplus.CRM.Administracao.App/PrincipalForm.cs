@@ -17,13 +17,14 @@ namespace Callplus.CRM.Administracao.App
     {
         private Usuario _usuarioLogado;
         private PermissaoService _permissaoService;
+        private BancoDeDadosService _bancoDeDadosService;
 
         public PrincipalForm(Usuario usuarioLogado)
         {
             _logger = LogManager.GetCurrentClassLogger();
             _usuarioLogado = usuarioLogado;
             _permissaoService = new PermissaoService();
-            
+            _bancoDeDadosService = new BancoDeDadosService();
 
             InitializeComponent();
         }
@@ -44,8 +45,9 @@ namespace Callplus.CRM.Administracao.App
             lblPerfil.Text = AdministracaoMDI._usuario.perfil.ToString();
             lblEmpresa.Text = AdministracaoMDI._usuario.Empresa.ToString();
             lblVersao.Text = "Versão: " + LoginForm.Release;
+            lblBancoDeDados.Text = _bancoDeDadosService.RetornarNomeDoBanco();
 
-            if (AdministracaoMDI._usuario.Empresa.Contains("VGX"))
+			if (AdministracaoMDI._usuario.Empresa.Contains("VGX"))
             {
                 ptbLogoEmpresa.Image = Resources.VGX_logo;
             }
@@ -327,9 +329,6 @@ namespace Callplus.CRM.Administracao.App
             }
         }
 
-
-        #endregion EVENTOS
-
         private void lklRelTrabalhoDaOperacao1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
@@ -500,5 +499,7 @@ namespace Callplus.CRM.Administracao.App
                 _logger.Error(ex);
             }
         }
-    }
+
+		#endregion EVENTOS
+	}
 }

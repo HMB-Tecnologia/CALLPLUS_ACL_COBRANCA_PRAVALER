@@ -10,6 +10,8 @@ using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using Callplus.CRM.Administracao.App.Login;
 using Callplus.CRM.Administracao.App.Relatorios;
+using Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas;
+using Callplus.CRM.Administracao.App.Dashboard;
 
 namespace Callplus.CRM.Administracao.App
 {
@@ -112,7 +114,6 @@ namespace Callplus.CRM.Administracao.App
             }
         }
         
-
         #endregion METODOS
 
         #region EVENTOS
@@ -161,8 +162,6 @@ namespace Callplus.CRM.Administracao.App
         {
             ExibirForm(new Qualidade.ScriptDeAtendimento.ListaScriptAtendimentoForm());
         }
-
-        #endregion EVENTOS
 
         private void produtosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -463,5 +462,43 @@ namespace Callplus.CRM.Administracao.App
                 _logger.Error(ex);
             }
         }
-    }
+
+		private void mnuRelRankingDaOperacao_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				AdministracaoMDI.ExibirForm(new RankingDaOperacao());
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex);
+			}
+		}
+
+		private void mnuDashAuditoriaToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				AdministracaoMDI.ExibirForm(new ListaAuditoriaDeVendaAgrupadaForm());
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex);
+			}
+		}
+
+		private void mnuDashOperacoesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				AdministracaoMDI.ExibirForm(new DashOperacaoForm());
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex);
+			}
+		}
+
+		#endregion EVENTOS
+	}
 }

@@ -921,6 +921,7 @@
     <Content Include="Qualidade\Checklist\images\strikeout.gif" />
     <Content Include="Qualidade\Checklist\images\underline.gif" />
     <Content Include="Qualidade\Checklist\images\Undo.gif" />
+    <None Include="Resources\pravaler_logo.png" />
     <None Include="Resources\icons8-barra-de-carregamento.gif" />
     <None Include="Resources\icons8-preloader.gif" />
     <None Include="Resources\plus.png" />

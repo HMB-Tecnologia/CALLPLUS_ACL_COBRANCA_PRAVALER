@@ -151,31 +151,31 @@ namespace Callplus.CRM.Tabulador.App.Checklist
 
         private void FinalizarChecklist()
         {
-            campanhaPrincipal = _campanhaService.RetornarCampanhaPrincipalDoUsuario(_usuario.Id);
+            //campanhaPrincipal = _campanhaService.RetornarCampanhaPrincipalDoUsuario(_usuario.Id);
             //_campanha.TipoAuditoria
-            if (campanhaPrincipal.TipoAuditoria == Dominio.Tipos.TipoDeAuditoria.OFFLINE)
-            {
-                _checklistRealizado = true;
+            //if (campanhaPrincipal.TipoAuditoria == Dominio.Tipos.TipoDeAuditoria.OFFLINE)
+            //{
+            //    _checklistRealizado = true;
 
-                this.Close();
-                return;
-            }
+            //    this.Close();
+            //    return;
+            //}
 
-            SolicitarPermissaoForm solicitarPemissaoForm = new SolicitarPermissaoForm(_usuario);
-            var retorno = solicitarPemissaoForm.SolicitarPermissaoDeUsuario(true, true);
+            //SolicitarPermissaoForm solicitarPemissaoForm = new SolicitarPermissaoForm(_usuario);
+            //var retorno = solicitarPemissaoForm.SolicitarPermissaoDeUsuario(true, true);
 
-            if (retorno?.PermissaoConfirmada ?? false)
-            {
-                _checklistRealizado = true;
-                _idAuditor = (int)retorno.IdUsuarioPermissao;
+            //if (retorno?.PermissaoConfirmada ?? false)
+            //{
+            //    _checklistRealizado = true;
+            //    _idAuditor = (int)retorno.IdUsuarioPermissao;
 
-                this.Close();
-            }
+            //    this.Close();
+            //}
 
 
-            //_checklistRealizado = true;
+            _checklistRealizado = true;
 
-            //this.Close();
+            this.Close();
         }
 
         #endregion METODOS

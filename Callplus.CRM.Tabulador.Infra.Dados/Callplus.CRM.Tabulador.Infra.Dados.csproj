@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Dao\AtendimentoDao.cs" />
     <Compile Include="Dao\AvaliacaoDeAtendimentoDao.cs" />
+    <Compile Include="Dao\BancoDeDadosDao.cs" />
     <Compile Include="Dao\BluechipDAO.cs" />
     <Compile Include="Dao\NegociacaoDao.cs" />
     <Compile Include="Dao\ContratoDao.cs" />

@@ -120,7 +120,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(182, 13);
 			this.label2.TabIndex = 31;
-			this.label2.Text = "PORTABILIDADE";
+			this.label2.Text = "COBRANÇA PRAVALER";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label3
@@ -130,7 +130,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(182, 13);
 			this.label3.TabIndex = 32;
-			this.label3.Text = "MERCADO PAGO";
+			this.label3.Text = "ACTIONLINE";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// LoginForm

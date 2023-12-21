@@ -143,7 +143,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(182, 13);
 			this.label2.TabIndex = 107;
-			this.label2.Text = "PRAVALER";
+			this.label2.Text = "COBRANÇA PRAVALER";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// LoginForm

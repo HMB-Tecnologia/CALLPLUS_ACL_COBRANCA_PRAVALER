@@ -1010,7 +1010,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 							cmbCampanha.Habilitar();
 							ConfigurarPictureBoxAplicar(pctAplicarCampanha, habilitar: true);
-							btnCopiarDadosHuaweiManual.Enabled = true;
+							//btnCopiarDadosHuaweiManual.Enabled = true;
 							btnConsultarProspect.Enabled = true;
 							EncerrarContagemDePausa();
 							_emPausa = false;
@@ -1057,7 +1057,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 							cmbCampanha.Desabilitar();
 							ConfigurarPictureBoxAplicar(pctAplicarCampanha, habilitar: false);
-							btnCopiarDadosHuaweiManual.Enabled = false;
+							//btnCopiarDadosHuaweiManual.Enabled = false;
 							btnConsultarProspect.Enabled = false;
 							IniciarContagemDePausa(true, tempoTotalPausa);
 							_emPausa = true;
@@ -1127,14 +1127,14 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				//RegraCampanhaAquisicaoTalk(idUsuario);
 				cmbCampanha.Text = campanhaPrincipal.Nome;
 
-				if (campanhaPrincipal.IdDiscador == 6)
-				{
-					ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: true, InserirDadosHuaweiVisivel: true);
-				}
-				else
-				{
-					ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: false, InserirDadosHuaweiVisivel: false);
-				}
+				//if (campanhaPrincipal.IdDiscador == 6)
+				//{
+				//	ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: true, InserirDadosHuaweiVisivel: true);
+				//}
+				//else
+				//{
+				//	ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: false, InserirDadosHuaweiVisivel: false);
+				//}
 			}
 			else
 			{
@@ -1154,14 +1154,14 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 				cmbCampanha.Text = campanhaPrincipal.Nome;
 
-				if (campanhaPrincipal.IdDiscador == 6)
-				{
-					ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: true, InserirDadosHuaweiVisivel: true);
-				}
-				else
-				{
-					ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: false, InserirDadosHuaweiVisivel: false);
-				}
+				//if (campanhaPrincipal.IdDiscador == 6)
+				//{
+				//	ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: true, InserirDadosHuaweiVisivel: true);
+				//}
+				//else
+				//{
+				//	ConfigurarBotaoInserirDadosHuawei(habilitarInserirDadosHuawei: false, InserirDadosHuaweiVisivel: false);
+				//}
 
 				ConfigurarDiscador(_discadorConectado, _usuario);
 			}
@@ -1196,10 +1196,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void CarregarComboTipoContato()
 		{
-            IEnumerable<TipoContato> contato = _statusDeAtendimentoService.ListarTipoContato();
+			IEnumerable<TipoContato> contato = _statusDeAtendimentoService.ListarTipoContato();
 
-            cmbTipoContato.PreencherComSelecione(contato, x => x.Id, x => x.Nome);
-        }
+			cmbTipoContato.PreencherComSelecione(contato, x => x.Id, x => x.Nome);
+		}
 
 		private void CarregarComboStatusDoOperador(IEnumerable<KeyValuePair<int, string>> listaIncluir = null)
 		{
@@ -1811,7 +1811,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				Invoke(new MethodInvoker(() =>
 				{
 					btnConsultarProspect.Enabled = habilitarConsultaProspect ?? btnConsultarProspect.Enabled;
-					btnCopiarDadosHuaweiManual.Enabled = habilitarConsultaProspect ?? btnCopiarDadosHuaweiManual.Enabled;
+					//btnCopiarDadosHuaweiManual.Enabled = habilitarConsultaProspect ?? btnCopiarDadosHuaweiManual.Enabled;
 					//tsTxtLoginHuawei.Enabled = habilitarConsultaProspect ?? tsTxtLoginHuawei.Enabled;
 					btnPararTempo.Enabled = hablitarPararTempo ?? btnPararTempo.Enabled;
 
@@ -1820,7 +1820,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			else
 			{
 				btnConsultarProspect.Enabled = habilitarConsultaProspect ?? btnConsultarProspect.Enabled;
-				btnCopiarDadosHuaweiManual.Enabled = habilitarConsultaProspect ?? btnCopiarDadosHuaweiManual.Enabled;
+				//btnCopiarDadosHuaweiManual.Enabled = habilitarConsultaProspect ?? btnCopiarDadosHuaweiManual.Enabled;
 				//tsTxtLoginHuawei.Enabled = habilitarConsultaProspect ?? tsTxtLoginHuawei.Enabled;
 				btnPararTempo.Enabled = hablitarPararTempo ?? btnPararTempo.Enabled;
 			}
@@ -2175,7 +2175,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			cmbTipoStatus.ResetarComSelecione(habilitar: true);
 			cmbStatus.ResetarComSelecione(habilitar: false);
-			
+
 			cmbCanal.ResetarComSelecione(true);
 			cmbTipoContato.ResetarComSelecione(true);
 
@@ -7433,7 +7433,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			listBoxEventos.Items.Clear();
 			listBoxEventos.Visible = false;
 			contatoManualLiberado = false;
-			btnCopiarDadosHuaweiManual.Enabled = true;
+			//btnCopiarDadosHuaweiManual.Enabled = true;
 			gbDadosComplementares.Visible = false;
 		}
 
@@ -7666,15 +7666,15 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void ScriptDeApresentacaoControl_OnApresentarOfertaClick(object sender, EventArgs eventArgs)
 		{
-			if (LoginHuaweiValido())
-			{
-				var oferta = RetornarProximaOfertaElegivel();
-				ConfigurarProximaOfertaElegivel(oferta);
-			}
-			else
-			{
-				MessageBox.Show("[Login Huawei] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			}
+			var oferta = RetornarProximaOfertaElegivel();
+			ConfigurarProximaOfertaElegivel(oferta);
+			//if (LoginHuaweiValido())
+			//{
+			//}
+			//else
+			//{
+			//	MessageBox.Show("[Login Huawei] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			//}
 		}
 
 		private void ScriptDeOfertaControl_OnFinalizarScript(StatusDeOferta statusDaOferta)
@@ -7686,7 +7686,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					gbDadosComplementares.Visible = true;
 				}
 
-				FinalizarScriptDeOferta(statusDaOferta); 
+				FinalizarScriptDeOferta(statusDaOferta);
 			}
 			catch (Exception ex)
 			{
@@ -8124,14 +8124,14 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void tESTEOLOSSOCKETToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				ObterContatoHuawei();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			//try
+			//{
+			//	ObterContatoHuawei();
+			//}
+			//catch (Exception ex)
+			//{
+			//	MessageBox.Show(ex.Message, "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//}
 		}
 
 		private void ObterContatoHuawei()
@@ -8206,7 +8206,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void CarregarCampos(DadosDetalhados dadosDetalhados)
 		{
-			SalvarProspectHuawei(dadosDetalhados);
+			//SalvarProspectHuawei(dadosDetalhados);
 		}
 
 		private string FormatarCamposHuawei(string texto)
@@ -8289,7 +8289,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_dataInicioContato = dataBanco;
 
 			btnBuscarContato.Enabled = false;
-			btnCopiarDadosHuaweiManual.Enabled = false;
+			//btnCopiarDadosHuaweiManual.Enabled = false;
 
 			//DADOS CONTATO
 			//LiberarCamposContato(true);
@@ -8346,44 +8346,44 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private void btnCopiarDadosHuaweiManual_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				if (LoginHuaweiValido())
-				{
-					if (cmbCampanha.Text.Contains("TALK"))
-					{
-						fCopiaDadosHuaweiManual copiaDadosHuaweyManual = new fCopiaDadosHuaweiManual();
-						copiaDadosHuaweyManual.ShowDialog();
+			//try
+			//{
+			//	if (LoginHuaweiValido())
+			//	{
+			//		if (cmbCampanha.Text.Contains("TALK"))
+			//		{
+			//			fCopiaDadosHuaweiManual copiaDadosHuaweyManual = new fCopiaDadosHuaweiManual();
+			//			copiaDadosHuaweyManual.ShowDialog();
 
-						var prospectController = new ProspectService();
+			//			var prospectController = new ProspectService();
 
-						bool sucesso = !string.IsNullOrEmpty(copiaDadosHuaweyManual.DadosHuawei) && copiaDadosHuaweyManual.DadosHuawei.ToUpper().Contains("SN");
+			//			bool sucesso = !string.IsNullOrEmpty(copiaDadosHuaweyManual.DadosHuawei) && copiaDadosHuaweyManual.DadosHuawei.ToUpper().Contains("SN");
 
-						PreencherCamposHuawei(sucesso, copiaDadosHuaweyManual.DadosHuawei, prospectController);
-					}
-					else
-					{
-						MessageBox.Show("Função permitida apenas para campanhas TALK!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					}
-				}
-				else
-				{
-					MessageBox.Show("[Login Huawei] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(
-				  $"Ocorreu um erro ao tentar copiar dados Huawei!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//			PreencherCamposHuawei(sucesso, copiaDadosHuaweyManual.DadosHuawei, prospectController);
+			//		}
+			//		else
+			//		{
+			//			MessageBox.Show("Função permitida apenas para campanhas TALK!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			//		}
+			//	}
+			//	else
+			//	{
+			//		MessageBox.Show("[Login Huawei] inválido!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			//	}
+			//}
+			//catch (Exception ex)
+			//{
+			//	MessageBox.Show(
+			//	  $"Ocorreu um erro ao tentar copiar dados Huawei!\n\nErro:{ex.Message}\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-				btnBuscarContato.Enabled = true;
-				btnCopiarDadosHuaweiManual.Enabled = true;
-			}
+			//	btnBuscarContato.Enabled = true;
+			//	btnCopiarDadosHuaweiManual.Enabled = true;
+			//}
 		}
 
 		private void tsTxtLoginHuawei_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			e.Handled = Texto.CaractereNumerico(e.KeyChar);
+			//e.Handled = Texto.CaractereNumerico(e.KeyChar);
 		}
 
 		private void tsTxtLoginHuawei_Leave(object sender, EventArgs e)
