@@ -114,7 +114,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
 		private void SalvarMailing()
 		{
-
 			if (PodeSalvar())
 			{
 				if (_mailing == null) _mailing = new Tabulador.Dominio.Entidades.Mailing();
@@ -139,6 +138,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				var idMailing = _mailingService.Gravar(_mailing);
 				GravarMalingEmCache(idMailing);
 
+				Thread.Sleep(3000);
 				atualizar = true;
 				this.Hide();
 				this.Close();
@@ -151,19 +151,17 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			if (_arquivoMailing != null && _arquivoMarcacoesMailing != null)
 				if (idMailing > 0)
 				{
-
-					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout10, string.Empty, idMailing) + " LAYOUT 10\n";
-					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout16, string.Empty, idMailing) + " LAYOUT 16\n";
-					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout30, string.Empty, idMailing) + " LAYOUT 30\n";
-					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout60, string.Empty, idMailing) + " LAYOUT 60\n";
+					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout10, string.Empty, idMailing) + " - LAYOUT 10\n";
+					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout16, string.Empty, idMailing) + " - LAYOUT 16\n";
+					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout30, string.Empty, idMailing) + " - LAYOUT 30\n";
+					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout60, string.Empty, idMailing) + " - LAYOUT 60\n";
 					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(string.Empty, _sqlArquivoMarcacoes, idMailing) + " MARCAÇÕES";
 				}
 				else
-				{
 					MessageBox.Show($"Ocorreu erro ao criar o Mailing!", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
 
 			txtObservacao.Text = retorno;
+			txtObservacao.Update();
 		}
 
 		private void TransferirArquivoParaServidorCallplus()
@@ -226,7 +224,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				MessageBox.Show(msgFinal, "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 		}
-		public delegate void CloseDelagate();
 
 		private void LocalizarArquivo(bool localizarArquivoMailing)
 		{
@@ -332,9 +329,9 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 		{
 			Discador discador = new Discador();
 
-			//if (cmbCampanha.TextoEhSelecione()) return;
-			//int idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
-			//discador = _discadorService.RetornarTipoEnvioDadosDiscador(idCampanha);
+			if (cmbCampanha.TextoEhSelecione()) return;
+			int idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
+			discador = _discadorService.RetornarTipoEnvioDadosDiscador(idCampanha);
 
 			cmdEnviarParaDiscador.Enabled = discador.spEnvioAutomaticoMailing != "" && _mailing != null;
 			cmdExportarArquivo.Enabled = discador.spExportacaoMailing != "" && _mailing != null;
@@ -346,7 +343,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			if (cmbCampanha.TextoEhSelecione()) return;
 
 			int idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
-			_caminhoServidorProcessamento = _campanhaService.RetornarCaminhoDoServidor(idCampanha);//.RetornarCaminhoDoServidorSemCampanha();
+			_caminhoServidorProcessamento = _campanhaService.RetornarCaminhoDoServidor(idCampanha);
 
 			btnCarregarArquivoMailing.Enabled = !string.IsNullOrEmpty(_caminhoServidorProcessamento);
 		}
@@ -657,7 +654,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			string[] parteNome = txtNome.Text.Split('_');
 			var idMailingDiscador = parteNome[0];
 
-
 			var nomeDoArquivo = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + idMailingDiscador + "_FULL.txt";
 			var _file = _mailingService.ExportarMailing(_mailing.id);
 
@@ -681,14 +677,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 						if (!string.IsNullOrEmpty(_dt.Rows[i][0].ToString().Trim()))
 							stream.WriteLine(_dt.Rows[i][0].ToString());
 					}
-
-
 				}
-
 
 				FtpWebRequest ftpRequest;
 				FtpWebResponse ftpResponse;
-
 				try
 				{
 					ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(@"ftp://172.20.20.227:21/callflex/importar/" + nomeDoArquivo));
@@ -717,25 +709,17 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 					//obtem o FtpWebResponse da operação de upload
 					ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
 					MessageBox.Show("Upload de arquivo concluído!\n" + ftpResponse.StatusDescription);
-
-
 				}
 				catch (Exception ex)
 				{
 
 					MessageBox.Show("Erro ao salvar arquivo no FTP: " + ex.Message);
 				}
-
-
-
 			}
 			catch (Exception ex)
 			{
-
 				MessageBox.Show("Falha ao Gerar o Arquivo, verifique permissões de pasta! " + ex);
 			}
-
-
 		}
 
 		private void CarregarCampanhas()
@@ -751,8 +735,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			try
 			{
 				CarregarCampanhas();
-				DesabilitarCampos();
 				CarregarDadosDoMailing();
+				DesabilitarCampos();
 			}
 			catch (Exception ex)
 			{
