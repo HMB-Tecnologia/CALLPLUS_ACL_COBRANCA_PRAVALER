@@ -52,10 +52,12 @@
 			this.dgContrato = new System.Windows.Forms.DataGridView();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this._containerDeLayoutDinamico = new Callplus.CRM.Tabulador.App.Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos();
 			this.tsOferta.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tcOferta.SuspendLayout();
 			this.tcOferta_tpDadosDoCliente.SuspendLayout();
+			this.gbDadosPessoais.SuspendLayout();
 			this.tcOferta_tpAcordo.SuspendLayout();
 			this.gcAcordos.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgAcordo)).BeginInit();
@@ -203,6 +205,7 @@
 			// 
 			// gbDadosPessoais
 			// 
+			this.gbDadosPessoais.Controls.Add(this._containerDeLayoutDinamico);
 			this.gbDadosPessoais.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gbDadosPessoais.Location = new System.Drawing.Point(3, 3);
 			this.gbDadosPessoais.Name = "gbDadosPessoais";
@@ -316,6 +319,17 @@
 			this.panel1.Size = new System.Drawing.Size(911, 169);
 			this.panel1.TabIndex = 4;
 			// 
+			// _containerDeLayoutDinamico
+			// 
+			this._containerDeLayoutDinamico.AutoScroll = true;
+			this._containerDeLayoutDinamico.AutoSize = true;
+			this._containerDeLayoutDinamico.Dock = System.Windows.Forms.DockStyle.Fill;
+			this._containerDeLayoutDinamico.Location = new System.Drawing.Point(3, 16);
+			this._containerDeLayoutDinamico.Name = "_containerDeLayoutDinamico";
+			this._containerDeLayoutDinamico.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this._containerDeLayoutDinamico.Size = new System.Drawing.Size(891, 214);
+			this._containerDeLayoutDinamico.TabIndex = 1;
+			// 
 			// CobrancaPravalerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,6 +356,8 @@
 			this.panel2.PerformLayout();
 			this.tcOferta.ResumeLayout(false);
 			this.tcOferta_tpDadosDoCliente.ResumeLayout(false);
+			this.gbDadosPessoais.ResumeLayout(false);
+			this.gbDadosPessoais.PerformLayout();
 			this.tcOferta_tpAcordo.ResumeLayout(false);
 			this.gcAcordos.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgAcordo)).EndInit();
@@ -377,5 +393,6 @@
 		private System.Windows.Forms.GroupBox gbTop;
 		private System.Windows.Forms.DataGridView dgContrato;
 		private System.Windows.Forms.Panel panel1;
+		private Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos _containerDeLayoutDinamico;
 	}
 }

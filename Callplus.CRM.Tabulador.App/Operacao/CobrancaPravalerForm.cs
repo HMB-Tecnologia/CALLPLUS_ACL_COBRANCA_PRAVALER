@@ -1,11 +1,12 @@
 ﻿using Callplus.CRM.Tabulador.App.Controles.CamposDinamicos;
 using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
-using Callplus.CRM.Tabulador.Infra.Dados.Util;
+using Callplus.CRM.Tabulador.Dominio.Entidades.LayoutDinamico;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using CallplusUtil.Forms;
 using NLog;
+using NLog.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +22,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		bool bloqueioStatus, bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
 		{
 			_logger = LogManager.GetCurrentClassLogger();
-
+			_layoutDinamicoService = new LayoutDinamicoService();
 			_atendimentoService = new AtendimentoService();
 			_campanhaService = new CampanhaService();
 			_checklistService = new ChecklistService();
@@ -48,7 +49,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		#region PROPRIEDADES
 
 		private readonly ILogger _logger;
-
+		private readonly LayoutDinamicoService _layoutDinamicoService;
 		private readonly AtendimentoService _atendimentoService;
 		private readonly CampanhaService _campanhaService;
 		private readonly ChecklistService _checklistService;
@@ -94,6 +95,21 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			{
 				ConfigurarStatusDaOferta(_idStatusOferta.Value);
 			}
+			CarregarLayoutDinamicoDaCampanhaDoProspect();
+		}
+
+		private void CarregarLayoutDinamicoDaCampanhaDoProspect()
+		{
+			var campanha = _campanhaService.RetornarCampanha(_prospect.IdCampanha);
+			if (campanha?.IdLayoutCampoDinamico == null) return;
+			int idLayout = campanha.IdLayoutCampoDinamico.Value;
+			LayoutDeCampoDinamico layout = _layoutDinamicoService.RetornarLayoutDinamico(idLayout);
+			_containerDeLayoutDinamico.Visible = false;
+			_containerDeLayoutDinamico.CarregarLayout(layout);
+
+			var valores = _layoutDinamicoService.ListarValoresDeCamposDinamicos(_prospect.Id, campanha.Id);
+			_containerDeLayoutDinamico.PreencherCampos(valores);
+			_containerDeLayoutDinamico.Visible = true;
 		}
 
 		private void CarregarControleDeEdicao()
@@ -542,9 +558,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 		}
 
-		#endregion EVENTOS        
-
-
 		private void btnNovoAcordo_Click(object sender, EventArgs e)
 		{
 			try
@@ -558,62 +571,6 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				MessageBox.Show(
 					$"Não foi possível criar uma Novo Acordo!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-		}
-
-		private void btnNovoTitulo_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				//NovoTitulo();
-			}
-			catch (Exception ex)
-			{
-				_logger.Error(ex);
-
-				MessageBox.Show(
-					$"Não foi possível criar um novo Título!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		private void dgDetalhesDoTitulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-			//try
-			//{
-			//	var senderGrid = (DataGridView)sender;
-			//	bool botaoDetalheFoiClicado = senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn
-			//		&& e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == nameof(colBtnDetalhe_detalhesTitulo);
-
-			//	if (botaoDetalheFoiClicado)
-			//	{
-			//		var idTiluloSelecionado = senderGrid.Rows[e.RowIndex].Cells[nameof(colID_detalhesTitulo)].Value;
-			//		if (idTiluloSelecionado != null && long.TryParse(idTiluloSelecionado.ToString(), out long idTtitulo))
-			//		{
-			//			var idContrato = _contrato?.Id;
-			//			var idStatus = 0;//_statusDoAtendimento?.IDStatus ?? 0;
-
-			//			if (idContrato != null)
-			//			{
-			//				var titulo = ObterTituloDoAtendimentoPorId(idContrato.Value, idTtitulo);
-			//				if (titulo == null)
-			//				{
-			//					MessageBox.Show("Não foi possível obter o Tílulo para exibição dos detalhes", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//					return;
-			//				}
-
-			//				DetalheTituloForm f = new DetalheTituloForm(_usuario, _atendimento);
-			//				f.ExibirDetalhes(titulo, _atendimento);
-			//				RecarregarDadosAtualizadosDosContratosDoProspect();
-			//			}
-			//		}
-			//	}
-			//}
-			//catch (Exception ex)
-			//{
-			//	_logger.Error(ex);
-
-			//	MessageBox.Show(
-			//		$"Ocorreu um erro inesperado ao carregar os dealhes do título!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//}
 		}
 
 		private void dgContrato_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -637,5 +594,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			tcOferta.SelectedTab = tcOferta_tpAcordo;
 		}
+
+		#endregion EVENTOS        
 	}
 }

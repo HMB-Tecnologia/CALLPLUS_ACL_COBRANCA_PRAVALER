@@ -247,7 +247,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 					txtCaminhoDoArquivoMailing.Text = _arquivoOrigem;
 					_arquivoDestino = _caminhoServidorProcessamento + nome;
 
-					var f = new LoadingForm("Armazenar Mailing em Cache");
+					var f = new LoadingForm("Armazenando Mailing em Cache");
 					var start = Task.Factory.StartNew(() => { f.ShowDialog(); });
 					ArmazenarMailingEmCache();
 					Invoke(new MethodInvoker(() => { f.FecharFormLoad(); }));
@@ -262,7 +262,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				{
 					txtCaminhoDoArquivoMarcacoes.Text = FileDialog.FileName;
 
-					var f = new LoadingForm("Armazenar Marcações em Cache");
+					var f = new LoadingForm("Armazenando Marcações em Cache");
 					var start = Task.Factory.StartNew(() => { f.ShowDialog(); });
 					ArmazenarMarcacoesMailingEmCache(FileDialog.FileName);
 					Invoke(new MethodInvoker(() => { f.FecharFormLoad(); }));

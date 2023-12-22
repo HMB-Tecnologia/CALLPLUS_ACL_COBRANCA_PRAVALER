@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using Callplus.CRM.Tabulador.App.Login;
-using Callplus.CRM.Tabulador.Dominio.Dto;
+﻿using Callplus.CRM.Tabulador.Dominio.Dto;
 using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Dominio.Entidades.LayoutDinamico;
-using Callplus.CRM.Tabulador.Dominio.Tipos;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using CallplusUtil.Forms;
 using CallplusUtil.Validacoes;
 using NLog;
 using Olos.SimpleSockets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Callplus.CRM.Tabulador.App.Operacao
 {
-    public partial class ConsultaDeProspectForm : Form
+	public partial class ConsultaDeProspectForm : Form
     {
         private readonly ConsultaDeProspectService _consultaDeProspectService;
         private readonly ProspectService _prospectService;
@@ -70,11 +68,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
         private bool AtendeRegrasDePesquisa()
         {
             var mensagens = new List<string>();
-
-            if (string.IsNullOrEmpty(txtTelefone.Text) && string.IsNullOrEmpty(txtIdProspect.Text) && string.IsNullOrEmpty(txtCpf.Text))
-            {
+            if (string.IsNullOrEmpty(txtTelefone.Text) && string.IsNullOrEmpty(txtIdProspect.Text))
                 mensagens.Add("Um dos campos deve ser preenchido para realizar a consulta.");
-            }
 
             CallplusFormsUtil.ExibirMensagens(mensagens);
             return !mensagens.Any();
@@ -173,14 +168,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
             if (!string.IsNullOrEmpty(txtIdProspect.Text))
                 idProspect = long.Parse(txtIdProspect.Text);
 
-            if (!string.IsNullOrEmpty(txtCpf.Text))
-            {
-                cpf = txtCpf.Text;
-            }
-
             ResetarControles();
 
-            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf , telefone, idProspect);
+            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, telefone, idProspect);
             dgResultadoPesquisa.DataSource = datatable;
 
             //MessageBox.Show($"Concluído!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -270,14 +260,13 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
             int idUsuario = _usuarioLogado?.Id ?? 0;
             long telefone = -1;
-            string cpf = "";
 
             if (!string.IsNullOrEmpty(txtTelefone.Text))
                 telefone = long.Parse(txtTelefone.Text);
 
             ResetarControles();
 
-            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf, telefone, idNovoCliente);
+            var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, telefone, idNovoCliente);
             dgResultadoPesquisa.DataSource = datatable;
 
         }
@@ -458,7 +447,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
                 ResetarControles();
 
-                var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, cpf, telefone, idProspect);
+                var datatable = _consultaDeProspectService.PesquisarProspects(idUsuario, telefone, idProspect);
 
                 dgResultadoPesquisa.DataSource = datatable;
             }
