@@ -24,7 +24,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 			_usuarioService = new UsuarioService();
 			_statusDeAuditoriaService = new StatusDeAuditoriaService();
 			_auditoriaDeOfertaBko = new AuditoriaDeOfertaService();
-			_ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+			_ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
 			_usuarioLogado = AdministracaoMDI._usuario;
 			_campanha = new Campanha();
 
@@ -38,7 +38,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 		private readonly UsuarioService _usuarioService;
 		private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
 		private readonly AuditoriaDeOfertaService _auditoriaDeOfertaBko;
-		private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+		private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
 		private readonly Usuario _usuarioLogado;
 		private Campanha _campanha;
 		private DataTable _dtExportaVenda;
@@ -117,7 +117,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 		{
 			int idRegistro = -1;
 			long telefone = 0;
-			long cpf = 0;
+			string cpf = string.Empty;
 			int idSupervisor = 0;
 			int idOperador = 0;
 			string idsCampanha = "";
@@ -153,8 +153,8 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 					if (long.TryParse(txtTelefone.Text, out telefone) == false)
 						telefone = -1;
 
-					if (long.TryParse(txtCpf.Text, out cpf) == false)
-						cpf = -1;
+					if (!string.IsNullOrEmpty(txtCpf.Text))
+						cpf = txtCpf.Text;
 
 					if (int.TryParse(cmbSupervisor.SelectedValue.ToString(), out idSupervisor) == false)
 						idSupervisor = -1;
@@ -187,7 +187,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 
 		private void RealizarAjustesGrid()
 		{
-			dgResultado.Columns["Data Oferta"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+			dgResultado.Columns["Data Acordo"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 			dgResultado.Columns["Data Auditoria"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 			dgResultado.Columns["Data Avaliação"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
@@ -201,11 +201,9 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 		{
 			if (linha >= 0)
 			{
-				long id = (long)dgResultado.Rows[linha].Cells["Cód Oferta Bko"].Value;
-				AuditoriaOferta_PortabilidadeMPForm f = new AuditoriaOferta_PortabilidadeMPForm(id);
+				long id = (long)dgResultado.Rows[linha].Cells["Cód Acordo Bko"].Value;
+				AuditoriaAcordo_CobrancaPravalerForm f = new AuditoriaAcordo_CobrancaPravalerForm(id);
 				f.Iniciar();
-
-
 				CarregarGrid(buscaRapida: false);
 			}
 		}
@@ -573,5 +571,6 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
 		}
 
 		#endregion EVENTOS
+
 	}
 }

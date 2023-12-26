@@ -18,7 +18,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.RelatorioDeAuditoria
             _logger = LogManager.GetCurrentClassLogger();
 
             _usuarioService = new UsuarioService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _statusDeAuditoriaService = new StatusDeAuditoriaService();
 
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.RelatorioDeAuditoria
 
         private readonly ILogger _logger;
         private readonly UsuarioService _usuarioService;
-        private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+        private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
         private string _dataInicio;
         private string _dataFim;

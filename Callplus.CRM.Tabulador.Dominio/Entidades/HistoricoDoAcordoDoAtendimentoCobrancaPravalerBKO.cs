@@ -2,10 +2,10 @@
 
 namespace Callplus.CRM.Tabulador.Dominio.Entidades
 {
-    public class HistoricoDaOfertaDoAtendimentoMigracaoBKO
+    public class HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO
     {
         public long id { get; set; }
-        public long idOfertaDoAtendimentoMigracaoBKO { get; set; }
+        public long idAcodoDoAtendimentoCobrancaPravalerBKO { get; set; }
         public int idStatusAuditoria { get; set; }
         public string protocolo { get; set; }
         public string autorizacao { get; set; }

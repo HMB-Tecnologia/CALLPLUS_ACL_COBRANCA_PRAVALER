@@ -73,7 +73,7 @@
     <Compile Include="Servicos\MailingService.cs" />
     <Compile Include="Servicos\NivelDeConfiancaServico.cs" />
     <Compile Include="Servicos\NotificacaoService.cs" />
-    <Compile Include="Servicos\OfertaDoAtendimentoService.cs" />
+    <Compile Include="Servicos\AcordoDoAtendimentoService.cs" />
     <Compile Include="Servicos\PausaService.cs" />
     <Compile Include="Servicos\PerfilService.cs" />
     <Compile Include="Servicos\PermissaoService.cs" />

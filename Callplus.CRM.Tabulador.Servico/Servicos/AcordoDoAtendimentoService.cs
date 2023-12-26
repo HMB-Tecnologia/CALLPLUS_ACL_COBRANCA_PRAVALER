@@ -8,31 +8,31 @@ using Callplus.CRM.Tabulador.Dominio.Dto;
 
 namespace Callplus.CRM.Tabulador.Servico.Servicos
 {
-    public class OfertaDoAtendimentoService
+    public class AcordoDoAtendimentoService
     {
-        private readonly OfertaDoAtendimentoDao _ofertaDoAtendimentoDao;
+        private readonly AcordoDoAtendimentoDao _dao;
         private readonly int _idStatusAuditoriaEmProcessamento = 21;
 
-        public OfertaDoAtendimentoService()
+        public AcordoDoAtendimentoService()
         {
-            _ofertaDoAtendimentoDao = new OfertaDoAtendimentoDao();
+            _dao = new AcordoDoAtendimentoDao();
         }
 
         public DataTable ListarOfertaDoAtendimento(long idAtendimento)
         {
-            return _ofertaDoAtendimentoDao.ListarOfertaDoAtendimento(idAtendimento);
+            return _dao.ListarOfertaDoAtendimento(idAtendimento);
         }
 
         public OfertaDoAtendimento RetornarOfertaElegivelParaAtendimento(long idAtendimento, int idCampanha, int idMailing)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaElegivelParaAtendimento(idAtendimento, idCampanha, idMailing);
+            return _dao.RetornarOfertaElegivelParaAtendimento(idAtendimento, idCampanha, idMailing);
         }
 
         public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeOferta status, string nome, string cpf, int? idBanco)
         {            
             //TODO: ALTERAR PARA CONSIDERAR O TIPO DA OFERTA NÃO UTILIZANDO O ID
             //if (oferta.IdTipoDeProduto == 0) 
-                return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroMigracao(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf);
+                return _dao.GravarStatusDaOfertaDoAtendimentoClaroMigracao(oferta.Id, oferta.IdAtendimento, status.Id, nome, cpf);
 
             //if (oferta.IdTipoDeProduto == 0)
             //    return _ofertaDoAtendimentoDao.GravarStatusDaOfertaDoAtendimentoClaroRentabilizacao(oferta.Id, oferta.IdAtendimento, status.Id);
@@ -48,107 +48,107 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
         
         public string ValidarLoginWM(string login)
         {
-            return _ofertaDoAtendimentoDao.ValidarLoginWM(login);
+            return _dao.ValidarLoginWM(login);
         }
 
         public string ValidarLoginDaOperadora(int idOperadora, string login)
         {
-            return _ofertaDoAtendimentoDao.ValidarLoginDaOperadora(idOperadora, login);
+            return _dao.ValidarLoginDaOperadora(idOperadora, login);
         }
 
         public CobrancaAtendimentoPravaler RetornarOfertaDoAtendimentoPreVendaMigracao(long idOferta)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoPreVendaMigracao(idOferta);
+            return _dao.RetornarOfertaDoAtendimentoPreVendaMigracao(idOferta);
         }
 
         public IEnumerable<OfertaDoAtendimento> RetornarOfertasDoAtendimento(long idAtendimento)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimento(idAtendimento);
+            return _dao.RetornarOfertaDoAtendimento(idAtendimento);
         }
 
         public IEnumerable<string> VerificarSePodeEditarOfertaBKO(int idUsuario, long idOfertaBko, int idTipoProduto)
         {
-            return _ofertaDoAtendimentoDao.VerificarSePodeEditarOfertaBKO(idUsuario,idOfertaBko,idTipoProduto);
+            return _dao.VerificarSePodeEditarOfertaBKO(idUsuario,idOfertaBko,idTipoProduto);
         }
 
         public void RemoverHistoricoDeOfertaBkoPendente(int idUsuario, long idOfertaBko, int? idTipoProduto)
         {
-             _ofertaDoAtendimentoDao.RemoverHistoricoDeOfertaBkoPendente(idUsuario, idOfertaBko, idTipoProduto);
+             _dao.RemoverHistoricoDeOfertaBkoPendente(idUsuario, idOfertaBko, idTipoProduto);
         }
 
         public DataTable ListarHistoricoDaOfertaDoAtendimentoBKO(long idOfertaBko, int idTipoDeProduto)
         {
-           return _ofertaDoAtendimentoDao.ListarHistoricoDaOfertaDoAtendimentoBKO(idOfertaBko, idTipoDeProduto);
+           return _dao.ListarHistoricoDaOfertaDoAtendimentoBKO(idOfertaBko, idTipoDeProduto);
         }
 
         public HistoricoDaOfertaDoAtendimentoBkoDTO RetornarHistoricoDaOfertaDoAtendimentoBKO_DTO(long idHistoricoBko, int idTipoDeProduto)
         {
-            var item = _ofertaDoAtendimentoDao
+            var item = _dao
                 .ListarHistoricoDaOfertaDoAtendimentoBKO_DTO(idHistoricoBko, null, idTipoDeProduto)
                 .FirstOrDefault(x => x.Id == idHistoricoBko);
             return item;
 
         }
 
-        public ResumoDaOfertaDoAtendimentoBkoDTO RetornarResumoDaOfertaDoAtendimentoBKO(long id, int idTipoDeProduto)
+        public ResumoDoAcordoDoAtendimentoBkoDTO RetornarAcordoDoAtendimentoBKO(long id, int idTipoDeProduto)
         {
-            return _ofertaDoAtendimentoDao.RetornarResumoDaOfertaDoAtendimentoBKO(id, idTipoDeProduto);
+            return _dao.RetornarAcordoDoAtendimentoBKO(id, idTipoDeProduto);
         }
 
         public IEnumerable<ConfiguracaoVencimentoFaturaDto> RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(bool exibirTodasAsDatas)
         {
-            return _ofertaDoAtendimentoDao.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(exibirTodasAsDatas);
+            return _dao.RetornarDatasDeVencimentoDeFaturaDisponiveisBKO(exibirTodasAsDatas);
         }
 
         public IEnumerable<CanalAdicional> ListarCanalAdicional(int idOperadora, int idProduto, bool ativo)
         {
-            return _ofertaDoAtendimentoDao.ListarCanalAdicional(idOperadora, idProduto, ativo);
+            return _dao.ListarCanalAdicional(idOperadora, idProduto, ativo);
         }
 
         public DataTable RetornarOfertaParaAvaliacao(int idCampanha, int idSupervisor, int idOperador, string dataInicial, string dataFinal, string idStatus, long? iDOferta)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus, iDOferta);
+            return _dao.RetornarOfertaParaAvaliacao(idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus, iDOferta);
         }
 
         public DataTable RetornarOfertaParaAvaliacaoBKO(long idOfertaBko)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaParaAvaliacaoBKO(idOfertaBko);
+            return _dao.RetornarOfertaParaAvaliacaoBKO(idOfertaBko);
+        }
+
+        public long GravarAcordoDoAtendimentoPravaler(CobrancaAtendimentoPravaler acordo)
+        {
+            return _dao.GravarAcordoDoAtendimentoPravaler(acordo);
+        }
+
+        public long GravarOfertaDoAtendimentoClaroMigracaoBKO(OfertaDoAtendimentoCobrancaPravalerBKO ofertaBko)
+        {
+            return _dao.GravarOfertaDoAtendimentoClaroMigracaoBKO(ofertaBko);
         }
 
         #region CLARO_MIGRACAO
 
-        public long GravarOfertaDoAtendimentoClaroMigracao(CobrancaAtendimentoPravaler oferta)
-        {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroMigracao(oferta);
-        }
-
-        public long GravarOfertaDoAtendimentoClaroMigracaoBKO(OfertaDoAtendimentoClaroMigracaoBKO ofertaBko)
-        {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroMigracaoBKO(ofertaBko);
-        }
-
         public CobrancaAtendimentoPravaler RetornarCobrancaAtendimentoPravaler(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroMigracao(id);
+            return _dao.RetornarOfertaDoAtendimentoClaroMigracao(id);
         }
 
-        public OfertaDoAtendimentoClaroMigracaoBKO RetornarOfertaDoAtendimentoClaroMigracaoBKO(long id)
+        public OfertaDoAtendimentoCobrancaPravalerBKO RetornarAcordoDoAtendimentoCobrancaPravalerBKO(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroMigracaoBKO(id);
+            return _dao.RetornarAcordoDoAtendimentoCobrancaPravalerBKO(id);
         }
 
-        public long GravarHistoricoDoAtendimentoClaroMigracaoBKO(HistoricoDaOfertaDoAtendimentoMigracaoBKO oferta)
+        public long GravarHistoricoDoAtendimentoCobrancaPravalerBKO(HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarHistoricoDoAtendimentoClaroMigracaoBKO(oferta);
+            return _dao.GravarHistoricoDoAtendimentoCobrancaPravalerBKO(oferta);
         }
 
-        public HistoricoDaOfertaDoAtendimentoMigracaoBKO IniciarAuditoriaDaOfertaClaroMigracaoBKO(int idUsuario, long idOfertaBko)
+        public HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO IniciarAuditoriaDaOfertaClaroMigracaoBKO(int idUsuario, long idOfertaBko)
         {
             int idStatusAuditoria = _idStatusAuditoriaEmProcessamento;
-            var historico = new HistoricoDaOfertaDoAtendimentoMigracaoBKO()
+            var historico = new HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO()
             {
                 id = 0,
-                idOfertaDoAtendimentoMigracaoBKO = idOfertaBko,
+                idAcodoDoAtendimentoCobrancaPravalerBKO = idOfertaBko,
                 idCriador = idUsuario,
                 idStatusAuditoria = idStatusAuditoria,
                 Observacao = "",
@@ -157,19 +157,19 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
                 protocolo = ""
             };
 
-            long idHistorico = GravarHistoricoDoAtendimentoClaroMigracaoBKO(historico);
+            long idHistorico = GravarHistoricoDoAtendimentoCobrancaPravalerBKO(historico);
             historico.id = idHistorico;
             return historico;
         }
 
         public IEnumerable<Usuario> ValidarUsuarioPermitidoParaAlterarProduto(string login, string senha)
         {
-            return _ofertaDoAtendimentoDao.ValidarUsuarioPermitidoParaAlterarProduto(login, senha);
+            return _dao.ValidarUsuarioPermitidoParaAlterarProduto(login, senha);
         }
 
         public long GravarAlteracaoDeProdutoMigracaoBKO(long idOfertaBKO, int idProdutoInicial, int idProduto, int idUsuario)
         {
-            return _ofertaDoAtendimentoDao.GravarAlteracaoDeProdutoMigracaoBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
+            return _dao.GravarAlteracaoDeProdutoMigracaoBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
         }
 
 
@@ -179,22 +179,22 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long GravarOfertaDoAtendimentoClaroRentabilizacao(OfertaDoAtendimentoClaroRentabilizacao oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroRentabilizacao(oferta);
+            return _dao.GravarOfertaDoAtendimentoClaroRentabilizacao(oferta);
         }
 
         public OfertaDoAtendimentoClaroRentabilizacao RetornarOfertaDoAtendimentoClaroRentabilizacao(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroRentabilizacao(id);
+            return _dao.RetornarOfertaDoAtendimentoClaroRentabilizacao(id);
         }
 
         public OfertaDoAtendimentoClaroRentabilizacaoBKO RetornarOfertaDoAtendimentoClaroRentabilizacaoBKO(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoClaroRentabilizacaoBKO(id);
+            return _dao.RetornarOfertaDoAtendimentoClaroRentabilizacaoBKO(id);
         }
 
         public long GravarHistoricoDoAtendimentoClaroRentabilizacaoBKO(HistoricoDaOfertaDoAtendimentoRentabilizacaoBKO oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarHistoricoDoAtendimentoClaroRentabilizacaoBKO(oferta);
+            return _dao.GravarHistoricoDoAtendimentoClaroRentabilizacaoBKO(oferta);
         }
 
         public HistoricoDaOfertaDoAtendimentoRentabilizacaoBKO IniciarAuditoriaDaOfertaClaroRentabilizacaoBKO(int idUsuario, long idOfertaBko)
@@ -219,12 +219,12 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public IEnumerable<PassaporteOferta> ListarPassaporteOferta()
         {
-            return _ofertaDoAtendimentoDao.ListarPassaporteOferta();
+            return _dao.ListarPassaporteOferta();
         }
 
         public long GravarOfertaDoAtendimentoClaroRentabilizacaoBKO(OfertaDoAtendimentoClaroRentabilizacaoBKO ofertaBko)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoClaroRentabilizacaoBKO(ofertaBko);
+            return _dao.GravarOfertaDoAtendimentoClaroRentabilizacaoBKO(ofertaBko);
         }
 
         #endregion CLARO_RENTABILIZACAO
@@ -233,32 +233,32 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long GravarOfertaDoAtendimentoMPPortabilidade(OfertaDoAtendimentoMPPortabilidade oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoMPPortabilidade(oferta);
+            return _dao.GravarOfertaDoAtendimentoMPPortabilidade(oferta);
         }
 
         public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoPreVendaPortabilidade(long idAtendimento)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoPreVendaPortabilidade(idAtendimento);
+            return _dao.RetornarOfertaDoAtendimentoPreVendaPortabilidade(idAtendimento);
         }
 
         public long GravarOfertaDoAtendimentoMPPortabilidadeBKO(OfertaDoAtendimentoMPPortabilidadeBKO ofertaBko)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoMPPortabilidadeBKO(ofertaBko);
+            return _dao.GravarOfertaDoAtendimentoMPPortabilidadeBKO(ofertaBko);
         }
 
         public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoMPPortabilidade(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoMPPortabilidade(id);
+            return _dao.RetornarOfertaDoAtendimentoMPPortabilidade(id);
         }
 
         public OfertaDoAtendimentoMPPortabilidadeBKO RetornarOfertaDoAtendimentoMPPortabilidadeBKO(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoMPPortabilidadeBKO(id);
+            return _dao.RetornarOfertaDoAtendimentoMPPortabilidadeBKO(id);
         }
 
         public long GravarHistoricoDoAtendimentoClaroPortabilidadeBKO(HistoricoDaOfertaDoAtendimentoPortabilidadeBKO oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarHistoricoDoAtendimentoClaroPortabilidadeBKO(oferta);
+            return _dao.GravarHistoricoDoAtendimentoClaroPortabilidadeBKO(oferta);
         }
 
         public HistoricoDaOfertaDoAtendimentoPortabilidadeBKO IniciarAuditoriaDaOfertaClaroPortabilidadeBKO(int idUsuario, long idOfertaBko)
@@ -283,7 +283,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long GravarAlteracaoDeProdutoPortabilidadeBKO(long idOfertaBKO, int idProdutoInicial, int idProduto, int idUsuario)
         {
-            return _ofertaDoAtendimentoDao.GravarAlteracaoDeProdutoPortabilidadeBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
+            return _dao.GravarAlteracaoDeProdutoPortabilidadeBKO(idOfertaBKO, idProdutoInicial, idProduto, idUsuario);
         }
 
         #endregion CLARO_PORTABILIDADE
@@ -292,17 +292,17 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long GravarOfertaDoAtendimentoNETPTV(OfertaDoAtendimentoNETPTV oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarOfertaDoAtendimentoNETPTV(oferta);
+            return _dao.GravarOfertaDoAtendimentoNETPTV(oferta);
         }
 
         public OfertaDoAtendimentoNETPTV RetornarOfertaDoAtendimentoNETPTV(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoNETPTV(id);
+            return _dao.RetornarOfertaDoAtendimentoNETPTV(id);
         }
 
         public OfertaDoAtendimentoNETPTVBKO RetornarOfertaDoAtendimentoNetPtvBKO(long id)
         {
-            return _ofertaDoAtendimentoDao.RetornarOfertaDoAtendimentoNetPtvBKO(id);
+            return _dao.RetornarOfertaDoAtendimentoNetPtvBKO(id);
         }
 
         public HistoricoDaOfertaDoAtendimentoNetPtvBKO IniciarAuditoriaDaOfertaNetPtvBKO(int idUsuario, long idOfertaBko)
@@ -330,7 +330,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 
         public long GravarHistoricoDoAtendimentoNetPtvBKO(HistoricoDaOfertaDoAtendimentoNetPtvBKO oferta)
         {
-            return _ofertaDoAtendimentoDao.GravarHistoricoDoAtendimentoNetPtvBKO(oferta);
+            return _dao.GravarHistoricoDoAtendimentoNetPtvBKO(oferta);
         }
 
         #endregion NET_PTV

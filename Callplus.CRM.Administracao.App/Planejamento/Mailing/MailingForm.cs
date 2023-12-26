@@ -58,6 +58,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 		private string _sqlArquivoMarcacoes = string.Empty;
 		private List<DadosMarcacoes> _marcacoesDistinct;
 		private string _mensagemDeAviso;
+		private bool _subirNovaCampanhaDoMailing = false;
 
 		#endregion VARIAVEIS
 
@@ -116,9 +117,12 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 		{
 			if (PodeSalvar())
 			{
+				if (_subirNovaCampanhaDoMailing)
+					PreparaMarcacoesParaGravar();
+
 				if (_mailing == null) _mailing = new Tabulador.Dominio.Entidades.Mailing();
 
-				if (_mailing.id == 0)
+				if (_mailing.id == 0 && !_subirNovaCampanhaDoMailing)
 				{
 					var f = new LoadingForm("Transferindo Arquivo Para Servidor Callplus");
 					var start = Task.Factory.StartNew(() => { f.ShowDialog(); });
@@ -138,10 +142,23 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				var idMailing = _mailingService.Gravar(_mailing);
 				GravarMalingEmCache(idMailing);
 
-				Thread.Sleep(3000);
-				atualizar = true;
-				this.Hide();
-				this.Close();
+				if (MessageBox.Show("Deseja aproveitar este arquivo e subir mailing para outra campanha?", "Aviso do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+				{
+					_subirNovaCampanhaDoMailing = true;
+					_campanhasDoMailing.RemoveAll(x => x.Equals(cmbCampanhaArquivoMarcacoes.Text));
+					CarregarCampanhasDoArquivoDeMarcacoes();
+
+					cmbCampanha.Enabled = true;
+					txtNome.Text = string.Empty;
+					txtObservacao.Text = string.Empty;
+					cmbCampanhaArquivoMarcacoes.Enabled = true;
+				}
+				else
+				{
+					atualizar = true;
+					this.Hide();
+					this.Close();
+				}
 			}
 		}
 
@@ -312,14 +329,16 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
 			_marcacoesDistinct = ObtemObjetoDeMarcacoes().DistinctBy(x => new { x.Cpf, x.Carteira }).ToList();
 			_campanhasDoMailing = _marcacoesDistinct.DistinctBy(x => x.Carteira).Select(x => x.Carteira?.ToUpper()?.Trim()).ToList();
-			CarregarCampanhasDoArquivoDeMarcacoes(_campanhasDoMailing);
+			CarregarCampanhasDoArquivoDeMarcacoes();
 		}
 
-		private void CarregarCampanhasDoArquivoDeMarcacoes(List<string> campanhas)
+		private void CarregarCampanhasDoArquivoDeMarcacoes()
 		{
+			cmbCampanhaArquivoMarcacoes.ResetarComSelecione(true);
+
 			var dic = new Dictionary<string, string>();
 			int id = 0;
-			foreach (var campanha in campanhas)
+			foreach (var campanha in _campanhasDoMailing)
 				dic.Add(Convert.ToString(id++), campanha);
 
 			cmbCampanhaArquivoMarcacoes.PreencherComSelecione(dic.OrderBy(x => x.Value));
@@ -345,7 +364,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			int idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
 			_caminhoServidorProcessamento = _campanhaService.RetornarCaminhoDoServidor(idCampanha);
 
-			btnCarregarArquivoMailing.Enabled = !string.IsNullOrEmpty(_caminhoServidorProcessamento);
+			if (!_subirNovaCampanhaDoMailing)
+				btnCarregarArquivoMailing.Enabled = !string.IsNullOrEmpty(_caminhoServidorProcessamento);
 		}
 
 		private void ExportarArquivo()
@@ -850,7 +870,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
 		private void cmbCampanhaArquivoMarcacoes_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			btnCarregar.Enabled = !string.IsNullOrEmpty(txtCaminhoDoArquivoMarcacoes.Text) && !string.IsNullOrEmpty(txtCaminhoDoArquivoMailing.Text) && !cmbCampanhaArquivoMarcacoes.TextoEhSelecione();
+			if (!_subirNovaCampanhaDoMailing)
+				btnCarregar.Enabled = !string.IsNullOrEmpty(txtCaminhoDoArquivoMarcacoes.Text) && !string.IsNullOrEmpty(txtCaminhoDoArquivoMailing.Text) && !cmbCampanhaArquivoMarcacoes.TextoEhSelecione();
 		}
 
 		#endregion EVENTOS

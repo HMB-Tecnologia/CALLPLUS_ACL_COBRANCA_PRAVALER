@@ -316,30 +316,6 @@
     <Compile Include="Operacao\CobrancaPravalerForm.designer.cs">
       <DependentUpon>CobrancaPravalerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operacao\OfertaNETPTVForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Operacao\OfertaNETPTVForm.Designer.cs">
-      <DependentUpon>OfertaNETPTVForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Operacao\OfertaMigracaoPreControleTimForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Operacao\OfertaMigracaoPreControleTimForm.Designer.cs">
-      <DependentUpon>OfertaMigracaoPreControleTimForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Operacao\OfertaPortabilidadeMPForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Operacao\OfertaPortabilidadeMPForm.Designer.cs">
-      <DependentUpon>OfertaPortabilidadeMPForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Operacao\OfertaRentabilizacaoTimForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Operacao\OfertaRentabilizacaoTimForm.Designer.cs">
-      <DependentUpon>OfertaRentabilizacaoTimForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Operacao\RankingOperadorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,18 +415,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Operacao\CobrancaPravalerForm.resx">
       <DependentUpon>CobrancaPravalerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Operacao\OfertaNETPTVForm.resx">
-      <DependentUpon>OfertaNETPTVForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Operacao\OfertaMigracaoPreControleTimForm.resx">
-      <DependentUpon>OfertaMigracaoPreControleTimForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Operacao\OfertaPortabilidadeMPForm.resx">
-      <DependentUpon>OfertaPortabilidadeMPForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Operacao\OfertaRentabilizacaoTimForm.resx">
-      <DependentUpon>OfertaRentabilizacaoTimForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Operacao\SolicitarPermissaoForm.resx">
       <DependentUpon>SolicitarPermissaoForm.cs</DependentUpon>

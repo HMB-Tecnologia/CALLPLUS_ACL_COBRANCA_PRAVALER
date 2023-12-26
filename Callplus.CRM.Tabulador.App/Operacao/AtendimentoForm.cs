@@ -56,7 +56,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_discadorService = new DiscadorService();
 			_campanhasDoUsuario = new List<Campanha>();
 			_scriptDeAtendimentoService = new ScriptDeAtendimentoService();
-			_ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+			_ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
 			_faqDeAtendimentoService = new FaqDeAtendimentoService();
 			_notificacaoService = new NotificacaoService();
 			_VerificacaoService = new VerificacaoService();
@@ -125,7 +125,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private readonly DiscadorService _discadorService;
 		private readonly LayoutDinamicoService _layoutDinamicoService;
 		private readonly ILogger _logger;
-		private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+		private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
 		private readonly ProdutoService _produtoService;
 		private readonly ProspectService _prospectService;
 		private static bool indicacao = false;
@@ -3630,9 +3630,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					if (ofertasDoAtendimento != null && ofertasDoAtendimento.Count() == 1)
 					{
 						var ofertaDoAtendimento = ofertasDoAtendimento?.First();
-						if (ofertaDoAtendimento.IdStatusDaOferta != null)
+						if (ofertaDoAtendimento.IdStatusDoAcordo != null)
 						{
-							var status = _statusDeOfertaService.RetornarStatusDeOferta(ofertaDoAtendimento.IdStatusDaOferta.Value, _campanhaAtual.Id);
+							var status = _statusDeOfertaService.RetornarStatusDeOferta(ofertaDoAtendimento.IdStatusDoAcordo.Value, _campanhaAtual.Id);
 							bool deveFinalizar = ConfigurarStatusDeAtendimentoDeAcordoComOStatusDeOferta(status);
 							if (deveFinalizar)
 							{
@@ -3848,7 +3848,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		private bool VerificarSeOfertaFoiFinalizada(OfertaDoAtendimento oferta)
 		{
-			int? idStatusDaOferta = null;
+			int? idStatusDoAcordo = null;
 
 			IEnumerable<OfertaDoAtendimento> ofertas = _ofertaDoAtendimentoService
 				.RetornarOfertasDoAtendimento(oferta.IdAtendimento);
@@ -3856,41 +3856,19 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			OfertaDoAtendimento ofertaAtual =
 				ofertas.FirstOrDefault(x => x.Id == oferta.Id && x.IdTipoDeProduto == oferta.IdTipoDeProduto);
 
-			//if (oferta.IdTipoDeProduto == 1)
-			//{
-			//    var ofertaMigracao = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroMigracao(oferta.Id);
-
-			//    idStatusDaOferta = ofertaMigracao.IdStatusDaOferta;
-			//}
-			//else if (oferta.IdTipoDeProduto == 3)
-			//{
-			//    var ofertaMigracao = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoClaroRentabilizacao(oferta.Id);
-
-			//    idStatusDaOferta = ofertaMigracao.IdStatusDaOferta;
-			//}
-
-			if (oferta.IdTipoDeProduto == 4)
-			{
-				var ofertaPortabilidade = _ofertaDoAtendimentoService.RetornarOfertaDoAtendimentoMPPortabilidade(oferta.Id);
-				idStatusDaOferta = ofertaPortabilidade.IdStatusDaOferta;
-			}
-			//rei almeida
-
-
-			idStatusDaOferta = ofertaAtual?.IdStatusDaOferta;
-
+			idStatusDoAcordo = ofertaAtual?.IdStatusDoAcordo;
 
 			List<string> mensagens = new List<string>();
 
 			if (_afterCallEncerrado) return true;
 
-			if (idStatusDaOferta == null)
+			if (idStatusDoAcordo == null)
 			{
 				mensagens.Add("A oferta não foi registrada!");
 			}
 			else
 			{
-				var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta((int)idStatusDaOferta, _campanhaAtual.Id);
+				var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta((int)idStatusDoAcordo, _campanhaAtual.Id);
 
 				if (statusOferta == null)
 				{
@@ -4594,7 +4572,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				if (ofertasDoAtendimento.Any() == false)
 					mensagens.Add("O Status da oferta não foi registrado para este atendimento.");
 
-				if (ofertasDoAtendimento.Any(x => x.IdStatusDaOferta == null || x.IdStatusDaOferta == 0))
+				if (ofertasDoAtendimento.Any(x => x.IdStatusDoAcordo == null || x.IdStatusDoAcordo == 0))
 					mensagens.Add("O Status da oferta não foi registrado para este atendimento.");
 
 
@@ -4605,9 +4583,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					{
 						foreach (OfertaDoAtendimento oferta in ofertasDoAtendimento)
 						{
-							if (oferta.IdStatusDaOferta != null && oferta.IdStatusDaOferta != 0)
+							if (oferta.IdStatusDoAcordo != null && oferta.IdStatusDoAcordo != 0)
 							{
-								var status = _statusDeOfertaService.RetornarStatusDeOferta(oferta.IdStatusDaOferta.Value, _campanhaAtual.Id);
+								var status = _statusDeOfertaService.RetornarStatusDeOferta(oferta.IdStatusDoAcordo.Value, _campanhaAtual.Id);
 
 								if (status.TipoStatus == TipoStatusDeOferta.Aceite)
 								{
@@ -4744,42 +4722,42 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 				if ((dgOferta.Rows[index].Cells["idTipoDeProduto"].Value.ToString() == "1") || (dgOferta.Rows[index].Cells["idTipoDeProduto"].Value.ToString() == "2"))
 				{
-					OfertaMigracaoPreControleTimForm f = new OfertaMigracaoPreControleTimForm(_usuario, idOferta, _prospectDoAtendimento, _containerDeLayoutDinamico, _discadorConectado, false, false, idStatusOferta, _campanhaAtual.Id);
+					//OfertaMigracaoPreControleTimForm f = new OfertaMigracaoPreControleTimForm(_usuario, idOferta, _prospectDoAtendimento, _containerDeLayoutDinamico, _discadorConectado, false, false, idStatusOferta, _campanhaAtual.Id);
 
-					f.StartPosition = FormStartPosition.CenterScreen;
-					f.ShowDialog();
+					//f.StartPosition = FormStartPosition.CenterScreen;
+					//f.ShowDialog();
 
-					atualizar = f.Atualizar;
+					//atualizar = f.Atualizar;
 				}
 
 				if ((dgOferta.Rows[index].Cells["idTipoDeProduto"].Value.ToString() == "3"))
 				{
-					OfertaRentabilizacaoTimForm f = new OfertaRentabilizacaoTimForm(_usuario, idOferta, _prospectDoAtendimento, false, false, idStatusOferta, _campanhaAtual.Id);
+					//OfertaRentabilizacaoTimForm f = new OfertaRentabilizacaoTimForm(_usuario, idOferta, _prospectDoAtendimento, false, false, idStatusOferta, _campanhaAtual.Id);
 
-					f.StartPosition = FormStartPosition.CenterScreen;
-					f.ShowDialog();
+					//f.StartPosition = FormStartPosition.CenterScreen;
+					//f.ShowDialog();
 
-					atualizar = f.Atualizar;
+					//atualizar = f.Atualizar;
 				}
 
 				if ((dgOferta.Rows[index].Cells["idTipoDeProduto"].Value.ToString() == "4"))
 				{
-					OfertaPortabilidadeMPForm f = new OfertaPortabilidadeMPForm(_usuario, idOferta, _prospectDoAtendimento, false, false, _containerDeLayoutDinamico, _discadorConectado, tsTxtLoginHuawei.Text, idStatusOferta, _campanhaAtual.Id);
+					//OfertaPortabilidadeMPForm f = new OfertaPortabilidadeMPForm(_usuario, idOferta, _prospectDoAtendimento, false, false, _containerDeLayoutDinamico, _discadorConectado, tsTxtLoginHuawei.Text, idStatusOferta, _campanhaAtual.Id);
 
-					f.StartPosition = FormStartPosition.CenterScreen;
-					f.ShowDialog();
+					//f.StartPosition = FormStartPosition.CenterScreen;
+					//f.ShowDialog();
 
-					atualizar = f.Atualizar;
+					//atualizar = f.Atualizar;
 				}
 
 				if ((dgOferta.Rows[index].Cells["idTipoDeProduto"].Value.ToString() == "5"))
 				{
-					OfertaNETPTVForm f = new OfertaNETPTVForm(_usuario, idOferta, _prospectDoAtendimento, false, false, _containerDeLayoutDinamico, _discadorConectado, idStatusOferta, _campanhaAtual.Id);
+					//OfertaNETPTVForm f = new OfertaNETPTVForm(_usuario, idOferta, _prospectDoAtendimento, false, false, _containerDeLayoutDinamico, _discadorConectado, idStatusOferta, _campanhaAtual.Id);
 
-					f.StartPosition = FormStartPosition.CenterScreen;
-					f.ShowDialog();
+					//f.StartPosition = FormStartPosition.CenterScreen;
+					//f.ShowDialog();
 
-					atualizar = f.Atualizar;
+					//atualizar = f.Atualizar;
 				}
 
 				if (atualizar)

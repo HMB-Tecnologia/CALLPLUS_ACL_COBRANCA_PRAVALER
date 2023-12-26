@@ -18,15 +18,15 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 {
 	public partial class CobrancaPravalerForm : Form
 	{
-		public CobrancaPravalerForm(Usuario usuario, long idOferta, Prospect prospect, ContainerDeLayoutDeCamposDinamicos camposDinamicos, Atendimento atendimento,
-		bool bloqueioStatus, bool fecharAoGravar, int? idStatusOferta = null, bool edicao = true)
+		public CobrancaPravalerForm(Usuario usuario, long idAcordo, Prospect prospect, ContainerDeLayoutDeCamposDinamicos camposDinamicos, Atendimento atendimento,
+		bool bloqueioStatus, bool fecharAoGravar, int? idStatusAcordo = null, bool edicao = true)
 		{
 			_logger = LogManager.GetCurrentClassLogger();
 			_layoutDinamicoService = new LayoutDinamicoService();
 			_atendimentoService = new AtendimentoService();
 			_campanhaService = new CampanhaService();
 			_checklistService = new ChecklistService();
-			_cobrancaAtendimentoService = new OfertaDoAtendimentoService();
+			_cobrancaAtendimentoService = new AcordoDoAtendimentoService();
 			_prospectService = new ProspectService();
 			_statusDeOfertaService = new StatusDeOfertaService();
 			_permissaoService = new PermissaoService();
@@ -36,9 +36,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			_atendimento = atendimento;
 			_usuario = usuario;
-			_oferta = _cobrancaAtendimentoService.RetornarCobrancaAtendimentoPravaler(idOferta);
+			_acordo = _cobrancaAtendimentoService.RetornarCobrancaAtendimentoPravaler(idAcordo);
 			_prospect = prospect;
-			_idStatusOferta = idStatusOferta;
+			_idStatusOferta = idStatusAcordo;
 			_permiteEditar = edicao;
 			_fecharAoGravar = fecharAoGravar;
 			_bloqueioStatus = bloqueioStatus;
@@ -53,7 +53,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private readonly AtendimentoService _atendimentoService;
 		private readonly CampanhaService _campanhaService;
 		private readonly ChecklistService _checklistService;
-		private readonly OfertaDoAtendimentoService _cobrancaAtendimentoService;
+		private readonly AcordoDoAtendimentoService _cobrancaAtendimentoService;
 		private readonly ProspectService _prospectService;
 		private readonly StatusDeOfertaService _statusDeOfertaService;
 		private readonly PermissaoService _permissaoService;
@@ -62,7 +62,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private Usuario _usuario;
 		private Prospect _prospect;
 		private Contrato _contrato;
-		private CobrancaAtendimentoPravaler _oferta;
+		private CobrancaAtendimentoPravaler _acordo;
 		private bool _bloqueioStatus;
 		private int? _idStatusOferta;
 		private bool _fecharAoGravar;
@@ -85,7 +85,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			Atualizar = false;
 			tsOferta_cmbStatusOferta.Enabled = false;
 			tsOferta_btnChecklist.Enabled = false;
-			txtObservacao.Text = _oferta.Observacao;
+			txtObservacao.Text = _acordo.Observacao;
 
 			CarregarTipoDeStatusDeOferta();
 			CarregarControleDeEdicao();
@@ -193,16 +193,16 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		{
 			if (AtendeRegrasDeGravacao(true))
 			{
-				_oferta.IdStatusDaOferta = Convert.ToInt32(tsOferta_cmbStatusOferta.ComboBox.SelectedValue);
+				_acordo.IdStatusDoAcordo = Convert.ToInt32(tsOferta_cmbStatusOferta.ComboBox.SelectedValue);
 
 				if (!string.IsNullOrEmpty(txtObservacao.Text))
-					_oferta.Observacao = txtObservacao.Text;
+					_acordo.Observacao = txtObservacao.Text;
 
-				_oferta.IdOperador = _usuario.Id;
+				_acordo.IdOperador = _usuario.Id;
 
-				_oferta.Id = _cobrancaAtendimentoService.GravarOfertaDoAtendimentoClaroMigracao(_oferta);
+				_acordo.Id = _cobrancaAtendimentoService.GravarAcordoDoAtendimentoPravaler(_acordo);
 
-				MessageBox.Show("Oferta gravada com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("Acordo gravado com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				Atualizar = true;
 
@@ -259,7 +259,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 				_checklistAplicado = false;
 
-				Checklist.ChecklistForm f = new Checklist.ChecklistForm(checklistSelecionado, this, (int)_oferta.IdTipoDeProduto, _camposDinamicos, _usuario);
+				Checklist.ChecklistForm f = new Checklist.ChecklistForm(checklistSelecionado, this, (int)_acordo.IdTipoDeProduto, _camposDinamicos, _usuario);
 
 				f.StartPosition = FormStartPosition.CenterScreen;
 				f.ShowDialog();
@@ -277,7 +277,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 			else
 			{
-				MessageBox.Show("Nenhum checklist disponível para a ofertaDoAtendimento.\nPode prosseguir com a gravação!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("Nenhum checklist disponível.\nPode prosseguir com a gravação!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
@@ -487,7 +487,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 		#region EVENTOS
 
-		private void OfertaMigracaoPreControleClaroForm_Load(object sender, EventArgs e)
+		private void CobrancaPravalerForm_Load(object sender, EventArgs e)
 		{
 			try
 			{
@@ -513,7 +513,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				_logger.Error(ex);
 
 				MessageBox.Show(
-					$"Não foi possível carregar os status da ofertaDoAtendimento!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					$"Não foi possível carregar os status do Atendimento!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -528,7 +528,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				_logger.Error(ex);
 
 				MessageBox.Show(
-					$"Não foi possível gravar a ofertaDoAtendimento!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					$"Não foi possível gravar o Acordo!\n\nErro:{ex.Message}\n\n\nStacktrace:{ex.StackTrace}", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 

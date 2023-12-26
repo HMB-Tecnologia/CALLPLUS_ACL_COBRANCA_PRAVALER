@@ -23,7 +23,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             _usuarioService = new UsuarioService();
             _statusDeAuditoriaService = new StatusDeAuditoriaService();
             _auditoriaDeOfertaBko = new AuditoriaDeOfertaService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _usuarioLogado = AdministracaoMDI._usuario;
 
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
         private readonly UsuarioService _usuarioService;
         private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
         private readonly AuditoriaDeOfertaService _auditoriaDeOfertaBko;
-        private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+        private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly Usuario _usuarioLogado;
         private DataTable _dtExportaVenda;
 
@@ -762,7 +762,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.AuditoriaDeVendas
             {
                 long id = Convert.ToInt64(lnkVendaSelecionada.Text);
 
-                AuditoriaOferta_PortabilidadeMPForm f = new AuditoriaOferta_PortabilidadeMPForm(id);
+                AuditoriaAcordo_CobrancaPravalerForm f = new AuditoriaAcordo_CobrancaPravalerForm(id);
                 f.Iniciar();
             }
         }

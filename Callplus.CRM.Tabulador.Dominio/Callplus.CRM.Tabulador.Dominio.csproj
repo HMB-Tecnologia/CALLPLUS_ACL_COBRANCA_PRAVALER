@@ -74,7 +74,7 @@
     <Compile Include="Dto\HistoricoDaOfertaDoAtendimentoBkoDTO.cs" />
     <Compile Include="Dto\PermissoesDoUsuarioDTO.cs" />
     <Compile Include="Dto\ProdutoDaOfertaDto.cs" />
-    <Compile Include="Dto\ResumoDaOfertaDoAtendimentoBkoDTO.cs" />
+    <Compile Include="Dto\ResumoDoAcordoDoAtendimentoBkoDTO.cs" />
     <Compile Include="Dto\ScriptDeAtendimentoDto.cs" />
     <Compile Include="Entidades\ArquivoDePausa.cs" />
     <Compile Include="Entidades\Atendimento.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Entidades\FrasesGamificacao.cs" />
     <Compile Include="Entidades\Gamificacao.cs" />
     <Compile Include="Entidades\GrauDeParentesco.cs" />
-    <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoMigracaoBKO.cs" />
+    <Compile Include="Entidades\HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoNetPtvBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoPortabilidadeBKO.cs" />
     <Compile Include="Entidades\HistoricoDaOfertaDoAtendimentoRentabilizacaoBKO.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Entidades\ModuloDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\OfertaDoAtendimento.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoNETPTV.cs" />
-    <Compile Include="Entidades\OfertaDoAtendimentoClaroMigracaoBKO.cs" />
+    <Compile Include="Entidades\OfertaDoAtendimentoCobrancaPravalerBKO.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoMPPortabilidade.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoMPPortabilidadeBKO.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoClaroRentabilizacao.cs" />

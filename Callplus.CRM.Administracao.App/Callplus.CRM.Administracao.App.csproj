@@ -134,29 +134,11 @@
     <Compile Include="Administracao\Usuario\UsuarioFormEdit.Designer.cs">
       <DependentUpon>UsuarioFormEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.cs">
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaAcordo_CobrancaPravalerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.Designer.cs">
-      <DependentUpon>AuditoriaOferta_PtvNetForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.Designer.cs">
-      <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.Designer.cs">
-      <DependentUpon>AuditoriaOferta_PortabilidadeMPForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.Designer.cs">
-      <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
+    <Compile Include="Backoffice\AuditoriaDeVendas\AuditoriaAcordo_CobrancaPravalerForm.Designer.cs">
+      <DependentUpon>AuditoriaAcordo_CobrancaPravalerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaAgrupadaForm.cs">
       <SubType>Form</SubType>
@@ -553,17 +535,8 @@
     <EmbeddedResource Include="Administracao\Usuario\UsuarioFormEdit.resx">
       <DependentUpon>UsuarioFormEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PtvNetForm.resx">
-      <DependentUpon>AuditoriaOferta_PtvNetForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_MigracaoClaroForm.resx">
-      <DependentUpon>AuditoriaOferta_MigracaoClaroForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_PortabilidadeMPForm.resx">
-      <DependentUpon>AuditoriaOferta_PortabilidadeMPForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaOferta_RentabilizacaoClaroForm.resx">
-      <DependentUpon>AuditoriaOferta_RentabilizacaoClaroForm.cs</DependentUpon>
+    <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\AuditoriaAcordo_CobrancaPravalerForm.resx">
+      <DependentUpon>AuditoriaAcordo_CobrancaPravalerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backoffice\AuditoriaDeVendas\ListaAuditoriaDeVendaAgrupadaForm.resx">
       <DependentUpon>ListaAuditoriaDeVendaAgrupadaForm.cs</DependentUpon>

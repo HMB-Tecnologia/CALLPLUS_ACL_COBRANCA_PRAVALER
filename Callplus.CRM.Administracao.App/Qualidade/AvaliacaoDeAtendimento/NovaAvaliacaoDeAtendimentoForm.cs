@@ -25,7 +25,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
             _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();
             _loginService = new LoginService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
             _statusDeOfertaService = new StatusDeOfertaService();
             _usuarioService = new UsuarioService();
@@ -53,7 +53,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
             _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();
             _loginService = new LoginService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
             _statusDeOfertaService = new StatusDeOfertaService();
             _usuarioService = new UsuarioService();
@@ -79,7 +79,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
         private readonly FeedbackDaAvaliacaoDeAtendimentoService _feedbackDaAvaliacaoDeAtendimentoService;
         private readonly FormularioDeQualidadeService _formularioDeQualidadeService;
         private readonly LoginService _loginService;
-        private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+        private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly ProspectService _prospectService;
         private readonly StatusDeOfertaService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
@@ -494,28 +494,28 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
 
                 if(oferta.IdTipoDeProduto == 1 || oferta.IdTipoDeProduto == 2)
                 {
-                    OfertaMigracaoPreControleTimForm form = new OfertaMigracaoPreControleTimForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDaOferta, null , false, exibirTodasAsDatasVencimento: true);
+                    //OfertaMigracaoPreControleTimForm form = new OfertaMigracaoPreControleTimForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDoAcordo, null , false, exibirTodasAsDatasVencimento: true);
 
-                    form.ShowDialog();
+                    //form.ShowDialog();
                 }
                 else if (oferta.IdTipoDeProduto == 3)
                 {
-                    OfertaRentabilizacaoTimForm form = new OfertaRentabilizacaoTimForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, oferta.IdStatusDaOferta, null, false);
+                    //OfertaRentabilizacaoTimForm form = new OfertaRentabilizacaoTimForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, oferta.IdStatusDoAcordo, null, false);
 
-                    form.ShowDialog();
+                    //form.ShowDialog();
                 }
                 else if (oferta.IdTipoDeProduto == 4)
                 {
 
-                    OfertaPortabilidadeMPForm form = new OfertaPortabilidadeMPForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, "", oferta.IdStatusDaOferta, null, false);
+                    //OfertaPortabilidadeMPForm form = new OfertaPortabilidadeMPForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, "", oferta.IdStatusDoAcordo, null, false);
 
-                    form.ShowDialog();
+                    //form.ShowDialog();
                 }
                 else if (oferta.IdTipoDeProduto == 5)
                 {
-                    OfertaNETPTVForm form = new OfertaNETPTVForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, oferta.IdStatusDaOferta, null, false);
+                    //OfertaNETPTVForm form = new OfertaNETPTVForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, oferta.IdStatusDoAcordo, null, false);
 
-                    form.ShowDialog();
+                    //form.ShowDialog();
                 }
             }
         }

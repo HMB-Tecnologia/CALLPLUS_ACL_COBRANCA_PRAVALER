@@ -4,7 +4,7 @@
     {
         public long Id { get; set; }
         public long IdAtendimento { get; set; }        
-        public int? IdStatusDaOferta { get; set; }
+        public int? IdStatusDoAcordo { get; set; }
         public long? IdProduto { get; set; }
         public int? IdTipoDeProduto { get; set; }
         public int? IdScriptOferta { get; set; }

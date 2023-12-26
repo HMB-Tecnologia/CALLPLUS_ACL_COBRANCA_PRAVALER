@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Callplus.CRM.Tabulador.Dominio.Dto;
+using Callplus.CRM.Tabulador.Dominio.Entidades;
+using Callplus.CRM.Tabulador.Infra.Dados.Util;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Callplus.CRM.Tabulador.Dominio.Entidades;
-using Callplus.CRM.Tabulador.Dominio.Dto;
-using Callplus.CRM.Tabulador.Infra.Dados.Util;
 using System.Net;
 using System.Net.Sockets;
 
 namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 {
-	public class OfertaDoAtendimentoDao : DaoBase
+	public class AcordoDoAtendimentoDao : DaoBase
 	{
 		protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
@@ -151,9 +150,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public ResumoDaOfertaDoAtendimentoBkoDTO RetornarResumoDaOfertaDoAtendimentoBKO(long id, int idTipoDeProduto)
+		public ResumoDoAcordoDoAtendimentoBkoDTO RetornarAcordoDoAtendimentoBKO(long id, int idTipoDeProduto)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_BKO_RETORNAR_RESUMO";
+			var sql = "APP_CRM_ACORDO_DO_ATENDIMENTO_BKO_RETORNAR_RESUMO";
 
 			var args = new
 			{
@@ -161,7 +160,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 				IdTipoDeProduto = idTipoDeProduto
 			};
 
-			var resultado = ExecutarProcedure<ResumoDaOfertaDoAtendimentoBkoDTO>(sql, args).FirstOrDefault();
+			var resultado = ExecutarProcedure<ResumoDoAcordoDoAtendimentoBkoDTO>(sql, args).FirstOrDefault();
 
 			return resultado;
 		}
@@ -197,7 +196,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 		{
 			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_RETORNAR_OFERTA_PARA_AVALIACAO ";
 
-			if(iDOferta == null)
+			if (iDOferta == null)
 				sql += string.Format("@IdCampanha = {0}, @IdSupervisor = {1}, @IdOperador = {2}, @DataInicial = '{3}', @DataFinal = '{4}', @idStatus = '{5}', @idoferta = {6} ",
 								idCampanha, idSupervisor, idOperador, dataInicial, dataFinal, idStatus, "null");
 			else
@@ -246,82 +245,29 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 		}
 
 
-		#region CLARO_MIGRACAO
-
-		public long GravarOfertaDoAtendimentoClaroMigracao(CobrancaAtendimentoPravaler oferta)
+		#region PRAVALER
+		public long GravarAcordoDoAtendimentoPravaler(CobrancaAtendimentoPravaler acordo)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_CLARO_MIGRACAO_GRAVAR";
+			var sql = "APP_CRM_ACORDO_DO_ATENDIMENTO_PRAVALER_GRAVAR";
 
 			var args = new
 			{
-				Id = oferta.Id,
-				IdAtendimento = oferta.IdAtendimento,
-				IdStatusDaOferta = oferta.IdStatusDaOferta,
-				IdProduto = oferta.IdProduto,
-				NumeroMigrado = oferta.NumeroMigrado,
-				IdProduto2 = oferta.IdProduto2,
-				NumeroMigrado2 = oferta.NumeroMigrado2,
-				FaturaDigital = oferta.FaturaDigital,
-				EmailFaturaDigital = oferta.EmailFaturaDigital,
-				DiaVencimento = oferta.DiaVencimento,
-				IdFormaDePagamento = oferta.IdFormaDePagamento,
-				IdBanco = oferta.IdBanco,
-				Agencia = oferta.Agencia,
-				Conta = oferta.Conta,
-				Nome = oferta.Nome,
-				Cpf = oferta.Cpf,
-				Rg = oferta.Rg,
-				Nascimento = oferta.Nascimento,
-				NomeDaMae = oferta.NomeDaMae,
-				TelefoneCelular = oferta.TelefoneCelular,
-				TelefoneResidencial = oferta.TelefoneResidencial,
-				TelefoneRecado = oferta.TelefoneRecado,
-				IdEstadoCivil = oferta.IdEstadoCivil,
-				IdProfissao = oferta.IdProfissao,
-				IdEscolaridade = oferta.IdFaixaDeRenda,
-				Cep = oferta.Cep,
-				Logradouro = oferta.Logradouro,
-				Numero = oferta.Numero,
-				Complemento = oferta.Complemento,
-				Bairro = oferta.Bairro,
-				Cidade = oferta.Cidade,
-				Uf = oferta.Uf,
-				PontoDeReferencia = oferta.PontoDeReferencia,
-				Observacao = oferta.Observacao,
-				TitularidadeDiferente = oferta.TitularidadeDiferente,
-				IdOperador = oferta.IdOperador,
-				//Codigo21 = oferta.codigo21,
-				ReceberContrato = oferta.receberContrato,
-				NumeroFaturaWhatsApp = oferta.NumeroFaturaWhatsApp,
-				Processado = oferta.processado,
-				//ofertaAparelho = oferta.ofertaAparelho,
-				//url = oferta.url
-				ondeReceberContrato = oferta.ondeReceberContrato,
-				Sexo = oferta.Sexo
-
-
+				acordo.Id,
+				acordo.IdAtendimento,
+				acordo.IdStatusDoAcordo,
+				acordo.IdProduto,
+				acordo.Observacao,
 			};
 
 			var resultado = ExecutarProcedureSingleOrDefault<long>(sql, args);
 
 			return resultado;
 		}
+		#endregion PRAVALER
 
-		public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoPreVendaPortabilidade(long id)
-		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_PRE_VENDA_LISTAR";
+		#region CLARO_MIGRACAO
 
-			var args = new
-			{
-				Id = id
-			};
-
-			var resultado = ExecutarProcedure<OfertaDoAtendimentoMPPortabilidade>(sql, args).FirstOrDefault();
-
-			return resultado;
-		}
-
-		public long GravarOfertaDoAtendimentoClaroMigracaoBKO(OfertaDoAtendimentoClaroMigracaoBKO oferta)
+		public long GravarOfertaDoAtendimentoClaroMigracaoBKO(OfertaDoAtendimentoCobrancaPravalerBKO oferta)
 		{
 			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_CLARO_MIGRACAO_BKO_GRAVAR";
 
@@ -388,7 +334,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
 		public CobrancaAtendimentoPravaler RetornarOfertaDoAtendimentoClaroMigracao(long id)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_CLARO_MIGRACAO_LISTAR_1";
+			var sql = "APP_CRM_ACORDO_DO_ATENDIMENTO_PRAVALER_LISTAR";
 
 			var args = new
 			{
@@ -401,34 +347,34 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public OfertaDoAtendimentoClaroMigracaoBKO RetornarOfertaDoAtendimentoClaroMigracaoBKO(long id)
+		public OfertaDoAtendimentoCobrancaPravalerBKO RetornarAcordoDoAtendimentoCobrancaPravalerBKO(long id)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_BKO_CLARO_MIGRACAO_LISTAR";
+			var sql = "APP_CRM_ACORDO_DO_ATENDIMENTO_BKO_PRAVALER_LISTAR";
 
 			var args = new
 			{
 				Id = id
 			};
 
-			var resultado = ExecutarProcedure<OfertaDoAtendimentoClaroMigracaoBKO>(sql, args).FirstOrDefault();
+			var resultado = ExecutarProcedure<OfertaDoAtendimentoCobrancaPravalerBKO>(sql, args).FirstOrDefault();
 			return resultado;
 		}
 
-		public long GravarHistoricoDoAtendimentoClaroMigracaoBKO(HistoricoDaOfertaDoAtendimentoMigracaoBKO historico)
+		public long GravarHistoricoDoAtendimentoCobrancaPravalerBKO(HistoricoDoAcordoDoAtendimentoCobrancaPravalerBKO historico)
 		{
-			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_BKO_CLARO_MIGRACAO_GRAVAR_HISTORICO";
+			var sql = "APP_CRM_ACORDO_DO_ATENDIMENTO_BKO_PRAVALER_GRAVAR_HISTORICO";
 
 			var args = new
 			{
 				Id = historico.id,
-				IdOferta = historico.idOfertaDoAtendimentoMigracaoBKO,
+				IdAcordo = historico.idAcodoDoAtendimentoCobrancaPravalerBKO,
 				IdStatusAuditoria = historico.idStatusAuditoria,
 				Protocolo = historico.protocolo,
-				Autorizacao = historico.autorizacao,
+				//Autorizacao = historico.autorizacao,
 				LoginWM = historico.loginWM,
 				CodigoAgente = historico.codigoAgente,
 				IdCriador = historico.idCriador,
-				Observacao = historico.Observacao
+				historico.Observacao
 			};
 
 			var resultado = ExecutarProcedureSingleOrDefault<long>(sql, args);
@@ -464,7 +410,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			{
 				Id = oferta.Id,
 				IdAtendimento = oferta.IdAtendimento,
-				IdStatusDaOferta = oferta.IdStatusDaOferta,
+				IdStatusDaOferta = oferta.IdStatusDoAcordo,
 				IdProduto = oferta.IdProduto,
 				NumeroMigrado = oferta.NumeroMigrado,
 				FaturaDigital = oferta.FaturaDigital,
@@ -572,6 +518,19 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 		#endregion CLARO_RENTABILIZACAO             
 
 		#region CLARO_PORTABILIDADE
+		public OfertaDoAtendimentoMPPortabilidade RetornarOfertaDoAtendimentoPreVendaPortabilidade(long id)
+		{
+			var sql = "APP_CRM_OFERTA_DO_ATENDIMENTO_PRE_VENDA_LISTAR";
+
+			var args = new
+			{
+				Id = id
+			};
+
+			var resultado = ExecutarProcedure<OfertaDoAtendimentoMPPortabilidade>(sql, args).FirstOrDefault();
+
+			return resultado;
+		}
 
 		public long GravarOfertaDoAtendimentoMPPortabilidade(OfertaDoAtendimentoMPPortabilidade oferta)
 		{
@@ -581,7 +540,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			{
 				oferta.Id,
 				oferta.IdAtendimento,
-				oferta.IdStatusDaOferta,
+				oferta.IdStatusDoAcordo,
 				oferta.Cust_Id,
 				oferta.Nome,
 				oferta.DddTel,
@@ -743,7 +702,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			{
 				Id = oferta.Id,
 				IdAtendimento = oferta.IdAtendimento,
-				IdStatusDaOferta = oferta.IdStatusDaOferta,
+				IdStatusDaOferta = oferta.IdStatusDoAcordo,
 				IdProduto = oferta.IdProduto,
 				FaturaDigital = oferta.FaturaDigital,
 				EmailFaturaDigital = oferta.EmailFaturaDigital,

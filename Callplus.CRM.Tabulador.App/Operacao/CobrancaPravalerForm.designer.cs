@@ -348,7 +348,7 @@
 			this.MinimizeBox = false;
 			this.Name = "CobrancaPravalerForm";
 			this.Text = "Cobrança Pravaler";
-			this.Load += new System.EventHandler(this.OfertaMigracaoPreControleClaroForm_Load);
+			this.Load += new System.EventHandler(this.CobrancaPravalerForm_Load);
 			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OfertaMigracaoPreControleClaroForm_KeyPress);
 			this.tsOferta.ResumeLayout(false);
 			this.tsOferta.PerformLayout();

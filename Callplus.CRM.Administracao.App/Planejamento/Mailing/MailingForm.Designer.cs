@@ -168,9 +168,9 @@
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(15, 113);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(188, 13);
+			this.label1.Size = new System.Drawing.Size(183, 13);
 			this.label1.TabIndex = 17;
-			this.label1.Text = "Campanhas do Arquivo de Marcações";
+			this.label1.Text = "Campanha do Arquivo de Marcações";
 			// 
 			// btnCarregar
 			// 

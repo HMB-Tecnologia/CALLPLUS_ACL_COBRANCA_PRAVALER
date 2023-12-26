@@ -25,7 +25,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();
             _loginService = new LoginService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
             _statusDeOfertaService = new StatusDeOfertaService();
             _usuarioService = new UsuarioService();
@@ -53,7 +53,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();
             _loginService = new LoginService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
             _statusDeOfertaService = new StatusDeOfertaService();
             _usuarioService = new UsuarioService();
@@ -79,7 +79,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _feedbackDaAvaliacaoDeAtendimentoService = new FeedbackDaAvaliacaoDeAtendimentoService();
             _formularioDeQualidadeService = new FormularioDeQualidadeService();
             _loginService = new LoginService();
-            _ofertaDoAtendimentoService = new OfertaDoAtendimentoService();
+            _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
             _statusDeOfertaService = new StatusDeOfertaService();
             _usuarioService = new UsuarioService();
@@ -107,7 +107,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         private readonly FeedbackDaAvaliacaoDeAtendimentoService _feedbackDaAvaliacaoDeAtendimentoService;
         private readonly FormularioDeQualidadeService _formularioDeQualidadeService;
         private readonly LoginService _loginService;
-        private readonly OfertaDoAtendimentoService _ofertaDoAtendimentoService;
+        private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly ProspectService _prospectService;
         private readonly StatusDeOfertaService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
@@ -886,17 +886,17 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     this.Location = new Point(0, 0);
                     this.Size = Screen.PrimaryScreen.WorkingArea.Size;
                     this.Height = Screen.PrimaryScreen.Bounds.Height - 80;
-                    OfertaMigracaoPreControleTimForm form = new OfertaMigracaoPreControleTimForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDaOferta, null, false, exibirTodasAsDatasVencimento: true);
-                    form.TopLevel = false;
-                    form.AutoScroll = true;
-                    pnlOferta.Controls.Add(form);
-                    form.FormBorderStyle = FormBorderStyle.None;
-                    form.Show();
+                    //OfertaMigracaoPreControleTimForm form = new OfertaMigracaoPreControleTimForm(AdministracaoMDI._usuario, oferta.Id, p, null, null, false, true, oferta.IdStatusDoAcordo, null, false, exibirTodasAsDatasVencimento: true);
+                    //form.TopLevel = false;
+                    //form.AutoScroll = true;
+                    //pnlOferta.Controls.Add(form);
+                    //form.FormBorderStyle = FormBorderStyle.None;
+                    //form.Show();
                 }
                 else if (oferta.IdTipoDeProduto == 3)
                 {
-                    OfertaRentabilizacaoTimForm form = new OfertaRentabilizacaoTimForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, oferta.IdStatusDaOferta, null, false);
-                    form.ShowDialog();
+                    //OfertaRentabilizacaoTimForm form = new OfertaRentabilizacaoTimForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, oferta.IdStatusDoAcordo, null, false);
+                    //form.ShowDialog();
                 }
                 else if (oferta.IdTipoDeProduto == 4)
                 {
@@ -905,12 +905,12 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
                     this.Location = new Point(0, 0);
                     this.Size = Screen.PrimaryScreen.WorkingArea.Size;
  
-                    OfertaPortabilidadeMPForm form = new OfertaPortabilidadeMPForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, "", oferta.IdStatusDaOferta, null, false);
-                    form.TopLevel = false;
-                    form.AutoScroll = true;
-                    pnlOferta.Controls.Add(form);
-                    form.FormBorderStyle = FormBorderStyle.None;
-                    form.Show();
+                    //OfertaPortabilidadeMPForm form = new OfertaPortabilidadeMPForm(AdministracaoMDI._usuario, oferta.Id, p, false, true, null, null, "", oferta.IdStatusDoAcordo, null, false);
+                    //form.TopLevel = false;
+                    //form.AutoScroll = true;
+                    //pnlOferta.Controls.Add(form);
+                    //form.FormBorderStyle = FormBorderStyle.None;
+                    //form.Show();
                 }
                 else if (oferta.IdTipoDeProduto == 5)
                 {

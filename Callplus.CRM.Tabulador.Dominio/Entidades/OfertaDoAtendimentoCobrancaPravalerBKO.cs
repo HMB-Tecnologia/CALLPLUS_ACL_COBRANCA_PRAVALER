@@ -2,7 +2,7 @@
 
 namespace Callplus.CRM.Tabulador.Dominio.Entidades
 {
-    public class OfertaDoAtendimentoClaroMigracaoBKO
+    public class OfertaDoAtendimentoCobrancaPravalerBKO
     {
         public long? id { get; set; }
         public long idOfertaDoAtendimento_Migracao { get; set; }

@@ -13,15 +13,14 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
     {
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
-        public DataTable Listar(string nome, DateTime? dataInicio, DateTime? dataTermino, int idTipoDeCampanha, string idsCampanha = "", string idsStatusAuditoria = "", long telefone = -1, long cpf = -1, int idSupervisor = -1, int idOperador = -1, string dataFiltro = "")
+        public DataTable Listar(string nome, DateTime? dataInicio, DateTime? dataTermino, int idTipoDeCampanha, string idsCampanha = "", string idsStatusAuditoria = "", long telefone = -1, string cpf = "", int idSupervisor = -1, int idOperador = -1, string dataFiltro = "")
         {
-            var sql = "APP_CRM_AUDITORIA_DE_VENDA_LISTAR_EXIBICAO_3 ";
+            var sql = "APP_CRM_AUDITORIA_DE_VENDA_LISTAR_EXIBICAO ";
             sql += $" @nome = '{nome}'";
             sql += $" ,@telefone = {telefone}";
-            sql += $" ,@cpf = {cpf}";
+            sql += $" ,@cpf = '{cpf}'";
             sql += $" ,@idSupervisor = {idSupervisor}";
             sql += $" ,@idOperador = {idOperador}";
-            sql += $" ,@idTipoDeCampanha =  {idTipoDeCampanha}";
             sql += $" ,@idsCampanha =  '{idsCampanha}'";
             sql += $" ,@idsStatusAuditoria = '{idsStatusAuditoria}'";
             sql += $" ,@dataFiltro = '{dataFiltro}'";

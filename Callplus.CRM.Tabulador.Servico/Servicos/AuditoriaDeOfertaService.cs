@@ -18,7 +18,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             _auditoriaDeOfertaDao = new AuditoriaDeOfertaDao();
         }
 
-        public DataTable Listar(string nomeProspect, DateTime? dataInicio, DateTime? dataTermino, int idTipoDeCampanha, string idsCampanha = "", string idsStatusAuditoria = "", long telefone = -1, long cpf = -1, int idSupervisor = -1, int idOperador = -1, string dataFiltro = "")
+        public DataTable Listar(string nomeProspect, DateTime? dataInicio, DateTime? dataTermino, int idTipoDeCampanha, string idsCampanha = "", string idsStatusAuditoria = "", long telefone = -1, string cpf = "", int idSupervisor = -1, int idOperador = -1, string dataFiltro = "")
         {
             return _auditoriaDeOfertaDao.Listar(nomeProspect, dataInicio, dataTermino, idTipoDeCampanha, idsCampanha, idsStatusAuditoria, telefone, cpf, idSupervisor, idOperador, dataFiltro);
         }
