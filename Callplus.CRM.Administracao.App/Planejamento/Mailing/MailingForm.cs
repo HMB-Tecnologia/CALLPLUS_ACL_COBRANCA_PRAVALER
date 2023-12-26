@@ -139,8 +139,12 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				_mailing.observacao = txtObservacao.Text.Trim();
 				_mailing.nomeArquivo = _arquivoDestino;
 
+				var frm = new LoadingForm("Gravando Mailing no Banco");
+				var str = Task.Factory.StartNew(() => { frm.ShowDialog(); });
 				var idMailing = _mailingService.Gravar(_mailing);
 				GravarMalingEmCache(idMailing);
+				Invoke(new MethodInvoker(() => { frm.FecharFormLoad(); }));
+				Task.WaitAny(str);
 
 				if (MessageBox.Show("Deseja aproveitar este arquivo e subir mailing para outra campanha?", "Aviso do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
@@ -152,6 +156,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 					txtNome.Text = string.Empty;
 					txtObservacao.Text = string.Empty;
 					cmbCampanhaArquivoMarcacoes.Enabled = true;
+					cmbCampanha.ResetarComSelecione(true);
 				}
 				else
 				{
@@ -168,11 +173,11 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			if (_arquivoMailing != null && _arquivoMarcacoesMailing != null)
 				if (idMailing > 0)
 				{
+					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(string.Empty, _sqlArquivoMarcacoes, idMailing) + " MARCAÇÕES";
 					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout10, string.Empty, idMailing) + " - LAYOUT 10\n";
 					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout16, string.Empty, idMailing) + " - LAYOUT 16\n";
 					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout30, string.Empty, idMailing) + " - LAYOUT 30\n";
 					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(_sqlArquivoMailingLayout60, string.Empty, idMailing) + " - LAYOUT 60\n";
-					retorno += _mailingService.GravarArquivoDeMailingEMarcacoes(string.Empty, _sqlArquivoMarcacoes, idMailing) + " MARCAÇÕES";
 				}
 				else
 					MessageBox.Show($"Ocorreu erro ao criar o Mailing!", "Erro do sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
