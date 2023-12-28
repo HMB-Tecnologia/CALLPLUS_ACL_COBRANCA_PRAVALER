@@ -27,7 +27,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _loginService = new LoginService();
             _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _usuarioService = new UsuarioService();
 
             this.modoFeedback = false;
@@ -55,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _loginService = new LoginService();
             _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _usuarioService = new UsuarioService();
 
             this.modoFeedback = true;
@@ -81,7 +81,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
             _loginService = new LoginService();
             _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _usuarioService = new UsuarioService();
 
             this.titulo = titulo;
@@ -109,7 +109,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.AvaliacaoDeAtendimento
         private readonly LoginService _loginService;
         private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly ProspectService _prospectService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
 
         private CobrancaAtendimentoPravaler _oferta;

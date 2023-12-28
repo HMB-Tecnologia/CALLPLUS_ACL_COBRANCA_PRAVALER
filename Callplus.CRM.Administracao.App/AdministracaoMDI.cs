@@ -383,7 +383,7 @@ namespace Callplus.CRM.Administracao.App
         {
             try
             {
-                AdministracaoMDI.ExibirForm(new Planejamento.StatusDeOferta.ListaStatusDeOfertaForm());
+                AdministracaoMDI.ExibirForm(new Planejamento.StatusDeOferta.ListaStatusDeAcordoForm());
             }
             catch (Exception ex)
             {

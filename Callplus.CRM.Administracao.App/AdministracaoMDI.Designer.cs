@@ -63,10 +63,10 @@
 			this.backofficeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuAuditoriaDeVenda = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuNotificacaoParaOperacao = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnuStatusDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuMonitoramentoDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuAlertaDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuGamificacao = new System.Windows.Forms.ToolStripMenuItem();
-			this.mnuStatusDeAuditoria = new System.Windows.Forms.ToolStripMenuItem();
 			this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuRelTrabalhoDaOperacao = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuRelRankingDaOperacao = new System.Windows.Forms.ToolStripMenuItem();
@@ -240,7 +240,7 @@
 			this.mnuStatusDeOferta.Enabled = false;
 			this.mnuStatusDeOferta.Name = "mnuStatusDeOferta";
 			this.mnuStatusDeOferta.Size = new System.Drawing.Size(203, 22);
-			this.mnuStatusDeOferta.Text = "Status de Oferta";
+			this.mnuStatusDeOferta.Text = "Status de Acordo";
 			this.mnuStatusDeOferta.Click += new System.EventHandler(this.mnuStatusDeOferta_Click);
 			// 
 			// mnuProduto
@@ -403,6 +403,14 @@
 			this.mnuNotificacaoParaOperacao.Text = "Notificações para Operação";
 			this.mnuNotificacaoParaOperacao.Click += new System.EventHandler(this.notificaçõesToolStripMenuItem_Click);
 			// 
+			// mnuStatusDeAuditoria
+			// 
+			this.mnuStatusDeAuditoria.Enabled = false;
+			this.mnuStatusDeAuditoria.Name = "mnuStatusDeAuditoria";
+			this.mnuStatusDeAuditoria.Size = new System.Drawing.Size(233, 22);
+			this.mnuStatusDeAuditoria.Text = "Status de Auditoria";
+			this.mnuStatusDeAuditoria.Click += new System.EventHandler(this.statusDeAuditoriaToolStripMenuItem_Click);
+			// 
 			// mnuMonitoramentoDeAuditoria
 			// 
 			this.mnuMonitoramentoDeAuditoria.Enabled = false;
@@ -425,14 +433,6 @@
 			this.mnuGamificacao.Size = new System.Drawing.Size(233, 22);
 			this.mnuGamificacao.Text = "Gamificação";
 			this.mnuGamificacao.Click += new System.EventHandler(this.mnuGamificacao_Click);
-			// 
-			// mnuStatusDeAuditoria
-			// 
-			this.mnuStatusDeAuditoria.Enabled = false;
-			this.mnuStatusDeAuditoria.Name = "mnuStatusDeAuditoria";
-			this.mnuStatusDeAuditoria.Size = new System.Drawing.Size(233, 22);
-			this.mnuStatusDeAuditoria.Text = "Status de Auditoria";
-			this.mnuStatusDeAuditoria.Click += new System.EventHandler(this.statusDeAuditoriaToolStripMenuItem_Click);
 			// 
 			// relatóriosToolStripMenuItem
 			// 

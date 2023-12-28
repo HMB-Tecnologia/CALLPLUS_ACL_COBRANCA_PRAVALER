@@ -1,6 +1,6 @@
 ﻿namespace Callplus.CRM.Tabulador.Dominio.Tipos
 {
-   public enum TipoStatusDeOferta
+   public enum TipoStatusDeAcordo
     {
         Default = 0,
         NaoDefinido = -1,

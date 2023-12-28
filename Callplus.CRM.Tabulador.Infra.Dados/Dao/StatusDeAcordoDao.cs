@@ -7,36 +7,36 @@ using Callplus.CRM.Tabulador.Infra.Dados.Util;
 
 namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 {
-    public class StatusDeOfertaDao : DaoBase
+    public class StatusDeAcordoDao : DaoBase
     {
         protected override IDbConnection Connection => ConnectionFactory.ObterConexao();
 
       
-        public IEnumerable<StatusDeOferta> ListarStatusDeOferta(long? idCampanha,int? idTipoStatus, bool? ativo)
+        public IEnumerable<StatusDeAcordo> ListarStatusDeAcordo(long? idCampanha,int? idTipoStatus, bool? ativo)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_LISTAR";
             var args = new {IdCampanha = idCampanha,  IdTipoTipoStatus = idTipoStatus, Ativo = ativo };
-            var resultado = ExecutarProcedure<StatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<StatusDeAcordo>(sql, args);
             return resultado;
         }
 
-        public StatusDeOferta RetornarStatusDeOferta(int idStatusOferta, int idCampanha)
+        public StatusDeAcordo RetornarStatusDeAcordo(int idStatusAcordo, int idCampanha)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_LISTAR";
-            var args = new { IdStatusOferta = idStatusOferta, IdCampanha = idCampanha };
-            var resultado = ExecutarProcedureSingleOrDefault<StatusDeOferta>(sql, args);
+            var args = new { IdStatusOferta = idStatusAcordo, IdCampanha = idCampanha };
+            var resultado = ExecutarProcedureSingleOrDefault<StatusDeAcordo>(sql, args);
             return resultado;
         }
 
-        public IEnumerable<TipoDeStatusDeOferta> ListarTipoDeStatusDeOferta(long idCampanha, bool? ativo)
+        public IEnumerable<TipoDeStatusDeAcordo> ListarTipoDeStatusDeOferta(long idCampanha, bool? ativo)
         {
             var sql = "APP_CRM_TIPO_STATUS_OFERTA_LISTAR";
             var args = new { IdCampanha = idCampanha, Ativo = ativo };
-            var resultado = ExecutarProcedure<TipoDeStatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<TipoDeStatusDeAcordo>(sql, args);
             return resultado;
         }
 
-        public IEnumerable<StatusDeOferta> RetornarCampanhasSelecionadas(int idStatusDeOferta)
+        public IEnumerable<StatusDeAcordo> RetornarCampanhasSelecionadas(int idStatusDeOferta)
         {
             var sql = "APP_CRM_CAMPANHAS_DO_STATUS_DE_OFERTA_LISTAR";
 
@@ -46,12 +46,12 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             };
 
 
-            var resultado = ExecutarProcedure<StatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<StatusDeAcordo>(sql, args);
 
             return resultado;
         }
 
-        public ConfiguracaoDoStatusDeOferta RetornarStatusDeAtendimento(StatusDeOferta statusDeOferta)
+        public ConfiguracaoDoStatusDeOferta RetornarStatusDeAtendimento(StatusDeAcordo statusDeOferta)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_VINCULO_RETORNAR";
 
@@ -66,14 +66,14 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public StatusDeOferta ListarTipoDeStatusDeOferta(int idStatus)
+        public StatusDeAcordo ListarTipoDeStatusDeOferta(int idStatus)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_TIPO_LISTAR";
             var args = new { IdStatus = idStatus };
-            var resultado = ExecutarProcedure<StatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<StatusDeAcordo>(sql, args);
             return resultado.FirstOrDefault();
         }
-        public int Gravar(StatusDeOferta statusDeOferta, string idsCampanhas)
+        public int Gravar(StatusDeAcordo statusDeOferta, string idsCampanhas)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_GRAVAR";
             var args = new
@@ -91,11 +91,11 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return ExecutarProcedureSingleOrDefault<int>(sql, args);
         }
 
-        public IEnumerable<StatusDeOferta> Listar(int? id, bool? ativo)
+        public IEnumerable<StatusDeAcordo> Listar(int? id, bool? ativo)
         {
             var sql = "APP_CRM_RETORNAR_STATUS_DE_OFERTA";
             var args = new { Id = id, Ativo = ativo };
-            var resultado = ExecutarProcedure<StatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<StatusDeAcordo>(sql, args);
             return resultado;
         }
 
@@ -143,11 +143,11 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             return resultado;
         }
 
-        public IEnumerable<StatusDeOferta> ListarStatusDeOfertaPorTipoCampanha(long? idCampanha, int? idTipoStatus, int? idTipoDeCampanha)
+        public IEnumerable<StatusDeAcordo> ListarStatusDeOfertaPorTipoCampanha(long? idCampanha, int? idTipoStatus, int? idTipoDeCampanha)
         {
             var sql = "APP_CRM_STATUS_DE_OFERTA_POR_TIPO_CAMPANHA_LISTAR";
             var args = new { IdCampanha = idCampanha, IdTipoTipoStatus = idTipoStatus, IdTipoDeCampanha = idTipoDeCampanha };
-            var resultado = ExecutarProcedure<StatusDeOferta>(sql, args);
+            var resultado = ExecutarProcedure<StatusDeAcordo>(sql, args);
             return resultado;
         }
     }

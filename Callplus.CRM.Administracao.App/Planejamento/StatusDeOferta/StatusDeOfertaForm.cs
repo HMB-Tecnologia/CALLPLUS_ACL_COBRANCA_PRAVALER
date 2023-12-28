@@ -10,13 +10,13 @@ using CallplusUtil.Forms;
 
 namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 {
-    public partial class StatusDeOfertaForm : Form
+    public partial class StatusDeAcordoForm : Form
     {
-        public StatusDeOfertaForm(int idStatus, string titulo)
+        public StatusDeAcordoForm(int idStatus, string titulo)
         {
             _logger = LogManager.GetCurrentClassLogger();
 
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _statusDeAtendimentoService = new StatusDeAtendimentoService();
             _campanhaService = new CampanhaService();
 
@@ -31,10 +31,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
         #region PROPRIEDADES
 
         private readonly ILogger _logger;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
-        private Tabulador.Dominio.Entidades.StatusDeOferta _statusDeOferta;
-        private IEnumerable<TipoDeStatusDeOferta> _tipoDeStatusDeOferta;
+        private Tabulador.Dominio.Entidades.StatusDeAcordo _statusDeOferta;
+        private IEnumerable<TipoDeStatusDeAcordo> _tipoDeStatusDeOferta;
         private readonly CampanhaService _campanhaService;
         private Tabulador.Dominio.Entidades.Campanha _campanha;
         private Tabulador.Dominio.Entidades.StatusDeAtendimento _statusDeAtendimento;
@@ -69,7 +69,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
                 {
                     edicao = false;
 
-                    _statusDeOferta = new Tabulador.Dominio.Entidades.StatusDeOferta();
+                    _statusDeOferta = new Tabulador.Dominio.Entidades.StatusDeAcordo();
 
                     _statusDeOferta.IdCriador = AdministracaoMDI._usuario.Id;
                 }
@@ -209,7 +209,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             int statusDeOferta = (_statusDeOferta == null) ? -1 : (int)_statusDeOferta.Id;
 
             IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas = _campanhaService.Listar(ativo: true);
-            IEnumerable<Tabulador.Dominio.Entidades.StatusDeOferta> _campanhasSelecionadas = _statusDeOfertaService.RetornarCampanhasSelecionadas(statusDeOferta);
+            IEnumerable<Tabulador.Dominio.Entidades.StatusDeAcordo> _campanhasSelecionadas = _statusDeOfertaService.RetornarCampanhasSelecionadas(statusDeOferta);
 
             clbCampanhas.Items.Clear();
 

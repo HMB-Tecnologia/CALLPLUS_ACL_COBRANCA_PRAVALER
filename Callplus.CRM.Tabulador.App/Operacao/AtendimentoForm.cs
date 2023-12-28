@@ -49,7 +49,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_campanhaService = new CampanhaService();
 			_grauDeParentescoService = new GrauDeParentescoService();
 			_statusDeAtendimentoService = new StatusDeAtendimentoService();
-			_statusDeOfertaService = new StatusDeOfertaService();
+			_statusDeOfertaService = new StatusDeAcordoService();
 			_prospectService = new ProspectService();
 			_layoutDinamicoService = new LayoutDinamicoService();
 			_produtoService = new ProdutoService();
@@ -132,7 +132,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private ResultadoDoAtendimento _resultadoDoAtendimentoAtual;
 		private readonly ScriptDeAtendimentoService _scriptDeAtendimentoService;
 		private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
-		private readonly StatusDeOfertaService _statusDeOfertaService;
+		private readonly StatusDeAcordoService _statusDeOfertaService;
 		private readonly FaqDeAtendimentoService _faqDeAtendimentoService;
 		private readonly NotificacaoService _notificacaoService;
 		private readonly VerificacaoService _VerificacaoService;
@@ -146,7 +146,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private OfertaDoAtendimento _ofertaAtualDoAtendimento;
 		private bool _exibindoScript;
 		private Prospect _prospectDoAtendimento;
-		private StatusDeOferta _statusDeOfertaSelecionado;
+		private StatusDeAcordo _statusDeOfertaSelecionado;
 		private StatusDeAtendimento _statusDoAtendimentoEmAndamento;
 		private System.Timers.Timer _timerPausa;
 		private System.Timers.Timer _timerAferCall;
@@ -2252,7 +2252,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			_logger.Warn($"ConfigurarStatusDeOfertaParaNovoAtendimento: {campanha.Id}");
 
 			long idCampanha = campanha.Id;
-			IEnumerable<TipoDeStatusDeOferta> tipoDeStatusDeOfertas = _statusDeOfertaService.ListarTipoDeStatusDeOferta(idCampanha, ativo: null);
+			IEnumerable<TipoDeStatusDeAcordo> tipoDeStatusDeOfertas = _statusDeOfertaService.ListarTipoDeStatusDeOferta(idCampanha, ativo: null);
 			//cmbTipoStatusOferta.ComboBox.PreencherComSelecione(tipoDeStatusDeOfertas, x => x.Id, x => x.Nome);
 			ResetarCombosTipoEStatusDaOferta(habilitarTipo: true, habilitarStatus: false);
 		}
@@ -2483,7 +2483,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			if (idStatusOferta > 0)
 			{
-				_statusDeOfertaSelecionado = _statusDeOfertaService.RetornarStatusDeOferta(idStatusOferta, _campanhaAtual.Id);
+				_statusDeOfertaSelecionado = _statusDeOfertaService.RetornarStatusDeAcordo(idStatusOferta, _campanhaAtual.Id);
 			}
 		}
 
@@ -2864,7 +2864,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 		}
 
-		private void ExibirTelaDeOferta(StatusDeOferta statusOferta)
+		private void ExibirTelaDeOferta(StatusDeAcordo statusOferta)
 		{
 			var oferta = _ofertaAtualDoAtendimento;
 
@@ -2883,7 +2883,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 				_pilhaDeJanelas.Pop();
 		}
 
-		private bool ConfigurarStatusDeAtendimentoDeAcordoComOStatusDeOferta(StatusDeOferta statusDaOferta)
+		private bool ConfigurarStatusDeAtendimentoDeAcordoComOStatusDeOferta(StatusDeAcordo statusDaOferta)
 		{
 			try
 			{
@@ -3550,8 +3550,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		}
 
 		OfertaDoAtendimento _ofertaAtual = new OfertaDoAtendimento();
-		StatusDeOferta _statusOferta = new StatusDeOferta();
-		private void FinalizarScriptDeOferta(StatusDeOferta statusDaOferta)
+		StatusDeAcordo _statusOferta = new StatusDeAcordo();
+		private void FinalizarScriptDeOferta(StatusDeAcordo statusDaOferta)
 		{
 			var ofertaAtual = _ofertaAtualDoAtendimento;
 			Campanha campanha = _campanhaAtual;
@@ -3559,7 +3559,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 
 			if (statusDaOferta != null)
 			{
-				if (statusDaOferta.TipoStatus == TipoStatusDeOferta.Aceite)
+				if (statusDaOferta.TipoStatus == TipoStatusDeAcordo.Aceite)
 				{
 					ExibirTelaDeOferta(statusDaOferta);
 
@@ -3589,8 +3589,8 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 					}
 				}
 
-				if (statusDaOferta.TipoStatus == TipoStatusDeOferta.Recusa || statusDaOferta.TipoStatus == TipoStatusDeOferta.Telefonia
-					|| statusDaOferta.TipoStatus == TipoStatusDeOferta.Agendamento || statusDaOferta.TipoStatus == TipoStatusDeOferta.Inelegivel)
+				if (statusDaOferta.TipoStatus == TipoStatusDeAcordo.Recusa || statusDaOferta.TipoStatus == TipoStatusDeAcordo.Telefonia
+					|| statusDaOferta.TipoStatus == TipoStatusDeAcordo.Agendamento || statusDaOferta.TipoStatus == TipoStatusDeAcordo.Inelegivel)
 				{
 					if (!_afterCallEncerrado)
 					{
@@ -3632,7 +3632,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 						var ofertaDoAtendimento = ofertasDoAtendimento?.First();
 						if (ofertaDoAtendimento.IdStatusDoAcordo != null)
 						{
-							var status = _statusDeOfertaService.RetornarStatusDeOferta(ofertaDoAtendimento.IdStatusDoAcordo.Value, _campanhaAtual.Id);
+							var status = _statusDeOfertaService.RetornarStatusDeAcordo(ofertaDoAtendimento.IdStatusDoAcordo.Value, _campanhaAtual.Id);
 							bool deveFinalizar = ConfigurarStatusDeAtendimentoDeAcordoComOStatusDeOferta(status);
 							if (deveFinalizar)
 							{
@@ -3774,7 +3774,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void ConfigurarStatusDeAtendimentoParaAceite()
 		{
 			var listaTipos = _statusDeAtendimentoService.ListarTipoDeStatusDeAtendimento(ativo: true);
-			listaTipos = listaTipos?.Where(x => (TipoStatusDeOferta)x.Key == TipoStatusDeOferta.Aceite).Select(x => x).ToList();
+			listaTipos = listaTipos?.Where(x => (TipoStatusDeAcordo)x.Key == TipoStatusDeAcordo.Aceite).Select(x => x).ToList();
 			cmbTipoStatus.PreencherComSelecione(listaTipos);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 		}
@@ -3782,7 +3782,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void ConfigurarStatusDeAtendimentoParaRecusa()
 		{
 			var listaTipos = _statusDeAtendimentoService.ListarTipoDeStatusDeAtendimento(ativo: true);
-			listaTipos = listaTipos?.Where(x => (TipoStatusDeOferta)x.Key == TipoStatusDeOferta.Recusa).Select(x => x).ToList();
+			listaTipos = listaTipos?.Where(x => (TipoStatusDeAcordo)x.Key == TipoStatusDeAcordo.Recusa).Select(x => x).ToList();
 			cmbTipoStatus.PreencherComSelecione(listaTipos);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 		}
@@ -3790,7 +3790,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void ConfigurarStatusDeAtendimentoParaAgendamento()
 		{
 			var listaTipos = _statusDeAtendimentoService.ListarTipoDeStatusDeAtendimento(ativo: true);
-			listaTipos = listaTipos?.Where(x => (TipoStatusDeOferta)x.Key == TipoStatusDeOferta.Agendamento).Select(x => x).ToList();
+			listaTipos = listaTipos?.Where(x => (TipoStatusDeAcordo)x.Key == TipoStatusDeAcordo.Agendamento).Select(x => x).ToList();
 			cmbTipoStatus.PreencherComSelecione(listaTipos);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 		}
@@ -3798,7 +3798,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void ConfigurarStatusDeAtendimentoParaTelefonia()
 		{
 			var listaTipos = _statusDeAtendimentoService.ListarTipoDeStatusDeAtendimento(ativo: true);
-			listaTipos = listaTipos?.Where(x => (TipoStatusDeOferta)x.Key == TipoStatusDeOferta.Telefonia).Select(x => x).ToList();
+			listaTipos = listaTipos?.Where(x => (TipoStatusDeAcordo)x.Key == TipoStatusDeAcordo.Telefonia).Select(x => x).ToList();
 			cmbTipoStatus.PreencherComSelecione(listaTipos);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 		}
@@ -3806,7 +3806,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void ConfigurarStatusDeAtendimentoParaInelegivel()
 		{
 			var listaTipos = _statusDeAtendimentoService.ListarTipoDeStatusDeAtendimento(ativo: true);
-			listaTipos = listaTipos?.Where(x => (TipoStatusDeOferta)x.Key == TipoStatusDeOferta.Inelegivel).Select(x => x).ToList();
+			listaTipos = listaTipos?.Where(x => (TipoStatusDeAcordo)x.Key == TipoStatusDeAcordo.Inelegivel).Select(x => x).ToList();
 			cmbTipoStatus.PreencherComSelecione(listaTipos);
 			cmbStatus.ResetarComSelecione(habilitar: false);
 		}
@@ -3868,13 +3868,13 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 			else
 			{
-				var statusOferta = _statusDeOfertaService.RetornarStatusDeOferta((int)idStatusDoAcordo, _campanhaAtual.Id);
+				var statusOferta = _statusDeOfertaService.RetornarStatusDeAcordo((int)idStatusDoAcordo, _campanhaAtual.Id);
 
 				if (statusOferta == null)
 				{
 					mensagens.Add("A oferta não foi registrada!");
 				}
-				if (statusOferta?.TipoStatus != TipoStatusDeOferta.Aceite)
+				if (statusOferta?.TipoStatus != TipoStatusDeAcordo.Aceite)
 				{
 					mensagens.Add("A oferta não foi finalizada como aceite!");
 				}
@@ -3917,7 +3917,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			}
 		}
 
-		private void GravarStatusDaOferta(OfertaDoAtendimento oferta, StatusDeOferta statusDaOferta, string nome, string cpf, int? idBanco)
+		private void GravarStatusDaOferta(OfertaDoAtendimento oferta, StatusDeAcordo statusDaOferta, string nome, string cpf, int? idBanco)
 		{
 			_ofertaDoAtendimentoService.GravarStatusDaOfertaDoAtendimento(oferta, statusDaOferta, nome, cpf, idBanco);
 		}
@@ -4585,9 +4585,9 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 						{
 							if (oferta.IdStatusDoAcordo != null && oferta.IdStatusDoAcordo != 0)
 							{
-								var status = _statusDeOfertaService.RetornarStatusDeOferta(oferta.IdStatusDoAcordo.Value, _campanhaAtual.Id);
+								var status = _statusDeOfertaService.RetornarStatusDeAcordo(oferta.IdStatusDoAcordo.Value, _campanhaAtual.Id);
 
-								if (status.TipoStatus == TipoStatusDeOferta.Aceite)
+								if (status.TipoStatus == TipoStatusDeAcordo.Aceite)
 								{
 									houveAceiteDeOferta = true;
 								}
@@ -7655,7 +7655,7 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 			//}
 		}
 
-		private void ScriptDeOfertaControl_OnFinalizarScript(StatusDeOferta statusDaOferta)
+		private void ScriptDeOfertaControl_OnFinalizarScript(StatusDeAcordo statusDaOferta)
 		{
 			try
 			{

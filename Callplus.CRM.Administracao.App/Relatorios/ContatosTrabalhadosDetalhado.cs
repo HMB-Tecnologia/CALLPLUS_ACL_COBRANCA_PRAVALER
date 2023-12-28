@@ -24,7 +24,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
             _statusDeAuditoriaService = new StatusDeAuditoriaService();
             _mailingService = new MailingService();
             _statusDeAtendimentoService = new StatusDeAtendimentoService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _relatorioService = new RelatorioService();
             InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
         private readonly UsuarioService _usuarioService;
         private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
         private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly MailingService _mailingService;
         private readonly RelatorioService _relatorioService;
 
@@ -124,7 +124,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
 
         private void CarregarStatusDeOferta(int? idCampanha, int? idTipoDeCampanha)
         {
-            IEnumerable<StatusDeOferta> statusDeOferta = _statusDeOfertaService.ListarStatusDeOfertaPorTipoCampanha(idCampanha: idCampanha, idTipoStatus: null, idTipoDeCampanha: idTipoDeCampanha);
+            IEnumerable<StatusDeAcordo> statusDeOferta = _statusDeOfertaService.ListarStatusDeOfertaPorTipoCampanha(idCampanha: idCampanha, idTipoStatus: null, idTipoDeCampanha: idTipoDeCampanha);
             chkStatusOferta.Preencher(statusDeOferta, x => x.Id, x => x.Nome);
         }
 

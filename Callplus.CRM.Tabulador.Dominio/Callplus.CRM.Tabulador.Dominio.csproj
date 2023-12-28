@@ -108,6 +108,8 @@
     <Compile Include="Entidades\Negociacao.cs" />
     <Compile Include="Entidades\NivelDeConfianca.cs" />
     <Compile Include="Entidades\OfertaDoAtendimentoWeb.cs" />
+    <Compile Include="Entidades\Parcela.cs" />
+    <Compile Include="Entidades\Prazo.cs" />
     <Compile Include="Entidades\ProcedimentoDoItemDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\ItemDoModuloDoFormularioDeQualidade.cs" />
     <Compile Include="Entidades\LayoutDinamico\ConfiguracaoDeCampoDoLayoutDinamico.cs" />
@@ -154,7 +156,7 @@
     <Compile Include="Entidades\StatusDeAtendimento.cs" />
     <Compile Include="Entidades\StatusDeAuditoria.cs" />
     <Compile Include="Entidades\StatusDeEntregaBluechip.cs" />
-    <Compile Include="Entidades\StatusDeOferta.cs" />
+    <Compile Include="Entidades\StatusDeAcordo.cs" />
     <Compile Include="Entidades\StatusDeOfertaDaCampanha.cs" />
     <Compile Include="Entidades\TelefoneDoProspect.cs" />
     <Compile Include="Entidades\TipoContato.cs" />
@@ -162,7 +164,7 @@
     <Compile Include="Entidades\TipoDeFrasesGamificacao.cs" />
     <Compile Include="Entidades\TipoDePlanoPorOperadora.cs" />
     <Compile Include="Entidades\TipoDeProduto.cs" />
-    <Compile Include="Entidades\TipoDeStatusDeOferta.cs" />
+    <Compile Include="Entidades\TipoDeStatusDeAcordo.cs" />
     <Compile Include="Entidades\TipoDeStatusDeAtendimento.cs" />
     <Compile Include="Entidades\TipoDiscagem.cs" />
     <Compile Include="Entidades\Titulo.cs" />
@@ -171,7 +173,7 @@
     <Compile Include="Entidades\VariavelDoChecklist.cs" />
     <Compile Include="Entidades\VariavelDoScriptDeAtendimento.cs" />
     <Compile Include="Entidades\VencimentoFatura.cs" />
-    <Compile Include="Entidades\Parcela.cs" />
+    <Compile Include="Entidades\ParcelaAcordo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tipos\Perfil.cs" />
     <Compile Include="Tipos\TipoDeAuditoria.cs" />
@@ -182,7 +184,7 @@
     <Compile Include="Tipos\TipoDiscador.cs" />
     <Compile Include="Tipos\TipoDeDiscagem.cs" />
     <Compile Include="Tipos\TipoStatusDeAtendimento.cs" />
-    <Compile Include="Tipos\TipoStatusDeOferta.cs" />
+    <Compile Include="Tipos\TipoStatusDeAcordo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

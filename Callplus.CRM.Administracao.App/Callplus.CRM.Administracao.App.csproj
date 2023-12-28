@@ -368,11 +368,11 @@
     <Compile Include="Planejamento\StatusDeAtendimento\StatusDeAtendimentoForm.Designer.cs">
       <DependentUpon>StatusDeAtendimentoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.cs">
+    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeAcordoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.designer.cs">
-      <DependentUpon>ListaStatusDeOfertaForm.cs</DependentUpon>
+    <Compile Include="Planejamento\StatusDeOferta\ListaStatusDeAcordoForm.designer.cs">
+      <DependentUpon>ListaStatusDeAcordoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.cs">
       <SubType>Form</SubType>
@@ -652,8 +652,8 @@
     <EmbeddedResource Include="Planejamento\StatusDeAtendimento\StatusDeAtendimentoForm.resx">
       <DependentUpon>StatusDeAtendimentoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Planejamento\StatusDeOferta\ListaStatusDeOfertaForm.resx">
-      <DependentUpon>ListaStatusDeOfertaForm.cs</DependentUpon>
+    <EmbeddedResource Include="Planejamento\StatusDeOferta\ListaStatusDeAcordoForm.resx">
+      <DependentUpon>ListaStatusDeAcordoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\StatusDeOferta\StatusDeOfertaForm.resx">
       <DependentUpon>StatusDeOfertaForm.cs</DependentUpon>

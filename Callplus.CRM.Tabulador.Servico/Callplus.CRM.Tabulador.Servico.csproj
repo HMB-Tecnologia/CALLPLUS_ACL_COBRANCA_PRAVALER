@@ -85,7 +85,7 @@
     <Compile Include="Servicos\RetornoDeCepService.cs" />
     <Compile Include="Servicos\ScriptDeAtendimentoService.cs" />
     <Compile Include="Servicos\StatusDeAuditoriaService.cs" />
-    <Compile Include="Servicos\StatusDeOfertaService.cs" />
+    <Compile Include="Servicos\StatusDeAcordoService.cs" />
     <Compile Include="Servicos\StatusDeAtendimentoService.cs" />
     <Compile Include="Servicos\Taks.cs" />
     <Compile Include="Servicos\TipoDeFraseService.cs" />

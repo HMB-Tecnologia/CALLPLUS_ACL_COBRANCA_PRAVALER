@@ -89,7 +89,7 @@
     <Compile Include="Dao\ProdutoDao.cs" />
     <Compile Include="Dao\AcordoDoAtendimentoDao.cs" />
     <Compile Include="Dao\StatusDeAuditoriaDao.cs" />
-    <Compile Include="Dao\StatusDeOfertaDao.cs" />
+    <Compile Include="Dao\StatusDeAcordoDao.cs" />
     <Compile Include="Dao\TipoDeFraseDao.cs" />
     <Compile Include="Dao\TipoDiscagemDao.cs" />
     <Compile Include="Dao\UsuarioDao.cs" />

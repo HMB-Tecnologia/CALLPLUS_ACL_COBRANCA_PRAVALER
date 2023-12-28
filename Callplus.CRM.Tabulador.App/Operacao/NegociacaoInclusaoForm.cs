@@ -1,636 +1,434 @@
 ﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
+using Callplus.CRM.Tabulador.Dominio.Tipos;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Callplus.CRM.Tabulador.App.Operacao
 {
 	public partial class NegociacaoInclusaoForm : Form
-    {
-        private Contrato _contratoDaNegociacao;
-		private Usuario _usuario;
-        private NegociacaoService _negociacaoService;
-		public NegociacaoInclusaoForm(Usuario usuario)
-        {
-            _usuario = usuario;
-            _negociacaoService = new NegociacaoService();
+	{
+		public NegociacaoInclusaoForm(Usuario usuario, Prospect prospect, int? idStatusAcordo, List<int> idsContratos = null)
+		{
+			_negociacaoService = new NegociacaoService();
+			_statusDeAcordoService = new StatusDeAcordoService();
+			_contratoService = new ContratoService();
+
+			_usuario = usuario;
+			_idStatusAcordo = idStatusAcordo;
+			_prospect = prospect;
+			_idsContratos = idsContratos;
 
 			InitializeComponent();
-        }
-
-        private void fNegociacao_Inclusao_Load(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.None;
-            ResetarCampos();
-            AtualizarTotalDaNegociacao();
-            MarcarTodosTitulos();
-        }
-
-        private void btnCancelarNegociacao_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void cmbStatusTitulo_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            int idStatusTitulo = 0;
-            idStatusTitulo = int.Parse(cmbTipoAcordo.SelectedValue.ToString());
-        }
-
-        private void btnSalvarNegociacao_Click(object sender, EventArgs e)
-        {
-            if (PodeSalvar() == false) return;
-
-            //if (!VerificarSePodeIncluirNegociacao()) return;
-
-            var resultado = MessageBox.Show("Confirmar a criação da nova negociação?\nEste processo não pode ser desfeito.", "Callplus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
-            {
-                try
-                {
-                    IncluirNovaNegociacao();
-                    MessageBox.Show("Concluído!", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                }
-                catch (Exception erro)
-                {
-                    MessageBox.Show($"Ocorreu um erro inesperado ao incluir uma nova Negociação.\nErro: {erro.Message}\nStacktrace:{erro.StackTrace}");
-                }
-            }
-        }
-
-        private void btnAdicionarParcela_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                IncluirParcelas();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu o seguinte erro ao incluir a(s) parcela(s)" + ex.Message, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void chkTodosTitulos_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkTodosTitulos.Checked == true)
-                {
-                    MarcarTodosTitulos();
-                }
-                else
-                {
-                    DesmarcarTodosTitulos();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu o seguinte erro" + ex.Message, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void cmbTipoAcordo_SelectionChangeCommitted(object sender, EventArgs e)
-        { 
-            int idStatusTitulo = 0;
-            idStatusTitulo = int.Parse(cmbTipoAcordo.SelectedValue.ToString());
-        }
-
-        private void btnRemoverParcelas_Click(object sender, EventArgs e)
-        {
-            dgParcelas.Rows.Clear();
-        }
-
-        private void CarregarTipoAcordo()
-        {
-            var tipoAcordo = _negociacaoService.RetornarTipoAcordo(ativo: true);
-			//cmbTipoAcordo.PreencherComSelecione(tipoAcordo, x => x.);
-
-			DataRow dataRow = tipoAcordo.NewRow();
-			dataRow["tipo"] = "SELECIONE...";
-			dataRow["id"] = "-1";
-			tipoAcordo.Rows.Add(dataRow);
-
-			cmbTipoAcordo.DataSource = tipoAcordo;
-			cmbTipoAcordo.ValueMember = "id";
-			cmbTipoAcordo.DisplayMember = "tipo";
-			cmbTipoAcordo.DropDownStyle = ComboBoxStyle.DropDown;
-			cmbTipoAcordo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			cmbTipoAcordo.AutoCompleteSource = AutoCompleteSource.ListItems;
-			cmbTipoAcordo.SelectedValue = "-1";
-			cmbTipoAcordo.DropDownStyle = ComboBoxStyle.DropDownList;
 		}
 
-        private void CarregarPrazoNegociacao()
-        {
-			var prazo = _negociacaoService.RetornarPrazoNegociacao(ativo: true);
+		#region PROPRIEDADES
 
-			//cmbPrazo.PreencherComSelecione(cmbPrazo, x => x.id, x.);
+		private Contrato _contratoDaNegociacao;
+		private List<Contrato> _listaContratosDaNegociacao;
+		private Usuario _usuario;
+		private NegociacaoService _negociacaoService;
+		private Prospect _prospect;
+		private int? _idStatusAcordo;
+		private List<int> _idsContratos;
+		private readonly StatusDeAcordoService _statusDeAcordoService;
+		private ContratoService _contratoService;
+		public bool Atualizar = false;
+		private double _valorPrincipal = 0.0;
+		private double _valorParcela = 0.0;
 
-			DataRow dataRow = prazo.NewRow();
-			dataRow["nome"] = "SELECIONE...";
-			dataRow["id"] = "-1";
-			prazo.Rows.Add(dataRow);
+		#endregion PROPRIEDADES
 
-			cmbPrazo.DataSource = prazo;
-			cmbPrazo.ValueMember = "id";
-			cmbPrazo.DisplayMember = "nome";
-			cmbPrazo.DropDownStyle = ComboBoxStyle.DropDown;
-			cmbPrazo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			cmbPrazo.AutoCompleteSource = AutoCompleteSource.ListItems;
-			cmbPrazo.SelectedValue = "-1";
-			cmbPrazo.DropDownStyle = ComboBoxStyle.DropDownList;
+		#region MÉTODOS
+
+		private void ResetarCampos()
+		{
+			txtValorPrincipal.Text = string.Empty;
+			txtValorParcelas.Text = string.Empty;
+			dtpDataVencimento.Text = string.Empty;
+			cmbParcela.ResetarComSelecione(true);
+			cmbPrazo.ResetarComSelecione(true);
 		}
 
-        private void ResetarCampos()
-        {
-            txtNumeroNegociacao.Text = string.Empty;
-            txtJuros.Text = string.Empty;
-            txtMulta.Text = string.Empty;
-            txtValorPrincipal.Text = string.Empty;
-            txtValorParcelas.Text = string.Empty;
-            mskDataVencimento.Text = string.Empty;
-            cmbQuantidadeParcela.Text = "1";
-            //cmbPrazo.ResetarComSelecione(true);
-        }
+		public void NovaNegociacao(Contrato contrato)
+		{
+			_contratoDaNegociacao = contrato;
+			if (_contratoDaNegociacao != null)
+			{
+				CarregarPrazoNegociacao();
+				CarregarParcelas();
 
-        public void NovaNegociacao(Contrato contrato)
-        {
-            _contratoDaNegociacao = contrato;
-            if (_contratoDaNegociacao != null)
-            {
-                AtualizarDadosDoContrato(contrato);
-                CarregarTipoAcordo();
-                CarregarPrazoNegociacao();
-                //AtualizarGridTitulos(_contratoDaNegociacao.Titulos);
-                ShowDialog();
-            }
-        }
+				ShowDialog();
+			}
+		}
 
-        private Negociacao CriarNegociacao()
-        {
-            var negociacao = new Negociacao();
+		private void CarregarPrazoNegociacao()
+		{
+			var prazo = _negociacaoService.RetornarPrazoNegociacao(true);
+			cmbPrazo.PreencherComSelecione(prazo, x => x.Id, x => x.Nome);
+		}
 
-            negociacao.IdTipoAcordo = int.Parse(cmbTipoAcordo.SelectedValue.ToString());
-            negociacao.NumeroNegociacao = txtNumeroNegociacao.Text;
+		private void CarregarParcelas()
+		{
+			var parcelas = _negociacaoService.RetornarParcelaNegociacao(true);
+			cmbParcela.PreencherComSelecione(parcelas, x => x.Id, x => x.Nome);
+		}
 
-			double.TryParse(txtValorPrincipal.Text, out double valorAtualizado);
-			negociacao.ValorPrincipal = valorAtualizado;
+		private Negociacao CriarNegociacao()
+		{
+			var negociacao = new Negociacao
+			{
+				IdTipoAcordo = int.Parse(tsAcordo_cmbStatusAcordo.ComboBox.SelectedValue.ToString()),
+				ValorPrincipal = _valorPrincipal,
+				ValorDasParcelas = _valorParcela,
+				IdUsuario = _usuario.Id,
+				IdPrazo = int.Parse(cmbPrazo.SelectedValue.ToString()),
+			};
 
-			double.TryParse(txtValorParcelas.Text, out double valorParcelas);
-			negociacao.ValorDasParcelas = valorParcelas;
-
-            double.TryParse(txtMulta.Text, out double multa);
-			negociacao.Multa = multa;
-
-			double.TryParse(txtJuros.Text, out double juros);
-			negociacao.Juros = juros;
-
-			int.TryParse(cmbPrazo.Text, out int idPrazo);
-			negociacao.IdPrazo = int.Parse(cmbPrazo.SelectedValue.ToString());
-
-			int.TryParse(cmbQuantidadeParcela.Text, out int quantidade);
+			int.TryParse(cmbParcela.Text, out int quantidade);
 			negociacao.QuantidadeDeParcela = quantidade;
 
-			DateTime.TryParse(mskDataVencimento.Text, out DateTime dataVencimento);
+			DateTime.TryParse(dtpDataVencimento.Value.ToString("dd/MM/yyyy"), out DateTime dataVencimento);
 			negociacao.DataVencimento = dataVencimento;
 
-            negociacao.IdUsuario = _usuario.Id;
-
-            return negociacao;
-        }
-
-        private Titulo RetornarTituloDoContratoEmTela(long idTitulo)
-        {
-            //var titulo = _contratoDaNegociacao.Titulos.First(x => x.IDTitulo == idTitulo);
-            //return titulo;
-            return null;
-        }
-
-        private void AtualizarDadosDoContrato(Contrato contrato)
-        {
-            txtIDContrato.Text = contrato.Id.ToString();
-        }
-
-        private void AtualizarGridTitulos(List<Titulo> titulos)
-        {
-            dgDetalhesDoTitulo.Rows.Clear();
-
-            foreach (var titulo in titulos)
-            {
-                if (VerificarSeExisteAcordo(titulo.IDTitulo) == false)
-                {
-                    var indice = dgDetalhesDoTitulo.Rows.Add();
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colID)].Value = titulo.IDTitulo;
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colNumeroDocumento)].Value = titulo.NumeroDocumento;
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colDataEmissao)].Value = titulo.DataEmissao.ToString("dd/MM/yyyy");
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colDataVencimento)].Value = titulo.DataVencimento.ToString("dd/MM/yyyy");
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colAtribuicaoRazaoEspecial)].Value = titulo.AtribuicaoEspecial;
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colTipoDocumento)].Value = titulo.TipoDocumento;
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colFormaDePagamento)].Value = titulo.FormaPagamento;
-                    dgDetalhesDoTitulo.Rows[indice].Cells[nameof(colMontante)].Value = titulo.Montante;
-                }
-            }
-        }
-
-        private bool VerificarSeExisteAcordo(long iDTitulo)
-        {
-            return _negociacaoService.VerificarSeExisteAcordo(iDTitulo);
-        }
-
-        private bool PodeSalvar()
-        {
-            var mensagens = new List<string>();
-            if (dgParcelas.Rows.Count <= 0)
-            {
-                mensagens.Add("Favor incluir a(s) parcela(s) do acordo!");
-            }
-
-            if (string.IsNullOrEmpty(cmbPrazo.Text) || cmbPrazo.Text == "SELECIONE...")
-            {
-                mensagens.Add("Informe o prazo!");
-            }
-
-            if (string.IsNullOrEmpty(cmbTipoAcordo.Text) || cmbTipoAcordo.Text == "SELECIONE...")
-            {
-                mensagens.Add("Informe o tipo do Acordo!");
-            }
-
-            int qtdTitulo = 0;
-            foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-            {
-                if (row.IsNewRow) continue;
-
-                if ((bool)row.Cells[nameof(colSelecioneTitulo)].FormattedValue)
-                {
-                    qtdTitulo++;
-                }
-            }
-
-            if (qtdTitulo <= 0)
-            {
-                mensagens.Add("Favor selecionar o(s) titulo(s) do acordo!");
-            }
-
-            DateTime data;
-
-            if (!DateTime.TryParse(mskDataVencimento.Text, out data))
-            {
-                mensagens.Add("Informe a data de vencimento!");
-            }
-
-            double valorPrincipal = 0;
-
-            if (!Double.TryParse(txtValorPrincipal.Text, out valorPrincipal) || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor principal!");
-            }
-
-            double valorParcela = 0;
-
-            if (!Double.TryParse(txtValorParcelas.Text, out valorParcela) || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor da parcela!");
-            }
-
-            double multa = 0;
-
-            if (!Double.TryParse(txtMulta.Text, out multa) || string.IsNullOrEmpty(txtMulta.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor da multa!");
-            }
-
-            double juros = 0;
-
-            if (!Double.TryParse(txtJuros.Text, out juros) || string.IsNullOrEmpty(txtJuros.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor dos juros!");
-            }
-
-            var podeContinuar = mensagens.Any() == false;
-            if (podeContinuar == false)
-            {
-                var msgFinal = string.Join("\n", mensagens.ToArray());
-                MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            return podeContinuar;
-
-        }
-
-        //private bool VerificarSePodeIncluirNegociacao()
-        //{
-        //    long idContrato = _contratoDaNegociacao.IDContrato;
-        //    int idUsuario = _usuario.Id;
-        //    List<string> msgs = _negociacaoCtl.PodeIncluirNegociacao(idContrato, idUsuario);
-
-        //    var podeContinuar = msgs.Any() == false;
-        //    if (podeContinuar == false)
-        //    {
-        //        var msgFinal = string.Join("\n", msgs.ToArray());
-        //        MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        //    }
-        //    return podeContinuar;
-        //}
-
-        private void IncluirNovaNegociacao()
-        {
-            var negociacao = CriarNegociacao();
-            negociacao.Titulos = ObterTitulosDoAcordo();
-            negociacao.Parcelas = ObterParcelasDoAcordo();
-
-			var idNegociacao = _negociacaoService.IncluirNegociacao(negociacao);
-			if (idNegociacao < 0)
-				throw new SystemException("Não foi possível obter o ID da nova negociação criada.");
-
-			foreach (var titulo in negociacao.Titulos)
-				_negociacaoService.IncluirTituloNegociacao(new TituloNegociacao(titulo.IDTitulo, idNegociacao));
-
-			foreach (var parcela in negociacao.Parcelas)
-				_negociacaoService.IncluirParcelaNegociacao(parcela, idNegociacao, negociacao.IdUsuario);
+			return negociacao;
 		}
 
-        private List<Parcela> ObterParcelasDoAcordo()
-        {
-            List<Parcela> parcelas = new List<Parcela>();
-            foreach (DataGridViewRow row in dgParcelas.Rows)
-            {
-                if (row.IsNewRow) continue;
-				Parcela parcela = new Parcela
+		//private bool VerificarSeExisteAcordo(long iDTitulo)
+		//{
+		//	return _negociacaoService.VerificarSeExisteAcordo(iDTitulo);
+		//}
+
+		private bool PodeSalvar()
+		{
+			var mensagens = new List<string>();
+			if (dgParcelas.Rows.Count <= 0)
+				mensagens.Add("Favor incluir a(s) parcela(s) do acordo!");
+
+			if (!DateTime.TryParse(dtpDataVencimento.Text, out DateTime data))
+				mensagens.Add("Informe a data de vencimento!");
+
+			if (string.IsNullOrEmpty(cmbPrazo.Text) || cmbPrazo.TextoEhSelecione())
+				mensagens.Add("Informe o prazo!");
+
+			if (_valorPrincipal < 0 || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
+				mensagens.Add("Informe o valor principal!");
+
+			if (_valorParcela < 0 || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
+				mensagens.Add("Informe o valor da parcela!");
+
+			var podeContinuar = mensagens.Any() == false;
+			if (podeContinuar == false)
+			{
+				var msgFinal = string.Join("\n", mensagens.ToArray());
+				MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
+
+			return podeContinuar;
+		}
+
+		//private bool VerificarSePodeIncluirNegociacao()
+		//{
+		//    long idContrato = _contratoDaNegociacao.Id;
+		//    int idUsuario = _usuario.Id;
+		//    List<string> msgs = _negociacaoCtl.PodeIncluirNegociacao(idContrato, idUsuario);
+
+		//    var podeContinuar = msgs.Any() == false;
+		//    if (podeContinuar == false)
+		//    {
+		//        var msgFinal = string.Join("\n", msgs.ToArray());
+		//        MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		//    }
+		//    return podeContinuar;
+		//}
+
+		private void IncluirNovaNegociacao()
+		{
+			long idNegociacao = 0;
+
+			var negociacao = CriarNegociacao();
+			negociacao.Parcelas = ObterParcelasDoAcordo();
+
+			if (_idsContratos.Count == 0)
+			{
+				idNegociacao = _negociacaoService.IncluirNegociacao(negociacao, _prospect.Id, _contratoDaNegociacao.Id, _prospect.Campo001);
+				if (idNegociacao < 0)
+					throw new SystemException("Não foi possível obter o ID da nova negociação criada.");
+
+				foreach (var parcela in negociacao.Parcelas)
+					_negociacaoService.IncluirParcelaNegociacao(parcela, idNegociacao, negociacao.IdUsuario);
+			}
+			else
+			{
+				foreach (var idContrato in _idsContratos)
+				{
+					idNegociacao = _negociacaoService.IncluirNegociacao(negociacao, _prospect.Id, idContrato, _prospect.Campo001);
+					if (idNegociacao < 0)
+						throw new SystemException("Não foi possível obter o ID da nova negociação criada.");
+				}
+
+				foreach (var parcela in negociacao.Parcelas)
+					_negociacaoService.IncluirParcelaNegociacao(parcela, idNegociacao, negociacao.IdUsuario);
+			}
+
+		}
+
+		private List<ParcelaAcordo> ObterParcelasDoAcordo()
+		{
+			List<ParcelaAcordo> parcelas = new List<ParcelaAcordo>();
+			foreach (DataGridViewRow row in dgParcelas.Rows)
+			{
+				if (row.IsNewRow) continue;
+
+				ParcelaAcordo parcela = new ParcelaAcordo
 				{
 					NumeroDaParcela = int.Parse(row.Cells[nameof(colParcelaParcelas)].Value.ToString()),
 					DataVencimento = DateTime.Parse(row.Cells[nameof(colVencimentoParcelas)].Value.ToString()),
-					ValorDaParcela = double.Parse(row.Cells[nameof(colValordaParcelaParcelas)].Value.ToString()),
-					ValorPrincipal = double.Parse(row.Cells[nameof(colValorPrincipalParcelas)].Value.ToString()),
-					Multa = double.Parse(row.Cells[nameof(colMultaParcelas)].Value.ToString()),
-					Juros = double.Parse(row.Cells[nameof(colJurosParcelas)].Value.ToString())
+					ValorPrincipal = _valorPrincipal,
+					ValorDaParcela = _valorParcela,
 				};
 				parcelas.Add(parcela);
-            }
+			}
 
-            return parcelas;
-        }
+			return parcelas;
+		}
 
-        private void dgDetalhesDoTitulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+		private void AtualizarTotalDaNegociacao()
+		{
+			decimal valorTotalNegociado = 0;
+			//var titulosSelecionados = ObterTitulosSelecionados();
+			//foreach (var titulo in titulosSelecionados)
+			//{
+			//    if (VerificarSeExisteAcordo(titulo.IDTitulo) == false)
+			//        valorTotalNegociado += titulo.Montante;
+			//}
 
-            if (e.ColumnIndex == colSelecioneTitulo.Index && e.RowIndex != -1)
-            {
-                dgDetalhesDoTitulo.EndEdit();
-                double valor = 0;
-                bool todosTitulosSelecionados = true;
-                foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-                {
-                    if (row.IsNewRow) continue;
-                    if ((bool)row.Cells[nameof(colSelecioneTitulo)].Value==true)
-                        valor = valor + double.Parse(row.Cells[nameof(colMontante)].Value.ToString());
-                    else
-                    {
-                        todosTitulosSelecionados = false;                                                
-                    }
-                        
-                }
+			//txtTotalNegociado.Text = $"R$ {valorTotalNegociado:N2}";
+			//txtValorPrincipal.Text = valorTotalNegociado.ToString();
+		}
 
-                chkTodosTitulos.CheckedChanged -= chkTodosTitulos_CheckedChanged;
-                
-                chkTodosTitulos.Checked = todosTitulosSelecionados;                
+		private void IncluirParcelas()
+		{
+			if (PodeIncluirParcelas())
+			{
+				int qtdParcela = int.Parse(cmbParcela.Text);
 
-                chkTodosTitulos.CheckedChanged += chkTodosTitulos_CheckedChanged;
-                
+				for (int i = 1; i <= qtdParcela; i++)
+				{
+					DateTime data = RetornarProximaData(i);
+					int indice = dgParcelas.Rows.Add();
+					dgParcelas.Rows[indice].Cells[nameof(colParcelaParcelas)].Value = i;
+					if (i == 1)
+						dgParcelas.Rows[indice].Cells[nameof(colVencimentoParcelas)].Value = dtpDataVencimento.Value.ToString("dd/MM/yyyy");
+					else
+						dgParcelas.Rows[indice].Cells[nameof(colVencimentoParcelas)].Value = data.ToString("dd/MM/yyyy");
 
+					dgParcelas.Rows[indice].Cells[nameof(colValorPrincipalParcelas)].Value = txtValorPrincipal.Text;
+					dgParcelas.Rows[indice].Cells[nameof(colValordaParcelaParcelas)].Value = txtValorParcelas.Text;
+				}
+			}
+		}
 
-                txtTotalNegociado.Text = $"R$ {valor:N2}";
-                txtValorPrincipal.Text = valor.ToString();
-            }
+		private DateTime RetornarProximaData(int adicionar)
+		{
+			adicionar--;
+			if (int.Parse(cmbPrazo.SelectedValue.ToString()) == 4)
+			{
+				DateTime data = DateTime.Parse(dtpDataVencimento.Text);
+				return data.AddMonths(adicionar);
+			}
+			else if (int.Parse(cmbPrazo.SelectedValue.ToString()) == 3)
+			{
+				DateTime data = DateTime.Parse(dtpDataVencimento.Text);
+				return data.AddDays(adicionar * 15);
+			}
+			else
+			{
+				DateTime data = DateTime.Parse(dtpDataVencimento.Text);
+				return data.AddDays(adicionar * 7);
+			}
+		}
 
-            //if((bool)dgDetalhesDoTitulo.CurrentCell.Value == true)
-            //{
-            //    foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-            //    {
-            //        if (row.IsNewRow) continue;
-            //        row.Cells[nameof(colSelecioneTitulo)].Value = false;
-            //    }
-            //}
-        }
+		private bool PodeIncluirParcelas()
+		{
+			var mensagens = new List<string>();
 
-        private List<Titulo> ObterTitulosDoAcordo()
-        {
-            List<Titulo> titulos = new List<Titulo>();
-            foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-            {
-                if (row.IsNewRow) continue;
-                Titulo titulo = new Titulo();
+			if (_valorPrincipal < 0 || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
+				mensagens.Add("Informe o valor principal!");
 
-                if ((bool)row.Cells[nameof(colSelecioneTitulo)].FormattedValue)
-                {
-                    titulo.IDTitulo = long.Parse(row.Cells[nameof(colID)].Value.ToString());
-                    titulos.Add(titulo);
-                }
+			if (string.IsNullOrEmpty(cmbParcela.Text) || cmbParcela.TextoEhSelecione())
+				mensagens.Add("Informe a quantidade de parcelas!");
 
-            }
-            return titulos;
-        }
+			if (_valorPrincipal < 0 || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
+				mensagens.Add("Informe o valor da parcela!");
 
-        private List<Titulo> ObterTitulosSelecionados()
-        {
-            //return _contratoDaNegociacao.Titulos;
-            return null;
-        }
+			if (string.IsNullOrEmpty(cmbPrazo.Text) || cmbPrazo.Text == "SELECIONE...")
+				mensagens.Add("Informe o prazo!");
 
-        private void AtualizarTotalDaNegociacao()
-        {
-            decimal valorTotalNegociado = 0;
-            //var titulosSelecionados = ObterTitulosSelecionados();
-            //foreach (var titulo in titulosSelecionados)
-            //{
-            //    if (VerificarSeExisteAcordo(titulo.IDTitulo) == false)
-            //        valorTotalNegociado += titulo.Montante;
-            //}
+			if (!DateTime.TryParse(dtpDataVencimento.Text, out DateTime data))
+				mensagens.Add("Informe a data de vencimento!");
 
-            //txtTotalNegociado.Text = $"R$ {valorTotalNegociado:N2}";
-            //txtValorPrincipal.Text = valorTotalNegociado.ToString();
-        }
+			var prazo = int.Parse(cmbPrazo.SelectedValue.ToString());
+			if (prazo != 1 && cmbParcela.Text == "1")
+				mensagens.Add("Para esse tipo de acordo a quantidade de parcelas deve ser maior que 1!");
 
-        private void txtValorBoleto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == ',') && !(e.KeyChar == Convert.ToChar(8)) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Enter)
-            //{
-            //    e.Handled = true;
-            //    MessageBox.Show("Favor informar apenas números com casas decimais separadas por virgula(\",\").", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
+			if (dgParcelas.Rows.Count > 0)
+				mensagens.Add("Já existem parcelas cadastradas!");
 
-        private void txtValorAtualizado_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == ',') && !(e.KeyChar == Convert.ToChar(8)) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Enter)
-            //{
-            //    e.Handled = true;
-            //    MessageBox.Show("Favor informar apenas números com casas decimais separadas por virgula(\",\").", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
+			var podeContinuar = mensagens.Any() == false;
+			if (podeContinuar == false)
+			{
+				var msgFinal = string.Join("\n", mensagens.ToArray());
+				MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
+			return podeContinuar;
+		}
 
-        private void txtValorParcelas_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == ',') && !(e.KeyChar == Convert.ToChar(8)) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Enter)
-            //{
-            //    e.Handled = true;
-            //    MessageBox.Show("Favor informar apenas números com casas decimais separadas por virgula(\",\").", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
+		private void CarregarStatusDeAcordo()
+		{
+			var statusDeAcordo = _statusDeAcordoService.ListarStatusDeAcordo(_prospect.IdCampanha, (int)TipoStatusDeAcordo.Aceite, true);
+			tsAcordo_cmbStatusAcordo.ComboBox.PreencherComSelecione(statusDeAcordo, x => x.Id, x => x.Nome);
 
-        private void ValidarSomenteNumeros_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ValidarSomenteNumeros(e);
-        }
+			var statusAcordo = _statusDeAcordoService.RetornarStatusDeAcordo((int)_idStatusAcordo, _prospect.IdCampanha);
+			tsAcordo_cmbStatusAcordo.ComboBox.SelectedValue = statusAcordo.Id.ToString();
+			tsAcordo_cmbStatusAcordo.Enabled = false;
+		}
 
-        private void ValidarSomenteNumeros(KeyPressEventArgs e)
-        {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Enter)
-            {
-                e.Handled = true;
-                MessageBox.Show("Favor informar apenas números no campo.", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+		private void CarregarCamposDeAcordoComStatus()
+		{
+			txtNomeCliente.Text = _prospect.Campo002?.ToUpper();
+			txtValorPrincipal.Text = $"R$ {_contratoDaNegociacao.Valor:N2}";
 
-        private void IncluirParcelas()
-        {
-            if (PodeInclirParcelas())
-            {
-                int qtdParcela = 0;
-                qtdParcela = int.Parse(cmbQuantidadeParcela.Text);
+			if (tsAcordo_cmbStatusAcordo.ComboBox.SelectedItem.ToString() == "ACORDO TOTAL")
+			{
+				cmbParcela.Enabled = false;
+				cmbParcela.SelectedValue = "1";
+				cmbPrazo.Enabled = false;
+				cmbPrazo.SelectedValue = "1";
 
-                for (int i = 1; i <= qtdParcela; i++)
-                {
-                    DateTime data = RetornarProximaData(i);
-                    int indice = dgParcelas.Rows.Add();
-                    dgParcelas.Rows[indice].Cells[nameof(colParcelaParcelas)].Value = i;
-                    if (i == 1)
-                        dgParcelas.Rows[indice].Cells[nameof(colVencimentoParcelas)].Value = mskDataVencimento.Text;
-                    else
-                        dgParcelas.Rows[indice].Cells[nameof(colVencimentoParcelas)].Value = data.ToString("dd/MM/yyyy");
+				var listaContratos = _contratoService.Listar(_prospect.Id, baixado: false);
+				var contratosSelecionados = listaContratos.Where(x => _idsContratos.Count > 0 ? _idsContratos.Any(y => y == x.Id) : _contratoDaNegociacao.Id == x.Id).ToList();
 
-                    dgParcelas.Rows[indice].Cells[nameof(colValorPrincipalParcelas)].Value = txtValorPrincipal.Text;
-                    dgParcelas.Rows[indice].Cells[nameof(colMultaParcelas)].Value = txtMulta.Text;
-                    dgParcelas.Rows[indice].Cells[nameof(colJurosParcelas)].Value = txtJuros.Text;
-                    dgParcelas.Rows[indice].Cells[nameof(colValordaParcelaParcelas)].Value = txtValorParcelas.Text;
-                }
-            }
-        }
+				foreach (var item in contratosSelecionados)
+					if (double.TryParse(item.Valor, out double valorPrincipal))
+						_valorPrincipal += double.Parse(item.Valor, CultureInfo.InvariantCulture);
 
-        private DateTime RetornarProximaData(int adicionar)
-        {
-            adicionar = adicionar - 1;
-            if (int.Parse(cmbPrazo.SelectedValue.ToString()) == 4)
-            {
-                DateTime data = DateTime.Parse(mskDataVencimento.Text);
-                return data.AddMonths(adicionar);
-            }
-            else if (int.Parse(cmbPrazo.SelectedValue.ToString()) == 3)
-            {
-                DateTime data = DateTime.Parse(mskDataVencimento.Text);
-                return data.AddDays(adicionar * 15);
-            }
-            else
-            {
-                DateTime data = DateTime.Parse(mskDataVencimento.Text);
-                return data.AddDays(adicionar * 7);
-            }
-        }
+				_valorParcela = _valorPrincipal;
 
-        private bool PodeInclirParcelas()
-        {
-            var mensagens = new List<string>();
-            if (string.IsNullOrEmpty(cmbQuantidadeParcela.Text))
-            {
-                mensagens.Add("Informe a quantidade de parcelas!");
-            }
+				txtValorPrincipal.Text = $"R$ {_valorPrincipal:N2}";
+				txtValorParcelas.Text = $"R$ {_valorPrincipal:N2}";
 
-            if (dgParcelas.Rows.Count > 0)
-            {
-                mensagens.Add("Já existem parcelas cadastradas no grid!");
-            }
+				lblIdContrato.Text = "Ids Contratos:";
+				txtIDContrato.Text = string.Join(", ", listaContratos.Select(p => p.Id));
+			}
+			else if (tsAcordo_cmbStatusAcordo.ComboBox.SelectedItem.ToString() == "ACORDO PARCIAL")
+			{
+				var listaContratos = _contratoService.Listar(_prospect.Id, baixado: false);
+				var contratosSelecionados = listaContratos.Where(x => _idsContratos.Count > 0 ? _idsContratos.Any(y => y == x.Id) : _contratoDaNegociacao.Id == x.Id).ToList();
 
-            if (string.IsNullOrEmpty(cmbPrazo.Text) || cmbPrazo.Text == "SELECIONE...")
-            {
-                mensagens.Add("Informe o prazo!");
-            }
+				foreach (var item in contratosSelecionados)
+					if (double.TryParse(item.Valor, out double valorPrincipal))
+						_valorPrincipal += double.Parse(item.Valor, CultureInfo.InvariantCulture);
 
-            int prazo = int.Parse(cmbPrazo?.SelectedValue.ToString());
-            if (prazo != 1 && cmbQuantidadeParcela.Text == "1")
-            {
-                mensagens.Add("Para esse tipo de acordo a quantidade de parcelas deve ser maior que 1!");
-            }
+				txtValorPrincipal.Text = $"R$ {_valorPrincipal:N2}";
+				txtValorParcelas.Text = $"R$ {_valorPrincipal:N2}";
 
-            if (prazo == 1 && cmbQuantidadeParcela.Text != "1")
-            {
-                mensagens.Add("Acordo à vista deve ter apenas uma parcela!");
-            }
+				lblIdContrato.Text = "Ids Contratos:";
+				txtIDContrato.Text = string.Join(", ", contratosSelecionados.Select(p => p.Id));
+			}
+		}
 
-            DateTime data;
+		private void LimparGridParcela()
+		{
+			dgParcelas.Rows.Clear();
+		}
 
-            if (!DateTime.TryParse(mskDataVencimento.Text, out data))
-            {
-                mensagens.Add("Informe a data de vencimento!");
-            }
+		private void CarregarConfiguracaoInicial()
+		{
+			this.DialogResult = DialogResult.None;
 
-            double valorPrincipal = 0;
+			ResetarCampos();
+			AtualizarTotalDaNegociacao();
+			CarregarStatusDeAcordo();
+			LimparGridParcela();
+			CarregarCamposDeAcordoComStatus();
+		}
 
-            if (!Double.TryParse(txtValorPrincipal.Text, out valorPrincipal) || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor principal!");
-            }
+		#endregion MÉTODOS
 
-            double valorParcela = 0;
+		#region EVENTOS
 
-            if (!Double.TryParse(txtValorParcelas.Text, out valorParcela) || string.IsNullOrEmpty(txtValorParcelas.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor da parcela!");
-            }
+		private void negociacaoInclusao_Load(object sender, EventArgs e)
+		{
+			try
+			{
+				CarregarConfiguracaoInicial();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ocorreu um erro ao carregar as configurações iniciais." + ex.Message, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-            double multa = 0;
+		private void btnSalvarNegociacao_Click(object sender, EventArgs e)
+		{
+			if (!PodeSalvar()) return;
 
-            if (!Double.TryParse(txtMulta.Text, out multa) || string.IsNullOrEmpty(txtMulta.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor da multa!");
-            }
+			var resultado = MessageBox.Show("Confirmar a criação da nova negociação?\nEste processo não pode ser desfeito.", "Callplus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (resultado == DialogResult.Yes)
+			{
+				try
+				{
+					IncluirNovaNegociacao();
+					MessageBox.Show("Concluído!", "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            double juros = 0;
+					Atualizar = true;
+					Hide();
+					Close();
+				}
+				catch (Exception erro)
+				{
+					MessageBox.Show($"Ocorreu um erro inesperado ao incluir uma nova Negociação.\nErro: {erro.Message}\nStacktrace:{erro.StackTrace}");
+				}
+			}
+		}
 
-            if (!Double.TryParse(txtJuros.Text, out juros) || string.IsNullOrEmpty(txtJuros.Text.Trim()))
-            {
-                mensagens.Add("Informe o valor dos juros!");
-            }
+		private void btnAdicionarParcela_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				IncluirParcelas();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ocorreu o seguinte erro ao incluir a(s) parcela(s)" + ex.Message, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-            var podeContinuar = mensagens.Any() == false;
-            if (podeContinuar == false)
-            {
-                var msgFinal = string.Join("\n", mensagens.ToArray());
-                MessageBox.Show(msgFinal, "Callplus", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            return podeContinuar;
-        }
+		private void btnRemoverParcelas_Click(object sender, EventArgs e)
+		{
+			LimparGridParcela();
+		}
 
-        private void DesmarcarTodosTitulos()
-        {
-            foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-            {
-                if (row.IsNewRow) continue;
-                row.Cells[nameof(colSelecioneTitulo)].Value = false;
-            }
-        }
+		private void cmbParcela_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (_valorPrincipal <= 0 || cmbParcela.TextoEhSelecione()) return;
 
-        private void MarcarTodosTitulos()
-        {
-            foreach (DataGridViewRow row in dgDetalhesDoTitulo.Rows)
-            {
-                if (row.IsNewRow) continue;
-                row.Cells[nameof(colSelecioneTitulo)].Value = true;
-            }
-        }
-    }
+			var v = _valorPrincipal / Convert.ToInt32(cmbParcela.SelectedValue);
+			_valorParcela = v;
+
+			txtValorParcelas.Text = $"R$ {v:N2}";
+		}
+
+		#endregion EVENTOS
+	}
 }

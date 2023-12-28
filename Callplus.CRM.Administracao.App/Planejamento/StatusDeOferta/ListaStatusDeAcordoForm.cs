@@ -10,12 +10,12 @@ using Callplus.CRM.Tabulador.Dominio.Entidades;
 
 namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 {
-    public partial class ListaStatusDeOfertaForm : Form
+    public partial class ListaStatusDeAcordoForm : Form
     {
-        public ListaStatusDeOfertaForm()
+        public ListaStatusDeAcordoForm()
         {
             _logger = LogManager.GetCurrentClassLogger();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _campanhaService = new CampanhaService();
 
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private readonly ILogger _logger;
         private readonly CampanhaService _campanhaService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private Tabulador.Dominio.Entidades.StatusDeAtendimento _statusDeAtendimento;
         private IEnumerable<Tabulador.Dominio.Entidades.Campanha> _campanhas;
 
@@ -55,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
 
         private void IniciarNovoRegistro()
         {
-            StatusDeOfertaForm f = new StatusDeOfertaForm( 0, "NOVO STATUS DE OFERTA");
+            StatusDeAcordoForm f = new StatusDeAcordoForm( 0, "NOVO STATUS DE ACORDO");
 
             f.Iniciar();
 
@@ -118,7 +118,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.StatusDeOferta
             {
                 int id = (int)dgDados.Rows[linha].Cells["Id"].Value;
 
-                StatusDeOfertaForm f = new StatusDeOfertaForm(id, "EDITAR STATUS DE OFERTA");
+                StatusDeAcordoForm f = new StatusDeAcordoForm(id, "EDITAR STATUS DE ACORDO");
 
                 f.Iniciar();
 

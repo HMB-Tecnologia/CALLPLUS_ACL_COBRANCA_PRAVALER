@@ -21,8 +21,6 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
         public DateTime DataCadastro { get; set; }
         public bool Ativo { get; set; }
         public int IdUsuario { get; set; }
-        public List<Titulo> Titulos { get; set; }
-        public string TitulosDoAcordo { get; set; }
-        public List<Parcela> Parcelas { get; set; }
+        public List<ParcelaAcordo> Parcelas { get; set; }
 	}
 }

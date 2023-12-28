@@ -18,7 +18,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
         public ScriptDeOfertaControl()
         {
             _pilhaDeEtapas = new Stack<EtapaDoScriptDeAtendimento>();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _scriptDeAtendimentoService = new ScriptDeAtendimentoService();
             InitializeComponent();
 
@@ -42,12 +42,12 @@ namespace Callplus.CRM.Tabulador.App.Controles
         private string _htmlPendente = "";
         private ScriptDeAtendimento _scriptDeAtendimento;
         private Campanha _campanha;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private ScriptDeAtendimentoService _scriptDeAtendimentoService;
         private readonly Stack<EtapaDoScriptDeAtendimento> _pilhaDeEtapas;
         private RespostaDaEtapaDoScriptDeAtendimento _respostaSelecionada;
 
-        public delegate void FinalizarAtendimento(StatusDeOferta tipoResultadoFimScriptAtendimento);
+        public delegate void FinalizarAtendimento(StatusDeAcordo tipoResultadoFimScriptAtendimento);
         public event FinalizarAtendimento OnFinalizarScript;
         public event EventHandler<EtapaChangedEventArgs> ProximaEtapaClick;
         public event EventHandler<EtapaChangedEventArgs> VoltarEtapaClick;
@@ -63,11 +63,11 @@ namespace Callplus.CRM.Tabulador.App.Controles
         {
             var itens = new List<KeyValuePair<int, string>>();
             IEnumerable<KeyValuePair<int, string>> listaFake = new List<KeyValuePair<int, string>>();
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Aceite, TipoStatusDeOferta.Aceite.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Recusa, TipoStatusDeOferta.Recusa.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Telefonia, TipoStatusDeOferta.Telefonia.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Agendamento, TipoStatusDeOferta.Agendamento.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Inelegivel, TipoStatusDeOferta.Inelegivel.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Aceite, TipoStatusDeAcordo.Aceite.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Recusa, TipoStatusDeAcordo.Recusa.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Telefonia, TipoStatusDeAcordo.Telefonia.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Agendamento, TipoStatusDeAcordo.Agendamento.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Inelegivel, TipoStatusDeAcordo.Inelegivel.ToString()));
 
             tsComboTipo.ComboBox.PreencherComSelecione(itens);
             tsComboStatus.ComboBox.PreencherComSelecione(listaFake);
@@ -355,7 +355,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
             if (tsComboStatus.ComboBox.TextoEhSelecione() == true) return;
 
             var idStatus = int.Parse(tsComboStatus.ComboBox.SelectedValue.ToString());
-            var statusSelecionado = _statusDeOfertaService.RetornarStatusDeOferta(idStatus, _campanha.Id);
+            var statusSelecionado = _statusDeOfertaService.RetornarStatusDeAcordo(idStatus, _campanha.Id);
 
             OnFinalizarScript?.Invoke(statusSelecionado);
         }
@@ -375,8 +375,8 @@ namespace Callplus.CRM.Tabulador.App.Controles
 
             long idCampaha = _campanha.Id;
             int idTipoStatus = int.Parse(tsComboTipo.ComboBox.SelectedValue.ToString());
-            TipoStatusDeOferta tipoStatus = (TipoStatusDeOferta)idTipoStatus;
-            var listaStatusOferta = _statusDeOfertaService.ListarStatusDeOferta(idCampaha, idTipoStatus, ativo: true);
+            TipoStatusDeAcordo tipoStatus = (TipoStatusDeAcordo)idTipoStatus;
+            var listaStatusOferta = _statusDeOfertaService.ListarStatusDeAcordo(idCampaha, idTipoStatus, ativo: true);
             tsComboStatus.ComboBox.PreencherComSelecione(listaStatusOferta, x => x.Id, x => x.Nome);
             tsComboStatus.ComboBox.ResetarComSelecione(habilitar: true);
 

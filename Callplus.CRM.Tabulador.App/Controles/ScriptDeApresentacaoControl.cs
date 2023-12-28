@@ -15,7 +15,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
         public ScriptDeApresentacaoControl()
         {
             _pilhaDeEtapas = new Stack<EtapaDoScriptDeAtendimento>();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _scriptDeAtendimentoService = new ScriptDeAtendimentoService();
             InitializeComponent();
 
@@ -41,7 +41,7 @@ namespace Callplus.CRM.Tabulador.App.Controles
         private string _htmlPendente = "";
         private ScriptDeAtendimento _scriptDeAtendimento;
         private Campanha _campanha;
-        private StatusDeOfertaService _statusDeOfertaService;
+        private StatusDeAcordoService _statusDeOfertaService;
         private ScriptDeAtendimentoService _scriptDeAtendimentoService;
         private readonly Stack<EtapaDoScriptDeAtendimento> _pilhaDeEtapas;
         private RespostaDaEtapaDoScriptDeAtendimento _respostaSelecionada;

@@ -514,10 +514,10 @@
 			this.lklStatusDeOferta.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(196)))));
 			this.lklStatusDeOferta.Location = new System.Drawing.Point(28, 69);
 			this.lklStatusDeOferta.Name = "lklStatusDeOferta";
-			this.lklStatusDeOferta.Size = new System.Drawing.Size(112, 17);
+			this.lklStatusDeOferta.Size = new System.Drawing.Size(117, 17);
 			this.lklStatusDeOferta.TabIndex = 53;
 			this.lklStatusDeOferta.TabStop = true;
-			this.lklStatusDeOferta.Text = "Status de Oferta";
+			this.lklStatusDeOferta.Text = "Status de Acordo";
 			this.lklStatusDeOferta.Visible = false;
 			this.lklStatusDeOferta.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lklStatusOferta_LinkClicked);
 			// 

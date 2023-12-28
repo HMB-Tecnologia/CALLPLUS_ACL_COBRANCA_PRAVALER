@@ -16,7 +16,7 @@ namespace Callplus.CRM.Administracao.App.Controles
         public ScriptDeOfertaControl()
         {
             _pilhaDeEtapas = new Stack<EtapaDoScriptDeAtendimento>();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             InitializeComponent();
 
             //((Control)webBrowserEtapa).Enabled = false;
@@ -38,11 +38,11 @@ namespace Callplus.CRM.Administracao.App.Controles
         private bool _carregarHtmPendente = false;
         private string _htmlPendente = "";
         private ScriptDeAtendimento _scriptDeAtendimento;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly Stack<EtapaDoScriptDeAtendimento> _pilhaDeEtapas;
         private RespostaDaEtapaDoScriptDeAtendimento _respostaSelecionada;
 
-        public delegate void FinalizarAtendimento(StatusDeOferta tipoResultadoFimScriptAtendimento);
+        public delegate void FinalizarAtendimento(StatusDeAcordo tipoResultadoFimScriptAtendimento);
         public event EventHandler<EtapaChangedEventArgs> ProximaEtapaClick;
         public event EventHandler<EtapaChangedEventArgs> VoltarEtapaClick;
 
@@ -54,9 +54,9 @@ namespace Callplus.CRM.Administracao.App.Controles
         {
             var itens = new List<KeyValuePair<int, string>>();
             IEnumerable<KeyValuePair<int, string>> listaFake = new List<KeyValuePair<int, string>>();
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Aceite, TipoStatusDeOferta.Aceite.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Recusa, TipoStatusDeOferta.Recusa.ToString()));
-            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeOferta.Telefonia, TipoStatusDeOferta.Telefonia.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Aceite, TipoStatusDeAcordo.Aceite.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Recusa, TipoStatusDeAcordo.Recusa.ToString()));
+            itens.Add(new KeyValuePair<int, string>((int)TipoStatusDeAcordo.Telefonia, TipoStatusDeAcordo.Telefonia.ToString()));
 
             tsComboRespostas.ComboBox.PreencherComSelecione(listaFake);
             //   tsComboTipo.ComboBox.PreencherComSelecione(listaFake);

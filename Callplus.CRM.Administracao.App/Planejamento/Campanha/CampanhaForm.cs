@@ -28,7 +28,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
             _layoutDinamicoService = new LayoutDinamicoService();
             _scriptDeAtendimentoService = new ScriptDeAtendimentoService();
             _statusDeAtendimentoService = new StatusDeAtendimentoService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _mailingService = new MailingService();
             _statusDeAuditoriaService = new StatusDeAuditoriaService();
             _tipoDiscagemService = new TipoDiscagemService();
@@ -71,7 +71,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
         private readonly LayoutDinamicoService _layoutDinamicoService;
         private readonly ScriptDeAtendimentoService _scriptDeAtendimentoService;
         private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly MailingService _mailingService;
         private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
         private readonly TipoDiscagemService _tipoDiscagemService;
@@ -254,7 +254,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
 
         private void CarregarStatusDeOferta()
         {
-            IEnumerable<Tabulador.Dominio.Entidades.StatusDeOferta> _statusDeOferta = _statusDeOfertaService.Listar(-1, true);
+            IEnumerable<Tabulador.Dominio.Entidades.StatusDeAcordo> _statusDeOferta = _statusDeOfertaService.Listar(-1, true);
             IEnumerable<StatusDeOfertaDaCampanha> _campanhasDoStatusDeOferta;
 
             if (_campanha != null)

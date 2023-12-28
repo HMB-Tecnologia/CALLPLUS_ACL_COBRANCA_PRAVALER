@@ -526,6 +526,11 @@
     <Content Include="bin\Debug\xCallIntegrator.BLL.dll" />
     <Content Include="bin\Debug\xCallIntegrator.DAL.dll" />
     <Content Include="bin\Debug\xCallIntegrator.dll" />
+    <None Include="Resources\copiar.png" />
+    <None Include="Resources\enviar.png" />
+    <None Include="Resources\copiar2.png" />
+    <None Include="Resources\enviar2.png" />
+    <None Include="Resources\enviar3.png" />
     <Content Include="Resources\TransferCall24x24.png" />
     <None Include="Web References\WSRotalogService\WebServiceRota.disco" />
     <None Include="Resources\microphone-off.png" />

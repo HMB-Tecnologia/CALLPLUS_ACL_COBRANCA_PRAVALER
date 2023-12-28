@@ -30,14 +30,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 			return _Dao.Gravar(contrato);
 		}
 
-		public Negociacao RetornarContrato(long id, bool baixado)
+		public long IncluirNegociacao(Negociacao negociacao, long idProspect, long idContrato, string cpf)
 		{
-			return _Dao.RetornarContrato(id, baixado);
-		}
-
-		public long IncluirNegociacao(Negociacao negociacao)
-		{
-			return _Dao.IncluirNegociacao(negociacao);
+			return _Dao.IncluirNegociacao(negociacao, idProspect, idContrato, cpf);
 		}
 
 		public void IncluirTituloNegociacao(TituloNegociacao tituloNegociacao)
@@ -45,14 +40,14 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 			_Dao.IncluirTituloNegociacao(tituloNegociacao);
 		}
 
-		public void IncluirParcelaNegociacao(Parcela parcela, long idNegociacao, int idUsuario)
+		public void IncluirParcelaNegociacao(ParcelaAcordo parcela, long idNegociacao, int idUsuario)
 		{
 			_Dao.IncluirParcelaNegociacao(parcela, idNegociacao, idUsuario);
 		}
 
-		public DataTable RetornarHistoricoNegociacaoPorIdContrato(long idContrato)
+		public DataTable RetornarHistoricoNegociacaoPorIdProspect(long idProspect)
 		{
-			return _Dao.RetornarHistoricoNegociacaoPorIdContrato(idContrato);
+			return _Dao.RetornarHistoricoNegociacaoPorIdProspect(idProspect);
 		}
 
 		public IEnumerable<string> PodeIncluirNegociacao(long idContrato, int idUsuario)
@@ -65,7 +60,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 			return _Dao.RetornarTipoAcordo(ativo);
 		}
 
-		public DataTable RetornarPrazoNegociacao(bool ativo)
+		public IEnumerable<Prazo> RetornarPrazoNegociacao(bool? ativo)
 		{
 			return _Dao.RetornarPrazoNegociacao(ativo);
 		}
@@ -73,6 +68,11 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
 		public bool VerificarSeExisteAcordo(long iDTitulo)
 		{
 			return _Dao.VerificarSeExisteAcordo(iDTitulo);
+		}
+
+		public IEnumerable<Parcela> RetornarParcelaNegociacao(bool ativo)
+		{
+			return _Dao.RetornarParcelaNegociacao(ativo);
 		}
 	}
 }

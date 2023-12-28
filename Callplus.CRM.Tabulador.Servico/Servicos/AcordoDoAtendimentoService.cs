@@ -28,7 +28,7 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _dao.RetornarOfertaElegivelParaAtendimento(idAtendimento, idCampanha, idMailing);
         }
 
-        public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeOferta status, string nome, string cpf, int? idBanco)
+        public long GravarStatusDaOfertaDoAtendimento(OfertaDoAtendimento oferta, StatusDeAcordo status, string nome, string cpf, int? idBanco)
         {            
             //TODO: ALTERAR PARA CONSIDERAR O TIPO DA OFERTA NÃO UTILIZANDO O ID
             //if (oferta.IdTipoDeProduto == 0) 

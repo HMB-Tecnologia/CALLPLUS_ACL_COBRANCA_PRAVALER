@@ -1,5 +1,6 @@
 ﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Infra.Dados.Dao;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -14,9 +15,9 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             _Dao = new ContratoDao();
         }
 
-        public List<Contrato> Listar(long id, bool baixado)
+        public IEnumerable<Contrato> Listar(long idProspect, bool baixado)
         {
-            return _Dao.Listar(id, baixado);
+            return _Dao.Listar(idProspect, baixado);
         }
 
         public DataTable ListarExibicao(long id, bool baixado)
@@ -29,9 +30,14 @@ namespace Callplus.CRM.Tabulador.Servico.Servicos
             return _Dao.Gravar(contrato);
         }
 
-        public Contrato RetornarContrato(long id, bool baixado)
+        public Contrato RetornarContrato(long id, bool baixado, long idContrato)
         {
-            return _Dao.RetornarContrato(id, baixado);
+            return _Dao.RetornarContrato(id, baixado, idContrato);
         }
+
+		public void BaixarContratosDoAcordo(string idsContratos, long id)
+		{
+			_Dao.BaixarContratosDoAcordo(idsContratos, id);
+		}
 	}
 }

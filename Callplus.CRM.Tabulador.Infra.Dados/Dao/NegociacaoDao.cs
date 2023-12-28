@@ -42,21 +42,6 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public Negociacao RetornarContrato(long id, bool baixado)
-		{
-			var sql = "";
-
-			var args = new
-			{
-				Id = id,
-				Baixado = baixado
-			};
-
-			var resultado = ExecutarProcedure<Negociacao>(sql, args);
-
-			return resultado.FirstOrDefault();
-		}
-
 		public int Gravar(Negociacao id)
 		{
 			var sql = "";
@@ -71,7 +56,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return Convert.ToInt32(resultado);
 		}
 
-		public long IncluirNegociacao(Negociacao negociacao)
+		public long IncluirNegociacao(Negociacao negociacao, long idProspect, long idContrato, string cpf)
 		{
 			var sql = string.Empty;
 			sql += "EXEC SP_INCLUIR_ACORDO";
@@ -84,7 +69,10 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			sql += $" @ValorDaParcelas = '{negociacao.ValorDasParcelas.ToString().Replace(",", ".")}',";
 			sql += $" @ValorPrincipal = '{negociacao.ValorPrincipal.ToString().Replace(",", ".")}',";
 			sql += $" @Juros = '{negociacao.Juros.ToString().Replace(",", ".")}',";
-			sql += $" @Multa = '{negociacao.Multa.ToString().Replace(",", ".")}'";
+			sql += $" @Multa = '{negociacao.Multa.ToString().Replace(",", ".")}',";
+			sql += $" @idProspect = {idProspect},";
+			sql += $" @idContrato = {idContrato},";
+			sql += $" @cpf = '{cpf}'";
 
 			var args = new { };
 
@@ -108,7 +96,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			ExecutarSql(sql, args);
 		}
 
-		public void IncluirParcelaNegociacao(Parcela parcela, long idNegociacao, int idUsuario)
+		public void IncluirParcelaNegociacao(ParcelaAcordo parcela, long idNegociacao, int idUsuario)
 		{
 			var sql = "EXEC SP_INCLUIR_PARCELA_ACORDO ";
 			sql += $" @IdAcordo = {idNegociacao},";
@@ -128,9 +116,9 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			ExecutarSql(sql, args);
 		}
 
-		public DataTable RetornarHistoricoNegociacaoPorIdContrato(long idContrato)
+		public DataTable RetornarHistoricoNegociacaoPorIdProspect(long idProspect)
 		{
-			var sql = $"EXEC SP_RETORNAR_HISTORICO_ACORDO @IdContrato = {idContrato}";
+			var sql = $"EXEC SP_RETORNAR_HISTORICO_ACORDO @IdProspect = {idProspect}";
 
 			var args = new
 			{
@@ -179,16 +167,16 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			return resultado;
 		}
 
-		public DataTable RetornarPrazoNegociacao(bool ativo)
+		public IEnumerable<Prazo> RetornarPrazoNegociacao(bool? ativo)
 		{
-			var sql = $" EXEC SP_RETORNAR_PRAZO_NEGOCIACAO @Ativo = {ativo}";
+			var sql = $"SP_RETORNAR_PRAZO_NEGOCIACAO";
 
 			var args = new
 			{
-
+				Ativo = ativo
 			};
 
-			var resultado = CarregarDataTable(sql, args);
+			var resultado = ExecutarProcedure<Prazo>(sql, args);
 
 			return resultado;
 		}
@@ -205,6 +193,20 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 			var resultado = CarregarDataTable(sql, args);
 
 			return resultado.Rows.Count > 0;
+		}
+
+		public IEnumerable<Parcela> RetornarParcelaNegociacao(bool ativo)
+		{
+			var sql = "APP_CRM_RETORNAR_PARCELA_NEGOCIACAO";
+
+			var args = new
+			{
+				Ativo = ativo
+			};
+
+			var resultado = ExecutarProcedure<Parcela>(sql, args);
+
+			return resultado;
 		}
 	}
 }

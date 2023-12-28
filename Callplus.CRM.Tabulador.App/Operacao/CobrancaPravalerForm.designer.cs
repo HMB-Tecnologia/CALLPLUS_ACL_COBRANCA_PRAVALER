@@ -28,63 +28,76 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CobrancaPravalerForm));
-			this.tsOferta = new System.Windows.Forms.ToolStrip();
+			this.tsAcordo = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-			this.tsOferta_cmbTipoStatusOferta = new System.Windows.Forms.ToolStripComboBox();
+			this.tsAcordo_cmbTipoStatusAcordo = new System.Windows.Forms.ToolStripComboBox();
 			this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-			this.tsOferta_cmbStatusOferta = new System.Windows.Forms.ToolStripComboBox();
-			this.tsOferta_btnSalvar = new System.Windows.Forms.ToolStripButton();
+			this.tsAcordo_cmbStatusAcordo = new System.Windows.Forms.ToolStripComboBox();
+			this.tsAcordo_btnSalvar = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.tsOferta_btnChecklist = new System.Windows.Forms.ToolStripButton();
+			this.tsAcordo_btnChecklist = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.label36 = new System.Windows.Forms.Label();
 			this.txtObservacao = new System.Windows.Forms.TextBox();
-			this.tcOferta = new System.Windows.Forms.TabControl();
-			this.tcOferta_tpDadosDoCliente = new System.Windows.Forms.TabPage();
+			this.tcAcordo = new System.Windows.Forms.TabControl();
+			this.tcAcordo_tpDadosDoProspect = new System.Windows.Forms.TabPage();
 			this.gbDadosPessoais = new System.Windows.Forms.GroupBox();
-			this.tcOferta_tpAcordo = new System.Windows.Forms.TabPage();
-			this.gcAcordos = new System.Windows.Forms.GroupBox();
+			this.tcAcordo_tpAcordo = new System.Windows.Forms.TabPage();
+			this.gcAcordo = new System.Windows.Forms.GroupBox();
 			this.dgAcordo = new System.Windows.Forms.DataGridView();
 			this.btnNovoAcordo = new System.Windows.Forms.Button();
+			this.tcAcordo_tpDadosAux = new System.Windows.Forms.TabPage();
+			this.gbDadosAux = new System.Windows.Forms.GroupBox();
+			this.chkEmail = new System.Windows.Forms.CheckBox();
+			this.btnCopiar = new System.Windows.Forms.Button();
+			this.chkWhatsApp = new System.Windows.Forms.CheckBox();
+			this.chkSms = new System.Windows.Forms.CheckBox();
+			this.btnEnviarCodBarras = new System.Windows.Forms.Button();
+			this.lblCodBarras = new System.Windows.Forms.Label();
+			this.txtCodBarras = new System.Windows.Forms.TextBox();
 			this.gbTop = new System.Windows.Forms.GroupBox();
 			this.dgContrato = new System.Windows.Forms.DataGridView();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this._containerDeLayoutDinamico = new Callplus.CRM.Tabulador.App.Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos();
-			this.tsOferta.SuspendLayout();
+			this.tsAcordo.SuspendLayout();
 			this.panel2.SuspendLayout();
-			this.tcOferta.SuspendLayout();
-			this.tcOferta_tpDadosDoCliente.SuspendLayout();
+			this.tcAcordo.SuspendLayout();
+			this.tcAcordo_tpDadosDoProspect.SuspendLayout();
 			this.gbDadosPessoais.SuspendLayout();
-			this.tcOferta_tpAcordo.SuspendLayout();
-			this.gcAcordos.SuspendLayout();
+			this.tcAcordo_tpAcordo.SuspendLayout();
+			this.gcAcordo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgAcordo)).BeginInit();
+			this.tcAcordo_tpDadosAux.SuspendLayout();
+			this.gbDadosAux.SuspendLayout();
 			this.gbTop.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgContrato)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// tsOferta
+			// tsAcordo
 			// 
-			this.tsOferta.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			this.tsOferta.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.tsOferta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.tsAcordo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			this.tsAcordo.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.tsAcordo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel3,
-            this.tsOferta_cmbTipoStatusOferta,
+            this.tsAcordo_cmbTipoStatusAcordo,
             this.toolStripLabel4,
-            this.tsOferta_cmbStatusOferta,
-            this.tsOferta_btnSalvar,
+            this.tsAcordo_cmbStatusAcordo,
+            this.tsAcordo_btnSalvar,
             this.toolStripSeparator1,
-            this.tsOferta_btnChecklist,
+            this.tsAcordo_btnChecklist,
             this.toolStripSeparator2});
-			this.tsOferta.Location = new System.Drawing.Point(0, 0);
-			this.tsOferta.Name = "tsOferta";
-			this.tsOferta.Padding = new System.Windows.Forms.Padding(2);
-			this.tsOferta.Size = new System.Drawing.Size(911, 27);
-			this.tsOferta.TabIndex = 0;
-			this.tsOferta.Text = "toolStrip2";
+			this.tsAcordo.Location = new System.Drawing.Point(0, 0);
+			this.tsAcordo.Name = "tsAcordo";
+			this.tsAcordo.Padding = new System.Windows.Forms.Padding(2);
+			this.tsAcordo.Size = new System.Drawing.Size(911, 27);
+			this.tsAcordo.TabIndex = 0;
+			this.tsAcordo.Text = "toolStrip2";
 			// 
 			// toolStripLabel3
 			// 
@@ -92,13 +105,13 @@
 			this.toolStripLabel3.Size = new System.Drawing.Size(42, 20);
 			this.toolStripLabel3.Text = "Status:";
 			// 
-			// tsOferta_cmbTipoStatusOferta
+			// tsAcordo_cmbTipoStatusAcordo
 			// 
-			this.tsOferta_cmbTipoStatusOferta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.tsOferta_cmbTipoStatusOferta.Enabled = false;
-			this.tsOferta_cmbTipoStatusOferta.Name = "tsOferta_cmbTipoStatusOferta";
-			this.tsOferta_cmbTipoStatusOferta.Size = new System.Drawing.Size(121, 23);
-			this.tsOferta_cmbTipoStatusOferta.SelectedIndexChanged += new System.EventHandler(this.cmbTipoStatusOferta_SelectedIndexChanged);
+			this.tsAcordo_cmbTipoStatusAcordo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.tsAcordo_cmbTipoStatusAcordo.Enabled = false;
+			this.tsAcordo_cmbTipoStatusAcordo.Name = "tsAcordo_cmbTipoStatusAcordo";
+			this.tsAcordo_cmbTipoStatusAcordo.Size = new System.Drawing.Size(121, 23);
+			this.tsAcordo_cmbTipoStatusAcordo.SelectedIndexChanged += new System.EventHandler(this.cmbTipoStatusOferta_SelectedIndexChanged);
 			// 
 			// toolStripLabel4
 			// 
@@ -106,26 +119,27 @@
 			this.toolStripLabel4.Name = "toolStripLabel4";
 			this.toolStripLabel4.Size = new System.Drawing.Size(3, 20);
 			// 
-			// tsOferta_cmbStatusOferta
+			// tsAcordo_cmbStatusAcordo
 			// 
-			this.tsOferta_cmbStatusOferta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.tsOferta_cmbStatusOferta.DropDownWidth = 400;
-			this.tsOferta_cmbStatusOferta.Enabled = false;
-			this.tsOferta_cmbStatusOferta.IntegralHeight = false;
-			this.tsOferta_cmbStatusOferta.Name = "tsOferta_cmbStatusOferta";
-			this.tsOferta_cmbStatusOferta.Size = new System.Drawing.Size(400, 23);
+			this.tsAcordo_cmbStatusAcordo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.tsAcordo_cmbStatusAcordo.DropDownWidth = 400;
+			this.tsAcordo_cmbStatusAcordo.Enabled = false;
+			this.tsAcordo_cmbStatusAcordo.IntegralHeight = false;
+			this.tsAcordo_cmbStatusAcordo.Name = "tsAcordo_cmbStatusAcordo";
+			this.tsAcordo_cmbStatusAcordo.Size = new System.Drawing.Size(400, 23);
+			this.tsAcordo_cmbStatusAcordo.SelectedIndexChanged += new System.EventHandler(this.tsAcordo_cmbStatusAcordo_SelectedIndexChanged);
 			// 
-			// tsOferta_btnSalvar
+			// tsAcordo_btnSalvar
 			// 
-			this.tsOferta_btnSalvar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.tsOferta_btnSalvar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.save;
-			this.tsOferta_btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsOferta_btnSalvar.Name = "tsOferta_btnSalvar";
-			this.tsOferta_btnSalvar.Size = new System.Drawing.Size(58, 20);
-			this.tsOferta_btnSalvar.Text = "Salvar";
-			this.tsOferta_btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-			this.tsOferta_btnSalvar.ToolTipText = "Salvar Venda";
-			this.tsOferta_btnSalvar.Click += new System.EventHandler(this.tsOferta_btnSalvar_Click);
+			this.tsAcordo_btnSalvar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.tsAcordo_btnSalvar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.save;
+			this.tsAcordo_btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsAcordo_btnSalvar.Name = "tsAcordo_btnSalvar";
+			this.tsAcordo_btnSalvar.Size = new System.Drawing.Size(58, 20);
+			this.tsAcordo_btnSalvar.Text = "Salvar";
+			this.tsAcordo_btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+			this.tsAcordo_btnSalvar.ToolTipText = "Salvar Venda";
+			this.tsAcordo_btnSalvar.Click += new System.EventHandler(this.tsOferta_btnSalvar_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -133,16 +147,16 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
 			// 
-			// tsOferta_btnChecklist
+			// tsAcordo_btnChecklist
 			// 
-			this.tsOferta_btnChecklist.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.tsOferta_btnChecklist.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.check;
-			this.tsOferta_btnChecklist.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsOferta_btnChecklist.Name = "tsOferta_btnChecklist";
-			this.tsOferta_btnChecklist.Size = new System.Drawing.Size(75, 20);
-			this.tsOferta_btnChecklist.Text = "Checklist";
-			this.tsOferta_btnChecklist.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-			this.tsOferta_btnChecklist.Click += new System.EventHandler(this.tsOferta_btnChecklist_Click);
+			this.tsAcordo_btnChecklist.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.tsAcordo_btnChecklist.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.check;
+			this.tsAcordo_btnChecklist.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsAcordo_btnChecklist.Name = "tsAcordo_btnChecklist";
+			this.tsAcordo_btnChecklist.Size = new System.Drawing.Size(75, 20);
+			this.tsAcordo_btnChecklist.Text = "Checklist";
+			this.tsAcordo_btnChecklist.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+			this.tsAcordo_btnChecklist.Click += new System.EventHandler(this.tsOferta_btnChecklist_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -181,27 +195,28 @@
 			this.txtObservacao.Size = new System.Drawing.Size(892, 59);
 			this.txtObservacao.TabIndex = 1;
 			// 
-			// tcOferta
+			// tcAcordo
 			// 
-			this.tcOferta.Controls.Add(this.tcOferta_tpDadosDoCliente);
-			this.tcOferta.Controls.Add(this.tcOferta_tpAcordo);
-			this.tcOferta.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tcOferta.Location = new System.Drawing.Point(0, 212);
-			this.tcOferta.Name = "tcOferta";
-			this.tcOferta.SelectedIndex = 0;
-			this.tcOferta.Size = new System.Drawing.Size(911, 265);
-			this.tcOferta.TabIndex = 2;
+			this.tcAcordo.Controls.Add(this.tcAcordo_tpDadosDoProspect);
+			this.tcAcordo.Controls.Add(this.tcAcordo_tpAcordo);
+			this.tcAcordo.Controls.Add(this.tcAcordo_tpDadosAux);
+			this.tcAcordo.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tcAcordo.Location = new System.Drawing.Point(0, 212);
+			this.tcAcordo.Name = "tcAcordo";
+			this.tcAcordo.SelectedIndex = 0;
+			this.tcAcordo.Size = new System.Drawing.Size(911, 265);
+			this.tcAcordo.TabIndex = 2;
 			// 
-			// tcOferta_tpDadosDoCliente
+			// tcAcordo_tpDadosDoProspect
 			// 
-			this.tcOferta_tpDadosDoCliente.Controls.Add(this.gbDadosPessoais);
-			this.tcOferta_tpDadosDoCliente.Location = new System.Drawing.Point(4, 22);
-			this.tcOferta_tpDadosDoCliente.Name = "tcOferta_tpDadosDoCliente";
-			this.tcOferta_tpDadosDoCliente.Padding = new System.Windows.Forms.Padding(3);
-			this.tcOferta_tpDadosDoCliente.Size = new System.Drawing.Size(903, 239);
-			this.tcOferta_tpDadosDoCliente.TabIndex = 0;
-			this.tcOferta_tpDadosDoCliente.Text = "Dados do Cliente";
-			this.tcOferta_tpDadosDoCliente.UseVisualStyleBackColor = true;
+			this.tcAcordo_tpDadosDoProspect.Controls.Add(this.gbDadosPessoais);
+			this.tcAcordo_tpDadosDoProspect.Location = new System.Drawing.Point(4, 22);
+			this.tcAcordo_tpDadosDoProspect.Name = "tcAcordo_tpDadosDoProspect";
+			this.tcAcordo_tpDadosDoProspect.Padding = new System.Windows.Forms.Padding(3);
+			this.tcAcordo_tpDadosDoProspect.Size = new System.Drawing.Size(903, 239);
+			this.tcAcordo_tpDadosDoProspect.TabIndex = 0;
+			this.tcAcordo_tpDadosDoProspect.Text = "Dados do Prospect";
+			this.tcAcordo_tpDadosDoProspect.UseVisualStyleBackColor = true;
 			// 
 			// gbDadosPessoais
 			// 
@@ -214,27 +229,27 @@
 			this.gbDadosPessoais.TabStop = false;
 			this.gbDadosPessoais.Text = "Dados Pessoais";
 			// 
-			// tcOferta_tpAcordo
+			// tcAcordo_tpAcordo
 			// 
-			this.tcOferta_tpAcordo.Controls.Add(this.gcAcordos);
-			this.tcOferta_tpAcordo.Location = new System.Drawing.Point(4, 22);
-			this.tcOferta_tpAcordo.Name = "tcOferta_tpAcordo";
-			this.tcOferta_tpAcordo.Size = new System.Drawing.Size(903, 239);
-			this.tcOferta_tpAcordo.TabIndex = 3;
-			this.tcOferta_tpAcordo.Text = "Acordos";
-			this.tcOferta_tpAcordo.UseVisualStyleBackColor = true;
+			this.tcAcordo_tpAcordo.Controls.Add(this.gcAcordo);
+			this.tcAcordo_tpAcordo.Location = new System.Drawing.Point(4, 22);
+			this.tcAcordo_tpAcordo.Name = "tcAcordo_tpAcordo";
+			this.tcAcordo_tpAcordo.Size = new System.Drawing.Size(903, 239);
+			this.tcAcordo_tpAcordo.TabIndex = 3;
+			this.tcAcordo_tpAcordo.Text = "Acordo do Prospect";
+			this.tcAcordo_tpAcordo.UseVisualStyleBackColor = true;
 			// 
-			// gcAcordos
+			// gcAcordo
 			// 
-			this.gcAcordos.Controls.Add(this.dgAcordo);
-			this.gcAcordos.Controls.Add(this.btnNovoAcordo);
-			this.gcAcordos.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gcAcordos.Location = new System.Drawing.Point(0, 0);
-			this.gcAcordos.Name = "gcAcordos";
-			this.gcAcordos.Size = new System.Drawing.Size(903, 239);
-			this.gcAcordos.TabIndex = 0;
-			this.gcAcordos.TabStop = false;
-			this.gcAcordos.Text = "Acordos";
+			this.gcAcordo.Controls.Add(this.dgAcordo);
+			this.gcAcordo.Controls.Add(this.btnNovoAcordo);
+			this.gcAcordo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gcAcordo.Location = new System.Drawing.Point(0, 0);
+			this.gcAcordo.Name = "gcAcordo";
+			this.gcAcordo.Size = new System.Drawing.Size(903, 239);
+			this.gcAcordo.TabIndex = 0;
+			this.gcAcordo.TabStop = false;
+			this.gcAcordo.Text = "Acordo";
 			// 
 			// dgAcordo
 			// 
@@ -265,13 +280,113 @@
 			this.btnNovoAcordo.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.btnNovoAcordo.Image = ((System.Drawing.Image)(resources.GetObject("btnNovoAcordo.Image")));
 			this.btnNovoAcordo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.btnNovoAcordo.Location = new System.Drawing.Point(820, 10);
+			this.btnNovoAcordo.Location = new System.Drawing.Point(3, 19);
 			this.btnNovoAcordo.Name = "btnNovoAcordo";
 			this.btnNovoAcordo.Size = new System.Drawing.Size(80, 25);
 			this.btnNovoAcordo.TabIndex = 187;
 			this.btnNovoAcordo.Text = "Novo ";
 			this.btnNovoAcordo.UseVisualStyleBackColor = true;
 			this.btnNovoAcordo.Click += new System.EventHandler(this.btnNovoAcordo_Click);
+			// 
+			// tcAcordo_tpDadosAux
+			// 
+			this.tcAcordo_tpDadosAux.Controls.Add(this.gbDadosAux);
+			this.tcAcordo_tpDadosAux.Location = new System.Drawing.Point(4, 22);
+			this.tcAcordo_tpDadosAux.Name = "tcAcordo_tpDadosAux";
+			this.tcAcordo_tpDadosAux.Size = new System.Drawing.Size(903, 239);
+			this.tcAcordo_tpDadosAux.TabIndex = 4;
+			this.tcAcordo_tpDadosAux.Text = "Dados Auxiliares";
+			this.tcAcordo_tpDadosAux.UseVisualStyleBackColor = true;
+			// 
+			// gbDadosAux
+			// 
+			this.gbDadosAux.Controls.Add(this.chkEmail);
+			this.gbDadosAux.Controls.Add(this.btnCopiar);
+			this.gbDadosAux.Controls.Add(this.chkWhatsApp);
+			this.gbDadosAux.Controls.Add(this.chkSms);
+			this.gbDadosAux.Controls.Add(this.btnEnviarCodBarras);
+			this.gbDadosAux.Controls.Add(this.lblCodBarras);
+			this.gbDadosAux.Controls.Add(this.txtCodBarras);
+			this.gbDadosAux.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gbDadosAux.Location = new System.Drawing.Point(0, 0);
+			this.gbDadosAux.Name = "gbDadosAux";
+			this.gbDadosAux.Size = new System.Drawing.Size(903, 239);
+			this.gbDadosAux.TabIndex = 0;
+			this.gbDadosAux.TabStop = false;
+			this.gbDadosAux.Text = "Dados Auxiliares";
+			// 
+			// chkEmail
+			// 
+			this.chkEmail.AutoSize = true;
+			this.chkEmail.Location = new System.Drawing.Point(149, 41);
+			this.chkEmail.Name = "chkEmail";
+			this.chkEmail.Size = new System.Drawing.Size(54, 17);
+			this.chkEmail.TabIndex = 4;
+			this.chkEmail.Text = "E-mail";
+			this.chkEmail.UseVisualStyleBackColor = true;
+			this.chkEmail.CheckedChanged += new System.EventHandler(this.chkEmail_CheckedChanged);
+			// 
+			// btnCopiar
+			// 
+			this.btnCopiar.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.copiar2;
+			this.btnCopiar.Location = new System.Drawing.Point(380, 62);
+			this.btnCopiar.Name = "btnCopiar";
+			this.btnCopiar.Size = new System.Drawing.Size(23, 23);
+			this.btnCopiar.TabIndex = 1;
+			this.btnCopiar.UseVisualStyleBackColor = true;
+			this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+			this.btnCopiar.MouseHover += new System.EventHandler(this.btnCopiar_MouseHover);
+			// 
+			// chkWhatsApp
+			// 
+			this.chkWhatsApp.AutoSize = true;
+			this.chkWhatsApp.Location = new System.Drawing.Point(67, 41);
+			this.chkWhatsApp.Name = "chkWhatsApp";
+			this.chkWhatsApp.Size = new System.Drawing.Size(76, 17);
+			this.chkWhatsApp.TabIndex = 3;
+			this.chkWhatsApp.Text = "WhatsApp";
+			this.chkWhatsApp.UseVisualStyleBackColor = true;
+			this.chkWhatsApp.CheckedChanged += new System.EventHandler(this.chkWhatsApp_CheckedChanged);
+			// 
+			// chkSms
+			// 
+			this.chkSms.AutoSize = true;
+			this.chkSms.Location = new System.Drawing.Point(12, 41);
+			this.chkSms.Name = "chkSms";
+			this.chkSms.Size = new System.Drawing.Size(49, 17);
+			this.chkSms.TabIndex = 2;
+			this.chkSms.Text = "SMS";
+			this.chkSms.UseVisualStyleBackColor = true;
+			this.chkSms.CheckedChanged += new System.EventHandler(this.chkSms_CheckedChanged);
+			// 
+			// btnEnviarCodBarras
+			// 
+			this.btnEnviarCodBarras.Image = global::Callplus.CRM.Tabulador.App.Properties.Resources.enviar3;
+			this.btnEnviarCodBarras.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.btnEnviarCodBarras.Location = new System.Drawing.Point(12, 89);
+			this.btnEnviarCodBarras.Name = "btnEnviarCodBarras";
+			this.btnEnviarCodBarras.Size = new System.Drawing.Size(75, 23);
+			this.btnEnviarCodBarras.TabIndex = 5;
+			this.btnEnviarCodBarras.Text = "Enviar";
+			this.btnEnviarCodBarras.UseVisualStyleBackColor = true;
+			this.btnEnviarCodBarras.Click += new System.EventHandler(this.btnEnviarCodBarras_Click);
+			// 
+			// lblCodBarras
+			// 
+			this.lblCodBarras.AutoSize = true;
+			this.lblCodBarras.Location = new System.Drawing.Point(9, 18);
+			this.lblCodBarras.Name = "lblCodBarras";
+			this.lblCodBarras.Size = new System.Drawing.Size(88, 13);
+			this.lblCodBarras.TabIndex = 1;
+			this.lblCodBarras.Text = "Código de Barras";
+			// 
+			// txtCodBarras
+			// 
+			this.txtCodBarras.Location = new System.Drawing.Point(12, 63);
+			this.txtCodBarras.Name = "txtCodBarras";
+			this.txtCodBarras.ReadOnly = true;
+			this.txtCodBarras.Size = new System.Drawing.Size(365, 20);
+			this.txtCodBarras.TabIndex = 0;
 			// 
 			// gbTop
 			// 
@@ -301,6 +416,7 @@
 			this.dgContrato.Size = new System.Drawing.Size(905, 141);
 			this.dgContrato.TabIndex = 185;
 			this.dgContrato.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgContrato_CellClick);
+			this.dgContrato.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgContrato_CellContentClick);
 			// 
 			// panel3
 			// 
@@ -337,10 +453,10 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(911, 567);
 			this.Controls.Add(this.panel1);
-			this.Controls.Add(this.tcOferta);
+			this.Controls.Add(this.tcAcordo);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel3);
-			this.Controls.Add(this.tsOferta);
+			this.Controls.Add(this.tsAcordo);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
@@ -349,18 +465,21 @@
 			this.Name = "CobrancaPravalerForm";
 			this.Text = "Cobrança Pravaler";
 			this.Load += new System.EventHandler(this.CobrancaPravalerForm_Load);
-			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OfertaMigracaoPreControleClaroForm_KeyPress);
-			this.tsOferta.ResumeLayout(false);
-			this.tsOferta.PerformLayout();
+			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CobrancaPravalerForm_KeyPress);
+			this.tsAcordo.ResumeLayout(false);
+			this.tsAcordo.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
-			this.tcOferta.ResumeLayout(false);
-			this.tcOferta_tpDadosDoCliente.ResumeLayout(false);
+			this.tcAcordo.ResumeLayout(false);
+			this.tcAcordo_tpDadosDoProspect.ResumeLayout(false);
 			this.gbDadosPessoais.ResumeLayout(false);
 			this.gbDadosPessoais.PerformLayout();
-			this.tcOferta_tpAcordo.ResumeLayout(false);
-			this.gcAcordos.ResumeLayout(false);
+			this.tcAcordo_tpAcordo.ResumeLayout(false);
+			this.gcAcordo.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgAcordo)).EndInit();
+			this.tcAcordo_tpDadosAux.ResumeLayout(false);
+			this.gbDadosAux.ResumeLayout(false);
+			this.gbDadosAux.PerformLayout();
 			this.gbTop.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgContrato)).EndInit();
 			this.panel1.ResumeLayout(false);
@@ -370,29 +489,39 @@
 		}
 
 		#endregion
-		private System.Windows.Forms.ToolStrip tsOferta;
+		private System.Windows.Forms.ToolStrip tsAcordo;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-		private System.Windows.Forms.ToolStripComboBox tsOferta_cmbTipoStatusOferta;
+		private System.Windows.Forms.ToolStripComboBox tsAcordo_cmbTipoStatusAcordo;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-		private System.Windows.Forms.ToolStripComboBox tsOferta_cmbStatusOferta;
-		private System.Windows.Forms.ToolStripButton tsOferta_btnSalvar;
+		private System.Windows.Forms.ToolStripComboBox tsAcordo_cmbStatusAcordo;
+		private System.Windows.Forms.ToolStripButton tsAcordo_btnSalvar;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.TabControl tcOferta;
-		private System.Windows.Forms.TabPage tcOferta_tpDadosDoCliente;
+		private System.Windows.Forms.TabControl tcAcordo;
+		private System.Windows.Forms.TabPage tcAcordo_tpDadosDoProspect;
 		private System.Windows.Forms.Label label36;
 		private System.Windows.Forms.TextBox txtObservacao;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.GroupBox gbDadosPessoais;
-		private System.Windows.Forms.ToolStripButton tsOferta_btnChecklist;
+		private System.Windows.Forms.ToolStripButton tsAcordo_btnChecklist;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.TabPage tcOferta_tpAcordo;
-		private System.Windows.Forms.GroupBox gcAcordos;
+		private System.Windows.Forms.TabPage tcAcordo_tpAcordo;
+		private System.Windows.Forms.GroupBox gcAcordo;
 		private System.Windows.Forms.Button btnNovoAcordo;
 		private System.Windows.Forms.DataGridView dgAcordo;
 		private System.Windows.Forms.GroupBox gbTop;
 		private System.Windows.Forms.DataGridView dgContrato;
 		private System.Windows.Forms.Panel panel1;
 		private Controles.CamposDinamicos.ContainerDeLayoutDeCamposDinamicos _containerDeLayoutDinamico;
+		private System.Windows.Forms.TabPage tcAcordo_tpDadosAux;
+		private System.Windows.Forms.GroupBox gbDadosAux;
+		private System.Windows.Forms.Button btnEnviarCodBarras;
+		private System.Windows.Forms.Label lblCodBarras;
+		private System.Windows.Forms.TextBox txtCodBarras;
+		private System.Windows.Forms.CheckBox chkWhatsApp;
+		private System.Windows.Forms.CheckBox chkSms;
+		private System.Windows.Forms.CheckBox chkEmail;
+		private System.Windows.Forms.Button btnCopiar;
+		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }

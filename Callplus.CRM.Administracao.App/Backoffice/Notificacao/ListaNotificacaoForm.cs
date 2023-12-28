@@ -24,7 +24,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
             _statusDeAuditoriaService = new StatusDeAuditoriaService();
             _mailingService = new MailingService();
             _statusDeAtendimentoService = new StatusDeAtendimentoService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _relatorioService = new RelatorioService();
             _notificacaoService = new NotificacaoService();
 
@@ -39,7 +39,7 @@ namespace Callplus.CRM.Administracao.App.Backoffice.Notificacao
         private readonly UsuarioService _usuarioService;
         private readonly StatusDeAuditoriaService _statusDeAuditoriaService;
         private readonly StatusDeAtendimentoService _statusDeAtendimentoService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly MailingService _mailingService;
         private readonly RelatorioService _relatorioService;
         private readonly NotificacaoService _notificacaoService;

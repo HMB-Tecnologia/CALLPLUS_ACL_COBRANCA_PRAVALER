@@ -27,7 +27,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
             _loginService = new LoginService();
             _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _usuarioService = new UsuarioService();
 
             this.modoFeedback = false;
@@ -55,7 +55,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
             _loginService = new LoginService();
             _ofertaDoAtendimentoService = new AcordoDoAtendimentoService();
             _prospectService = new ProspectService();
-            _statusDeOfertaService = new StatusDeOfertaService();
+            _statusDeOfertaService = new StatusDeAcordoService();
             _usuarioService = new UsuarioService();
 
             this.modoFeedback = true;
@@ -81,7 +81,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
         private readonly LoginService _loginService;
         private readonly AcordoDoAtendimentoService _ofertaDoAtendimentoService;
         private readonly ProspectService _prospectService;
-        private readonly StatusDeOfertaService _statusDeOfertaService;
+        private readonly StatusDeAcordoService _statusDeOfertaService;
         private readonly UsuarioService _usuarioService;
         private CobrancaAtendimentoPravaler _oferta;
 
@@ -301,7 +301,7 @@ namespace Callplus.CRM.Administracao.App.Qualidade.NovaAvaliacaoDeAtendimentoFor
         
         private void CarregarStatusDeOferta(int idCampanha)
         {
-            IEnumerable<StatusDeOferta> _status = _statusDeOfertaService.ListarStatusDeOferta(idCampanha, null, true);
+            IEnumerable<StatusDeAcordo> _status = _statusDeOfertaService.ListarStatusDeAcordo(idCampanha, null, true);
 
             if (cmbTipo.Text == "VENDA")
                 _status = _status.Where(x => x.IdTipoDeStatusDeOferta == 1);
