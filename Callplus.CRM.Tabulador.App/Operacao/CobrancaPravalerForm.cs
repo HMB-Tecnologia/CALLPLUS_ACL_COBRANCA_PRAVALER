@@ -331,6 +331,10 @@ namespace Callplus.CRM.Tabulador.App.Operacao
 		private void BaixarContratosDoAcordo()
 		{
 			var idsContratos = RetornarIds();
+
+			if (string.IsNullOrEmpty(idsContratos))
+				idsContratos = _contrato.Id.ToString() + ",";
+
 			_contratoService.BaixarContratosDoAcordo(idsContratos, _prospect.Id);
 		}
 
