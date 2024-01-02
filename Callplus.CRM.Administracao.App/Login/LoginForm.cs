@@ -29,7 +29,7 @@ namespace Callplus.CRM.Administracao.App.Login
         private string _modulo = "ADM";
         private string _maquinaUsuario = "";
         private string _enderecoIP = "";
-        private string _release = "01.000" +
+        private string _release = "01.001" +
             "";
         public static string Release;
 
