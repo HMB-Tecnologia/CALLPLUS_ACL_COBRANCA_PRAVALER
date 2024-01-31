@@ -1,6 +1,7 @@
 ﻿using Callplus.CRM.Tabulador.Dominio.Entidades;
 using Callplus.CRM.Tabulador.Servico.Servicos;
 using CallplusUtil.Extensions;
+using CallplusUtil.Forms;
 using MoreLinq;
 using NLog;
 using System;
@@ -84,7 +85,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
 			if (_mailing != null)
 			{
-				if (!_mailingService.VerificarSeMailingEstaProcessadoComSucesso(_mailing.id))
+				if (!_mailingService.VerificarSeMailingEstaProcessadoComSucesso(_mailing.Id))
 					mensagens.Add("O processamento do mailing ainda não foi finalizado!!");
 			}
 			else
@@ -92,7 +93,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				mensagens.Add("Não há mailing selecionado!");
 			}
 
-			ExibirMensagens(mensagens);
+			CallplusFormsUtil.ExibirMensagens(mensagens);
 			return !mensagens.Any();
 		}
 
@@ -100,10 +101,10 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 		{
 			if (_mailing != null)
 			{
-				cmbCampanha.SelectedValue = _mailing.idCampanha.ToString();
-				txtNome.Text = _mailing.nome;
-				txtObservacao.Text = _mailing.observacao;
-				chkAtivo.Checked = _mailing.ativo;
+				cmbCampanha.SelectedValue = _mailing.IdCampanha.ToString();
+				txtNome.Text = _mailing.Nome;
+				txtObservacao.Text = _mailing.Observacao;
+				chkAtivo.Checked = _mailing.Ativo;
 				ConsultarTipoEnvioDadosDiscador();
 			}
 			else
@@ -122,7 +123,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 
 				if (_mailing == null) _mailing = new Tabulador.Dominio.Entidades.Mailing();
 
-				if (_mailing.id == 0 && !_subirNovaCampanhaDoMailing)
+				if (_mailing.Id == 0 && !_subirNovaCampanhaDoMailing)
 				{
 					var f = new LoadingForm("Transferindo Arquivo Para Servidor Callplus");
 					var start = Task.Factory.StartNew(() => { f.ShowDialog(); });
@@ -131,13 +132,13 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 					Task.WaitAny(start);
 				}
 
-				_mailing.idCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
-				_mailing.nome = txtNome.Text.Trim();
-				_mailing.ativo = chkAtivo.Checked;
-				_mailing.idCriador = AdministracaoMDI._usuario.Id;
-				_mailing.idModificador = AdministracaoMDI._usuario.Id;
-				_mailing.observacao = txtObservacao.Text.Trim();
-				_mailing.nomeArquivo = _arquivoDestino;
+				_mailing.IdCampanha = int.Parse(cmbCampanha.SelectedValue.ToString());
+				_mailing.Nome = txtNome.Text.Trim();
+				_mailing.Ativo = chkAtivo.Checked;
+				_mailing.IdCriador = AdministracaoMDI._usuario.Id;
+				_mailing.IdModificador = AdministracaoMDI._usuario.Id;
+				_mailing.Observacao = txtObservacao.Text.Trim();
+				_mailing.NomeArquivo = _arquivoDestino;
 
 				var frm = new LoadingForm("Gravando Mailing no Banco");
 				var str = Task.Factory.StartNew(() => { frm.ShowDialog(); });
@@ -219,7 +220,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			if (ExisteNomeDoMailing())
 				mensagens.Add("Já existe um mailing com esse nome!");
 
-			if (_mailing == null || _mailing.id == 0)
+			if (_mailing == null || _mailing.Id == 0)
 			{
 				if (string.IsNullOrEmpty(txtCaminhoDoArquivoMailing.Text))
 					mensagens.Add("Selecione um [Arquivo de Mailing] para carregar!");
@@ -228,7 +229,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 					mensagens.Add("Selecione o [Arquivo de Marcações] para carregar!");
 			}
 
-			ExibirMensagens(mensagens);
+			CallplusFormsUtil.ExibirMensagens(mensagens);
 			return mensagens.Any() == false;
 		}
 
@@ -236,15 +237,6 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 		{
 			if (_mailing == null) return false;
 			return _mailingService.VerificarSeExisteNomeDoMailing(txtNome.Text.Trim());//
-		}
-
-		private void ExibirMensagens(List<string> mensagens)
-		{
-			if (mensagens.Any())
-			{
-				var msgFinal = string.Join("\n", mensagens);
-				MessageBox.Show(msgFinal, "Aviso do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
 		}
 
 		private void LocalizarArquivo(bool localizarArquivoMailing)
@@ -383,7 +375,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			saveFileDialog.Title = "Exportar Mailing";
 
 			//saveFileDialog.FileName = "CALLPLUS-DISCADOR-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
-			saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + _mailing.id + "_FULL.txt";
+			saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + _mailing.Id + "_FULL.txt";
 
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
@@ -399,7 +391,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 							{
 								var sw = new StreamWriter(myStream);
 
-								var _dt = _mailingService.ExportarMailing(_mailing.id);
+								var _dt = _mailingService.ExportarMailing(_mailing.Id);
 
 								for (int i = 0; i < _dt.Rows.Count; i++)
 								{
@@ -680,7 +672,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 			var idMailingDiscador = parteNome[0];
 
 			var nomeDoArquivo = DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + idMailingDiscador + "_FULL.txt";
-			var _file = _mailingService.ExportarMailing(_mailing.id);
+			var _file = _mailingService.ExportarMailing(_mailing.Id);
 
 			//TODO - Ajustando método para importar para área FTP.
 			// _mailingService.ExportarMailingDiscador(_mailing.id);
@@ -695,7 +687,7 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
 				{
 					//var sw = new StreamWriter(stream);
 
-					var _dt = _mailingService.ExportarMailing(_mailing.id);
+					var _dt = _mailingService.ExportarMailing(_mailing.Id);
 
 					for (int i = 0; i < _dt.Rows.Count; i++)
 					{

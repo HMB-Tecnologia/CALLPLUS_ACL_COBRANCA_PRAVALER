@@ -113,30 +113,30 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Mailing
             {
                 Tabulador.Dominio.Entidades.Mailing mailing = new Tabulador.Dominio.Entidades.Mailing();
 
-                mailing.id = (int)dgResultado.Rows[linha].Cells["ID"].Value;
-                mailing.idCampanha = (int)dgResultado.Rows[linha].Cells["idCampanha"].Value;
+                mailing.Id = (int)dgResultado.Rows[linha].Cells["ID"].Value;
+                mailing.IdCampanha = (int)dgResultado.Rows[linha].Cells["idCampanha"].Value;
 
-                mailing.nome = dgResultado.Rows[linha].Cells["Nome"].Value.ToString();
+                mailing.Nome = dgResultado.Rows[linha].Cells["Nome"].Value.ToString();
 
                 if (dgResultado.Rows[linha].Cells["Ativo"].Value.ToString().ToUpper() == "SIM")
                 {
-                    mailing.ativo = true;
+                    mailing.Ativo = true;
                 }
                 else
                 {
-                    mailing.ativo = false;
+                    mailing.Ativo = false;
                 }
 
                 if (dgResultado.Rows[linha].Cells["Indicação"].Value.ToString().ToUpper() == "SIM")
                 {
-                    mailing.indicacao = true;
+                    mailing.Indicacao = true;
                 }
                 else
                 {
-                    mailing.indicacao = false;
+                    mailing.Indicacao = false;
                 }
 
-                mailing.observacao = dgResultado.Rows[linha].Cells["observacao"].Value.ToString();
+                mailing.Observacao = dgResultado.Rows[linha].Cells["observacao"].Value.ToString();
 
                 MailingForm f = new MailingForm("DETALHES DO MAILING", mailing, _campanhas);
 

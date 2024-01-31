@@ -4,17 +4,17 @@ namespace Callplus.CRM.Tabulador.Dominio.Entidades
 {
     public class Mailing
     {
-        public int id { get; set; }
-        public int idCampanha { get; set; }
-        public string nome { get; set; }        
-        public bool ativo { get; set; }
-        public bool indicacao { get; set; }
-        public int idCriador { get; set; }
-        public DateTime dataCriacao { get; set; }
-        public int idModificador { get; set; }
-        public DateTime dataModificacao { get; set; }
-        public string observacao { get; set; }
-        public int idStatusProcessamento { get; set; }
-        public string nomeArquivo { get; set; }
+        public int Id { get; set; }
+        public int IdCampanha { get; set; }
+		public string Nome { get; set; }
+		public bool Ativo { get; set; }
+        public bool Indicacao { get; set; }
+        public int IdCriador { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public int IdModificador { get; set; }
+        public DateTime DataModificacao { get; set; }
+        public string Observacao { get; set; }
+        public int IdStatusProcessamento { get; set; }
+        public string NomeArquivo { get; set; }
     }
 }

@@ -118,7 +118,7 @@ namespace Callplus.CRM.Administracao.App.Relatorios
                 ativo = null;
 
             IEnumerable<Mailing> mailings = _mailingService.Listar(id: null, idCampanha: idCampanha, ativo: ativo);
-            cmbMailing.PreencherComTodos(mailings, x => x.id, x => x.nome);
+            cmbMailing.PreencherComTodos(mailings, x => x.Id, x => x.Nome);
             cmbMailing.ResetarComSelecione(habilitar: cmbMailing.Enabled);
         }
 

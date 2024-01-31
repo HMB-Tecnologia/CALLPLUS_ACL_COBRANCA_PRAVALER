@@ -21,7 +21,7 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
             sql += $" ,@idSupervisor = {idSupervisor}";
             sql += $" ,@idMailing = '{idMailing}'";
             sql += $" ,@idsStatusAtendimento = '{idsStatusAtendimento}'";
-            sql += $" ,@idsStatusOferta = '{idsStatusOferta}'";
+            sql += $" ,@IdsStatusAcordo = '{idsStatusOferta}'";
             sql += $" ,@filtrarStatusDeAtendimentoNulo = '{filtrarStatusDeAtendimentoNulo}'";
             sql += $" ,@filtrarStatusDeOfertaNulo = '{filtrarStatusDeOfertaNulo}'";
             //sql += $" ,@idTipoDeCampanha = {idTipoDeCampanha}";

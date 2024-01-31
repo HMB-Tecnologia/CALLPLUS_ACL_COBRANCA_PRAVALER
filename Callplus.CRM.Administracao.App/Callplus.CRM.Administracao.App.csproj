@@ -296,6 +296,12 @@
     <Compile Include="Planejamento\LayoutDinamico\LayoutDinamicoForm.Designer.cs">
       <DependentUpon>LayoutDinamicoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Planejamento\Mailing\ArquivoComplementarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planejamento\Mailing\ArquivoComplementarForm.Designer.cs">
+      <DependentUpon>ArquivoComplementarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planejamento\Mailing\ListaMailingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -615,6 +621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\LayoutDinamico\LayoutDinamicoForm.resx">
       <DependentUpon>LayoutDinamicoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planejamento\Mailing\ArquivoComplementarForm.resx">
+      <DependentUpon>ArquivoComplementarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planejamento\Mailing\ListaMailingForm.resx">
       <DependentUpon>ListaMailingForm.cs</DependentUpon>

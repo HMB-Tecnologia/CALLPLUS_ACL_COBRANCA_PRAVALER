@@ -116,15 +116,15 @@ namespace Callplus.CRM.Tabulador.Infra.Dados.Dao
 
             var args = new
             {
-                Id = mailing.id,
-                IdCampanha = mailing.idCampanha,
-                Nome = mailing.nome,
-                Ativo = mailing.ativo,
-                Indicacao = mailing.indicacao,
-                IdModificador = mailing.idModificador,
-                IdCriador = mailing.idCriador,
-                NomeArquivo = mailing.nomeArquivo,
-                Observacao = mailing.observacao
+                Id = mailing.Id,
+                IdCampanha = mailing.IdCampanha,
+                Nome = mailing.Nome,
+                Ativo = mailing.Ativo,
+                Indicacao = mailing.Indicacao,
+                IdModificador = mailing.IdModificador,
+                IdCriador = mailing.IdCriador,
+                NomeArquivo = mailing.NomeArquivo,
+                Observacao = mailing.Observacao
             };
 
             var resultado = ExecuteProcedureScalar(sql, args);

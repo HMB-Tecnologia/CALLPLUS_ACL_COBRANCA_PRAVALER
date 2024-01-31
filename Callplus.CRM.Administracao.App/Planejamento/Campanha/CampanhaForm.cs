@@ -679,36 +679,36 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
 
             _mailing = new Tabulador.Dominio.Entidades.Mailing();
 
-            _mailing.ativo = true;
-            _mailing.indicacao = true;
-            _mailing.idStatusProcessamento = 3;
-            _mailing.idCriador = AdministracaoMDI._usuario.Id;
+            _mailing.Ativo = true;
+            _mailing.Indicacao = true;
+            _mailing.IdStatusProcessamento = 3;
+            _mailing.IdCriador = AdministracaoMDI._usuario.Id;
 
-            _mailing.idCampanha = _campanha.Id;
+            _mailing.IdCampanha = _campanha.Id;
 
             if (!espelho)
             {
-                _mailing.nome = "MAILING_INDICACAO_" + txtNome.Text.Trim().Replace(" ", "_");
-                _mailing.observacao = "MAILING DE INDICACAO DA CAMPANHA " + txtNome.Text.ToUpper();
-                _mailing.nomeArquivo = _campanha.EnderecoDeImportacaoDoMailing + "MALING_DA_CAMPANHA_" + _campanha.Nome.ToUpper().Replace(" ", "_") + ".csv";
+                _mailing.Nome = "MAILING_INDICACAO_" + txtNome.Text.Trim().Replace(" ", "_");
+                _mailing.Observacao = "MAILING DE INDICACAO DA CAMPANHA " + txtNome.Text.ToUpper();
+                _mailing.NomeArquivo = _campanha.EnderecoDeImportacaoDoMailing + "MALING_DA_CAMPANHA_" + _campanha.Nome.ToUpper().Replace(" ", "_") + ".csv";
             }
             else
             {
-                _mailing.nome = "MAILING_INDICACAO_" + _novaCampanha.Nome.ToString().ToUpper().Replace(" ", "_");
-                _mailing.observacao = "MAILING DE INDICACAO DA CAMPANHA " + _novaCampanha.Nome.ToString().ToUpper().Replace(" ", "_");
-                _mailing.nomeArquivo = _campanha.EnderecoDeImportacaoDoMailing + "CADASTRO_MANUAL_CAMPANHA_" + _campanha.Nome.ToUpper().Replace(" ", "_") + ".csv";
+                _mailing.Nome = "MAILING_INDICACAO_" + _novaCampanha.Nome.ToString().ToUpper().Replace(" ", "_");
+                _mailing.Observacao = "MAILING DE INDICACAO DA CAMPANHA " + _novaCampanha.Nome.ToString().ToUpper().Replace(" ", "_");
+                _mailing.NomeArquivo = _campanha.EnderecoDeImportacaoDoMailing + "CADASTRO_MANUAL_CAMPANHA_" + _campanha.Nome.ToUpper().Replace(" ", "_") + ".csv";
             }
 
-            _mailing.id = _mailingService.Gravar(_mailing);
+            _mailing.Id = _mailingService.Gravar(_mailing);
 
             var idCampanha = _campanha.Id;
 
-            _campanhaService.AtualizarDadosDeCadastroManual(idCampanha, _mailing.id);
+            _campanhaService.AtualizarDadosDeCadastroManual(idCampanha, _mailing.Id);
 
             if (!espelho)
             {
                 CarregarMailingsIndicacao();
-                cmbMailingIndicacao.SelectedValue = _mailing.id.ToString();
+                cmbMailingIndicacao.SelectedValue = _mailing.Id.ToString();
             }
         }
 
@@ -719,8 +719,8 @@ namespace Callplus.CRM.Administracao.App.Planejamento.Campanha
 
         private void CarregarMailingsIndicacao()
         {
-            IEnumerable<Tabulador.Dominio.Entidades.Mailing> _mailings = _mailingService.Listar(-1, true).Where(x => x.indicacao == true && x.idStatusProcessamento != 4);
-            cmbMailingIndicacao.PreencherComSelecione(_mailings, x => x.id, x => x.nome);
+            IEnumerable<Tabulador.Dominio.Entidades.Mailing> _mailings = _mailingService.Listar(-1, true).Where(x => x.Indicacao == true && x.IdStatusProcessamento != 4);
+            cmbMailingIndicacao.PreencherComSelecione(_mailings, x => x.Id, x => x.Nome);
         }
 
         private void CarregarTipoCampanha()

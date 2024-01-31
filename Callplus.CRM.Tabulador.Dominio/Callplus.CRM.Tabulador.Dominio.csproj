@@ -51,6 +51,8 @@
     <Compile Include="Dto\ProdutoDoChecklistDto.cs" />
     <Compile Include="Dto\ProdutoDoScriptDeAtendimentoDto.cs" />
     <Compile Include="Entidades\Aparelho.cs" />
+    <Compile Include="Entidades\ArquivoCaixa.cs" />
+    <Compile Include="Entidades\ArquivoD.cs" />
     <Compile Include="Entidades\CampanhaDoStatusDeAtendimento.cs" />
     <Compile Include="Entidades\CampanhaDoStatusDeAuditoria.cs" />
     <Compile Include="Entidades\Canal.cs" />

@@ -323,6 +323,7 @@
 			// 
 			this.cmdExportarArquivo.BackColor = System.Drawing.SystemColors.Control;
 			this.cmdExportarArquivo.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.cmdExportarArquivo.Enabled = false;
 			this.cmdExportarArquivo.FlatAppearance.BorderSize = 0;
 			this.cmdExportarArquivo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
 			this.cmdExportarArquivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
